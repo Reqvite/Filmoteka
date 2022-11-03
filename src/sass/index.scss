@@ -1,2 +1,20 @@
 @import './common';
-@import './example';
+
+//utils
+@import './utils/variables';
+@import './utils/visually-hidden';
+@import './utils/mixin';
+@import './utils/_breakpoints';
+
+// base styles
+@import './base/reset';
+@import './base/container';
+@import './base/body-section';
+
+//components
+@import './components/modal';
+@import './components/btn';
+@import './components/titles';
+
+//layouts
+@import './layouts/header';
