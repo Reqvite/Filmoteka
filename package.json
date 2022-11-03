@@ -2,14 +2,14 @@
   "name": "Filmoteka",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://goitacademy.github.io/parcel-project-template",
+  "homepage": "https://Reqvite.github.io/parcel-project-template",
   "scripts": {
-    "start": "parcel src/*.html --public-url /parcel-project-template/",
-    "build": "parcel build src/*.html --public-url /parcel-project-template/"
+    "start": "parcel src/*.html --public-url /Filmoteka/",
+    "build": "parcel build src/*.html --public-url /Filmoteka/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/goitacademy/parcel-project-template.git"
+    "url": "git+https://github.com/Reqvite/Filmoteka.git"
   },
   "keywords": [],
   "author": "GoIt team",
