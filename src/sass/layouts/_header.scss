@@ -1,0 +1,126 @@
+.header__section {
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 92px;
+  padding-top: 42px;
+  opacity: 0.9;
+  background-image: url(../images/header-background-img-home/header-bcgrd-mobile1x.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: url(../images/header-background-img-home/header-bcgrd-mobile2x.jpg);
+  }
+
+  @media screen and (min-width: 768px) {
+    background-image: url(../images/header-background-img-home/header-bcgrd-tablet1x.jpg);
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(../images/header-background-img-home/header-bcgrd-tablet2x.jpg);
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    background-image: url(../images/header-background-img-home/header-bcgrd-desktop1x.jpg);
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(../images/header-background-img-home/header-bcgrd-desktop2x.jpg);
+    }
+  }
+}
+.header__logo-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+}
+.header__logo-text {
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: block;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+    margin-left: 10px;
+  }
+}
+.header__nav-wrap {
+  display: flex;
+}
+
+.header__nav-list {
+  display: flex;
+  margin-left: 112px;
+  margin-top: 2px;
+  @media screen and (min-width: 768px) {
+    margin-left: 387px;
+  }
+}
+.header__nav-item:last-child {
+  margin-left: 40px;
+}
+.header__nav-link {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.header__nav-link--active {
+  border-bottom: 3px solid #ff001b;
+}
+.header__search-form {
+  position: relative;
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+  color: #ffffff;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 1);
+  @media screen and (min-width: 768px) {
+    width: 336px;
+  }
+}
+input[name='search'] {
+  width: 100%;
+  color: #ffffff;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+
+  &::placeholder {
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.14px;
+    margin-bottom: 4px;
+  }
+}
+.header__form-submit-btn {
+  position: absolute;
+  right: 1px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+//Це тільки частина header(My Library)
+.heder__mylibrary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+
+  @include tablet {
+    margin-top: 40px;
+  }
+}
