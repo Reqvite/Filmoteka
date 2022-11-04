@@ -32,6 +32,12 @@ const createFilmDetailsMarkup = async () => {
     </ul>
     <h3 class="film-details__secondary-title">About</h3>
     <p class="film-details__about">${overview}</p>
+    <ul class="buttons-list list">
+  <li class="buttons-list__item">
+    <button class="main-button button" type="button">Add to watched</button>
+  </li>
+  <li class="buttons-list__item"><button class="secondary-button button" type="button">Add to queue</button></li>
+</ul>
   </div>
 </div>`
     

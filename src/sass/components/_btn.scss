@@ -1,0 +1,43 @@
+.button {
+  display: block;
+  font-size: 12px;
+  line-height: 1.33;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  border-radius: 5px;
+
+  padding: 14px 10px 12px;
+
+  cursor: pointer;
+}
+
+.main-button {
+  border-color: transparent;
+  color: white;
+  background-color: $accentBg-color;
+
+  &:hover,
+  &:focus {
+    background-color: $hover-focusBG-color;
+  }
+}
+
+.secondary-button {
+  background-color: transparent;
+}
+
+.modal-button {
+  display: block;
+  padding: 0;
+  margin-left: auto;
+  border-color: transparent;
+  background-color: transparent;
+
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+  }
+}

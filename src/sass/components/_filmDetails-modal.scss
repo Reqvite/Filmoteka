@@ -43,11 +43,6 @@
   //   }
 }
 
-.cross-modal {
-  display: block;
-  margin-left: auto;
-}
-
 .film-details-wrapper {
   margin-top: 18px;
   @include tablet {
@@ -121,4 +116,15 @@
 
 .film-details__about {
   margin-top: 8px;
+}
+
+.buttons-list {
+  display: flex;
+  margin-top: 20px;
+}
+
+.buttons-list__item {
+  &:not(:first-child) {
+    margin-left: 15px;
+  }
 }
