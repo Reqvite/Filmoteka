@@ -1,34 +1,32 @@
 .footer_box {
+  background-color: $mainBg-color;
+  width: auto;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
   padding: 30px 0 30px 0;
-  background-color: #f7f7f7;
-  width: 1280 px;
-  height: 77 px;
+}
+.footer_text {
+  color: $footer-text-color;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+
+  @include tablet {
+    font-size: 16 px;
+    line-height: 1.15;
+  }
 }
 
-.footer_text {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16 px;
-  line-height: 0.84;
-  color: #545454;
-}
 .footer_link {
   text-decoration: none;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16 px;
-  line-height: 0.84;
-  color: #545454;
 }
+
 .footer_link:hover,
 .footer_link:focus {
   text-decoration: underline;
+  color: $secondary-text-color;
 }
 .is-hidden {
   transform: translateX(-100%);
@@ -108,4 +106,8 @@
   font-weight: 500;
   font-size: 30px;
   line-height: 1.17;
+}
+.vl {
+  border-left: 1px solid $footer-text-color;
+  height: 7px;
 }
