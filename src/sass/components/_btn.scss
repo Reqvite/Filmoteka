@@ -1,0 +1,43 @@
+.heder__mylibrary-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 130px;
+    height: 44px;
+    padding: 14px;
+    background-color: inherit;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    cursor: pointer;
+    color: $header-text-color;
+    border: 1px solid $header-text-color;
+    &:not(:last-child){
+        margin-right: 20px;
+    }
+
+    &.active-btn, &:hover, &:focus{
+        border: transparent;
+        background-color: $secondary-text-color;
+        box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);  
+    }
+
+    @include tablet {
+        min-width: 152px;
+        padding: 13px;
+
+        &:not(:last-child){
+            margin-right: 32px;
+        }
+    }
+    @include desktop{
+        min-width: 148px;
+        height: 42px;
+        padding: 12px;
+        &:not(:last-child){
+            margin-right: 16px;
+        }
+    }
+}
