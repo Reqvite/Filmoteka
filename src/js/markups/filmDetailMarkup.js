@@ -1,6 +1,6 @@
 import { fetchFilmDetails } from "../service";
 
-const modal = document.querySelector('.modal');
+const modal = document.querySelector('.film-modal-content');
 
 const createFilmDetailsMarkup = async () => {
     const resp = await fetchFilmDetails();
