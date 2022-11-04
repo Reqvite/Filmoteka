@@ -112,3 +112,15 @@ input[name='search'] {
   outline: none;
   background-color: rgba(0, 0, 0, 0);
 }
+
+//Це тільки частина header(My Library)
+.heder__mylibrary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+
+  @include tablet {
+    margin-top: 40px;
+  }
+}
