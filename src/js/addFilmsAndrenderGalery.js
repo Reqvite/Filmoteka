@@ -1,55 +1,62 @@
-// import FilmsApiServer from './fimlsApiServer';
+import FilmsApiServer from './fimlsApiServer';
+import Notiflix from 'notiflix';
+import filmCardsTpl from './markups/filmCardMarkup' 
 
-// const filmsApiServer = new FilmsApiServer();
-// const refs = {
-//   form: document.querySelector('.search-form'), // .search-form - селектор форми в якій знаїодиться інпут - поле пошуку
-//   gallery: document.querySelector('.gallery'), // .gallery- селектор контейнема в який буде рендеритися дані з бекенду
-// };
+const filmsApiServer = new FilmsApiServer();
 
-// refs.form.addEventListener('submit', onSubmitForm);
+const refs = {
+  form: document.querySelector('.header__search-form'),
+  gallery: document.querySelector('.container-films'), // .container-films - контейнер для карток в main(робить хтось інший)
+};
 
-// function onSubmitForm(e) {
-//   e.preventDefault();
-//   clearGalleryContainer();
-//   filmsApiServer.resetPage();
+refs.form.addEventListener('submit', onSubmitForm);
 
-//   filmsApiServer.query = e.currentTarget.searchQuery.value.trim();
+function onSubmitForm(e) {
+  e.preventDefault();
+  clearGalleryContainer();
 
-//   if (filmsApiServer.query === '') {
-//     Notiflix.Notify.warning(
-//       'Please enter your search query'
-//     );
+  filmsApiServer.query = e.currentTarget.search.value.trim();
 
-//     return;
-//   }
+  if (filmsApiServer.query === '') {
+    Notiflix.Notify.warning('Please enter your search query');
+    return;
+  }
 
-//   addFilmsAndUpdateUI();
-// }
+  addFilmsAndUpdateUI();
+}
 
-// async function addFilmsAndUpdateUI() {
-//   try {
-// 	const { results } = await filmsApiServer.fetchFilms();
-//     renderGalleryList(results);
-//     // filmsApiServer.increasePage();
+async function addFilmsAndUpdateUI() {
+  try {
+    const { results } = await filmsApiServer.fetchFilms();
+    renderGalleryList(results);
+  } catch (err) {
+    onFetchError(err);
+  }
+}
 
-//   } catch (err) {
-//     onFetchError(err);
-//   }
-// }
+function renderGalleryList(data) {
+  
+  if (data.length === 0) {
+    Notiflix.Notify.failure(
+      'Search result not successful. Enter the correct movie name and try again'
+    );
+    clearSearchQuery();
+    return;
+  }
 
-// function renderGalleryList(data) {
+  refs.gallery.insertAdjacentHTML('beforeend', filmCardsTpl(data)); //filmCardsTpl(data) - функція яка рендерить HTML сторінку(робить хтось інший), data - масив обєктів
+}
 
-//   if (data.length === 0) {
-//     Notiflix.Notify.failure(
-//       'Search result not successful. Enter the correct movie name and try again'
-//     );
-//     clearGalleryContainer();
-//     return;
-//   }
+function clearSearchQuery() {
+  refs.form.search.value = '';
+}
 
-//   refs.gallery.insertAdjacentHTML('beforeend', fotoCardsTpl(data)); //fotoCardsTpl(data) - функція яка рендерить HTML сторінку, data - масив обєктів
-// }
+function clearGalleryContainer() {
+  refs.gallery.innerHTML = '';
+}
 
-// function clearGalleryContainer() {
-//   refs.gallery.innerHTML = '';
-// }
+function onFetchError(err) {
+  console.log(err);
+  clearGalleryContainer();
+}
+
