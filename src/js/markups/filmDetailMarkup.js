@@ -13,7 +13,7 @@ const createFilmDetailsMarkup = async () => {
     <ul class="details-list list">
       <li class="details-list__item">
         <p class="details-list_title">Vote / Votes</p>
-        <span class="details-list__information">${vote_average} / ${vote_count}</span>
+        <span class="details-list__information-1">${vote_average}</span>&nbsp/&nbsp<span class="details-list__information-2">${vote_count}</span>
       </li>
       <li class="details-list__item">
         <p class="details-list_title">Popularity</p>

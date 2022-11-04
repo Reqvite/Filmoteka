@@ -86,6 +86,7 @@
 
 .details-list__item {
   display: flex;
+  align-items: center;
   &:not(:first-child) {
     margin-top: 8px;
   }
@@ -99,9 +100,22 @@
   width: 100px;
 }
 
-.details-list__information {
+.details-list__information-1 {
+  display: block;
+  padding: 1px 10px;
+
+  border-radius: 5px;
+  color: white;
+  background-color: $accentBg-color;
   font-weight: 500;
-  font-size: 12px;
+  font-size: inherit;
+  line-height: 1.16;
+  text-transform: uppercase;
+}
+.details-list__information-2 {
+  display: block;
+  font-weight: 500;
+  font-size: inherit;
   line-height: 1.16;
   text-transform: uppercase;
 }
