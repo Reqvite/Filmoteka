@@ -35,7 +35,7 @@ export const createFilmDetailsMarkup = resp => {
   <li class="buttons-list__item">
     <button class="main-button button" type="button" name="watched">Add to watched</button>
   </li>
-  <li class="buttons-list__item"><button class="secondary-button button" type="button">Add to queue</button></li>
+  <li class="buttons-list__item"><button class="secondary-button button" type="button" name="queue">Add to queue</button></li>
 </ul>
   </div>
 </div>`

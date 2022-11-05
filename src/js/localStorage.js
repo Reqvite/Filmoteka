@@ -1,7 +1,7 @@
 import Notiflix from 'notiflix';
 import fotoCardsTpl from "./markups/filmCardMarkup";
 
-const WATCHED_KYE = 'add-to-watched';
+const WATCHED_KYE = 'queue';
 const container = document.querySelector('.container-films')
 const refs ={
     headerNavList: document.querySelector('.header__nav-list'),
@@ -15,7 +15,7 @@ const onClickBtn = (data,e)=>{
     
     const idMovie = data.id
   
-    if (e.target.name !== 'watched') {
+    if (e.target.name !== 'queue') {
         return;
         
     };
@@ -26,6 +26,9 @@ const onClickBtn = (data,e)=>{
         //listWatchedArr.map(obj => obj.id).includes(idMovie) // інший спосіб
     
         if (checkingListWatchedArr) {
+            Notiflix.Notify.info(`Тhis movie has already been added to the QUEUE`,{
+                timeout: 2000,
+            });
         return; 
     };
 
@@ -38,6 +41,9 @@ const onClickBtn = (data,e)=>{
        const checkingListWatchedArr =  moviesListLocalStorage.some(obj => obj.id === idMovie);
        
        if (checkingListWatchedArr) {
+        Notiflix.Notify.info(`Тhis movie has already been added to the QUEUE`,{
+            timeout: 2000,
+        });
         return;
         
         }else{
@@ -51,7 +57,7 @@ const onClickBtn = (data,e)=>{
         return;
     };
         
-    //----- add obj in localStorage -------// 
+              //----- add obj in localStorage -------// 
     listWatchedArr.push(data);
     localStorage.setItem(WATCHED_KYE,JSON.stringify(listWatchedArr))
 
@@ -61,6 +67,9 @@ const onClickBtn = (data,e)=>{
 
 };
 
+
+// ------------------click my library-------------
+
 const onMyLibararyClick = e =>{
 
     if ( e.target.name !=='library') {
@@ -69,18 +78,17 @@ const onMyLibararyClick = e =>{
 
    const moviesListLocalStorage= JSON.parse(localStorage.getItem(WATCHED_KYE));
    if (moviesListLocalStorage === null) {
-    Notiflix.Notify.success(`emty`,{
+    Notiflix.Notify.failure(`my library is emty`,{
         timeout: 2000,
     });
     return;
    }
-   const qqq = fotoCardsTpl(moviesListLocalStorage);
-   container.innerHTML = qqq
+   const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
+   container.innerHTML = renderLibrary;
 
 };
 
 refs.headerNavList.addEventListener('click',onMyLibararyClick);
-
 
 
 
