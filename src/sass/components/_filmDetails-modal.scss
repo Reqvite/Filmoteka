@@ -24,8 +24,12 @@
   }
 
   @media screen and (max-width: 767.98px) {
+    width: 80vw;
     max-width: 380px;
+    height: 95%;
+    overflow-y: scroll;
   }
+
   @include tablet {
     width: 704px;
   }
@@ -77,7 +81,6 @@
 }
 
 .film-details__main-title {
-  font-weight: 500;
   font-size: 20px;
   line-height: 1.15;
 }
@@ -92,11 +95,13 @@
   &:not(:first-child) {
     margin-top: 8px;
   }
+  &:nth-child(3) > .details-list__information-2 {
+    text-transform: uppercase;
+  }
 }
 
 .details-list_title {
   color: $filmDetails-text-color;
-  font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
   width: 100px;
@@ -105,27 +110,23 @@
 .details-list__information-1 {
   display: block;
   padding: 1px 10px;
-
   border-radius: 5px;
   color: white;
   background-color: $accentBg-color;
-  font-weight: 500;
-  font-size: inherit;
+  font-size: 12px;
   line-height: 1.16;
   text-transform: uppercase;
 }
 .details-list__information-2 {
   display: block;
-  font-weight: 500;
-  font-size: inherit;
+  text-align: left;
+  font-size: 14px;
   line-height: 1.16;
-  text-transform: uppercase;
 }
 
 .film-details__secondary-title {
   margin-top: 20px;
-  font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.16;
   text-transform: uppercase;
 }

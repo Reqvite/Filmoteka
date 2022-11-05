@@ -21,6 +21,7 @@ const openModal = async e => {
             modal_text.forEach(el => el.style.color = "#ffffff" );
             return;
         }
+
     }
 
 }
@@ -29,10 +30,10 @@ container.addEventListener('click', openModal)
 
 
 const  closeModal = e =>{
-    const modalContainer = document.querySelector('.film-details-wrapper')
+    const modalContainer = document.querySelector('.film-details-wrapper');
     modal.classList.add('hidden');
     modalClose.removeEventListener('click', closeModal);
-    body.style.overflow = 'scroll'
+    body.style.overflow = 'scroll';
     modalContainer.remove();
 }
 
