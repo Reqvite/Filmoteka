@@ -7,6 +7,7 @@ const filmsApiServer = new FilmsApiServer();
 const refs = {
   form: document.querySelector('.header__search-form'),
   gallery: document.querySelector('.container-films'), // .container-films - контейнер для карток в main(робить хтось інший)
+  spinner: document.querySelector('.loader'),
 };
 
 refs.form.addEventListener('submit', onSubmitForm);
@@ -43,8 +44,9 @@ function renderGalleryList(data) {
     clearSearchQuery();
     return;
   }
-
+  refs.spinner.classList.remove('is-hiden');
   refs.gallery.insertAdjacentHTML('beforeend', filmCardsTpl(data)); //filmCardsTpl(data) - функція яка рендерить HTML сторінку(робить хтось інший), data - масив обєктів
+  refs.spinner.classList.add('is-hiden');
 }
 
 function clearSearchQuery() {
