@@ -16,56 +16,70 @@ const firebaseConfig = {
   appId: "1:394290136676:web:9848416d6de87eb2614171"
 };
 
+const logInBtn = document.querySelector('.loginBtn')
+
+const modal = document.querySelector('.backdrop-form');
+
+console.log(modal)
+logInBtn.addEventListener('click', e => {
+    modal.classList.remove('form-hidden');
+})
+console.log(logInBtn)
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const auth = getAuth();
 
-
 const formRegistr = document.querySelector('.registr')
 
 formRegistr.addEventListener('submit', e => {
     e.preventDefault()
-const username = formRegistr.elements[0].value
-   const  email = formRegistr.elements[1].value
+    const username = formRegistr.elements[0].value
+    const email = formRegistr.elements[1].value
     const password = formRegistr.elements[2].value
-//    createUserWithEmailAndPassword(auth, email, password)
+
+    e.target.reset()
+    modal.classList.add('form-hidden');
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            // ...
+            set(ref(database, 'users/' + user.uid), {
+                username: username,
+                email: email
+            })
+            modal.classList.add('form-hidden');
+            
+            alert('created')
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+            alert(errorMessage)
+        });
+})
+
+// const auth = getAuth();
+// signInWithEmailAndPassword(auth, email, password)
 //   .then((userCredential) => {
 //     // Signed in 
 //     const user = userCredential.user;
 //     // ...
-//       set(ref(database, 'users/' + user.uid),{
-//           username: username,
-//           email: email
-//       })
-//       alert('created')
+//        const dt = new Date();
+//          update(ref(database, 'users/' + user.uid),{
+//           last_login: dt,
+//         })
+//       alert('login')
 //   })
 //   .catch((error) => {
 //     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     // ..
+//       const errorMessage = error.message;
 //       alert(errorMessage)
 //   });
-
-const auth = getAuth();
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    // ...
-       const dt = new Date();
-         update(ref(database, 'users/' + user.uid),{
-          last_login: dt,
-        })
-      alert('login')
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage)
-  });
     
-})
+// })
 
 const user = auth.currentUser;
 onAuthStateChanged(auth, (user) => {
@@ -81,14 +95,14 @@ onAuthStateChanged(auth, (user) => {
 });
 
 
-signOut(auth).then(() => {
-  // Sign-out successful.
-    alert('sign out')
-}).catch((error) => {
-   const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage)
-});
+// signOut(auth).then(() => {
+//   // Sign-out successful.
+//     alert('sign out')
+// }).catch((error) => {
+//    const errorCode = error.code;
+//       const errorMessage = error.message;
+//       alert(errorMessage)
+// });
 
 
 
