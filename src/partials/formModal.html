@@ -1,15 +1,17 @@
 <div class="backdrop-form form-hidden">
   <div class="form-modal">
+       <button type="button" class="modal-form-btn">
         <svg class="cross-modal" width="25" height="25">
           <use href="./images/sprite.svg#icon-close"></use>
         </svg>
+      </button>
     <form class="registr">
     <input class="name-input" type="text" id="username" name="username" placeholder="Username" />
     <input type="text" id="email" name="email" placeholder="E-mail" />
     <input type="password" id="password" name="password" placeholder="Password" />
     
-    <input type="submit" id='signIn' name="signIn" value="Sign up" />
-    <input type="submit" id='login' name="login" value="Login" />
+    <input type="submit" id='signIn' name="signIn" value="Sign up" class="submit-signUp-btn"/>
+    <input type="submit" id='login' name="login" value="Login" class="submit-login-btn"/>
     </form>
   </div>
   
