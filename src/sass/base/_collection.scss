@@ -1,0 +1,63 @@
+
+.collection{
+        margin-top: 100px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+}
+
+.collection__item{
+    list-style: none;
+width: 100%;
+
+
+@include mobile {
+    
+    }
+
+        @include tablet {
+            width: calc((100% - 20px)/2)
+        }
+
+                @include desktop {
+                    width: calc((100% - 40px)/3);
+                }
+
+}
+
+
+.card__image{
+    width: 100%;
+  
+
+}
+
+.card-wrap{
+    text-align: start;
+
+ 
+}
+
+
+.card-wrap__link{
+    text-decoration: none;
+}
+
+.card__genre{
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.active{
+    width: 40px;
+    height: 40px;
+    left: 620px;
+    top: 2302px;
+    color: white;
+    background: #FF6B08;
+    border-radius: 5px;
+}
