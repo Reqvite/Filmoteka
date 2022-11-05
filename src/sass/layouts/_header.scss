@@ -8,9 +8,7 @@
   background-image: url(../images/header-background-img-home/header-bcgrd-mobile1x.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
+  @include retina {
     background-image: url(../images/header-background-img-home/header-bcgrd-mobile2x.jpg);
   }
 
@@ -18,17 +16,13 @@
     padding-top: 40px;
     padding-bottom: 80px;
     background-image: url(../images/header-background-img-home/header-bcgrd-tablet1x.jpg);
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
+    @include retina {
       background-image: url(../images/header-background-img-home/header-bcgrd-tablet2x.jpg);
     }
   }
   @include desktop {
     background-image: url(../images/header-background-img-home/header-bcgrd-desktop1x.jpg);
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
+    @include retina {
       background-image: url(../images/header-background-img-home/header-bcgrd-desktop2x.jpg);
     }
   }
