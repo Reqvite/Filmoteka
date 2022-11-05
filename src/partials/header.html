@@ -10,28 +10,35 @@
         </a>
         <h1 class="visually-hidden">Filmoteka</h1>
         <ul class="header__nav-list list">
-          <li class="header__nav-item">
-            <a href="#" class="header__nav-link link header__nav-link--active">home</a>
+          <li class="header__nav-item home-js">
+            <a href="#" class="header__nav-link link header__nav-link--current">home</a>
           </li>
-          <li class="header__nav-item">
-            <a href="#" class="header__nav-link link" name ='library'>my library</a>
+
+          <li class="header__nav-item ">
+            <a href="#" class="header__nav-link my-library-js link" name='library'>my library</a>
           </li>
         </ul>
       </div>
+     <div class="header__main-wrap">
       <form class="header__search-form">
-        <input type="text" name="search" placeholder="Movie search" />
+        <input class="header__input" type="text" name="search" placeholder="Movie search" />
         <button type ="submit" class="header__form-submit-btn">
           <svg width="12" height="12" class="header__logo">
             <use href="./images/sprite.svg#icon-search-2"></use>
           </svg>
         </button>
       </form>
-
-      <div class="header__mylibrary visually-hidden">
-        <button class="header__mylibrary-btn active-btn">Watched</button>
-        <button class="header__mylibrary-btn queue-js ">Queue</button>
+<div class="header__mylibrary visually-hidden">
+   <button class="header__mylibrary-btn main-button button active-btn">Watched</button>
+        <button class="header__mylibrary-btn  button  ">Queue</button>
+      
       </div>
       <button type="button" class="toggle-theme"> Theme</button>
+
+</div>
+      
+      
+</div>
     </section>
   </div>
 </header>
