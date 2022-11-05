@@ -2,8 +2,8 @@ import './sass/index.scss';
 
 import './js/modal-footer';
 
-import './js/addFilmsAndRenderGalery'
 
+import './js/addFilmsAndRenderGalery'
 
 import './js/service';
 
@@ -16,4 +16,6 @@ import './js/pagination'
 import './js/localStorage';
 
 import './js/toggleTheme';
+
+import './js/changeHeaderPageHome-Mylibrary';
 
