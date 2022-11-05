@@ -2,4 +2,9 @@ body {
   background-color: white;
   color: $main-text-color;
   font-family: $mainFont;
+  font-weight: 500;
+}
+
+.dark-theme {
+  background-color: rgb(97, 97, 97);
 }
