@@ -1,12 +1,14 @@
 import FilmsApiServer from './fimlsApiServer';
 import Notiflix from 'notiflix';
 import filmCardsTpl from './markups/filmCardMarkup' 
+import updateMarkupPagination from './pagination'
 
 const filmsApiServer = new FilmsApiServer();
 
 const refs = {
   form: document.querySelector('.header__search-form'),
   gallery: document.querySelector('.container-films'), // .container-films - контейнер для карток в main(робить хтось інший)
+  listEl: document.querySelector('.pagination__list'),
   spinner: document.querySelector('.loader'),
 };
 
@@ -14,22 +16,25 @@ refs.form.addEventListener('submit', onSubmitForm);
 
 function onSubmitForm(e) {
   e.preventDefault();
-  clearGalleryContainer();
-
+  clearContainer(refs.gallery);
+  clearContainer(refs.listEl);
+  
   filmsApiServer.query = e.currentTarget.search.value.trim();
 
   if (filmsApiServer.query === '') {
     Notiflix.Notify.warning('Please enter your search query');
+    
     return;
   }
 
+  localStorage.setItem('query', `${filmsApiServer.query}`);
   addFilmsAndUpdateUI();
 }
 
 
 async function addFilmsAndUpdateUI() {
   try {
-    const { results } = await filmsApiServer.fetchFilms();
+    const results = await filmsApiServer.fetchFilms();
     renderGalleryList(results);
   } catch (err) {
     onFetchError(err);
@@ -37,25 +42,31 @@ async function addFilmsAndUpdateUI() {
 }
 
 function renderGalleryList(data) {
+  const { results, page, total_pages } = data;
+  clearSearchQuery();
   
-  if (data.length === 0) {
+  if (results.length === 0) {
+    clearContainer(refs.listEl);
     Notiflix.Notify.failure(
       'Search result not successful. Enter the correct movie name and try again'
     );
-    clearSearchQuery();
+    
     return;
   }
+  
   refs.spinner.classList.remove('is-hiden');
-  refs.gallery.insertAdjacentHTML('beforeend', filmCardsTpl(data)); //filmCardsTpl(data) - функція яка рендерить HTML сторінку(робить хтось інший), data - масив обєктів
+  refs.gallery.innerHTML = filmCardsTpl(results); //filmCardsTpl(data) - функція яка рендерить HTML сторінку(робить хтось інший), results - масив обєктів
   refs.spinner.classList.add('is-hiden');
+  updateMarkupPagination(total_pages, page);
+  
 }
 
 function clearSearchQuery() {
   refs.form.search.value = '';
 }
 
-function clearGalleryContainer() {
-  refs.gallery.innerHTML = '';
+function clearContainer(element) {
+  element.innerHTML = '';
 }
 
 function onFetchError(err) {
