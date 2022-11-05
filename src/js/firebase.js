@@ -24,7 +24,7 @@ console.log(modal)
 logInBtn.addEventListener('click', e => {
     modal.classList.remove('form-hidden');
 })
-console.log(logInBtn)
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
@@ -50,7 +50,7 @@ formRegistr.addEventListener('submit', e => {
                 email: email
             })
             modal.classList.add('form-hidden');
-            
+            logInBtn.style.display = 'none'
             alert('created')
         })
         .catch((error) => {
