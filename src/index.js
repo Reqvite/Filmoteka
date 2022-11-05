@@ -8,7 +8,7 @@ import './js/service';
 
 import './js/markups/filmDetailMarkup';
 
-import './js/openFilmModal';
+import './js/openFilmModal'
 import './js/localStorage';
 
 import './js/toggleTheme';
