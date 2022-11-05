@@ -11,3 +11,5 @@ import './js/markups/filmDetailMarkup';
 
 import './js/openFilmModal'
 import './js/toggleTheme';
+
+import './js/firebase'
