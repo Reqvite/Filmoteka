@@ -2,10 +2,10 @@
 const modal = document.querySelector('.film-modal-content');
 
 export const createFilmDetailsMarkup = resp => {
-    const { poster_path, original_title, vote_average, vote_count, popularity, genres, overview } = resp.data;  
+    const { poster_path, original_title, vote_average, vote_count, popularity, genres, overview, id } = resp.data;  
 
     const markup = `<div class="film-details-wrapper">
-  <div><img class="modal-img" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="" /></div>
+  <div><img class="modal-img" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="" data-id="${id}"/></div>
   <div class="film-details">
     <h2 class="film-details__main-title">${original_title}</h2>
     <ul class="details-list list">
