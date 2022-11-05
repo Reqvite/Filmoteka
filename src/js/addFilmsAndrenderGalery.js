@@ -25,6 +25,7 @@ function onSubmitForm(e) {
   addFilmsAndUpdateUI();
 }
 
+
 async function addFilmsAndUpdateUI() {
   try {
     const { results } = await filmsApiServer.fetchFilms();
