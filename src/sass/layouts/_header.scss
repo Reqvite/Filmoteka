@@ -77,6 +77,29 @@
 .header__nav-link--active {
   border-bottom: 3px solid #ff001b;
 }
+.form-theme-wrap {
+  display: flex;
+}
+.toggle-theme {
+  color: $mainBg-color;
+  margin-top: 30px;
+  margin-right: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $accentBg-color;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  min-width: 70px;
+  cursor: pointer;
+  padding: 5px;
+  &:hover,
+  &:focus {
+    background-color: $hover-focusBG-color;
+    box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
+  }
+}
 
 .header__search-form {
   position: relative;
@@ -129,24 +152,5 @@ input[name='search'] {
 
   @include tablet {
     margin-top: 40px;
-  }
-}
-
-.toggle-theme{
-  color: $mainBg-color;
-  margin-left: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $accentBg-color;
-  border: none;
-  border-radius: 5px;
-  height: 30px;
-  min-width: 70px;
-  cursor: pointer;
-  padding: 5px;
-  &:hover, &:focus{
-    background-color:  $hover-focusBG-color;
-    box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
   }
 }
