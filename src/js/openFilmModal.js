@@ -4,7 +4,8 @@ import { createFilmDetailsMarkup } from "./markups/filmDetailMarkup";
 const container = document.querySelector('.container-films')
 const modal = document.querySelector('.backdrop-details');
 const modalClose = document.querySelector('.modal-icon-cross');
-const body = document.querySelector('body')
+const body = document.querySelector('body');
+
 
 const openModal = async e => {
     if (e.target.getAttribute('class')?.includes('card-film')) {
@@ -13,10 +14,19 @@ const openModal = async e => {
         modal.classList.remove('hidden') 
         body.style.overflow = 'hidden'
         modalClose.addEventListener('click', closeModal)
+    
+        const modal_text = document.querySelectorAll(".details-list_title");
+        const LS = JSON.parse(localStorage.getItem('theme'));
+        if(LS){
+            modal_text.forEach(el => el.style.color = "#ffffff" );
+            return;
+        }
     }
+
 }
 
 container.addEventListener('click', openModal)
+
 
 const  closeModal = e =>{
     const modalContainer = document.querySelector('.film-details-wrapper')
