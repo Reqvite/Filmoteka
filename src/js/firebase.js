@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, set, ref, enableLogging, update  } from "firebase/database";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,10 +18,79 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app)
+  const database = getDatabase(app);
+  const auth = getAuth();
+
+
+const formRegistr = document.querySelector('.registr')
+
+formRegistr.addEventListener('submit', e => {
+    e.preventDefault()
+const username = formRegistr.elements[0].value
+   const  email = formRegistr.elements[1].value
+    const password = formRegistr.elements[2].value
+//    createUserWithEmailAndPassword(auth, email, password)
+//   .then((userCredential) => {
+//     // Signed in 
+//     const user = userCredential.user;
+//     // ...
+//       set(ref(database, 'users/' + user.uid),{
+//           username: username,
+//           email: email
+//       })
+//       alert('created')
+//   })
+//   .catch((error) => {
+//     const errorCode = error.code;
+//     const errorMessage = error.message;
+//     // ..
+//       alert(errorMessage)
+//   });
+
 const auth = getAuth();
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+       const dt = new Date();
+         update(ref(database, 'users/' + user.uid),{
+          last_login: dt,
+        })
+      alert('login')
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage)
+  });
+    
+})
+
+const user = auth.currentUser;
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+});
 
 
-console.log(app)
-console.log(database)
-console.log(auth)
+signOut(auth).then(() => {
+  // Sign-out successful.
+    alert('sign out')
+}).catch((error) => {
+   const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage)
+});
+
+
+
+
+
