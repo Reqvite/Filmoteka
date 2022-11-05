@@ -1,4 +1,5 @@
 const toggleTheme = document.querySelector('.toggle-theme');
+
 const footer = document.querySelector(".footer_box");
 const modal_bgr = document.querySelector(".film-modal-content");
 
