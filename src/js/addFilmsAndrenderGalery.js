@@ -9,6 +9,7 @@ const refs = {
   form: document.querySelector('.header__search-form'),
   gallery: document.querySelector('.container-films'), // .container-films - контейнер для карток в main(робить хтось інший)
   listEl: document.querySelector('.pagination__list'),
+  spinner: document.querySelector('.loader'),
 };
 
 refs.form.addEventListener('submit', onSubmitForm);
@@ -29,6 +30,7 @@ function onSubmitForm(e) {
   localStorage.setItem('query', `${filmsApiServer.query}`);
   addFilmsAndUpdateUI();
 }
+
 
 async function addFilmsAndUpdateUI() {
   try {
@@ -51,8 +53,10 @@ function renderGalleryList(data) {
     
     return;
   }
-
+  
+  refs.spinner.classList.remove('is-hiden');
   refs.gallery.innerHTML = filmCardsTpl(results); //filmCardsTpl(data) - функція яка рендерить HTML сторінку(робить хтось інший), results - масив обєктів
+  refs.spinner.classList.add('is-hiden');
   updateMarkupPagination(total_pages, page);
   
 }
