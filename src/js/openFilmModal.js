@@ -5,9 +5,9 @@ const modalClose = document.querySelector('.modal-icon-cross');
 
 container.addEventListener('click', (e) => {
     if (e.target.getAttribute('class')?.includes('test-modal')) {
-        modal.classList.remove('is-hidden') 
+        modal.classList.remove('hidden') 
         modalClose.addEventListener('click', e => {
-            modal.classList.add('is-hidden');
+            modal.classList.add('hidden');
         })
     }
 })

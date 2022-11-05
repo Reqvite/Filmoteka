@@ -1,11 +1,27 @@
-<div class="backdrop is-hidden film-modal">
-  <div class="modal">
+<div class="backdrop-details hidden film-modal">
+  <div class="film-modal-content">
     <div class="modal-top">
       <button type="button" class="modal-icon-cross">
         <svg class="cross-modal" width="25" height="25">
           <use href="./images/sprite.svg#icon-close"></use>
         </svg>
       </button>
+    </div>
+    <div class="film-details-wrapper">
+      <div class="film-details">
+        <ul class="buttons-list list">
+          <li class="buttons-list__item">
+            <button class="main-button button" type="button">
+              Add to watched
+            </button>
+          </li>
+          <li class="buttons-list__item">
+            <button class="secondary-button button" type="button">
+              Add to queue
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
