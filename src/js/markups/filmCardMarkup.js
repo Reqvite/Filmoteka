@@ -1,6 +1,6 @@
 export default function fotoCardsTpl(data) {
-	return data.map(({ poster_path, original_title, vote_average, genre_ids, release_date }) => {
-		return `<div class="card-film">
+	return data.map(({ poster_path, original_title, vote_average, genre_ids, release_date, id }) => {
+		return `<div class="card-film" data-id="${id}">>
 		<div class="card-film__container">
 			<img class="card-film__img" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="${original_title}"/>
 		</div>
