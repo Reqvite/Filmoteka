@@ -28,12 +28,14 @@
   text-decoration: underline;
   color: $secondary-text-color;
 }
+
 .is-hidden {
   transform: translateX(-100%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
+
 .backdrop {
   position: fixed;
   top: 0;
