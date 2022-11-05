@@ -26,7 +26,8 @@ const openModal = async e => {
 
 }
 
-container.addEventListener('click', openModal)
+container.addEventListener('click', openModal);
+
 
 
 const  closeModal = e =>{
