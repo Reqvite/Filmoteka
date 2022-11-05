@@ -2,8 +2,7 @@ import './sass/index.scss';
 
 import './js/modal-footer';
 
-
-import './js/addFilmsAndRenderGalery'
+import './js/addFilmsAndrenderGalery';
 
 import './js/service';
 
