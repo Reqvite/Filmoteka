@@ -7,9 +7,7 @@
   background-image: url(../images/header-background-img-home/header-bcgrd-mobile1x.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
+  @include retina {
     background-image: url(../images/header-background-img-home/header-bcgrd-mobile2x.jpg);
   }
 
@@ -17,26 +15,29 @@
     padding-top: 40px;
     padding-bottom: 80px;
     background-image: url(../images/header-background-img-home/header-bcgrd-tablet1x.jpg);
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
+    @include retina {
       background-image: url(../images/header-background-img-home/header-bcgrd-tablet2x.jpg);
     }
   }
   @include desktop {
     background-image: url(../images/header-background-img-home/header-bcgrd-desktop1x.jpg);
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
+    @include retina {
       background-image: url(../images/header-background-img-home/header-bcgrd-desktop2x.jpg);
     }
   }
 }
+
 .header__logo-link {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    text-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    text-shadow: 0px 3px 3px #ffffff;
+    transform: scale(1.1);
+  }
   @include tablet {
     margin-left: 17px;
   }
@@ -69,9 +70,20 @@
     margin-right: 17px;
   }
 }
-.header__nav-item:last-child {
-  margin-left: 40px;
+.header__nav-item {
+  &:last-child {
+    margin-left: 40px;
+  }
+
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    text-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    text-shadow: 0px 3px 3px #ffffff;
+    transform: scale(1.1);
+  }
 }
+
 .header__nav-link {
   font-style: normal;
   font-weight: 500;
@@ -80,8 +92,42 @@
   text-transform: uppercase;
   color: #ffffff;
 }
-.header__nav-link--active {
-  border-bottom: 3px solid #ff001b;
+
+// .header__nav-link--current::after {
+//   content: '';
+//   position: absolute;
+//   display: block;
+//   left: 0;
+//   bottom: 10;
+//   width: 34px;
+//   height: 3px;
+//   background-color: #ff001b;
+//   transform: scaleX(1);
+// }
+.header__main-wrap {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+.toggle-theme {
+  color: $mainBg-color;
+  margin-top: 30px;
+  margin-right: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $accentBg-color;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  min-width: 70px;
+  cursor: pointer;
+  padding: 5px;
+  &:hover,
+  &:focus {
+    background-color: $hover-focusBG-color;
+    box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
+  }
 }
 
 .header__search-form {
@@ -103,7 +149,7 @@
     width: 394px;
   }
 }
-input[name='search'] {
+.header__input {
   width: 100%;
   height: 20px;
   color: #ffffff;
@@ -127,6 +173,31 @@ input[name='search'] {
 }
 
 //Це тільки частина header(My Library)
+.header__section--mylibrary {
+  background-color: rgba(0, 0, 0, 0.56);
+  background-image: url(../images/header-background-img-mylibrary/mylibrary-mobile-x1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include retina {
+    background-image: url(../images/header-background-img-mylibrary/mylibrary-mobile-x2.jpg);
+  }
+
+  @include tablet {
+    padding-top: 40px;
+    padding-bottom: 80px;
+    background-image: url(../images/header-background-img-mylibrary/mylibrary-tablet-x1.jpg);
+    @include retina {
+      background-image: url(../images/header-background-img-mylibrary/mylibrary-tablet-x2.jpg);
+    }
+  }
+  @include desktop {
+    background-image: url(../images/header-background-img-mylibrary/mylibrary-desktop-x1.jpg);
+    @include retina {
+      background-image: url(../images/header-background-img-mylibrary/mylibrary-desktop-x2.jpg);
+    }
+  }
+}
+
 .header__mylibrary {
   display: flex;
   align-items: center;
@@ -138,21 +209,13 @@ input[name='search'] {
   }
 }
 
-.toggle-theme{
-  color: $mainBg-color;
-  margin-left: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: $accentBg-color;
-  border: none;
-  border-radius: 5px;
-  height: 30px;
-  min-width: 70px;
-  cursor: pointer;
-  padding: 5px;
-  &:hover, &:focus{
-    background-color:  $hover-focusBG-color;
-    box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
+.header__mylibrary-btn {
+  min-width: 130px;
+
+  &:last-child {
+    margin-left: 20px;
+    @include tablet {
+      margin-left: 32px;
+    }
   }
 }
