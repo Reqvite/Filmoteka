@@ -15,13 +15,13 @@ img {
   height: auto;
 }
 
-.list {
+li,
+ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
-.link {
+a {
   text-decoration: none;
   color: currentColor;
 }
