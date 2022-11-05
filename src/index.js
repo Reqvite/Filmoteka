@@ -10,3 +10,4 @@ import './js/service';
 import './js/markups/filmDetailMarkup';
 
 import './js/openFilmModal'
+import './js/toggleTheme';
