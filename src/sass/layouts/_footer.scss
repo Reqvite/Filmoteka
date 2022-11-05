@@ -1,0 +1,115 @@
+.footer_box {
+  background-color: $mainBg-color;
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 30px 0 30px 0;
+}
+.footer_text {
+  color: $footer-text-color;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+
+  @include tablet {
+    font-size: 16 px;
+    line-height: 1.15;
+  }
+}
+
+.footer_link {
+  text-decoration: none;
+}
+
+.footer_link:hover,
+.footer_link:focus {
+  text-decoration: underline;
+  color: $secondary-text-color;
+}
+
+.is-hidden {
+  transform: translateX(-100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: 528px;
+  height: 581px;
+  background: #ffffff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 40px;
+
+  .backdrop.is-hidden & {
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+}
+.modal__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  cursor: pointer;
+
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  padding: 0;
+  top: 8px;
+  right: 8px;
+}
+
+.modal__icon {
+  fill: #000000;
+}
+.meny__icon {
+  fill: #000000;
+  &:focus,
+  :hover {
+    fill: #ff6b01;
+  }
+}
+.modal__footer {
+  color: #000000;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.17;
+}
+.vl {
+  border-left: 1px solid $footer-text-color;
+  height: 7px;
+}

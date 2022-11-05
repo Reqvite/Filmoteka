@@ -50,3 +50,14 @@ fetchMovies(1)
 
 
 
+import './js/modal-footer';
+
+import './js/addFilmsAndrenderGalery'
+
+
+import './js/service';
+
+import './js/markups/filmDetailMarkup';
+
+import './js/openFilmModal'
+import './js/toggleTheme';
