@@ -5,7 +5,8 @@ const API_KEY = 'e145377b3a98d62607e7dc90339d279b';
 
 export default class FilmsApiServer {
   constructor() {
-    (this.searchQuery = ''), (this.page = 1), (this.perPage = 20);
+    this.searchQuery = '',
+    this.page = 1;
   }
 
   async fetchFilms() {
@@ -14,9 +15,10 @@ export default class FilmsApiServer {
         api_key: API_KEY,
         query: `${this.searchQuery}`,
         page: `${this.page}`,
+        language: 'en-US',
       },
     };
-	  const { data } = await axios.get(`${BASE_URL}`, options);
+    const { data } = await axios.get(`${BASE_URL}`, options);
     return data;
   }
 
@@ -26,6 +28,14 @@ export default class FilmsApiServer {
 
   set query(newQuery) {
     this.searchQuery = newQuery;
+  }
+
+  get pagePagination() {
+    return this.page;
+  }
+
+  set pagePagination(newPage) {
+    this.page = newPage;
   }
 
   increasePage() {

@@ -1,0 +1,34 @@
+.pagination{
+	@include flexCenter();
+
+	&__list {
+		display: flex;
+		padding: 8px;
+	}
+
+	& li {
+		@include flexCenter();
+
+		height: 40px;
+		width: 40px;
+		border-radius: 5px;
+
+		font-weight: 500;
+		font-size: 12px;
+		line-height: 1.33;
+		
+		list-style: none;
+		text-align: center;
+		cursor: pointer;
+
+		@include transition();
+	}
+	
+	&__arrow{
+		background-color: #F7F7F7;
+	}
+
+	&__numb.active, &__numb:hover, &__numb:focus, &__arrow:hover, &__arrow:focus,&__numb-first:hover, &__numb-first:focus, &__numb-last:hover, &__numb-last:focus {
+		background-color: $accentBg-color;
+	} 
+}
