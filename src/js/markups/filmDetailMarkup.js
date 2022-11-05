@@ -15,15 +15,15 @@ export const createFilmDetailsMarkup = resp => {
       </li>
       <li class="details-list__item">
         <p class="details-list_title">Popularity</p>
-        <span class="details-list__information">${popularity}</span>
+        <span class="details-list__information-2">${popularity}</span>
       </li>
       <li class="details-list__item">
         <p class="details-list_title">Original Title</p>
-        <span class="details-list__information">${original_title}</span>
+        <span class="details-list__information-2 ">${original_title}</span>
       </li>
       <li class="details-list__item">
         <p class="details-list_title">Genre</p>
-        <span class="details-list__information">${genres.map(el => {
+        <span class="details-list__information-2">${genres.map(el => {
             return el.name
         })}</span>
       </li>
