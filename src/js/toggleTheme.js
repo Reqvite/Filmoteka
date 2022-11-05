@@ -1,7 +1,7 @@
 const toggleTheme = document.querySelector('.toggle-theme');
  const footer = document.querySelector(".footer_box")
 //  const footerText = document.querySelector(".footer_text")
-console.log("footer",footer);
+// console.log("footer",footer);
 toggleTheme.addEventListener('click', onChangeTheme);
 
 function onChangeTheme() {

@@ -17,7 +17,8 @@ const openModal = async (e) => {
     }
 }
 
-container.addEventListener('click', openModal)
+container.addEventListener('click', openModal);
+
 
 function closeModal(e) {
     const modalContainer = document.querySelector('.film-details-wrapper')
