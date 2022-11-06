@@ -9,7 +9,6 @@ const body = document.querySelector('body');
 
 
 const openModal = async e => {
-  console.log(e.target)
   if (e.target.closest('.collection__item')?.dataset.id) {
     const resp = await fetchFilmDetails(
       e.target.closest('.collection__item').dataset.id
