@@ -1,6 +1,7 @@
 export default function fotoCardsTpl(data) {
 	return data.map(({ poster_path, original_title, vote_average, genreNames, release_date, id }) => {
-		return `<div class="collection__item" data-id="${id}">
+		return `<li class="collection__item" data-id="${id}">
+		<a href="" class="card-wrap__link link">
 		<div class="card">
 			<img class="card-film__img" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="${original_title}"/>
 
@@ -13,7 +14,8 @@ export default function fotoCardsTpl(data) {
 			</div>
 	</div>
   </div>
-</div>`;
+  </a>
+</li>`;
 	}).join('')
 }
 

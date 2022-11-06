@@ -19,8 +19,8 @@
 .film-modal-content {
   padding: 16px 20px 46px 20px;
   background-color: $mainBg-color;
-  &.dark{
-    background-color: rgb(97, 97, 97) ;
+  &.dark {
+    background-color: rgb(97, 97, 97);
   }
 
   @media screen and (max-width: 767.98px) {
@@ -109,7 +109,7 @@
 
 .details-list__information-1 {
   display: block;
-  padding: 1px 10px;
+  padding: 3px 10px;
   border-radius: 5px;
   color: white;
   background-color: $accentBg-color;
