@@ -1,5 +1,5 @@
 import Notiflix from 'notiflix';
-import { collectionRender } from './markups/collectionRender'
+import { renderMarkUp } from './markups/collectionRender'
 import { fetchGenreId } from './collectionFetch'; 
 // import fotoCardsTpl from "./markups/filmCardMarkup";
 
@@ -96,7 +96,7 @@ const onMyLibararyClick = e =>{
     return;
    }
     // const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
-    const renderLibrary = collectionRender(moviesListLocalStorage, genreCollection);
+    const renderLibrary = renderMarkUp(moviesListLocalStorage, genreCollection);
     container.innerHTML = renderLibrary;
 
 };
