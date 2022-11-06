@@ -2,15 +2,9 @@ import FilmsApiServer from './fimlsApiServer';
 import Notiflix from 'notiflix';
 import filmCardsTpl from './markups/filmCardMarkup' 
 import updateMarkupPagination from './pagination'
+import { refs } from "./refs/refs";
 
 const filmsApiServer = new FilmsApiServer();
-
-const refs = {
-  form: document.querySelector('.header__search-form'),
-  gallery: document.querySelector('.container-films'), // .container-films - контейнер для карток в main(робить хтось інший)
-  listEl: document.querySelector('.pagination__list'),
-  spinner: document.querySelector('.loader'),
-};
 
 refs.form.addEventListener('submit', onSubmitForm);
 
