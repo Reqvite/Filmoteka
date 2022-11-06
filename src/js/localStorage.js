@@ -1,6 +1,6 @@
 import Notiflix from 'notiflix';
-import { renderMarkUp } from './collectionRender';
-import { fetchGenreId } from './collectionFetch';
+import { collectionRender } from './markups/collectionRender'
+import { fetchGenreId } from './collectionFetch'; 
 // import fotoCardsTpl from "./markups/filmCardMarkup";
 
 const WATCHED_KYE = 'queue';
@@ -95,8 +95,8 @@ const onMyLibararyClick = e =>{
     return;
    }
     // const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
-    const renderLibrary = renderMarkUp(moviesListLocalStorage, genreCollection);
-   container.innerHTML = renderLibrary;
+    const renderLibrary = collectionRender(moviesListLocalStorage, genreCollection);
+    container.innerHTML = renderLibrary;
 
 };
 

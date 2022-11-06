@@ -1,4 +1,4 @@
 import Notiflix from 'notiflix';
-import fotoCardsTpl from './markups/filmCardMarkup';
+import { collectionRender } from './markups/collectionRender'
 
 let watchedArr = [];

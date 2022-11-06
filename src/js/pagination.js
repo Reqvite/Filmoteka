@@ -1,5 +1,4 @@
 import FilmsApiServer from './fimlsApiServer';
-import filmCardsTpl from './markups/filmCardMarkup';
 import { refs } from "./refs/refs";
 
 

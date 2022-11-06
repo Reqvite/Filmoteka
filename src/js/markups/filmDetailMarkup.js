@@ -1,5 +1,4 @@
 
-import { fetchFilmDetails } from '../service';
 import viewTrailer from '../viewTrailer';
 
 import { onClickBtn } from "../localStorage";
