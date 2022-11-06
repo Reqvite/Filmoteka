@@ -6,6 +6,7 @@ const modal = document.querySelector('.backdrop-details');
 const modalClose = document.querySelector('.modal-icon-cross');
 const body = document.querySelector('body');
 
+
 const openModal = async e => {
   if (e.target.getAttribute('class')?.includes('card-film')) {
     const resp = await fetchFilmDetails(

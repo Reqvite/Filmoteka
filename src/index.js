@@ -16,5 +16,7 @@ import './js/localStorage';
 
 import './js/toggleTheme';
 
+import './js/firebase'
+
 import './js/changeHeaderPageHome-Mylibrary';
 
