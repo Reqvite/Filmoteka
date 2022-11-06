@@ -12,13 +12,16 @@ const pagination = document.querySelector(`.pagination`);
 
 
   let genreCollection = {};
-  fetchGenreId()
-  .then(genreId => {
-    genreId.data.genres.forEach(function (genre) {
+  
+  async function fetchTrendingFilms() {
+  const resp = await fetchGenreId()
+
+    resp.data.genres.forEach(function (genre) {
       genreCollection[genre.id] = genre.name
     })
-  }).catch(error => console.log(error));
 
+   await fetchMovies(page)
+  }
 
   function fetchMovies(page) {
   fetchPopularMovies(page).then(response => {
@@ -50,6 +53,6 @@ function fetchMoviesOnPagination(page) {
 //   fetchMovies(e.target.dataset.page)
 // })
 
-fetchMovies(page)
 
 
+fetchTrendingFilms()
