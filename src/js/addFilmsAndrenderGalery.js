@@ -1,10 +1,20 @@
 import FilmsApiServer from './fimlsApiServer';
 import Notiflix from 'notiflix';
-import filmCardsTpl from './markups/filmCardMarkup' 
 import updateMarkupPagination from './pagination'
+import { fetchGenreId } from './collectionFetch';
+import { renderMarkUp } from './collectionRender';
 import { refs } from "./refs/refs";
 
 const filmsApiServer = new FilmsApiServer();
+
+ let genreCollection = {};
+ fetchGenreId()
+   .then(genreId => {
+     genreId.data.genres.forEach(function (genre) {
+       genreCollection[genre.id] = genre.name;
+     });
+   })
+   .catch(error => console.log(error));
 
 refs.form.addEventListener('submit', onSubmitForm);
 
@@ -12,16 +22,15 @@ function onSubmitForm(e) {
   e.preventDefault();
   clearContainer(refs.gallery);
   clearContainer(refs.listEl);
+  filmsApiServer.resetPage();
   
   filmsApiServer.query = e.currentTarget.search.value.trim();
 
   if (filmsApiServer.query === '') {
     Notiflix.Notify.warning('Please enter your search query');
-    
     return;
   }
 
-  localStorage.setItem('query', `${filmsApiServer.query}`);
   addFilmsAndUpdateUI();
 }
 
@@ -37,6 +46,22 @@ async function addFilmsAndUpdateUI() {
   }
 }
 
+async function renderAfterChangingPage(currentPage) {
+  try {
+    document.querySelector('.header').scrollIntoView();
+    filmsApiServer.pagePagination = currentPage;
+    const data = await filmsApiServer.fetchFilms();
+    const { results, page, total_pages } = data;
+
+    refs.spinner.classList.remove('is-hiden');
+    const render = renderMarkUp(results, genreCollection);
+    refs.gallery.innerHTML = render; 
+    refs.spinner.classList.add('is-hiden');
+  } catch (err) {
+    onFetchError(err);
+  }
+}
+
 function renderGalleryList(data) {
   const { results, page, total_pages } = data;
   clearSearchQuery();
@@ -46,11 +71,17 @@ function renderGalleryList(data) {
     Notiflix.Notify.failure(
       'Search result not successful. Enter the correct movie name and try again'
     );
-    
     return;
   }
-  refs.gallery.innerHTML = filmCardsTpl(results); //filmCardsTpl(data) - функція яка рендерить HTML сторінку(робить хтось інший), results - масив обєктів
-  updateMarkupPagination(total_pages, page);
+
+  
+  refs.spinner.classList.remove('is-hiden');
+  const render = renderMarkUp(results, genreCollection);
+  refs.gallery.innerHTML = render;
+    refs.spinner.classList.add('is-hiden');
+
+  updateMarkupPagination(total_pages, page, renderAfterChangingPage);
+
 }
 
 function clearSearchQuery() {
@@ -63,6 +94,6 @@ function clearContainer(element) {
 
 function onFetchError(err) {
   console.log(err);
-  clearGalleryContainer();
+  clearContainer(refs.gallery);
 }
 
