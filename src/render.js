@@ -2,6 +2,7 @@ import { buildUrl } from "./fetch";
 
 export function renderMarkUp(arrMovies, genreCollection) {
     console.log(arrMovies);
+    
      return arrMovies.map(
       ({
           poster_path,
@@ -35,9 +36,9 @@ export function renderMarkUp(arrMovies, genreCollection) {
 
                 <div class="card__data">
                     
-                        <p class="card__genre">${genreNames.join(", ")}</p>
-            
-                    <p class="card__year">${release_date}</p>
+                    <p class="card__genre">${genreNames.join(", ")} |</p>
+                   
+                    <p class="card__year">${new Date(release_date).getFullYear()}</p>
                 </div>
             </div>
 
@@ -48,7 +49,7 @@ export function renderMarkUp(arrMovies, genreCollection) {
  }
 
 
-
+// pagination var Vlad Lysenko
 export function renderPagination(currentPage, total_pages) {
     let paginationArr = [];
     let paginationLinks = "";

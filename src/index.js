@@ -3,7 +3,7 @@ import { fetchGenreId } from "./fetch";
 import { fetchPopularMovies } from "./fetch";
 import { renderMarkUp } from "./render";
 import { renderPagination } from "./render";
-// import Notiflix from 'notiflix';
+
 
 
 let page = 1;
@@ -12,7 +12,6 @@ const pagination = document.querySelector(`.pagination`);
 
 // console.log(collection);
 
-let genreIdArr = [];
 let genreCollection = {};
 
 fetchGenreId()
@@ -40,12 +39,12 @@ function fetchMovies(page) {
 
 pagination.addEventListener("click", (e) => {
   e.preventDefault()
-  console.log(e.target);
-  console.log(e.target.dataset.page);
+//   console.log(e.target);
+//   console.log(e.target.dataset.page);
   fetchMovies(e.target.dataset.page)
 })
 
-fetchMovies(1)
+fetchMovies(page)
 
 
 

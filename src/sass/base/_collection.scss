@@ -1,17 +1,27 @@
 
 .collection{
-        margin-top: 100px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            width: 100%;
-            padding-left: 15px;
-            padding-right: 15px;
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+
+            
 }
 
 .collection__item{
     list-style: none;
-width: 100%;
+    width: 100%;
+    transition: box-shadow .3s;
+    float: left;
+    border-radius: 5px;
+    
+
+    &:hover {
+            box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+        }
 
 
 @include mobile {
@@ -31,13 +41,29 @@ width: 100%;
 
 .card__image{
     width: 100%;
+    border-radius: 5px;
   
 
 }
 
 .card-wrap{
     text-align: start;
-
+    margin-top: 12px;
+    margin-bottom: 32px;
+    padding-left: 5px;
+    font-weight: 500;
+    
+   
+    @include mobile {
+        font-size: 12px;
+        line-height: 16px;
+        }
+    
+    @include desktop {
+        font-size: 20px;
+        line-height: 24px;
+         text-transform: uppercase;
+        }
  
 }
 
@@ -48,10 +74,30 @@ width: 100%;
 
 .card__genre{
     list-style: none;
+    padding-top: 10px;
     margin-left: 0;
     padding-left: 0;
+    
 }
 
+.card__title{
+    
+    text-transform: uppercase;
+    color: black;
+}
+
+.card__data{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    color: #FF6B08;
+}
+
+.card__year{
+    padding-left: 6px;
+}
+
+// pagination var Vlad Lysenko
 .active{
     width: 40px;
     height: 40px;
