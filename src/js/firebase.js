@@ -2,6 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, enableLogging, update,child, get } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { getUserData } from "./localStorage";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,6 +21,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth();
 const user = auth.currentUser;
+
   
 
 const signinBtn = document.querySelector('.signin-Btn');
@@ -156,15 +159,22 @@ function logInUser(e) {
 }
 
 //Получение данных если пользоваетль залогинен
+
+let userData;
 onAuthStateChanged(auth, (user) => {
+
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;   
-        const dbRef = ref(getDatabase());
+      const uid = user.uid; 
+      const dbRef = ref(getDatabase());
+
 get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+
   if (snapshot.exists()) {
     console.log(snapshot.val());
+    getUserData(snapshot.val());
+
   } else {
     console.log("No data available");
   }
@@ -177,6 +187,7 @@ get(child(dbRef, `users/${uid}`)).then((snapshot) => {
     // ...
   }
 });
+
 
 //Выйти из аккаунта
 logOut.addEventListener('click', e => {
@@ -195,7 +206,6 @@ logOut.addEventListener('click', e => {
       alert(errorMessage)
 });
 })
-
 
 
 

@@ -1,7 +1,14 @@
 import Notiflix from 'notiflix';
 import fotoCardsTpl from "./markups/filmCardMarkup";
+let userData;
+
+function getUserData(data) {
+    userData = data
+}
+
 
 const WATCHED_KYE = 'queue';
+const USER_LOGIN_KEY = 'userIsLogin';
 const container = document.querySelector('.container-films')
 const refs ={
     headerNavList: document.querySelector('.header__nav-list'),
@@ -19,6 +26,18 @@ const onClickBtn = (data,e)=>{
         return;
         
     };
+
+    const userIsLogin = JSON.parse(localStorage.getItem(USER_LOGIN_KEY));
+    if (userIsLogin) {
+        
+        
+        
+    } else{
+        Notiflix.Notify.failure(`please log in`,{
+            timeout: 2000,
+        });
+        return;
+    }
   
 
         //-------перевіряю чи є в listWatchedArr фільм з id 
@@ -32,6 +51,7 @@ const onClickBtn = (data,e)=>{
         return; 
     };
 
+    
 
         //---- перевіряю LocalStorage і добавляю новий об'єкт-------
     const moviesListLocalStorage = JSON.parse(localStorage.getItem(WATCHED_KYE));
@@ -72,6 +92,8 @@ const onClickBtn = (data,e)=>{
 
 const onMyLibararyClick = e =>{
 
+    console.log(userData);
+
     if ( e.target.name !=='library') {
         return; 
     };
@@ -92,4 +114,4 @@ refs.headerNavList.addEventListener('click',onMyLibararyClick);
 
 
 
-export{onClickBtn};
+export{onClickBtn, getUserData};
