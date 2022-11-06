@@ -1,15 +1,15 @@
 import Notiflix from 'notiflix';
 
-const container = document.querySelector('.container-films');
-const myLibraryBtn = document.querySelector('.my-library-js');
-
 let dataWatched = [];
 
-export function onClickAddToWached(data) {
-  const idMovie = data.id;
+export function onClickAddToWached(data, evt) {
   const watchedMovieInLS = JSON.parse(localStorage.getItem('watched'));
 
-  if (dataWatched.some(obj => obj.id === idMovie)) {
+  if (evt.target.name !== 'watched') {
+    return;
+  }
+
+  if (dataWatched.some(el => el.id === data.id)) {
     Notiflix.Notify.info(`Тhis movie has already been added to the Watched`, {
       timeout: 2000,
     });
@@ -18,20 +18,21 @@ export function onClickAddToWached(data) {
 
   if (watchedMovieInLS !== null) {
     const checkingListWatchedArr = watchedMovieInLS.some(
-      obj => obj.id === idMovie
+      el => el.id === data.id
     );
 
     if (checkingListWatchedArr) {
-      Notiflix.Notify.info(`Тhis movie has already been added to the Watched`, {
-        timeout: 2000,
-      });
-
+      Notiflix.Notify.info(
+        `Тhis movie has already been added to the watched list`,
+        {
+          timeout: 2000,
+        }
+      );
       return;
     } else {
       watchedMovieInLS.push(data);
       localStorage.setItem('watched', JSON.stringify(watchedMovieInLS));
-
-      Notiflix.Notify.success(`Add movie`, {
+      Notiflix.Notify.success(`Add movie to watched list`, {
         timeout: 2000,
       });
     }
@@ -41,27 +42,7 @@ export function onClickAddToWached(data) {
   dataWatched.push(data);
   localStorage.setItem('watched', JSON.stringify(dataWatched));
 
-  Notiflix.Notify.success(`Add movie`, {
+  Notiflix.Notify.success(`Add movie to watched list`, {
     timeout: 2000,
   });
 }
-
-// ------------------click my library-------------
-
-// const onMyLibararyClick = e => {
-//   if (e.target.name !== 'library') {
-//     return;
-//   }
-
-//   const moviesListLocalStorage = JSON.parse(localStorage.getItem('watched'));
-//   if (moviesListLocalStorage === null) {
-//     Notiflix.Notify.failure(`my library is emty`, {
-//       timeout: 2000,
-//     });
-//     return;
-//   }
-//   const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
-//   container.innerHTML = renderLibrary;
-// };
-
-// refs.headerNavList.addEventListener('click', onMyLibararyClick);
