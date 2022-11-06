@@ -28,7 +28,9 @@ function onSubmitForm(e) {
 
 async function addFilmsAndUpdateUI() {
   try {
+    refs.spinner.classList.remove('is-hiden');
     const results = await filmsApiServer.fetchFilms();
+    refs.spinner.classList.add('is-hiden');
     renderGalleryList(results);
   } catch (err) {
     onFetchError(err);
@@ -47,12 +49,8 @@ function renderGalleryList(data) {
     
     return;
   }
-  
-  refs.spinner.classList.remove('is-hiden');
   refs.gallery.innerHTML = filmCardsTpl(results); //filmCardsTpl(data) - функція яка рендерить HTML сторінку(робить хтось інший), results - масив обєктів
-  refs.spinner.classList.add('is-hiden');
   updateMarkupPagination(total_pages, page);
-  
 }
 
 function clearSearchQuery() {
