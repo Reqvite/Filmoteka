@@ -9,6 +9,7 @@ const body = document.querySelector('body');
 
 
 const openModal = async e => {
+  e.preventDefault()
   if (e.target.closest('.collection__item')?.dataset.id) {
     const resp = await fetchFilmDetails(
       e.target.closest('.collection__item').dataset.id
