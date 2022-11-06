@@ -1,0 +1,100 @@
+.collection {
+  padding: 0 20px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  grid-template-columns: auto;
+  gap: 32px;
+
+  @include tablet {
+    grid-template-columns: auto auto;
+    padding: 0 32px;
+  }
+
+  @include desktop {
+    grid-template-columns: auto auto auto;
+  }
+}
+.collection__item {
+  cursor: pointer;
+  max-width: 280px;
+
+  @include tablet {
+    max-width: 336px;
+  }
+
+  @include desktop {
+    max-width: 395px;
+  }
+  transform: scale(1);
+  transition: box-shadow 1000ms cubic-bezier(0.075, 0.82, 0.165, 1),
+    transform 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+    transform: scale(1.05);
+  }
+}
+.card {
+}
+.card__image {
+}
+
+.card-wrap {
+  text-align: start;
+  margin-top: 12px;
+  margin-bottom: 32px;
+  padding-left: 5px;
+
+  @include mobile {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  @include desktop {
+    font-size: 20px;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+}
+.card__title {
+  text-transform: uppercase;
+}
+.card__data {
+  display: flex;
+  align-items: baseline;
+  color: #ff6b08;
+}
+.card__genre {
+  list-style: none;
+  margin-top: 10px;
+  margin-left: 0;
+  padding-left: 0;
+}
+.card__year {
+  margin-left: 6px;
+}
+
+.card-film__rating {
+  margin-left: 8px;
+  display: block;
+  padding: 1px 6px;
+  border-radius: 5px;
+  color: white;
+  background-color: $accentBg-color;
+  font-size: 12px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+// // pagination var Vlad Lysenko
+// .active {
+//   width: 40px;
+//   height: 40px;
+//   left: 620px;
+//   top: 2302px;
+//   color: white;
+//   background: #ff6b08;
+//   border-radius: 5px;
+// }
