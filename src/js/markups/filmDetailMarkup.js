@@ -1,8 +1,10 @@
-
+import { onClickBtn } from "../localStorage";
 const modal = document.querySelector('.film-modal-content');
 
 export const createFilmDetailsMarkup = resp => {
+  console.log(resp.data);
     const { poster_path, original_title, vote_average, vote_count, popularity, genres, overview, id } = resp.data;  
+
 
     const markup = `<div class="film-details-wrapper">
   <div><img class="modal-img" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="" data-id="${id}"/></div>
@@ -32,15 +34,24 @@ export const createFilmDetailsMarkup = resp => {
     <p class="film-details__about">${overview}</p>
     <ul class="buttons-list list">
   <li class="buttons-list__item">
-    <button class="main-button button" type="button">Add to watched</button>
+    <button class="main-button button" type="button" name="watched">Add to watched</button>
   </li>
-  <li class="buttons-list__item"><button class="secondary-button button" type="button">Add to queue</button></li>
+  <li class="buttons-list__item"><button class="secondary-button button" type="button" name="queue">Add to queue</button></li>
 </ul>
   </div>
 </div>`
     
-  modal.insertAdjacentHTML("beforeend", markup) 
-}
+  modal.insertAdjacentHTML("beforeend", markup);
+
+  const buttonsList = document.querySelector('.buttons-list');
+
+  buttonsList.addEventListener('click', (e)  => onClickBtn(resp.data, e));
+ 
+
+};
+
+
+
 
 
  
