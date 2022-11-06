@@ -9,11 +9,12 @@ export function renderMarkUp(arrMovies, genreCollection) {
           genre_ids, 
           title,
           release_date,
-            id
+             id,
+          vote_average
          }) =>
          {
              let genreNames = genre_ids.map((id) => genreCollection[id])
-             if (genreNames.length > 3) {
+             if (genreNames.length >= 3) {
                  genreNames = [genreNames[0], genreNames[1], "Other"];
                 
              }
@@ -23,7 +24,8 @@ export function renderMarkUp(arrMovies, genreCollection) {
              
              
              return `
-  <div class="collection__item" data-id=${id}>
+  <li class="collection__item" data-id=${id}>
+  <a href="" class="card-wrap__link link">
         <div class="card">
                 <img class="card__image" src="https://www.themoviedb.org/t/p/original/${poster_path}" alt="${title}" width="395px" height="574px">
 
@@ -34,11 +36,13 @@ export function renderMarkUp(arrMovies, genreCollection) {
                     <p class="card__genre">${genreNames.join(", ")} |</p>
                    
                     <p class="card__year">${new Date(release_date).getFullYear()}</p>
+                    <p class="card-film__rating">${vote_average}</p>
                 </div>
             </div>
 
         </div>
-    </div>
+        </a>
+    </li>
          `
          }).join('');
  }
