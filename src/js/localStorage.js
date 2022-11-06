@@ -1,11 +1,21 @@
 import Notiflix from 'notiflix';
-import fotoCardsTpl from "./markups/filmCardMarkup";
+import { renderMarkUp } from './collectionRender';
+// import fotoCardsTpl from "./markups/filmCardMarkup";
 
 const WATCHED_KYE = 'queue';
 const container = document.querySelector('.container-films')
 const refs ={
     headerNavList: document.querySelector('.header__nav-list'),
 };
+
+let genreCollection = {};
+fetchGenreId()
+  .then(genreId => {
+    genreId.data.genres.forEach(function (genre) {
+      genreCollection[genre.id] = genre.name;
+    });
+  })
+  .catch(error => console.log(error));
 
 
 //------------------------add to watched---------------
@@ -83,7 +93,8 @@ const onMyLibararyClick = e =>{
     });
     return;
    }
-   const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
+    // const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
+    const renderLibrary = renderMarkUp(moviesListLocalStorage, genreCollection);
    container.innerHTML = renderLibrary;
 
 };
