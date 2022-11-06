@@ -184,7 +184,8 @@ logOut.addEventListener('click', e => {
            signinBtn.style.display = 'block';
             loginBtn.style.display = 'block';
         logOut.classList.add('is-hidden')
-        
+      myLibraryJs.style.display = 'none';
+      
         localStorage.setItem("userIsLogin", "false");
     alert('sign out')
 }).catch((error) => {
