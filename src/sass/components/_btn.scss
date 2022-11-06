@@ -89,6 +89,15 @@
   }
 }
 
+.trailer-button {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50%;
+}
+
 .modal-icon-cross {
   display: block;
   padding: 0;
@@ -102,4 +111,3 @@
   &:focus {
   }
 }
-//

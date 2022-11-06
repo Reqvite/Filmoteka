@@ -12,7 +12,7 @@ export function renderMarkUp(arrMovies, genreCollection) {
           genreNames = [genreNames[0], genreNames[1], 'Other'];
         }
 
-        return `
+             return `
   <li class="collection__item" data-id=${id}>
   <a href="" class="card-wrap__link link">
         <div class="card">
@@ -23,6 +23,7 @@ export function renderMarkUp(arrMovies, genreCollection) {
                     
                     <p class="card__genre">${genreNames.join(', ')} |</p>
                    
+
                     <p class="card__year">${new Date(
                       release_date
                     ).getFullYear()}</p>

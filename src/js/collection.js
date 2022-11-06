@@ -20,7 +20,7 @@ const pagination = document.querySelector(`.pagination`);
   }).catch(error => console.log(error));
 
 
-function fetchMovies(page) {
+  function fetchMovies(page) {
   fetchPopularMovies(page).then(response => {
   const render = renderMarkUp(response.data.results, genreCollection);
   // const renderedPagination = renderPagination(Number(response.data.page), Number(response.data.total_pages))
@@ -43,10 +43,13 @@ function fetchMoviesOnPagination(page) {
   });
 }
 
+
 // pagination by VladLysenko
 // pagination.addEventListener("click", (e) => {
 //   e.preventDefault()
 //   fetchMovies(e.target.dataset.page)
 // })
+
 fetchMovies(page)
+
 

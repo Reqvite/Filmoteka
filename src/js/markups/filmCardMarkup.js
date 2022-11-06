@@ -1,3 +1,4 @@
+
 // export default function fotoCardsTpl(data) {
 // 	return data.map(({ poster_path, original_title, vote_average, genreNames, release_date, id }) => {
 // 		return `<li class="collection__item" data-id="${id}">
@@ -17,6 +18,7 @@
 // </li>`;
 // 	}).join('')
 // }
+
 
 // не хватает
 
