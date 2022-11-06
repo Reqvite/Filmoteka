@@ -37,7 +37,9 @@ function onSubmitForm(e) {
 
 async function addFilmsAndUpdateUI() {
   try {
+    refs.spinner.classList.remove('is-hiden');
     const results = await filmsApiServer.fetchFilms();
+    refs.spinner.classList.add('is-hiden');
     renderGalleryList(results);
   } catch (err) {
     onFetchError(err);
@@ -71,6 +73,7 @@ function renderGalleryList(data) {
     );
     return;
   }
+
   
   refs.spinner.classList.remove('is-hiden');
   const render = renderMarkUp(results, genreCollection);
@@ -78,6 +81,7 @@ function renderGalleryList(data) {
     refs.spinner.classList.add('is-hiden');
 
   updateMarkupPagination(total_pages, page, renderAfterChangingPage);
+
 }
 
 function clearSearchQuery() {

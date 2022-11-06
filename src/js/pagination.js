@@ -1,6 +1,13 @@
-import { refs } from './refs/refs';
+import FilmsApiServer from './fimlsApiServer';
+import filmCardsTpl from './markups/filmCardMarkup';
+import { refs } from "./refs/refs";
+
+
+const filmsApiServer = new FilmsApiServer();
 
 export default function updateMarkupPagination(totalPages, page, addFilmsAndUpdateUI) {
+
+
   let itemEl = '';
   let activePages = '';
   let beforPages = page - 1;
@@ -105,5 +112,38 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
     });
     index += 1;
   }
+}
+
+async function addFilmsAndUpdateUI() {
+	try {
+    refs.spinner.classList.remove('is-hiden');
+		filmsApiServer.query = localStorage.getItem('query');
+		const results = await filmsApiServer.fetchFilms();
+    refs.spinner.classList.add('is-hiden');
+		renderGalleryList(results);
+	} catch (err) {
+		onFetchError(err);
+	}
+}
+
+function renderGalleryList(data) {
+	const { results } = data;
+	
+	refs.gallery.innerHTML = filmCardsTpl(results); //filmCardsTpl(data) - функція яка рендерить HTML сторінку(робить хтось інший), results - масив обєктів
+	document.querySelector('.header').scrollIntoView();
+	clearSearchQuery();
+}
+
+function onFetchError(err) {
+  console.log(err);
+  clearGalleryContainer();
+}
+
+function clearGalleryContainer() {
+  refs.gallery.innerHTML = '';
+}
+
+function clearSearchQuery() {
+  refs.form.search.value = '';
 }
 
