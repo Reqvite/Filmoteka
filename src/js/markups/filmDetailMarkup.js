@@ -1,4 +1,4 @@
-import { fetchFilmDetails } from '../service';
+import { fetchFilmDetails } from '../service/service';
 
 import viewTrailer from '../viewTrailer';
 
