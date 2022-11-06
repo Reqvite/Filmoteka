@@ -1,5 +1,5 @@
 
-import { fetchFilmDetails } from './service';
+import { fetchFilmDetails } from './service/service';
 import { createFilmDetailsMarkup } from './markups/filmDetailMarkup';
 import { refs } from "./refs/refs";
 

@@ -1,5 +1,6 @@
 import './sass/index.scss';
 
+//markups
 
 import './js/collection';
 import './js/modal-footer';
@@ -7,7 +8,7 @@ import './js/modal-footer';
 
 import './js/addFilmsAndrenderGalery';
 
-import './js/service';
+import './js/service/service';
 
 import './js/markups/filmDetailMarkup';
 

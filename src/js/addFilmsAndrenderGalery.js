@@ -1,8 +1,8 @@
 import FilmsApiServer from './fimlsApiServer';
 import Notiflix from 'notiflix';
 import updateMarkupPagination from './pagination'
-import { fetchGenreId } from './collectionFetch';
-import { renderMarkUp } from './collectionRender';
+import { fetchGenreId } from './collectionFetch'; 
+import { renderMarkUp } from './markups/collectionRender'; 
 import { refs } from "./refs/refs";
 
 const filmsApiServer = new FilmsApiServer();
