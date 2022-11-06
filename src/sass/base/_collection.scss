@@ -17,33 +17,23 @@
     transition: box-shadow .3s;
     float: left;
     border-radius: 5px;
-    
-
     &:hover {
             box-shadow: 0 0 11px rgba(33, 33, 33, .2);
         }
-
-
-@include mobile {
-    
-    }
-
+        
         @include tablet {
             width: calc((100% - 20px)/2)
         }
-
-                @include desktop {
-                    width: calc((100% - 40px)/3);
-                }
-
+        
+        @include desktop {
+            width: calc((100% - 40px)/3);
+        }
 }
 
 
 .card__image{
     width: 100%;
     border-radius: 5px;
-  
-
 }
 
 .card-wrap{

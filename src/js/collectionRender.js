@@ -1,4 +1,4 @@
-import { buildUrl } from "./fetch";
+import { buildUrl } from "./collectionFetch";
 
 export function renderMarkUp(arrMovies, genreCollection) {
     console.log(arrMovies);
