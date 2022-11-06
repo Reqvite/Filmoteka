@@ -3,6 +3,7 @@ import { collectionRender } from './markups/collectionRender'
 import { fetchGenreId } from './collectionFetch'; 
 // import fotoCardsTpl from "./markups/filmCardMarkup";
 
+
 const WATCHED_KYE = 'queue';
 const container = document.querySelector('.container-films')
 const refs ={
