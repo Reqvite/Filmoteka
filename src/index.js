@@ -9,15 +9,16 @@ import './js/service';
 
 import './js/markups/filmDetailMarkup';
 
-import './js/openFilmModal'
+import './js/openFilmModal';
 
-import './js/pagination'
+import './js/pagination';
 
 import './js/localStorage';
 
 import './js/toggleTheme';
 
-import './js/firebase'
+import './js/firebase';
 
 import './js/changeHeaderPageHome-Mylibrary';
 
+import './js/addCurrentFilmToMyLibrary';
