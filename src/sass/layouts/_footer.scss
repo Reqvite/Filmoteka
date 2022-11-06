@@ -18,7 +18,18 @@
     line-height: 1.15;
   }
 }
-
+.footer-text__big {
+  color: $footer-text-color;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+}
+.footer-text__smol {
+  color: $footer-text-color;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.14;
+}
 .footer_link {
   text-decoration: none;
 }
@@ -28,15 +39,13 @@
   text-decoration: underline;
   color: $secondary-text-color;
 }
-
 .is-hidden {
   transform: translateX(-100%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
-
-.backdrop {
+.modal-footer {
   position: fixed;
   top: 0;
   left: 0;
@@ -55,7 +64,7 @@
   }
 }
 
-.modal {
+.modal-footer__box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -64,19 +73,20 @@
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
-  width: 528px;
-  height: 581px;
+  width: 80%;
+  height: 100%;
   background: #ffffff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   padding: 40px;
 
-  .backdrop.is-hidden & {
+  .modal-footer.is-hidden & {
     transform: translate(-50%, -50%) scale(0.5);
   }
 }
-.modal__button {
+
+.footer__button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,23 +103,123 @@
   right: 8px;
 }
 
-.modal__icon {
+.footer__icon {
   fill: #000000;
 }
-.meny__icon {
+.footer__icon {
   fill: #000000;
   &:focus,
   :hover {
     fill: #ff6b01;
   }
 }
-.modal__footer {
-  color: #000000;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 1.17;
-}
 .vl {
   border-left: 1px solid $footer-text-color;
   height: 7px;
+}
+.team {
+  gap: 10px;
+  color: $mainBg-color;
+  background: #f7f5f5;
+  padding: 20px;
+}
+.team-box {
+  display: flex;
+  flex-direction: column;
+  @include tablet {
+    width: calc((100% - 30px) / 2);
+    flex-wrap: wrap;
+  }
+  @include desktop {
+    width: calc((100% - 90px) / 3);
+  }
+}
+.team__title {
+  color: $secondary-text-color;
+  font-size: 16 px;
+  line-height: 1.15;
+  text-align: center;
+}
+.team__list {
+  overflow-y: scroll;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 20px 30px;
+  @include tablet {
+    width: calc((100% - 30px) / 2);
+    flex-wrap: wrap;
+  }
+  @include desktop {
+    width: calc((100% - 90px) / 3);
+  }
+}
+.team__card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f5f5;
+}
+
+.about {
+  text-align: center;
+  padding: 10px 10px;
+
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 0px 0px 4px 4px;
+
+  .team__card & {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+.team__foto {
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+}
+.team__card .team__foto {
+  overflow: hidden;
+}
+.networks {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.networks__list {
+  width: 44px;
+  height: 44px;
+  margin-left: 10px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.networks__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition-property: color, background-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: $footer-text-color;
+
+  &:hover,
+  &:focus {
+    background-color: #ff6b01;
+    color: #ffffff;
+  }
+}
+
+.networks__icon {
+  fill: $footer-text-color;
 }
