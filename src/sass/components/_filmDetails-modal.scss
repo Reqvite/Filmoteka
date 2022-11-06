@@ -74,6 +74,7 @@
 }
 
 .film-details {
+  position: relative;
   @media screen and (max-width: 767.98px) {
     margin-top: 20px;
   }
@@ -161,7 +162,7 @@
 
   padding-top: 56.25%;
 
-  transform: translateY(120%);
+  transform: translateY(150%);
   transition: transform 950ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &__vieo {

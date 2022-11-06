@@ -1,18 +1,22 @@
 import fetchTrailerVideo from './fetchTrailerVideo';
 
-export default async function viewTrailer() {
+export default async function viewTrailer(trailerId) {
   const btnViewAndStopTrailer = document.querySelector('.trailer-button');
   const trailer = document.querySelector('.trailer');
+  const insertBtn = btnViewAndStopTrailer.firstElementChild;
+  console.log(insertBtn);
 
   btnViewAndStopTrailer.addEventListener('click', onClickViewAndStopTrailer);
 
   async function onClickViewAndStopTrailer(e) {
     let keyVideo;
-    if (e.target.innerText === 'View') {
-      await fetchTrailerVideo().then(resp => {
-        const { results } = resp.data;
-        keyVideo = results[0].key;
-      });
+    if (e.target.innerText === 'VIEW TRAILER') {
+      await fetchTrailerVideo(trailerId)
+        .then(resp => {
+          const { results } = resp.data;
+          keyVideo = results[0].key;
+        })
+        .catch(error => console.log(error));
       trailer.classList.add('is-view');
       trailer.insertAdjacentHTML(
         'beforeend',
@@ -26,13 +30,17 @@ export default async function viewTrailer() {
           allowfullscreen
         ></iframe>`
       );
-      e.target.innerText = 'Close';
+      e.target.innerText = 'CLOSE TRAILER';
+      insertBtn.classList.remove('trailer-button__text--play');
+      insertBtn.classList.add('trailer-button__text--stop');
       return;
     }
 
-    if (e.target.innerText === 'Close') {
+    if (e.target.innerText === 'CLOSE TRAILER') {
       trailer.classList.remove('is-view');
-      e.target.innerText = 'View';
+      e.target.innerText = 'VIEW TRAILER';
+      insertBtn.classList.add('trailer-button__text--play');
+      insertBtn.classList.remove('trailer-button__text--stop');
       trailer.innerHTML = '';
       return;
     }
