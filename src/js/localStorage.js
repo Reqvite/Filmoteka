@@ -1,5 +1,6 @@
 import Notiflix from 'notiflix';
 import { renderMarkUp } from './collectionRender';
+import { fetchGenreId } from './collectionFetch';
 // import fotoCardsTpl from "./markups/filmCardMarkup";
 
 const WATCHED_KYE = 'queue';
