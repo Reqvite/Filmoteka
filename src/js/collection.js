@@ -10,17 +10,21 @@ const pagination = document.querySelector(`.pagination`);
 
 let genreCollection = {};
 
-fetchGenreId()
-  .then(genreId => {
-    genreId.data.genres.forEach(function (genre) {
+ async function  fetchTrending (){
+    const resp = await fetchGenreId()
+
+    resp.data.genres.forEach(function (genre) {
       genreCollection[genre.id] = genre.name
-    })
+
     // console.log(genreCollection); 
   })
-  .catch(error => console.log(error));
+
+  
+    await fetchMovies(page)
+}
 
 
-function fetchMovies(page) {
+  function fetchMovies(page) {
   fetchPopularMovies(page).then(response => {
     // console.log(response.data.results);
   const render = renderMarkUp(response.data.results, genreCollection);
@@ -32,9 +36,11 @@ function fetchMovies(page) {
 
 }
 
+
 // pagination by VladLysenko
 // pagination.addEventListener("click", (e) => {
 //   e.preventDefault()
 //   fetchMovies(e.target.dataset.page)
 // })
-fetchMovies(page)
+fetchTrending(page)
+
