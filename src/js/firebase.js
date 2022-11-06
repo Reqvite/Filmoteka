@@ -66,7 +66,8 @@ modalFormBtnClose.addEventListener('click', e => {
 
 //Открытие модалки(регистрация)
 signinBtn.addEventListener('click', e => {
-    modal.classList.remove('form-hidden');
+  modal.classList.remove('form-hidden');
+      nameInput.style.display = 'block';
     formRegistr.addEventListener('submit', signUpUser) 
     submitSignBtn.style.display = 'block';
 })
@@ -143,7 +144,7 @@ function logInUser(e) {
       submitLoginBtn.style.display = 'none';
 
       localStorage.setItem("userIsLogin", "true");
-      formRegistr.addEventListener('submit', logInUser);
+      formRegistr.removeEventListener('submit', logInUser);
       alert('login')
   })
   .catch((error) => {
