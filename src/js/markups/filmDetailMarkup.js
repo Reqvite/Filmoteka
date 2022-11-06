@@ -41,12 +41,11 @@ export const createFilmDetailsMarkup = resp => {
     <button class="main-button button" type="button" name="watched">Add to watched</button>
   </li>
   <li class="buttons-list__item"><button class="secondary-button button" type="button" name="queue">Add to queue</button></li>
+  	<li class="buttons-list__item"><button class="trailer-button" type="button">View</button></li>
 </ul>
-  </div>
   <div class="trailer">
 		</div>
-	</div>
-	<button class="trailer-button" type="button">View</button>
+
 </div>`
     
   modal.insertAdjacentHTML("beforeend", markup);
