@@ -1,4 +1,4 @@
-@mixin transition($one, $two, $three, $time, $func) {
+@mixin transition($one:all, $two:null, $three:null, $time:250ms, $func:cubic-bezier(0.4, 0, 0.2, 1)) {
   transition-property: $one, $two, $three;
   transition-duration: $time;
   transition-timing-function: $func;
@@ -26,4 +26,10 @@
     (min-resolution: 2dppx) {
     @content;
   }
+}
+
+@mixin flexCenter($type:flex, $main-axis:center, $cross-axis:center) {
+	display: $type;
+	justify-content: $main-axis;
+	align-items: $cross-axis;
 }

@@ -1,11 +1,9 @@
-const toggleTheme = document.querySelector('.toggle-theme');
-const footer = document.querySelector(".footer_box");
-const modal_bgr = document.querySelector(".film-modal-content");
+import { refs } from "./refs/refs";
 
 const LS_Key = 'theme';
 DarkOrWhiteTheme();
 
-toggleTheme.addEventListener('click', onChangeTheme);
+refs.toggleTheme.addEventListener('click', onChangeTheme);
 
 function onChangeTheme() {
     document.body.classList.toggle("dark-theme");
@@ -17,16 +15,15 @@ function onChangeTheme() {
 function DarkOrWhiteTheme() {
     const Dark = JSON.parse(localStorage.getItem(LS_Key));
     if(Dark){
-        footer.style.backgroundColor = "rgb(182, 165, 165)";
+        refs.footer.style.backgroundColor = "rgb(182, 165, 165)";
         document.body.classList.add("dark-theme");
-        modal_bgr.classList.add('dark');
-        toggleTheme.style.color = "#ffffff";
-
+        refs.modal_bgr.classList.add('dark');
+        refs.toggleTheme.style.color = "#ffffff";
         return;
     }
         document.body.classList.remove("dark-theme");
-        footer.style.backgroundColor = "#ffffff";
-        modal_bgr.classList.remove('dark');
-        toggleTheme.style.color = "#000000";   
+        refs.footer.style.backgroundColor = "#ffffff";
+        refs.modal_bgr.classList.remove('dark');
+        refs.toggleTheme.style.color = "#000000";   
 }
 
