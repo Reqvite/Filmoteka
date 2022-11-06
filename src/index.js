@@ -1,5 +1,6 @@
 import './sass/index.scss';
 
+import './js/collection';
 import './js/modal-footer';
 
 import './js/addFilmsAndrenderGalery';
