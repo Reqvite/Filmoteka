@@ -10,7 +10,6 @@
   @include retina {
     background-image: url(../images/header-background-img-home/header-bcgrd-mobile2x.jpg);
   }
-
   @include tablet {
     padding-top: 40px;
     padding-bottom: 80px;
@@ -38,13 +37,9 @@
     text-shadow: 0px 3px 3px #ffffff;
     transform: scale(1.1);
   }
-  @include tablet {
-    margin-left: 17px;
-  }
 }
 .header__logo-text {
   display: none;
-
   @include tablet {
     display: block;
     font-weight: 500;
@@ -63,19 +58,14 @@
 .header__nav-list {
   display: flex;
   align-items: center;
-  margin-left: 114px;
+  margin-left: auto;
   margin-top: 2px;
-
-  @include tablet {
-    margin-left: auto;
-    margin-right: 17px;
-  }
 }
+
 .header__nav-item {
   &:last-child {
     margin-left: 40px;
   }
-
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
     text-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
@@ -84,7 +74,6 @@
     transform: scale(1.1);
   }
 }
-
 .header__nav-link {
   font-style: normal;
   font-weight: 500;
@@ -105,15 +94,18 @@
 //   background-color: #ff001b;
 //   transform: scaleX(1);
 // }
-.header__main-wrap {
+.header__home-wrap {
   display: flex;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
 }
 .toggle-theme {
+  position: absolute;
+  right: 0;
+  bottom: 30;
   color: $mainBg-color;
   margin-top: 30px;
-  margin-right: 17px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,8 +121,10 @@
     background-color: $hover-focusBG-color;
     box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
   }
+  @include tablet {
+    bottom: 0;
+  }
 }
-
 .header__search-form {
   position: relative;
   width: 280px;
@@ -175,6 +169,8 @@
 
 //Це тільки частина header(My Library)
 .header__section--mylibrary {
+  padding-bottom: 62px;
+  padding-top: 42px;
   background-color: rgba(0, 0, 0, 0.56);
   background-image: url(../images/header-background-img-mylibrary/mylibrary-mobile-x1.jpg);
   background-repeat: no-repeat;
@@ -182,10 +178,9 @@
   @include retina {
     background-image: url(../images/header-background-img-mylibrary/mylibrary-mobile-x2.jpg);
   }
-
   @include tablet {
     padding-top: 40px;
-    padding-bottom: 80px;
+    padding-bottom: 60px;
     background-image: url(../images/header-background-img-mylibrary/mylibrary-tablet-x1.jpg);
     @include retina {
       background-image: url(../images/header-background-img-mylibrary/mylibrary-tablet-x2.jpg);
@@ -198,25 +193,35 @@
     }
   }
 }
-
 .header__mylibrary {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
-  margin-top: 60px;
-
+  margin-top: 66px;
   @include tablet {
     margin-top: 40px;
   }
 }
-
 .header__mylibrary-btn {
   min-width: 130px;
-
+  color: #ffffff;
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
   &:last-child {
     margin-left: 20px;
     @include tablet {
       margin-left: 32px;
     }
+  }
+  @include tablet {
+    min-width: 152px;
+  }
+}
+.header__mylibrary .toggle-theme {
+  bottom: 65;
+  @include tablet {
+    bottom: 15;
   }
 }
