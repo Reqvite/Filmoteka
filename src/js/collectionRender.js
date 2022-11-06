@@ -1,7 +1,7 @@
 import { buildUrl } from "./collectionFetch";
 
 export function renderMarkUp(arrMovies, genreCollection) {
-    console.log(arrMovies);
+    // console.log(arrMovies);
     
      return arrMovies.map(
       ({
@@ -9,7 +9,7 @@ export function renderMarkUp(arrMovies, genreCollection) {
           genre_ids, 
           title,
           release_date,
-
+            id
          }) =>
          {
              let genreNames = genre_ids.map((id) => genreCollection[id])
@@ -19,21 +19,16 @@ export function renderMarkUp(arrMovies, genreCollection) {
              }
 
 
-             console.log(genreNames);
+            //  console.log(genreNames);
              
              
              return `
-             <li class="collection__item">
-        <article class="card">
-            <a class="card__link" href="">
-                <img class="card__image" src="https://www.themoviedb.org/t/p/w220_and_h330_face${poster_path}" alt="${title}" width="395px" height="574px">
-            </a>
+  <div class="collection__item" data-id=${id}>
+        <div class="card">
+                <img class="card__image" src="https://www.themoviedb.org/t/p/original/${poster_path}" alt="${title}" width="395px" height="574px">
 
             <div class="card-wrap">
-                <a class="card-wrap__link" href="">
-                    <h2 class="card__title">${title}</h2>
-                </a>
-
+                <h2 class="card__title">${title}</h2>
                 <div class="card__data">
                     
                     <p class="card__genre">${genreNames.join(", ")} |</p>
@@ -42,8 +37,8 @@ export function renderMarkUp(arrMovies, genreCollection) {
                 </div>
             </div>
 
-        </article>
-    </li>
+        </div>
+    </div>
          `
          }).join('');
  }

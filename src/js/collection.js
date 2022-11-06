@@ -5,7 +5,7 @@ import { renderPagination } from "./collectionRender";
 
 
 let page = 1;
-const collection = document.querySelector(`.collection`);
+const collection = document.querySelector(`.container-films`);
 const pagination = document.querySelector(`.pagination`);
 
 let genreCollection = {};
