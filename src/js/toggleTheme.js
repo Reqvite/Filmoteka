@@ -19,7 +19,6 @@ function DarkOrWhiteTheme() {
         document.body.classList.add("dark-theme");
         refs.modal_bgr.classList.add('dark');
         refs.toggleTheme.style.color = "#ffffff";
-
         return;
     }
         document.body.classList.remove("dark-theme");

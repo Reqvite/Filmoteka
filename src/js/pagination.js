@@ -1,11 +1,7 @@
 import FilmsApiServer from './fimlsApiServer';
 import filmCardsTpl from './markups/filmCardMarkup';
+import { refs } from "./refs/refs";
 
-const refs = {
-	form: document.querySelector('.header__search-form'),
-	gallery: document.querySelector('.container-films'), 
-	listEl: document.querySelector('.pagination__list'),
-};
 
 const filmsApiServer = new FilmsApiServer();
 
@@ -125,8 +121,10 @@ export default function updateMarkupPagination(totalPages, page) {
 
 async function addFilmsAndUpdateUI() {
 	try {
+    refs.spinner.classList.remove('is-hiden');
 		filmsApiServer.query = localStorage.getItem('query');
 		const results = await filmsApiServer.fetchFilms();
+    refs.spinner.classList.add('is-hiden');
 		renderGalleryList(results);
 	} catch (err) {
 		onFetchError(err);
