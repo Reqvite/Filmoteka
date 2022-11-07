@@ -8,12 +8,8 @@ import { renderMarkUp } from './markups/collectionRender'
 import { fetchGenreId } from './collectionFetch';
 import { renderMurkUpLibrary, clearContainer } from "./markups/renderMarkUpLibrary"; 
 
-console.log(refs);
 const auth = getAuth();
 const USER_LOGIN_KEY = 'userIsLogin';
-
-
-const container = document.querySelector('.container-films')
 
 // let genreCollection = {};
 // fetchGenreId()
@@ -122,9 +118,12 @@ const onClickBtn = (data,e)=>{
 
 const onMyLibararyClick = e =>{
 
-    if ( e.target.name !=='library') {
+    if (e.target.name !== 'library') {
+         refs.listEl.classList.remove('is-hidden');
         return; 
     };
+
+    refs.listEl.classList.add('is-hidden');
 
 
 //    const moviesListLocalStorage= JSON.parse(localStorage.getItem(WATCHED_KYE));
@@ -179,5 +178,49 @@ const onMyLibararyClick = e =>{
 refs.headerNavList.addEventListener('click',onMyLibararyClick);
 
 
+const onQueueBtnClickinLibrary = e =>{
+        console.log(5);
+    onAuthStateChanged(auth, (user) => {
+
+            if (user) {
+                const uid = user.uid; 
+                const dbRef = ref(getDatabase());
+      
+                get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+      
+                    if (snapshot.exists()) {
+                        const queueListData = snapshot.val().queueList
+                        if (queueListData === '') {
+                            clearContainer();
+                        
+                            Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
+                             timeout: 2000,
+                            });
+                        }else{
+                            const queueList = JSON.parse(snapshot.val().queueList);
+                            console.log(queueList);
+                            renderMurkUpLibrary(queueList);
+                            console.log(queueList);
+                        };
+                    
+                   
+                } else {
+                    console.log("No data available");
+            }
+            }).catch((error) => {
+                console.error(error);
+            });
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+    });
+    
+}
+
+refs.queueBtnInLibrary.addEventListener('click', onQueueBtnClickinLibrary)
+
+    
 
 export{ onClickBtn };
