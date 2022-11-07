@@ -1,22 +1,15 @@
+import { refs } from '../refs/refs';
 
-import { refs } from "../refs/refs";
+const renderMurkUpLibrary = queueList => {
+  const markup = queueList.reduce((acc, obj) => {
+    const { id, poster_path, title, release_date, vote_average, genres } = obj;
 
-const renderMurkUpLibrary = queueList =>{
+    const genreNames = genres.map(gender => gender.name);
+    const releaseYear = release_date.split('-');
 
-    const markup = queueList.reduce((acc, obj) =>{
-        const {
-            id,
-            poster_path,
-            title, 
-            release_date, 
-            vote_average, 
-            genres 
-        } = obj;
-        
-        const genreNames = genres.map(gender => gender.name);
-        const releaseYear = release_date.split('-')
-        
-        return acc +`
+    return (
+      acc +
+      `
         <li class="collection__item" data-id=${id}>
         <a href="" class="card-wrap__link link">
               <div class="card">
@@ -24,7 +17,6 @@ const renderMurkUpLibrary = queueList =>{
                   <div class="card-wrap">
                       <h2 class="card_ _title">${title}</h2>
                       <div class="card__data">
-                          
                           <p class="card__genre">${genreNames.join(', ')} |</p>
                           <p class="card__year">${releaseYear[0]}</p>
                           <p class="card-film__rating">${vote_average}</p>
@@ -34,20 +26,17 @@ const renderMurkUpLibrary = queueList =>{
               </a>
           </li>
                `
-    }, '');
+    );
+  }, '');
 
-    refs.gallery.innerHTML = markup
-
+  return (refs.gallery.innerHTML = markup);
 };
 
-
-
-
-const clearContainer = () =>{
-    const title = `
+const clearContainer = () => {
+  const title = `
     <h1>Opps🙊 your library is empty! Choose something!</h1>
-    `
-    refs.gallery.innerHTML = title;
+    `;
+  refs.gallery.innerHTML = title;
 };
 
-export{ renderMurkUpLibrary, clearContainer };
+export { renderMurkUpLibrary, clearContainer };

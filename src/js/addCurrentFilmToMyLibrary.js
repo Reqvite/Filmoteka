@@ -1,5 +1,9 @@
 import Notiflix from 'notiflix';
 import { renderMarkUp } from './markups/collectionRender';
+import {
+  renderMurkUpLibrary,
+  clearContainer,
+} from './markups/renderMarkUpLibrary';
 
 const libraryButton = document.querySelector('.header__mylibrary');
 const container = document.querySelector('.container-films');
@@ -49,6 +53,8 @@ export function onClickAddToWached(data, evt) {
   Notiflix.Notify.success(`Add movie to watched list.`);
 }
 
+// Клік на кнопку вочед і рендер розмітки
+
 function onWatchedClick(e) {
   const watchedMovieInLS = JSON.parse(localStorage.getItem('watched'));
   if (e.target.name == 'watched-btn') {
@@ -56,11 +62,9 @@ function onWatchedClick(e) {
       Notiflix.Notify.failure(`My library is emty`);
       return;
     }
+    const markupWatched = renderMurkUpLibrary(watchedMovieInLS);
 
-    const markupWatched = renderMarkUp(
-      JSON.parse(localStorage.getItem('watched'))
-    );
-    container.innerHTML = '';
+    clearContainer();
     container.innerHTML = markupWatched;
   }
 }
