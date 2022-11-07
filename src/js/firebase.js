@@ -1,11 +1,10 @@
-// Import the functions you need from the SDKs you need
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, enableLogging, update,child, get } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
 
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAmrcw3LWh5vdrPE40gh2Uggxq3EG96Lys",
   authDomain: "film-library-registration.firebaseapp.com",
@@ -23,27 +22,27 @@ const auth = getAuth();
 const user = auth.currentUser;
 
   
-
+//Modal btns
 const signinBtn = document.querySelector('.signin-Btn');
 const loginBtn = document.querySelector('.login-Btn');
+
+//submit btns
 const logOut = document.querySelector('.login-Out');
-
-
-const nameInput = document.querySelector('.name-input');
 const submitSignBtn = document.querySelector('.submit-signUp-btn');
 const submitLoginBtn = document.querySelector('.submit-login-btn');
 
-
+//modal open-close
 const modal = document.querySelector('.backdrop-form');
 const modalFormBtnClose = document.querySelector('.modal-form-btn');
 
+//form changes
+const nameInput = document.querySelector('.name-input');
 const formRegistr = document.querySelector('.registr')
 
 
 const myLibraryJs = document.querySelector('.my-library-js');
-
 myLibraryJs.style.display = 'none'
- logOut.style.display = 'none'
+logOut.style.display = 'none'
 
 //Проверка залогинен пользователь или нет
 function userIsLogin(){
@@ -106,13 +105,14 @@ function signUpUser(e) {
             formRegistr.removeEventListener('submit', signUpUser);
 
             localStorage.setItem("userIsLogin", "true");
-            alert('created')
+            Notify.success('Congratulations, your account has been successfully created.');
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
              formRegistr.removeEventListener('submit', signUpUser);
-            alert(errorMessage)
+         
+          Notify.failure(errorMessage);
         })
         e.target.reset()
 }
@@ -153,13 +153,13 @@ function logInUser(e) {
 
       localStorage.setItem("userIsLogin", "true");
       formRegistr.removeEventListener('submit', logInUser);
-      alert('login')
+       Notify.success('Successful login.');
   })
   .catch((error) => {
     const errorCode = error.code;
       const errorMessage = error.message;
     formRegistr.removeEventListener('submit', signUpUser);
-      alert(errorMessage)
+      Notify.failure(errorMessage);
   });   
 }
 
@@ -201,7 +201,7 @@ logOut.addEventListener('click', e => {
       myLibraryJs.style.display = 'none';
       
         localStorage.setItem("userIsLogin", "false");
-    alert('sign out')
+      Notify.success('Successful logged out.');
 }).catch((error) => {
    const errorCode = error.code;
       const errorMessage = error.message;

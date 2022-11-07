@@ -42,9 +42,8 @@
 }
 
 .card-wrap {
-  text-align: start;
-  margin-top: 12px;
-  margin-bottom: 32px;
+  padding-top: 12px;
+  padding-bottom: 32px;
   padding-left: 5px;
 
   @include mobile {
@@ -98,4 +97,3 @@
 //   background: #ff6b08;
 //   border-radius: 5px;
 // }
-
