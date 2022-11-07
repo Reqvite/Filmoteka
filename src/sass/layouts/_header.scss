@@ -1,7 +1,7 @@
 .header__section {
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 92px;
+  padding-bottom: 89px;
   padding-top: 42px;
   opacity: 0.9;
   background-image: url(../images/header-background-img-home/header-bcgrd-mobile1x.jpg);
@@ -12,7 +12,7 @@
   }
   @include tablet {
     padding-top: 40px;
-    padding-bottom: 80px;
+    padding-bottom: 81px;
     background-image: url(../images/header-background-img-home/header-bcgrd-tablet1x.jpg);
     @include retina {
       background-image: url(../images/header-background-img-home/header-bcgrd-tablet2x.jpg);
@@ -30,12 +30,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 30px;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
     text-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
     text-shadow: 0px 3px 3px #ffffff;
     transform: scale(1.1);
+  }
+  @include tablet {
+    height: 35px;
   }
 }
 .header__logo-text {
@@ -53,6 +57,7 @@
 }
 .header__nav-wrap {
   display: flex;
+  // align-items: center;
 }
 
 .header__nav-list {
@@ -60,6 +65,7 @@
   align-items: baseline;
   margin-left: auto;
   margin-top: 10px;
+  height: 20px;
 }
 
 .header__nav-item {
@@ -83,10 +89,13 @@
 }
 
 .header__home-wrap {
-  padding-top: 62px;
+  padding-top: 49px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  @include tablet {
+    padding-top: 40px;
+  }
 }
 .toggle-theme {
   position: absolute;
@@ -160,7 +169,7 @@
 }
 .header__input {
   width: 100%;
-  height: 20px;
+  height: 19px;
   color: #ffffff;
   border: none;
   background-color: rgba(0, 0, 0, 0);
@@ -233,6 +242,11 @@
   @include tablet {
     min-width: 152px;
   }
+}
+
+.header__mylibrary-btn--active {
+  background: #ff6b01;
+  border: none;
 }
 .header__mylibrary .toggle-theme {
   bottom: 65;
