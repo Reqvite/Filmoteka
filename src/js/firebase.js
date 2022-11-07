@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, enableLogging, update,child, get } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyAmrcw3LWh5vdrPE40gh2Uggxq3EG96Lys",
   authDomain: "film-library-registration.firebaseapp.com",
@@ -16,9 +17,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+export const database = getDatabase(app);
 const auth = getAuth();
 const user = auth.currentUser;
+
   
 //Modal btns
 const signinBtn = document.querySelector('.signin-Btn');
@@ -131,15 +133,16 @@ function logInUser(e) {
     const email = formRegistr.elements[1].value
     const password = formRegistr.elements[2].value
 
- signInWithEmailAndPassword(auth, email, password)
+  signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    console.log(user);
     // ...
        const dt = new Date();
          update(ref(database, 'users/' + user.uid),{
              last_login: dt,
-             localData: 'data'
+             localData: 'data'  
          })
             modal.classList.add('form-hidden');
             signinBtn.style.display = 'none';
@@ -162,14 +165,18 @@ function logInUser(e) {
 
 //Получение данных если пользоваетль залогинен
 onAuthStateChanged(auth, (user) => {
+
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;   
-        const dbRef = ref(getDatabase());
+      const uid = user.uid; 
+      const dbRef = ref(getDatabase());
+
 get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+
   if (snapshot.exists()) {
     console.log(snapshot.val());
+
   } else {
     console.log("No data available");
   }
@@ -182,6 +189,7 @@ get(child(dbRef, `users/${uid}`)).then((snapshot) => {
     // ...
   }
 });
+
 
 //Выйти из аккаунта
 logOut.addEventListener('click', e => {
@@ -200,8 +208,5 @@ logOut.addEventListener('click', e => {
       alert(errorMessage)
 });
 })
-
-
-
 
 
