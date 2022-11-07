@@ -19,7 +19,7 @@ import './js/viewTrailer';
 
 import './js/pagination';
 
-import './js/localStorage';
+import './js/myLibrary';
 
 import './js/toggleTheme';
 
