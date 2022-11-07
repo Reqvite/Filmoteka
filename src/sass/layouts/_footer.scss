@@ -124,6 +124,7 @@
   gap: 10px;
   color: $mainBg-color;
   background: #ffffff;
+  width: auto;
   height: auto;
   padding: 20px;
 }
@@ -133,31 +134,29 @@
   align-items: center;
   grid-template-columns: auto;
   gap: 32px;
-  margin-top: 20px;
+
   @include tablet {
     grid-template-columns: auto auto;
     padding: 0 32px;
-    margin-top: 30px;
   }
 
   @include desktop {
     grid-template-columns: auto auto auto;
-    margin-top: 40px;
   }
 }
 .team-footer__title {
   color: $secondary-text-color;
-  font-size: 16 px;
+  font-size: 36px;
   line-height: 1.15;
   text-align: center;
 
   @include tablet {
-    font-size: 18 px;
+    font-size: 58px;
     line-height: 1.5;
   }
 
   @include desktop {
-    font-size: 20 px;
+    font-size: 70px;
     line-height: 1.8;
   }
 }
@@ -185,8 +184,8 @@
   margin-right: auto;
   width: auto;
 }
-.team-footer__card .team-footer__foto {
-}
+// .team-footer__card .team-footer__foto {
+// }
 .networks-footer {
   display: flex;
   justify-content: center;

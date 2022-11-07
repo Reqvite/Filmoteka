@@ -4,6 +4,9 @@ import * as image from '../images/footer/no-foto.jpg';
 import * as image3 from '../images/footer/img_6550.jpg';
 import * as image4 from '../images/footer/me-foto-1.jpg';
 import * as image5 from '../images/footer/Taras-Novitskyi.jpg';
+import * as image6 from '../images/footer/Yevhenii-Kavetskyi.jpg';
+import * as image9 from '../images/footer/Inna-Sikora.jpg';
+import * as image8 from '../images/footer/Lina-Fomenko.jpg';
 import * as sprite from '../images/sprite.svg';
 
 (() => {
@@ -43,11 +46,11 @@ import * as sprite from '../images/sprite.svg';
     {img: `${image3}`, h3: `Alexander Kulyk`, a:`https://github.com/alexander-kulyk`, href: `https://uk.linkedin.com/`},
     {img: `${image4}`, h3: `Viunyk Daria`, a:`https://github.com/Darya-Viunyk`, href: `https://www.linkedin.com/in/darya-viunyk-50b386181/`},
     {img: `${image5}`, h3: `Taras Novitskyi`, a:`https://github.com/Taras-Novitskyi`, href: `https://uk.linkedin.com/`},
-    { img: `${image}`, h3: `Evgeniy`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` },
-    { img: `${image}`, h3: `Evgeniy`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` },
-    { img: `${image}`, h3: `Evgeniy`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` },
-    { img: `${image}`, h3: `Evgeniy`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` },
-    { img: `${image}`, h3: `Evgeniy`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` }, 
+    { img: `${image6}`, h3: `Yevhenii Kavetskyi`, a: `https://github.com/eugeniusz57`, href: `https://www.linkedin.com/in/yevhenii-kavetskyi-423a34250/` },
+    { img: `${image}`, h3: `Sergii Samara`, a: `https://github.com/SerhiiSamara`, href: `https://uk.linkedin.com/` },
+    { img: `${image8}`, h3: `Lina Fomenko`, a: `https://github.com/linafv`, href: `https://uk.linkedin.com/` },
+    { img: `${image9}`, h3: `Inna Sikora`, a: `https://github.com/Inna2794`, href: `https://uk.linkedin.com/` },
+    { img: `${image}`, h3: `Vlad Lysenko`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` }, 
   ];
   // DFilmoteka\src\images\sprite.svg:\archive\Goit\js\
   const paletteCarts = document.querySelector(`.js-palette`);
