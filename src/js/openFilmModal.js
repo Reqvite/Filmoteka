@@ -80,3 +80,13 @@ function escModal(e) {
     document.removeEventListener('keydown', escModal);
   }
 }
+
+modal.addEventListener('click', closeModalOutsideWindow);
+
+function closeModalOutsideWindow(e) {
+  e.preventDefault();
+  if (!e.target.classList.contains('backdrop-details')) {
+    return;
+  }
+  closeModal();
+}
