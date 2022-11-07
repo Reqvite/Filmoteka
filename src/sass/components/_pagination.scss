@@ -31,4 +31,10 @@
 	&__numb.active, &__numb:hover, &__numb:focus, &__arrow:hover, &__arrow:focus,&__numb-first:hover, &__numb-first:focus, &__numb-last:hover, &__numb-last:focus {
 		background-color: $accentBg-color;
 	} 
+
+	&.is-hidden {
+		display: none;
+	}
 }
+
+
