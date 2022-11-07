@@ -19,11 +19,16 @@ function DarkOrWhiteTheme() {
         document.body.classList.add("dark-theme");
         refs.modal_bgr.classList.add('dark');
         refs.toggleTheme.style.color = "#ffffff";
+        refs.iconSun.classList.add('is-hiden'); 
+        refs.iconBrightness.classList.remove('is-hiden');
         return;
     }
         document.body.classList.remove("dark-theme");
         refs.footer.style.backgroundColor = "#ffffff";
         refs.modal_bgr.classList.remove('dark');
-        refs.toggleTheme.style.color = "#000000";   
+        refs.toggleTheme.style.color = "#000000"; 
+        refs.iconBrightness.classList.add('is-hiden');
+        refs.iconSun.classList.remove('is-hiden') ;
+
 }
 
