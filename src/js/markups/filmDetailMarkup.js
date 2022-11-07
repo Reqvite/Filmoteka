@@ -3,7 +3,7 @@ import { fetchFilmDetails } from '../service/service';
 
 import viewTrailer from '../viewTrailer';
 
-import { onClickBtn } from '../localStorage';
+import { onClickBtn } from '../myLibrary';
 import { onClickAddToWached } from '../addCurrentFilmToMyLibrary';
 
 const modal = document.querySelector('.film-modal-content');
