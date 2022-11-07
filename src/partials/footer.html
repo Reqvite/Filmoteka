@@ -1,6 +1,6 @@
 <footer>
+  <h2 class="is-hidden">footer</h2>
   <div class="footer_box container">
-    <h2 class="is-hidden"></h2>
     <p class="footer_text">
       &copy; 2020 <span class="vl"></span> &nbsp; All Rights Reserved &nbsp;
       <span class="vl"></span>
@@ -18,13 +18,21 @@
     </p>
   </div>
 </footer>
-<div class="backdrop is-hidden" data-modal>
-  <div class="modal">
-    <button type="button" class="modal__button" data-modal-close>
-      <svg class="meny__icon" width="30" height="30" aria-label="modal-close">
-        <use class="icon-close" href="./images/sprite.svg#icon-close"></use>
+
+<div class="modal-footer is-hidden" data-modal>
+  <div class="modal-footer__box">
+    <button type="button" class="footer__button" data-modal-close>
+      <svg class="footer__icon" width="30" height="30" aria-label="modal-close">
+        <use
+          class="footer-icon__close"
+          href="./images/sprite.svg#icon-close"
+        ></use>
       </svg>
     </button>
-    <p class="modal__footer">Special-team</p>
+
+    <h2 class="team-footer__title">Smart Strategy</h2>
+    <div class="team-footer__box">
+      <ul class="team-footer__box list team-footer__list js-palette"></ul>
+    </div>
   </div>
 </div>
