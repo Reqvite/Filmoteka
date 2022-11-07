@@ -5,7 +5,8 @@ import { database } from "./firebase";
 
 import { refs } from "./refs/refs";
 import { renderMarkUp } from './markups/collectionRender'
-import { fetchGenreId } from './collectionFetch'; 
+import { fetchGenreId } from './collectionFetch';
+import { renderMurkUpLibrary, clearContainer } from "./markups/renderMarkUpLibrary"; 
 
 console.log(refs);
 const auth = getAuth();
@@ -14,14 +15,14 @@ const USER_LOGIN_KEY = 'userIsLogin';
 
 const container = document.querySelector('.container-films')
 
-let genreCollection = {};
-fetchGenreId()
-  .then(genreId => {
-    genreId.data.genres.forEach(function (genre) {
-      genreCollection[genre.id] = genre.name;
-    });
-  })
-  .catch(error => console.log(error));
+// let genreCollection = {};
+// fetchGenreId()
+//   .then(genreId => {
+//     genreId.data.genres.forEach(function (genre) {
+//       genreCollection[genre.id] = genre.name;
+//     });
+//   })
+//   .catch(error => console.log(error));
 
 
 //------------------------add to queue---------------
@@ -70,7 +71,7 @@ const onClickBtn = (data,e)=>{
                             //listWatchedArr.map(obj => obj.id).includes(idMovie) // інший спосіб
                          
                             if (checkArr) {
-                                Notiflix.Notify.info(`Тhis movie was add to the QUEUE`,{
+                                Notiflix.Notify.info(`Тhis movie is in the QUEUE`,{
                                     timeout: 2000,
                                 });
                                 
@@ -149,11 +150,14 @@ const onMyLibararyClick = e =>{
                 if (snapshot.exists()) {
                     const queueListData = snapshot.val().queueList
                     if (queueListData === '') {
+                        clearContainer();
+                        
                         Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
                             timeout: 2000,
                         });
                     }else{
                         const queueList = JSON.parse(snapshot.val().queueList)
+                        renderMurkUpLibrary(queueList);
                         console.log(queueList);
                     };
                     
