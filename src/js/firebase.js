@@ -1,9 +1,10 @@
-// Import the functions you need from the SDKs you need
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, enableLogging, update,child, get } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyAmrcw3LWh5vdrPE40gh2Uggxq3EG96Lys",
   authDomain: "film-library-registration.firebaseapp.com",
@@ -16,41 +17,44 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+export const database = getDatabase(app);
 const auth = getAuth();
 const user = auth.currentUser;
-  
 
+  
+//Modal btns
 const signinBtn = document.querySelector('.signin-Btn');
 const loginBtn = document.querySelector('.login-Btn');
+
+//submit btns
 const logOut = document.querySelector('.login-Out');
-
-
-const nameInput = document.querySelector('.name-input');
 const submitSignBtn = document.querySelector('.submit-signUp-btn');
 const submitLoginBtn = document.querySelector('.submit-login-btn');
 
-
+//modal open-close
 const modal = document.querySelector('.backdrop-form');
 const modalFormBtnClose = document.querySelector('.modal-form-btn');
 
+//form changes
+const nameInput = document.querySelector('.name-input');
 const formRegistr = document.querySelector('.registr')
 
 
 const myLibraryJs = document.querySelector('.my-library-js');
 myLibraryJs.style.display = 'none'
+logOut.style.display = 'none'
 
 //Проверка залогинен пользователь или нет
 function userIsLogin(){
     const userIsLogin = localStorage.getItem("userIsLogin");
     const userIsLoginParse = JSON.parse(userIsLogin);
 
-    if (userIsLoginParse) {
+  if (userIsLoginParse) {
     signinBtn.style.display = 'none';
     loginBtn.style.display = 'none';
     myLibraryJs.style.display = 'block';
-    logOut.classList.remove('is-hidden');
-    } 
+    logOut.style.display = 'block';
+  }
 }
 
 userIsLogin()
@@ -84,28 +88,32 @@ function signUpUser(e) {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            // ...
+          const dt = new Date();
+          
             set(ref(database, 'users/' + user.uid), {
                 username: username,
-                email: email
+                queueList:'',
+              email: email,
+                last_login: dt,
             })
 
             modal.classList.add('form-hidden');
             signinBtn.style.display = 'none';
             loginBtn.style.display = 'none';
-            logOut.classList.remove('is-hidden');
+            logOut.style.display = 'block'
             myLibraryJs.style.display = 'block';
             submitSignBtn.style.display = 'none';
             formRegistr.removeEventListener('submit', signUpUser);
 
             localStorage.setItem("userIsLogin", "true");
-            alert('created')
+            Notify.success('Congratulations, your account has been successfully created.');
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
              formRegistr.removeEventListener('submit', signUpUser);
-            alert(errorMessage)
+         
+          Notify.failure(errorMessage);
         })
         e.target.reset()
 }
@@ -122,15 +130,15 @@ loginBtn.addEventListener('click', e => {
 //Логинизация
 function logInUser(e) {
     e.preventDefault()
-    const username = formRegistr.elements[0].value
+  const username = formRegistr.elements[0].value 
     const email = formRegistr.elements[1].value
     const password = formRegistr.elements[2].value
 
- signInWithEmailAndPassword(auth, email, password)
+  signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    // ...
+    const uid = user.uid;   
        const dt = new Date();
          update(ref(database, 'users/' + user.uid),{
              last_login: dt,
@@ -139,32 +147,48 @@ function logInUser(e) {
             modal.classList.add('form-hidden');
             signinBtn.style.display = 'none';
       loginBtn.style.display = 'none';
-      logOut.classList.remove('is-hidden');
+      logOut.style.display = 'block';
       myLibraryJs.style.display = 'block';
       submitLoginBtn.style.display = 'none';
 
       localStorage.setItem("userIsLogin", "true");
-      formRegistr.removeEventListener('submit', logInUser);
-      alert('login')
+    formRegistr.removeEventListener('submit', logInUser);
+    
+        const dbRef = ref(getDatabase());
+get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+  if (snapshot.exists()) {
+     Notify.success(`Hi, ${snapshot.val().username || 'Anonymus' }, you are logged in successfully.`);
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+    
+
   })
   .catch((error) => {
     const errorCode = error.code;
       const errorMessage = error.message;
     formRegistr.removeEventListener('submit', signUpUser);
-      alert(errorMessage)
+      Notify.failure(errorMessage);
   });   
 }
 
 //Получение данных если пользоваетль залогинен
 onAuthStateChanged(auth, (user) => {
+
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;   
-        const dbRef = ref(getDatabase());
+      const uid = user.uid; 
+      const dbRef = ref(getDatabase());
+
 get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+
   if (snapshot.exists()) {
     console.log(snapshot.val());
+
   } else {
     console.log("No data available");
   }
@@ -178,25 +202,23 @@ get(child(dbRef, `users/${uid}`)).then((snapshot) => {
   }
 });
 
+
 //Выйти из аккаунта
 logOut.addEventListener('click', e => {
     signOut(auth).then(() => {
   // Sign-out successful.
            signinBtn.style.display = 'block';
             loginBtn.style.display = 'block';
-        logOut.classList.add('is-hidden')
+        logOut.style.display = 'none'
       myLibraryJs.style.display = 'none';
       
         localStorage.setItem("userIsLogin", "false");
-    alert('sign out')
+      Notify.success('Successful logged out.');
 }).catch((error) => {
    const errorCode = error.code;
       const errorMessage = error.message;
       alert(errorMessage)
 });
 })
-
-
-
 
 

@@ -1,16 +1,26 @@
 
-import { fetchFilmDetails } from '../service';
+import { fetchFilmDetails } from '../service/service';
+
 import viewTrailer from '../viewTrailer';
 
-import { onClickBtn } from "../localStorage";
+import { onClickBtn } from '../myLibrary';
+import { onClickAddToWached } from '../addCurrentFilmToMyLibrary';
+
 const modal = document.querySelector('.film-modal-content');
 
-
 export const createFilmDetailsMarkup = resp => {
-  console.log(resp.data);
-    const { poster_path, original_title, vote_average, vote_count, popularity, genres, overview, id } = resp.data;  
+  const {
+    poster_path,
+    original_title,
+    vote_average,
+    vote_count,
+    popularity,
+    genres,
+    overview,
+    id,
+  } = resp.data;
 
-    const markup = `<div class="film-details-wrapper">
+  const markup = `<div class="film-details-wrapper">
   <div><img class="modal-img" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="" data-id="${id}"/></div>
   <div class="film-details">
     <h2 class="film-details__main-title">${original_title}</h2>
@@ -30,8 +40,8 @@ export const createFilmDetailsMarkup = resp => {
       <li class="details-list__item">
         <p class="details-list_title">Genre</p>
         <span class="details-list__information-2">${genres.map(el => {
-            return el.name
-        })}</span>
+    return el.name;
+  })}</span>
       </li>
     </ul>
     <h3 class="film-details__secondary-title">About</h3>
@@ -41,18 +51,24 @@ export const createFilmDetailsMarkup = resp => {
     <button class="main-button button" type="button" name="watched">Add to watched</button>
   </li>
   <li class="buttons-list__item"><button class="secondary-button button" type="button" name="queue">Add to queue</button></li>
-  	<li class="buttons-list__item"><button class="trailer-button" type="button">View</button></li>
 </ul>
-  <div class="trailer">
-		</div>
 
-</div>`
-    
-  modal.insertAdjacentHTML("beforeend", markup);
+<button class="trailer-button button" type="button">
+<span class="trailer-button__text trailer-button__text--play">View trailer</span>
+</button>
+</div>
+<div class="trailer"></div>
+  </div>
+</div>`;
+
+  modal.insertAdjacentHTML('beforeend', markup);
 
   const buttonsList = document.querySelector('.buttons-list');
 
-  buttonsList.addEventListener('click', (e)  => onClickBtn(resp.data, e));
- 
-viewTrailer()
-};
+  buttonsList.addEventListener('click', e => onClickBtn(resp.data, e));
+
+  viewTrailer(id);
+
+  buttonsList.addEventListener('click', e => onClickAddToWached(resp.data, e));
+
+}

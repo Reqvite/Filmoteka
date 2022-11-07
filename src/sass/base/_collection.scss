@@ -59,9 +59,10 @@
 .card__wrap {
   margin-top: 12px;
   flex-grow: 1;
+
   padding-left: 5px;
 
-   @include mobile {
+  @include mobile {
     font-size: 12px;
     line-height: 1.33;
   }
@@ -97,14 +98,14 @@
   height: 16px;
 
   margin-left: 8px;
-  
+
   font-size: 12px;
   line-height: 1.2;
   font-weight: 500;
   color: white;
   border-radius: 5px;
   background-color: $accentBg-color;
-  
+
   @include desktop {
     width: 40px;
     height: 20px;
@@ -121,4 +122,3 @@
 //   background: #ff6b08;
 //   border-radius: 5px;
 // }
-

@@ -74,6 +74,9 @@
 }
 
 .film-details {
+  position: relative;
+  padding-bottom: 50px;
+
   @media screen and (max-width: 767.98px) {
     margin-top: 20px;
   }
@@ -156,13 +159,18 @@
 .trailer {
   position: absolute;
   left: 0;
-  top: 0;
+  top: 75%;
   width: 100%;
 
   padding-top: 56.25%;
 
-  transform: translateY(120%);
+  transform: translateY(400%);
   transition: transform 950ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @include tablet {
+    top: 0;
+    transform: translateY(200%);
+  }
 
   &__vieo {
     position: absolute;
