@@ -24,7 +24,6 @@ const renderMurkUpLibrary = queueList =>{
                   <div class="card-wrap">
                       <h2 class="card_ _title">${title}</h2>
                       <div class="card__data">
-                          
                           <p class="card__genre">${genreNames.join(', ')} |</p>
                           <p class="card__year">${releaseYear[0]}</p>
                           <p class="card-film__rating">${vote_average}</p>
