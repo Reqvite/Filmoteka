@@ -1,9 +1,9 @@
-// Import the functions you need from the SDKs you need
+import Notiflix from 'notiflix';
+
 import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, enableLogging, update,child, get } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAmrcw3LWh5vdrPE40gh2Uggxq3EG96Lys",
   authDomain: "film-library-registration.firebaseapp.com",
@@ -20,7 +20,7 @@ const database = getDatabase(app);
 const auth = getAuth();
 const user = auth.currentUser;
   
-
+//
 const signinBtn = document.querySelector('.signin-Btn');
 const loginBtn = document.querySelector('.login-Btn');
 const logOut = document.querySelector('.login-Out');
