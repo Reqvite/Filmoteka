@@ -6,9 +6,7 @@
   width: 100vw;
   z-index: 999;
   background-color: rgba(0, 0, 0, 0.4);
-
   opacity: 1;
-
   transition: opacity 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
   &.form-hidden {
     opacity: 0;
@@ -17,22 +15,27 @@
 }
 
 .form-modal {
-  padding: 16px 20px 46px 20px;
-  background-color: $mainBg-color;
-
-  @media screen and (max-width: 767.98px) {
-    width: 80vw;
-    max-width: 380px;
-    height: 95%;
-    overflow-y: scroll;
-  }
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px 20px 20px;
+  background-image: linear-gradient(
+      rgba(47, 48, 58, 0.4),
+      rgba(47, 48, 58, 0.4)
+    ),
+    url(../images/header-background-img-home/form-background2.jpg);
+  background-size: cover;
+  border-radius: 10px;
+  border: 1px solid wheat;
 
   @include tablet {
-    width: 704px;
+    width: 40vw;
   }
 
   @include desktop {
-    width: 804px;
+    width: 30vw;
   }
 
   position: absolute;
@@ -46,9 +49,31 @@
   }
 }
 
-.signin-Btn {
+.input {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
 }
+
+.signin-Btn {
+  margin-left: 10px;
+}
+
+.signin-Btn,
 .login-Btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: white;
+
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    text-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    text-shadow: 0px 3px 3px #ffffff;
+    transform: scale(1.1);
+  }
 }
 
 .login-Out {
@@ -58,8 +83,60 @@
   }
 }
 
-.submit-signUp-btn {
-  display: none;
+.modal-form-btn {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 13px;
+  top: 13px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+  color: wheat;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus {
+    color: $hover-focusBG-color;
+    box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
+  }
+}
+
+.cross-modal {
+  fill: currentColor;
+}
+
+.submit-signUp-btn,
+.submit-login-btn {
+  // display: none;
+  color: black;
+  background-color: $accentBg-color;
+  border: none;
+  border-radius: 5px;
+  height: 30px;
+  min-width: 70px;
+  cursor: pointer;
+  padding: 5px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &:hover,
+  &:focus {
+    background-color: $hover-focusBG-color;
+    box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
+  }
+  @include tablet {
+    bottom: 0;
+  }
 }
 .submit-login-btn {
   display: none;
