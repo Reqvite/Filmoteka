@@ -35,6 +35,8 @@ const openModal = async e => {
     modal.classList.remove('hidden');
     body.style.overflow = 'hidden';
     modalClose.addEventListener('click', closeModal);
+    document.addEventListener('keydown', escModal);
+    modal.addEventListener('click', closeModalOutsideWindow);
 
     ChangeColorText();
 
@@ -55,6 +57,8 @@ const closeModal = e => {
   const modalContainer = document.querySelector('.film-details-wrapper');
   modal.classList.add('hidden');
   modalClose.removeEventListener('click', closeModal);
+  modal.removeEventListener('keydown', escModal);
+  modal.removeEventListener('click', closeModalOutsideWindow);
   body.style.overflow = 'scroll';
   modalContainer.remove();
 };
@@ -68,8 +72,6 @@ function ChangeColorText() {
   }
 }
 
-document.addEventListener('keydown', escModal);
-
 function escModal(e) {
   e.preventDefault();
   if (modal.classList.contains('hidden')) {
@@ -77,11 +79,8 @@ function escModal(e) {
   }
   if (e.code === 'Escape') {
     closeModal();
-    document.removeEventListener('keydown', escModal);
   }
 }
-
-modal.addEventListener('click', closeModalOutsideWindow);
 
 function closeModalOutsideWindow(e) {
   e.preventDefault();
