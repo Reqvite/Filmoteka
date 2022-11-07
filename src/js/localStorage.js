@@ -14,7 +14,7 @@ const refs ={
 };
 
 
-//------------------------add to watched---------------
+//------------------------add to queue---------------
 
 
 const onClickBtn = (data,e)=>{
@@ -25,7 +25,7 @@ const onClickBtn = (data,e)=>{
         return;
         
     };
-     // ----------перевіряю чи залогінився юзер ------------------
+          /*-------перевіряю чи залогінився юзер ------------*/
     const userIsLogin = JSON.parse(localStorage.getItem(USER_LOGIN_KEY));
     
     if (userIsLogin) {
@@ -57,6 +57,7 @@ const onClickBtn = (data,e)=>{
                             
                             /*---- перевіряю  масив на однакові id і добавляю новий об'єкт-------*/
                             const checkArr = queueDataArr.some(obj => obj.id === idMovie);
+                            //listWatchedArr.map(obj => obj.id).includes(idMovie) // інший спосіб
                          
                             if (checkArr) {
                                 Notiflix.Notify.info(`Тhis movie was add to the QUEUE`,{
@@ -82,7 +83,12 @@ const onClickBtn = (data,e)=>{
                         };
                   
                     } else {
+
+                        Notiflix.Notify.failure(`No data available`,{
+                            timeout: 2000,
+                        });
                       console.log("No data available");
+
                     }
                   }).catch((error) => {
                     console.error(error);
@@ -96,66 +102,6 @@ const onClickBtn = (data,e)=>{
         });
         return;
     };
-
-
-
-        
-
-        //-------перевіряю чи є в listWatchedArr фільм з id 
-        //const checkingListWatchedArr = listWatchedArr.some(obj => obj.id === idMovie);
-        //listWatchedArr.map(obj => obj.id).includes(idMovie) // інший спосіб
-
-        // if (checkingListWatchedArr) {
-        //     Notiflix.Notify.info(`Тhis movie was add to the QUEUE`,{
-        //         timeout: 2000,
-        //     });
-        //     return; 
-        // };
-
-        
-        // const qqq = JSON.stringify(listWatchedArr)
-        // console.log(qqq);
-        
-
-      
-        //-----------------------------
-        
-
-
-        
-    
-
-    
-
-        //---- перевіряю LocalStorage і добавляю новий об'єкт-------
-    // const moviesListLocalStorage = JSON.parse(localStorage.getItem(WATCHED_KYE));
-
-    // if (moviesListLocalStorage !== null) {
-        
-    //    const checkingListWatchedArr =  moviesListLocalStorage.some(obj => obj.id === idMovie);
-       
-    //    if (checkingListWatchedArr) {
-    //     Notiflix.Notify.info(`Тhis movie has already been added to the QUEUE`,{
-    //         timeout: 2000,
-    //     });
-    //     return;
-        
-    //     }else{
-
-    //     moviesListLocalStorage.push(data);
-    //     localStorage.setItem(WATCHED_KYE, JSON.stringify(moviesListLocalStorage));
-    //     Notiflix.Notify.success(`Add movie`,{
-    //         timeout: 2000,
-    //     });
-    //     };
-    //     return;
-    // };
-        
-              //----- add obj in localStorage -------// 
-    
-    // localStorage.setItem(WATCHED_KYE,JSON.stringify(listWatchedArr));
-
-
 };
 
 
@@ -179,8 +125,16 @@ const onMyLibararyClick = e =>{
             get(child(dbRef, `users/${uid}`)).then((snapshot) => {
       
                 if (snapshot.exists()) {
-                    const queueList = JSON.parse(snapshot.val().localData)
-                    console.log(queueList);
+                    const snapShot = snapshot.val().localData
+                    if (snapShot === 'data') {
+                        Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
+                            timeout: 2000,
+                        });
+                    }else{
+                        const queueList = JSON.parse(snapshot.val().localData)
+                        console.log(queueList);
+                    };
+                    
                    
                 } else {
                 console.log("No data available");
@@ -193,23 +147,8 @@ const onMyLibararyClick = e =>{
           // User is signed out
           // ...
         }
-        });
-
-
-
-   const moviesListLocalStorage= JSON.parse(localStorage.getItem(WATCHED_KYE));
-   if (moviesListLocalStorage === null) {
-    Notiflix.Notify.failure(`my library is emty`,{
-        timeout: 2000,
     });
-    return;
-   }
-   const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
-   container.innerHTML = renderLibrary;
-
 };
-
-
 
 refs.headerNavList.addEventListener('click',onMyLibararyClick);
 
