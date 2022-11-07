@@ -129,7 +129,7 @@ loginBtn.addEventListener('click', e => {
 //Логинизация
 function logInUser(e) {
     e.preventDefault()
-    const username = formRegistr.elements[0].value
+  const username = formRegistr.elements[0].value 
     const email = formRegistr.elements[1].value
     const password = formRegistr.elements[2].value
 
@@ -137,8 +137,7 @@ function logInUser(e) {
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
-    console.log(user);
-    // ...
+    const uid = user.uid;   
        const dt = new Date();
          update(ref(database, 'users/' + user.uid),{
              last_login: dt,
@@ -152,8 +151,20 @@ function logInUser(e) {
       submitLoginBtn.style.display = 'none';
 
       localStorage.setItem("userIsLogin", "true");
-      formRegistr.removeEventListener('submit', logInUser);
-       Notify.success('Successful login.');
+    formRegistr.removeEventListener('submit', logInUser);
+    
+        const dbRef = ref(getDatabase());
+get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+  if (snapshot.exists()) {
+     Notify.success(`Hi, ${snapshot.val().username || 'Anonymus' }, you are logged in successfully.`);
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+    
+
   })
   .catch((error) => {
     const errorCode = error.code;
