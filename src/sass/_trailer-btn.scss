@@ -9,6 +9,10 @@
   font-size: 16px;
   background-color: transparent;
   border-color: transparent;
+  @include desktop {
+    left: 75%;
+    bottom: -20px;
+  }
   &__text {
     display: flex;
     align-items: center;
