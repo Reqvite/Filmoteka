@@ -4,7 +4,6 @@ export default async function viewTrailer(trailerId) {
   const btnViewAndStopTrailer = document.querySelector('.trailer-button');
   const trailer = document.querySelector('.trailer');
   const insertBtn = btnViewAndStopTrailer.firstElementChild;
-  console.log(insertBtn);
 
   btnViewAndStopTrailer.addEventListener('click', onClickViewAndStopTrailer);
 

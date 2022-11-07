@@ -9,7 +9,6 @@ import { onClickAddToWached } from '../addCurrentFilmToMyLibrary';
 const modal = document.querySelector('.film-modal-content');
 
 export const createFilmDetailsMarkup = resp => {
-  console.log(resp.data);
   const {
     poster_path,
     original_title,
