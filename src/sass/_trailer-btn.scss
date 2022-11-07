@@ -1,0 +1,48 @@
+.trailer-button {
+  display: block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  padding: 0;
+  color: red;
+  font-size: 16px;
+  background-color: transparent;
+  border-color: transparent;
+  &__text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__text--play::before {
+    content: '';
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+    background: url('../images/play-button.svg') no-repeat center;
+    background-size: 100%;
+  }
+
+  &__text--play:hover::before,
+  &__text--play:focus::before {
+    width: 55px;
+    height: 55px;
+  }
+
+  &__text--stop::before {
+    content: '';
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+    background: url('../images/stop-button.svg') no-repeat center;
+    background-size: 100%;
+  }
+
+  &__text--stop:hover::before,
+  &__text--stop:focus::before {
+    width: 55px;
+    height: 55px;
+  }
+}
