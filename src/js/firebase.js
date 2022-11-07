@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, enableLogging, update,child, get } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { getUserData } from "./localStorage";
+
 
 
 // Your web app's Firebase configuration
@@ -18,7 +18,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+export const database = getDatabase(app);
 const auth = getAuth();
 const user = auth.currentUser;
 
@@ -129,15 +129,16 @@ function logInUser(e) {
     const email = formRegistr.elements[1].value
     const password = formRegistr.elements[2].value
 
- signInWithEmailAndPassword(auth, email, password)
+  signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    console.log(user);
     // ...
        const dt = new Date();
          update(ref(database, 'users/' + user.uid),{
              last_login: dt,
-             localData: 'data'
+             localData: 'data'  
          })
             modal.classList.add('form-hidden');
             signinBtn.style.display = 'none';
@@ -159,8 +160,6 @@ function logInUser(e) {
 }
 
 //Получение данных если пользоваетль залогинен
-
-let userData;
 onAuthStateChanged(auth, (user) => {
 
   if (user) {
@@ -173,7 +172,6 @@ get(child(dbRef, `users/${uid}`)).then((snapshot) => {
 
   if (snapshot.exists()) {
     console.log(snapshot.val());
-    getUserData(snapshot.val());
 
   } else {
     console.log("No data available");
@@ -206,7 +204,5 @@ logOut.addEventListener('click', e => {
       alert(errorMessage)
 });
 })
-
-
 
 
