@@ -11,5 +11,6 @@ gallery: document.querySelector('.container-films'),
 listEl: document.querySelector('.pagination__list'),
 iconSun: document.querySelector('.icon-sun'),
 iconBrightness: document.querySelector('.icon-brightness'),
-headerNavList: document.querySelector('.header__nav-list')
+headerNavList: document.querySelector('.header__nav-list'),
+queueBtnInLibrary: document.querySelector('.header__mylibrary-btn')
 }
