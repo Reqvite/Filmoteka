@@ -1,20 +1,17 @@
 import FilmsApiServer from './fimlsApiServer';
-import filmCardsTpl from './markups/filmCardMarkup';
+import { refs } from "./refs/refs";
 
-const refs = {
-	form: document.querySelector('.header__search-form'),
-	gallery: document.querySelector('.container-films'), 
-	listEl: document.querySelector('.pagination__list'),
-};
 
 const filmsApiServer = new FilmsApiServer();
 
-export default function updateMarkupPagination(totalPages, page) {
+export default function updateMarkupPagination(totalPages, page, addFilmsAndUpdateUI) {
+
+
   let itemEl = '';
   let activePages = '';
   let beforPages = page - 1;
   let afterPages = page + 1;
-
+	
   if (page > 1) {
     itemEl += `<li class="pagination__arrow pagination__arrow-prev"><span>&#129128;</span></li>`;
   }
@@ -62,44 +59,40 @@ export default function updateMarkupPagination(totalPages, page) {
     itemEl += `<li class="pagination__arrow pagination__arrow-next"><span>&#129130;</span></li>`;
   }
 
-	refs.listEl.innerHTML = itemEl;
+  refs.listEl.innerHTML = itemEl;
 
-	const refsPagin = {
-		prevEl: document.querySelector('.pagination__arrow-prev'),
-		nextEl: document.querySelector('.pagination__arrow-next'),
-		numbFirstEl: document.querySelector('.pagination__numb-first'),
-		numbLastEl: document.querySelector('.pagination__numb-last'),
-		numbEl: document.querySelectorAll('.pagination__numb'),
-	}
+  const refsPagin = {
+    prevEl: document.querySelector('.pagination__arrow-prev'),
+    nextEl: document.querySelector('.pagination__arrow-next'),
+    numbFirstEl: document.querySelector('.pagination__numb-first'),
+    numbLastEl: document.querySelector('.pagination__numb-last'),
+    numbEl: document.querySelectorAll('.pagination__numb'),
+  };
 
   if (refsPagin.prevEl) {
     refsPagin.prevEl.addEventListener('click', async () => {
-      filmsApiServer.decreasePage();
-      updateMarkupPagination(totalPages, page - 1);
-      addFilmsAndUpdateUI();
+      await addFilmsAndUpdateUI(page - 1);
+      updateMarkupPagination(totalPages, page - 1, addFilmsAndUpdateUI);
     });
   }
 
   if (refsPagin.nextEl) {
     refsPagin.nextEl.addEventListener('click', async () => {
-      filmsApiServer.increasePage();
-      updateMarkupPagination(totalPages, page + 1);
-      addFilmsAndUpdateUI();
+      await addFilmsAndUpdateUI(page + 1);
+      updateMarkupPagination(totalPages, page + 1, addFilmsAndUpdateUI);
     });
   }
   if (refsPagin.numbFirstEl) {
     refsPagin.numbFirstEl.addEventListener('click', async () => {
-      filmsApiServer.resetPage();
-      updateMarkupPagination(totalPages, 1);
-      addFilmsAndUpdateUI();
+      await addFilmsAndUpdateUI(1);
+      updateMarkupPagination(totalPages, 1, addFilmsAndUpdateUI);
     });
   }
 
   if (refsPagin.numbLastEl) {
     refsPagin.numbLastEl.addEventListener('click', async () => {
-      filmsApiServer.pagePagination = totalPages;
-      updateMarkupPagination(totalPages, totalPages);
-      addFilmsAndUpdateUI();
+      await addFilmsAndUpdateUI(totalPages);
+      updateMarkupPagination(totalPages, totalPages, addFilmsAndUpdateUI);
     });
   }
 
@@ -113,20 +106,19 @@ export default function updateMarkupPagination(totalPages, page) {
     }
 
     refsPagin.numbEl[index].addEventListener('click', async () => {
-      filmsApiServer.pagePagination = pageLength;
-      updateMarkupPagination(totalPages, pageLength);
-      addFilmsAndUpdateUI();
+      await addFilmsAndUpdateUI(pageLength);
+      updateMarkupPagination(totalPages, pageLength, addFilmsAndUpdateUI);
     });
-
     index += 1;
   }
 }
 
-
 async function addFilmsAndUpdateUI() {
 	try {
+    refs.spinner.classList.remove('is-hiden');
 		filmsApiServer.query = localStorage.getItem('query');
 		const results = await filmsApiServer.fetchFilms();
+    refs.spinner.classList.add('is-hiden');
 		renderGalleryList(results);
 	} catch (err) {
 		onFetchError(err);
@@ -153,3 +145,4 @@ function clearGalleryContainer() {
 function clearSearchQuery() {
   refs.form.search.value = '';
 }
+
