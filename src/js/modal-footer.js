@@ -1,5 +1,9 @@
 // import image from '../images/footer';
-import * as image from '../images/footer/me-foto-1.jpg';
+
+import * as image from '../images/footer/no-foto.jpg';
+import * as image3 from '../images/footer/img_6550.jpg';
+import * as image4 from '../images/footer/me-foto-1.jpg';
+import * as image5 from '../images/footer/Taras-Novitskyi.jpg';
 import * as sprite from '../images/sprite.svg';
 
 (() => {
@@ -31,10 +35,12 @@ import * as sprite from '../images/sprite.svg';
   //////// cart////////
 
   const cart = [
-    {img: `${image}`, h3: `Viunyk Daria`, a:`https://github.com/Darya-Viunyk`, href: `https://www.linkedin.com/in/darya-viunyk-50b386181/`},
-    {img: `${image}`, h3: `Viunyk Daria`, a:`https://github.com/Darya-Viunyk`, href: `https://www.linkedin.com/in/darya-viunyk-50b386181/`},
-    {img: `${image}`, h3: `Viunyk Daria`, a:`https://github.com/Darya-Viunyk`, href: `https://www.linkedin.com/in/darya-viunyk-50b386181/`},
-    {img: `${image}`, h3: `Viunyk Daria`, a:`https://github.com/Darya-Viunyk`, href: `https://www.linkedin.com/in/darya-viunyk-50b386181/`},
+    {img: `${image}`, h3: `Scrum Master Yurii Perekrestnyi`, a:`https://github.com/Jodlei`, href: `https://uk.linkedin.com/`},
+    {img: `${image}`, h3: `Team Lead Vladyslav Yachyn`, a:`https://github.com/Reqvite`, href: `https://uk.linkedin.com/`},
+    {img: `${image3}`, h3: `Alexander Kulyk`, a:`https://github.com/alexander-kulyk`, href: `https://uk.linkedin.com/`},
+    {img: `${image4}`, h3: `Viunyk Daria`, a:`https://github.com/Darya-Viunyk`, href: `https://www.linkedin.com/in/darya-viunyk-50b386181/`},
+    {img: `${image5}`, h3: `Taras Novitskyi`, a:`https://github.com/Taras-Novitskyi`, href: `https://uk.linkedin.com/`},
+    {img: `${image}`, h3: `Evgeniy`, a:`https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/`},
   ];
   // DFilmoteka\src\images\sprite.svg:\archive\Goit\js\
   const paletteCarts = document.querySelector(`.js-palette`);
@@ -43,27 +49,27 @@ import * as sprite from '../images/sprite.svg';
   function createCart(cart){
     return cart.map(({img, h3, a, href}) =>{
       return `
-      <li class="team__card">
+      <li class="team-footer__card">
       <img
-        class="team__foto"
+        class="team-footer__foto"
         src="${img}"
-        alt="foto Viunyk Daria"
+        alt="foto"
       />
-      <div class="about">
+      <div class="about-footer">
         <h3 class="footer-text__big">${h3}</h3>
         <p lang="en" class="footer-text__smol">Frontend Developer</p>
-        <ul class="networks list">
-          <li class="networks__list">
-            <a href="${a}" class="networks__link">
-              <svg class="networks__icon" width="20" height="20">
+        <ul class="networks-footer list">
+          <li class="networks-footer__list">
+            <a href="${a}" class="networks-footer__link">
+              <svg class="networks-footer__icon" width="20" height="20">
                 <use href="${sprite}#icon-git-icon"></use>
               </svg>
             </a>
           </li>
-          <li class="networks__list">
-            <a href="${href}" class="networks__link">
-              <svg class="networks__icon" width="20" height="20">
-                <use href="${sprite}#icon-git-icon"></use>
+          <li class="networks-footer__list">
+            <a href="${href}" class="networks-footer__link">
+              <svg class="networks-footer__icon" width="20" height="20">
+                <use href="${sprite}#icon-link-icon"></use>
               </svg>
             </a>
           </li>
