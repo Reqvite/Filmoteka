@@ -118,9 +118,12 @@ const onClickBtn = (data,e)=>{
 
 const onMyLibararyClick = e =>{
 
-    if ( e.target.name !=='library') {
+    if (e.target.name !== 'library') {
+         refs.listEl.classList.remove('is-hidden');
         return; 
     };
+
+    refs.listEl.classList.add('is-hidden');
 
 
 //    const moviesListLocalStorage= JSON.parse(localStorage.getItem(WATCHED_KYE));
