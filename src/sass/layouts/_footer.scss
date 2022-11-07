@@ -18,7 +18,18 @@
     line-height: 1.15;
   }
 }
-
+.footer-text__big {
+  color: $footer-text-color;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+}
+.footer-text__smol {
+  color: $footer-text-color;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.14;
+}
 .footer_link {
   text-decoration: none;
 }
@@ -28,20 +39,20 @@
   text-decoration: underline;
   color: $secondary-text-color;
 }
-
 .is-hidden {
   transform: translateX(-100%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
-
-.backdrop {
+.modal-footer {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+
+  overflow: auto;
   background: rgba(0, 0, 0, 0.2);
   opacity: 1;
 
@@ -55,61 +66,155 @@
   }
 }
 
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1);
+.modal-footer__box {
+  margin: 0 auto;
   transition-property: transform;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-
-  width: 528px;
-  height: 581px;
-  background: #ffffff;
+  width: 80%;
+  background: #f7f5f5;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   padding: 40px;
 
-  .backdrop.is-hidden & {
+  .modal-footer.is-hidden & {
     transform: translate(-50%, -50%) scale(0.5);
   }
 }
-.modal__button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  cursor: pointer;
 
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+.footer__button {
+  cursor: pointer;
   width: 30px;
   height: 30px;
+  background-color: #fff;
+  border: 1px solid #0000001a;
   border-radius: 50%;
+  justify-content: center;
+  align-items: center;
   padding: 0;
-  top: 8px;
-  right: 8px;
+  right: 12%;
+  top: 2%;
+  display: flex;
+  position: absolute;
 }
 
-.modal__icon {
+.footer__icon {
   fill: #000000;
 }
-.meny__icon {
+.footer__icon {
   fill: #000000;
   &:focus,
   :hover {
     fill: #ff6b01;
   }
 }
-.modal__footer {
-  color: #000000;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 1.17;
-}
 .vl {
   border-left: 1px solid $footer-text-color;
   height: 7px;
+}
+.team-footer {
+  gap: 10px;
+  color: $mainBg-color;
+  background: #ffffff;
+  width: auto;
+  height: auto;
+  padding: 20px;
+}
+.team-footer__box {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: auto;
+  gap: 32px;
+
+  @include tablet {
+    grid-template-columns: auto auto;
+    padding: 0 32px;
+  }
+
+  @include desktop {
+    grid-template-columns: auto auto auto;
+  }
+}
+.team-footer__title {
+  color: $secondary-text-color;
+  font-size: 36px;
+  line-height: 1.15;
+  text-align: center;
+
+  @include tablet {
+    font-size: 58px;
+    line-height: 1.5;
+  }
+
+  @include desktop {
+    font-size: 70px;
+    line-height: 1.8;
+  }
+}
+.team-footer__list {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 20px 30px;
+}
+.team-footer__card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f5f5;
+}
+
+.about-footer {
+  text-align: center;
+  padding: 10px 10px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 0px 0px 4px 4px;
+}
+
+.team-footer__foto {
+  width: auto;
+  aspect-ratio: 3/4;
+}
+// .team-footer__card .team-footer__foto {
+// }
+.networks-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.networks-footer__list {
+  width: 44px;
+  height: 44px;
+  margin-left: 10px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.networks-footer__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition-property: color, background-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: $footer-text-color;
+
+  &:hover,
+  &:focus {
+    background-color: #ffffff;
+    color: #ff6b01;
+  }
+}
+
+.networks-footer__icon {
+  fill: $footer-text-color;
 }
