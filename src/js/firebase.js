@@ -41,19 +41,21 @@ const formRegistr = document.querySelector('.registr')
 
 
 const myLibraryJs = document.querySelector('.my-library-js');
+
 myLibraryJs.style.display = 'none'
+ logOut.style.display = 'none'
 
 //Проверка залогинен пользователь или нет
 function userIsLogin(){
     const userIsLogin = localStorage.getItem("userIsLogin");
     const userIsLoginParse = JSON.parse(userIsLogin);
 
-    if (userIsLoginParse) {
+  if (userIsLoginParse) {
     signinBtn.style.display = 'none';
     loginBtn.style.display = 'none';
     myLibraryJs.style.display = 'block';
-    logOut.classList.remove('is-hidden');
-    } 
+    logOut.style.display = 'block';
+  }
 }
 
 userIsLogin()
@@ -87,16 +89,18 @@ function signUpUser(e) {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            // ...
+          const dt = new Date();
+          
             set(ref(database, 'users/' + user.uid), {
                 username: username,
-                email: email
+              email: email,
+                last_login: dt,
             })
 
             modal.classList.add('form-hidden');
             signinBtn.style.display = 'none';
             loginBtn.style.display = 'none';
-            logOut.classList.remove('is-hidden');
+            logOut.style.display = 'block'
             myLibraryJs.style.display = 'block';
             submitSignBtn.style.display = 'none';
             formRegistr.removeEventListener('submit', signUpUser);
@@ -143,7 +147,7 @@ function logInUser(e) {
             modal.classList.add('form-hidden');
             signinBtn.style.display = 'none';
       loginBtn.style.display = 'none';
-      logOut.classList.remove('is-hidden');
+      logOut.style.display = 'block';
       myLibraryJs.style.display = 'block';
       submitLoginBtn.style.display = 'none';
 
@@ -193,7 +197,7 @@ logOut.addEventListener('click', e => {
   // Sign-out successful.
            signinBtn.style.display = 'block';
             loginBtn.style.display = 'block';
-        logOut.classList.add('is-hidden')
+        logOut.style.display = 'none'
       myLibraryJs.style.display = 'none';
       
         localStorage.setItem("userIsLogin", "false");
