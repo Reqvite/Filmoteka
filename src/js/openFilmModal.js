@@ -73,7 +73,7 @@ function ChangeColorText() {
 }
 
 function escModal(e) {
-  e.preventDefault();
+
   if (modal.classList.contains('hidden')) {
     return;
   }
@@ -83,7 +83,7 @@ function escModal(e) {
 }
 
 function closeModalOutsideWindow(e) {
-  e.preventDefault();
+
   if (!e.target.classList.contains('backdrop-details')) {
     return;
   }
