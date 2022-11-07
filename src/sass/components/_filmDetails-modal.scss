@@ -75,15 +75,19 @@
 
 .film-details {
   position: relative;
+  padding-bottom: 50px;
+
   @media screen and (max-width: 767.98px) {
     margin-top: 20px;
   }
   @include tablet {
     width: 50%;
     margin-left: 68px;
+    padding-bottom: 50px;
   }
   @include desktop {
     margin-left: 16px;
+    padding-bottom: 0;
   }
 }
 
@@ -162,8 +166,15 @@
 
   padding-top: 56.25%;
 
-  transform: translateY(150%);
+  transform: translateY(250%);
   transition: transform 950ms cubic-bezier(0.4, 0, 0.2, 1);
+  @media screen and (max-width: 767.98px) {
+    top: 50%;
+  }
+
+  @include tablet {
+    transform: translateY(150%);
+  }
 
   &__vieo {
     position: absolute;

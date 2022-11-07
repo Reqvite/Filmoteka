@@ -24,7 +24,8 @@
     background-size: 100%;
   }
 
-  &__text--play:hover::before {
+  &__text--play:hover::before,
+  &__text--play:focus::before {
     width: 55px;
     height: 55px;
   }
@@ -39,7 +40,8 @@
     background-size: 100%;
   }
 
-  &__text--stop:hover::before {
+  &__text--stop:hover::before,
+  &__text--stop:focus::before {
     width: 55px;
     height: 55px;
   }
