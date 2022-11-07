@@ -9,13 +9,14 @@ const renderMurkUpLibrary = queueList => {
 
     return (
       acc +
-      `
-        <li class="collection__item" data-id=${id}>
+      `<li class="collection__item" data-id=${id}>
         <a href="" class="card-wrap__link link">
               <div class="card">
+              <div class="card__image-wrap">
                       <img class="card__image" src="https://www.themoviedb.org/t/p/original/${poster_path}" alt="${title}" width="395px" height="574px">
-                  <div class="card-wrap">
-                      <h2 class="card_ _title">${title}</h2>
+                       </div>
+                  <div class="card__wrap">
+                      <h2 class="card__titletitle">${title}</h2>
                       <div class="card__data">
                           <p class="card__genre">${genreNames.join(', ')} |</p>
                           <p class="card__year">${releaseYear[0]}</p>
