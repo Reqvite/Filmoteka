@@ -1,5 +1,8 @@
 import Notiflix from 'notiflix';
 
+import { collectionRender } from './markups/collectionRender'
+
+
 let dataWatched = [];
 
 export function onClickAddToWached(data, evt) {

@@ -1,4 +1,6 @@
-import { fetchFilmDetails } from '../service';
+
+import { fetchFilmDetails } from '../service/service';
+
 import viewTrailer from '../viewTrailer';
 
 import { onClickBtn } from '../localStorage';
@@ -7,7 +9,6 @@ import { onClickAddToWached } from '../addCurrentFilmToMyLibrary';
 const modal = document.querySelector('.film-modal-content');
 
 export const createFilmDetailsMarkup = resp => {
-  console.log(resp.data);
   const {
     poster_path,
     original_title,
@@ -39,8 +40,8 @@ export const createFilmDetailsMarkup = resp => {
       <li class="details-list__item">
         <p class="details-list_title">Genre</p>
         <span class="details-list__information-2">${genres.map(el => {
-          return el.name;
-        })}</span>
+    return el.name;
+  })}</span>
       </li>
     </ul>
     <h3 class="film-details__secondary-title">About</h3>
@@ -50,8 +51,13 @@ export const createFilmDetailsMarkup = resp => {
     <button class="main-button button" type="button" name="watched">Add to watched</button>
   </li>
   <li class="buttons-list__item"><button class="secondary-button button" type="button" name="queue">Add to queue</button></li>
-  	<li class="buttons-list__item"><button class="trailer-button" type="button">View</button></li>
 </ul>
+
+<button class="trailer-button button" type="button">
+<span class="trailer-button__text trailer-button__text--play">View trailer</span>
+</button>
+</div>
+<div class="trailer"></div>
   </div>
 </div>`;
 
@@ -60,5 +66,9 @@ export const createFilmDetailsMarkup = resp => {
   const buttonsList = document.querySelector('.buttons-list');
 
   buttonsList.addEventListener('click', e => onClickBtn(resp.data, e));
+
+  viewTrailer(id);
+
   buttonsList.addEventListener('click', e => onClickAddToWached(resp.data, e));
-};
+
+}
