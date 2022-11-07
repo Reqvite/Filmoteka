@@ -1,8 +1,7 @@
 import { fetchGenreId } from "./collectionFetch";
 import { fetchPopularMovies } from "./collectionFetch";
-import { renderMarkUp } from "./collectionRender";
+import { renderMarkUp } from "./markups/collectionRender"; 
 import updateMarkupPagination from './pagination';
-import { renderPagination } from "./collectionRender";
 import { refs } from './refs/refs';
 
 
@@ -45,14 +44,5 @@ function fetchMoviesOnPagination(page) {
     collection.innerHTML = render;
   });
 }
-
-
-// pagination by VladLysenko
-// pagination.addEventListener("click", (e) => {
-//   e.preventDefault()
-//   fetchMovies(e.target.dataset.page)
-// })
-
-
 
 fetchTrendingFilms()
