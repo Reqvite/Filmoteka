@@ -57,9 +57,9 @@
 
 .header__nav-list {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   margin-left: auto;
-  margin-top: 2px;
+  margin-top: 10px;
 }
 
 .header__nav-item {
@@ -74,7 +74,6 @@
 .header__nav-button {
   background-color: transparent;
   border: none;
-
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -103,7 +102,7 @@
   background-color: $accentBg-color;
   border: none;
   border-radius: 50%;
- 
+
   cursor: pointer;
   padding: 5px;
   &:hover,
@@ -116,7 +115,6 @@
     height: 40px;
     width: 40px;
   }
-
 }
 .toggle-theme-mylibrary {
   position: absolute;
@@ -243,8 +241,9 @@
   }
 }
 
-.icon-sun, .icon-brightness{
-&.is-hiden{
-  display: none;
+.icon-sun,
+.icon-brightness {
+  &.is-hiden {
+    display: none;
+  }
 }
-} 

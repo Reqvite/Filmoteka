@@ -1,7 +1,8 @@
 import Notiflix from 'notiflix';
+import { renderMarkUp } from './markups/collectionRender';
 
-import { collectionRender } from './markups/collectionRender'
-
+const libraryButton = document.querySelector('.header__mylibrary');
+const container = document.querySelector('.container-films');
 
 let dataWatched = [];
 
@@ -45,7 +46,23 @@ export function onClickAddToWached(data, evt) {
   dataWatched.push(data);
   localStorage.setItem('watched', JSON.stringify(dataWatched));
 
-  Notiflix.Notify.success(`Add movie to watched list.`, {
-    timeout: 2000,
-  });
+  Notiflix.Notify.success(`Add movie to watched list.`);
 }
+
+function onWatchedClick(e) {
+  const watchedMovieInLS = JSON.parse(localStorage.getItem('watched'));
+  if (e.target.name == 'watched-btn') {
+    if (watchedMovieInLS === '') {
+      Notiflix.Notify.failure(`My library is emty`);
+      return;
+    }
+
+    const markupWatched = renderMarkUp(
+      JSON.parse(localStorage.getItem('watched'))
+    );
+    container.innerHTML = '';
+    container.innerHTML = markupWatched;
+  }
+}
+
+libraryButton.addEventListener('click', onWatchedClick);
