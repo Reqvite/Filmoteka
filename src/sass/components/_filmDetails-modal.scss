@@ -83,11 +83,9 @@
   @include tablet {
     width: 50%;
     margin-left: 68px;
-    padding-bottom: 50px;
   }
   @include desktop {
     margin-left: 16px;
-    padding-bottom: 0;
   }
 }
 
@@ -161,17 +159,17 @@
 .trailer {
   position: absolute;
   left: 0;
-  top: 60%;
+  top: 75%;
   width: 100%;
 
   padding-top: 56.25%;
 
-  transform: translateY(250%);
+  transform: translateY(400%);
   transition: transform 950ms cubic-bezier(0.4, 0, 0.2, 1);
 
   @include tablet {
     top: 0;
-    transform: translateY(150%);
+    transform: translateY(200%);
   }
 
   &__vieo {
