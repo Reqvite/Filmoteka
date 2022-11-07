@@ -10,7 +10,7 @@ export function onClickAddToWached(data, evt) {
   }
 
   if (dataWatched.some(el => el.id === data.id)) {
-    Notiflix.Notify.info(`Тhis movie has already been added to the Watched`, {
+    Notiflix.Notify.info(`Тhis movie has already been added to the watched.`, {
       timeout: 2000,
     });
     return;
@@ -23,7 +23,7 @@ export function onClickAddToWached(data, evt) {
 
     if (checkingListWatchedArr) {
       Notiflix.Notify.info(
-        `Тhis movie has already been added to the watched list`,
+        `Тhis movie has already been added to the watched list.`,
         {
           timeout: 2000,
         }
@@ -32,7 +32,7 @@ export function onClickAddToWached(data, evt) {
     } else {
       watchedMovieInLS.push(data);
       localStorage.setItem('watched', JSON.stringify(watchedMovieInLS));
-      Notiflix.Notify.success(`Add movie to watched list`, {
+      Notiflix.Notify.success(`Add movie to watched list.`, {
         timeout: 2000,
       });
     }
@@ -42,7 +42,7 @@ export function onClickAddToWached(data, evt) {
   dataWatched.push(data);
   localStorage.setItem('watched', JSON.stringify(dataWatched));
 
-  Notiflix.Notify.success(`Add movie to watched list`, {
+  Notiflix.Notify.success(`Add movie to watched list.`, {
     timeout: 2000,
   });
 }
