@@ -166,12 +166,12 @@
 
   padding-top: 56.25%;
 
-  transform: translateY(250%);
+  transform: translateY(400%);
   transition: transform 950ms cubic-bezier(0.4, 0, 0.2, 1);
 
   @include tablet {
     top: 0;
-    transform: translateY(150%);
+    transform: translateY(250%);
   }
 
   &__vieo {
