@@ -12,6 +12,7 @@ import * as sprite from '../images/sprite.svg';
       closeModalBtn: document.querySelector("[data-modal-close]"),
       backdrop: document.querySelector(".modal-footer"),
       modal: document.querySelector("[data-modal]"),
+      body: document.querySelector('body')
     };
 
     refs.openModalBtn.addEventListener("click", toggleModal);
@@ -21,14 +22,16 @@ import * as sprite from '../images/sprite.svg';
     function toggleModal(event){
       event.preventDefault();
       refs.modal.classList.toggle("is-hidden");
-
+      refs.body.style.overflow = 'hidden'
     }
     function onCloseModal(){
       refs.modal.classList.add(`is-hidden`);
     }
-    function onBackdropClick(event){
+  function onBackdropClick(event) {
+            refs.body.style.overflow = 'scroll'
       if(event.currentTarget === event.target){
         onCloseModal();
+       
       }
     }
   })();
@@ -40,12 +43,16 @@ import * as sprite from '../images/sprite.svg';
     {img: `${image3}`, h3: `Alexander Kulyk`, a:`https://github.com/alexander-kulyk`, href: `https://uk.linkedin.com/`},
     {img: `${image4}`, h3: `Viunyk Daria`, a:`https://github.com/Darya-Viunyk`, href: `https://www.linkedin.com/in/darya-viunyk-50b386181/`},
     {img: `${image5}`, h3: `Taras Novitskyi`, a:`https://github.com/Taras-Novitskyi`, href: `https://uk.linkedin.com/`},
-    {img: `${image}`, h3: `Evgeniy`, a:`https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/`},
+    { img: `${image}`, h3: `Evgeniy`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` },
+    { img: `${image}`, h3: `Evgeniy`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` },
+    { img: `${image}`, h3: `Evgeniy`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` },
+    { img: `${image}`, h3: `Evgeniy`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` },
+    { img: `${image}`, h3: `Evgeniy`, a: `https://github.com/eugeniusz57`, href: `https://uk.linkedin.com/` }, 
   ];
   // DFilmoteka\src\images\sprite.svg:\archive\Goit\js\
   const paletteCarts = document.querySelector(`.js-palette`);
   const createCarts = createCart(cart);
-  paletteCarts.insertAdjacentHTML(`beforebegin`, createCarts);
+  paletteCarts.insertAdjacentHTML(`afterbegin`, createCarts);
   function createCart(cart){
     return cart.map(({img, h3, a, href}) =>{
       return `
