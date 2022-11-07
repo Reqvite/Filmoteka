@@ -1,7 +1,7 @@
 <header class="header">
- <section class="header__section">
-  <div class="container">
-          <div class="header__nav-wrap">
+  <section class="header__section">
+    <div class="container">
+      <div class="header__nav-wrap">
         <a href="./index.html" class="header__logo-link link">
           <svg width="24" height="24" class="header__logo">
             <use href="./images/sprite.svg#icon-logo"></use>
@@ -11,16 +11,23 @@
         <h1 class="visually-hidden">Filmoteka</h1>
         <ul class="header__nav-list list">
           <li class="header__nav-item home-js">
-            <a href="#" class="header__nav-link link header__nav-link--current">home</a>
+            <a href="#" class="header__nav-link link header__nav-link--current"
+              >home</a
+            >
           </li>
 
-          <li class="header__nav-item ">
-            <a href="#" class="header__nav-link my-library-js link" name='library'>my library</a>
+          <li class="header__nav-item">
+            <a
+              href="#"
+              class="header__nav-link my-library-js link"
+              name="library"
+              >my library</a
+            >
           </li>
-           <li class="header__nav-item">
+          <li class="header__nav-item">
             <button type="button" class="button signin-Btn">Sign in</button>
           </li>
-           <li class="header__nav-item">
+          <li class="header__nav-item">
             <button type="button" class="button login-Btn">Log in</button>
           </li>
           <li class="header__nav-item login-Out">
@@ -28,22 +35,33 @@
           </li>
         </ul>
       </div>
-     <div class="header__home-wrap">
-      <form class="header__search-form">
-        <input class="header__input" type="text" name="search" placeholder="Movie search" />
-        <button type ="submit" class="header__form-submit-btn">
-          <svg width="12" height="12" class="header__logo">
-            <use href="./images/sprite.svg#icon-search-2"></use>
+      <div class="header__home-wrap">
+        <form class="header__search-form">
+          <input
+            class="header__input"
+            type="text"
+            name="search"
+            placeholder="Movie search"
+          />
+          <button type="submit" class="header__form-submit-btn">
+            <svg width="12" height="12" class="header__logo">
+              <use href="./images/sprite.svg#icon-search-2"></use>
+            </svg>
+          </button>
+        </form>
+        <button type="button" class="toggle-theme">
+          <svg class="icon-sun" width="25" height="25">
+            <use href="./images/sprite.svg#icon-sun"></use>
+          </svg>
+          <svg class="icon-brightness" width="25" height="25">
+            <use href="./images/sprite.svg#icon-brightness"></use>
           </svg>
         </button>
-      </form>
-      <button type="button" class="toggle-theme "> Theme</button>     
-</div>
-<div class="header__mylibrary visually-hidden">
-   <button class="header__mylibrary-btn  button active-btn">Watched</button>
-    <button class="header__mylibrary-btn  button  ">Queue</button>
-    </div>     
-  </div>
-    </section>
-  </div>
+      </div>
+      <div class="header__mylibrary visually-hidden">
+        <button class="header__mylibrary-btn button active-btn">Watched</button>
+        <button class="header__mylibrary-btn button">Queue</button>
+      </div>
+    </div>
+  </section>
 </header>
