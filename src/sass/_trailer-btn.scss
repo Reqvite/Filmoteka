@@ -9,9 +9,12 @@
   font-size: 16px;
   background-color: transparent;
   border-color: transparent;
+
+  @include tablet {
+    bottom: -20px;
+  }
   @include desktop {
     left: 75%;
-    bottom: -20px;
   }
   &__text {
     display: flex;
