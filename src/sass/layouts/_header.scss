@@ -102,8 +102,11 @@
 }
 .toggle-theme {
   position: absolute;
+  height: 30px;
+  width: 30px;
   right: 0;
-  bottom: 30;
+  bottom: 30px;
+  margin-top: 0px;
   color: $mainBg-color;
   margin-top: 30px;
   display: flex;
@@ -111,9 +114,8 @@
   align-items: center;
   background-color: $accentBg-color;
   border: none;
-  border-radius: 5px;
-  height: 30px;
-  min-width: 70px;
+  border-radius: 50%;
+ 
   cursor: pointer;
   padding: 5px;
   &:hover,
@@ -123,7 +125,10 @@
   }
   @include tablet {
     bottom: 0;
+    height: 40px;
+    width: 40px;
   }
+
 }
 .header__search-form {
   position: relative;
@@ -225,3 +230,9 @@
     bottom: 15;
   }
 }
+
+.icon-sun, .icon-brightness{
+&.is-hiden{
+  display: none;
+}
+} 

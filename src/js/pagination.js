@@ -1,5 +1,6 @@
 import FilmsApiServer from './fimlsApiServer';
 import { refs } from "./refs/refs";
+import { spinner } from "./spinner";
 
 
 const filmsApiServer = new FilmsApiServer();
@@ -115,10 +116,10 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
 
 async function addFilmsAndUpdateUI() {
 	try {
-    refs.spinner.classList.remove('is-hiden');
+    spinner();
 		filmsApiServer.query = localStorage.getItem('query');
 		const results = await filmsApiServer.fetchFilms();
-    refs.spinner.classList.add('is-hiden');
+    spinner();
 		renderGalleryList(results);
 	} catch (err) {
 		onFetchError(err);

@@ -4,6 +4,7 @@ import updateMarkupPagination from './pagination'
 import { fetchGenreId } from './collectionFetch'; 
 import { renderMarkUp } from './markups/collectionRender'; 
 import { refs } from "./refs/refs";
+import { spinner } from "./spinner";
 
 const filmsApiServer = new FilmsApiServer();
 
@@ -37,9 +38,9 @@ function onSubmitForm(e) {
 
 async function addFilmsAndUpdateUI() {
   try {
-    refs.spinner.classList.remove('is-hiden');
+    spinner();
     const results = await filmsApiServer.fetchFilms();
-    refs.spinner.classList.add('is-hiden');
+    spinner();
     renderGalleryList(results);
   } catch (err) {
     onFetchError(err);
@@ -53,10 +54,10 @@ async function renderAfterChangingPage(currentPage) {
     const data = await filmsApiServer.fetchFilms();
     const { results, page, total_pages } = data;
 
-    refs.spinner.classList.remove('is-hiden');
+   spinner();
     const render = renderMarkUp(results, genreCollection);
     refs.gallery.innerHTML = render; 
-    refs.spinner.classList.add('is-hiden');
+    spinner();
   } catch (err) {
     onFetchError(err);
   }
@@ -75,10 +76,10 @@ function renderGalleryList(data) {
   }
 
   
-  refs.spinner.classList.remove('is-hiden');
+  spinner();
   const render = renderMarkUp(results, genreCollection);
   refs.gallery.innerHTML = render;
-    refs.spinner.classList.add('is-hiden');
+    spinner();
 
   updateMarkupPagination(total_pages, page, renderAfterChangingPage);
 
