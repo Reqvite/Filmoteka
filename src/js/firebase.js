@@ -156,7 +156,7 @@ function logInUser(e) {
     const errorCode = error.code;
       const errorMessage = error.message;
     formRegistr.removeEventListener('submit', signUpUser);
-      alert(errorMessage)
+      Notify.failure(errorMessage);
   });   
 }
 
@@ -193,7 +193,7 @@ logOut.addEventListener('click', e => {
       myLibraryJs.style.display = 'none';
       
         localStorage.setItem("userIsLogin", "false");
-    alert('sign out')
+      Notify.success('Successful logged out.');
 }).catch((error) => {
    const errorCode = error.code;
       const errorMessage = error.message;
