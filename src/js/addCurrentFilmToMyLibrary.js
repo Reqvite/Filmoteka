@@ -4,9 +4,11 @@ import {
   renderMurkUpLibrary,
   clearContainer,
 } from './markups/renderMarkUpLibrary';
+import { fetchTrendingFilms } from './collection.js';
 
 const libraryButton = document.querySelector('.header__mylibrary');
 const container = document.querySelector('.container-films');
+const homeButton = document.querySelector('.home-js');
 
 let dataWatched = [];
 
@@ -69,4 +71,10 @@ function onWatchedClick(e) {
   }
 }
 
+function onHomeClick() {
+  clearContainer();
+  fetchTrendingFilms();
+}
+
+homeButton.addEventListener('click', onHomeClick);
 libraryButton.addEventListener('click', onWatchedClick);
