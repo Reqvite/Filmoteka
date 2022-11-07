@@ -1,7 +1,7 @@
 // import image from '../images/footer';
 
 import * as image from '../images/footer/no-foto.jpg';
-import * as image3 from '../images/footer/img_6550.jpg';
+import * as image3 from '../images/footer/Alexander-Kulyk.jpg';
 import * as image4 from '../images/footer/me-foto-1.jpg';
 import * as image5 from '../images/footer/Taras-Novitskyi.jpg';
 import * as image6 from '../images/footer/Yevhenii-Kavetskyi.jpg';
