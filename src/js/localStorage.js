@@ -1,6 +1,6 @@
 import Notiflix from 'notiflix';
 
-import fotoCardsTpl from "./markups/filmCardMarkup";
+// import fotoCardsTpl from "./markups/filmCardMarkup";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { getDatabase, ref, child, push, update, get  } from "firebase/database";
 import { database } from "./firebase";
