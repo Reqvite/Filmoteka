@@ -1,31 +1,28 @@
 import Notiflix from 'notiflix';
-
-// import fotoCardsTpl from "./markups/filmCardMarkup";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { getDatabase, ref, child, push, update, get  } from "firebase/database";
 import { database } from "./firebase";
 
+import { refs } from "./refs/refs";
+import { renderMarkUp } from './markups/collectionRender'
+import { fetchGenreId } from './collectionFetch';
+import { renderMurkUpLibrary, clearContainer } from "./markups/renderMarkUpLibrary"; 
 
+console.log(refs);
 const auth = getAuth();
 const USER_LOGIN_KEY = 'userIsLogin';
 
-import { renderMarkUp } from './markups/collectionRender'
-import { fetchGenreId } from './collectionFetch'; 
-
 
 const container = document.querySelector('.container-films')
-const refs ={
-    headerNavList: document.querySelector('.header__nav-list'),
-};
 
-let genreCollection = {};
-fetchGenreId()
-  .then(genreId => {
-    genreId.data.genres.forEach(function (genre) {
-      genreCollection[genre.id] = genre.name;
-    });
-  })
-  .catch(error => console.log(error));
+// let genreCollection = {};
+// fetchGenreId()
+//   .then(genreId => {
+//     genreId.data.genres.forEach(function (genre) {
+//       genreCollection[genre.id] = genre.name;
+//     });
+//   })
+//   .catch(error => console.log(error));
 
 
 //------------------------add to queue---------------
@@ -53,8 +50,8 @@ const onClickBtn = (data,e)=>{
                 get(child(dbRef, `users/${uid}`)).then((snapshot) => {
 
                     if (snapshot.exists()) {
-                        const queueDataString = snapshot.val().localData
-                        if (queueDataString === 'data') {
+                        const queueDataString = snapshot.val().queueList
+                        if (queueDataString === '') {
 
                             let listWatchedArr = [];
                             listWatchedArr.push(data);
@@ -62,7 +59,7 @@ const onClickBtn = (data,e)=>{
                             const queueListString = JSON.stringify(listWatchedArr);
                             console.log(queueListString);
                             update(ref(database, 'users/' + uid),{
-                                localData: queueListString
+                                queueList: queueListString
                             });  
                         } else{
                             
@@ -74,7 +71,7 @@ const onClickBtn = (data,e)=>{
                             //listWatchedArr.map(obj => obj.id).includes(idMovie) // інший спосіб
                          
                             if (checkArr) {
-                                Notiflix.Notify.info(`Тhis movie was add to the QUEUE`,{
+                                Notiflix.Notify.info(`Тhis movie is in the QUEUE`,{
                                     timeout: 2000,
                                 });
                                 
@@ -85,10 +82,10 @@ const onClickBtn = (data,e)=>{
                                 const queueListString = JSON.stringify(queueDataArr)
 
                                 update(ref(database, 'users/' + uid),{
-                                localData: queueListString
+                                    queueList: queueListString
                                 });
 
-                                Notiflix.Notify.success(`Add movie`,{
+                                Notiflix.Notify.success(`Added movie to QUEUE`,{
                                     timeout: 2000,
                                 });
 
@@ -130,16 +127,16 @@ const onMyLibararyClick = e =>{
     };
 
 
-   const moviesListLocalStorage= JSON.parse(localStorage.getItem(WATCHED_KYE));
-   if (moviesListLocalStorage === null) {
-    Notiflix.Notify.failure(`my library is emty`,{
-        timeout: 2000,
-    });
-    return;
-   }
-    // const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
-    const renderLibrary = renderMarkUp(moviesListLocalStorage, genreCollection);
-    container.innerHTML = renderLibrary;
+//    const moviesListLocalStorage= JSON.parse(localStorage.getItem(WATCHED_KYE));
+//    if (moviesListLocalStorage === null) {
+//     Notiflix.Notify.failure(`my library is emty`,{
+//         timeout: 2000,
+//     });
+//     return;
+//    }
+//     // const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
+//     const renderLibrary = renderMarkUp(moviesListLocalStorage, genreCollection);
+//     container.innerHTML = renderLibrary;
 
 
     onAuthStateChanged(auth, (user) => {
@@ -151,13 +148,16 @@ const onMyLibararyClick = e =>{
             get(child(dbRef, `users/${uid}`)).then((snapshot) => {
       
                 if (snapshot.exists()) {
-                    const snapShot = snapshot.val().localData
-                    if (snapShot === 'data') {
+                    const queueListData = snapshot.val().queueList
+                    if (queueListData === '') {
+                        clearContainer();
+                        
                         Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
                             timeout: 2000,
                         });
                     }else{
-                        const queueList = JSON.parse(snapshot.val().localData)
+                        const queueList = JSON.parse(snapshot.val().queueList)
+                        renderMurkUpLibrary(queueList);
                         console.log(queueList);
                     };
                     

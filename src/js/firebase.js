@@ -92,6 +92,7 @@ function signUpUser(e) {
           
             set(ref(database, 'users/' + user.uid), {
                 username: username,
+                queueList:'',
               email: email,
                 last_login: dt,
             })
@@ -141,7 +142,7 @@ function logInUser(e) {
        const dt = new Date();
          update(ref(database, 'users/' + user.uid),{
              last_login: dt,
-             localData: 'data'  
+             localData: 'data'
          })
             modal.classList.add('form-hidden');
             signinBtn.style.display = 'none';
