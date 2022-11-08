@@ -205,7 +205,7 @@
   }
   @include tablet {
     padding-top: 40px;
-    padding-bottom: 60px;
+    padding-bottom: 57px;
     background-image: url(../images/header-background-img-mylibrary/mylibrary-tablet-x1.jpg);
     @include retina {
       background-image: url(../images/header-background-img-mylibrary/mylibrary-tablet-x2.jpg);
@@ -224,10 +224,6 @@
   align-items: center;
   justify-content: center;
   margin-left: auto;
-  // margin-top: 66px;
-  @include tablet {
-    // margin-top: 40px;
-  }
 }
 .header__mylibrary-btn {
   min-width: 130px;
