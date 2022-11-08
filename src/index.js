@@ -5,7 +5,6 @@ import './sass/index.scss';
 import './js/collection';
 import './js/modal-footer';
 
-
 import './js/addFilmsAndrenderGalery';
 
 import './js/service/service';
@@ -13,7 +12,6 @@ import './js/service/service';
 import './js/markups/filmDetailMarkup';
 
 import './js/openFilmModal';
-
 
 import './js/viewTrailer';
 
@@ -27,5 +25,4 @@ import './js/firebase';
 
 import './js/changeHeaderPageHome-Mylibrary';
 
-import './js/addCurrentFilmToMyLibrary';
-
+import './js/addFilmToWatchedList-firebase';
