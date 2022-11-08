@@ -22,7 +22,7 @@ export const createFilmDetailsMarkup = resp =>{
   } = resp.data;
  
             poster_path
-              ? poster_path = `https://www.themoviedb.org/t/p/original/${poster_path}`
+              ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
               : poster_path = img
             vote_average
               ? vote_average = vote_average.toFixed(1)
