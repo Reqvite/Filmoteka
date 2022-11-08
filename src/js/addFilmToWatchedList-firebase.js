@@ -72,7 +72,6 @@ const onClickAddToWatched = (data, e) => {
 // Кнопка Watched
 
 const onWatchedBtnClick = e => {
-  console.log('watched');
   refs.queueBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.watchedBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
