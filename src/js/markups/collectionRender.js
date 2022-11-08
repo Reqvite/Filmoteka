@@ -25,7 +25,7 @@ export function renderMarkUp(arrMovies, genreCollection) {
   <a href="" class="card-wrap__link link">
         <div class="card">
             <div class="card__image-wrap">
-                <img class="card__image" src=${poster_path} alt="${title}">
+                <img class="card__image" src=${poster_path} alt="${title}" >
             </div>
             <div class="card__wrap">
                 <h2 class="card__title">${title}</h2>
