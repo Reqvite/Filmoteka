@@ -4,7 +4,7 @@ import img from '../../images/collection/csaff-no-poster.jpg'
 import viewTrailer from '../viewTrailer';
 
 import { onClickBtn } from '../myLibrary';
-import { onClickAddToWached } from '../addCurrentFilmToMyLibrary';
+import { onClickAddToWatched } from '../addFilmToWatchedList-firebase';
 
 const modal = document.querySelector('.film-modal-content');
 
@@ -79,5 +79,5 @@ export const createFilmDetailsMarkup = resp =>{
 
   viewTrailer(id);
 
-  buttonsList.addEventListener('click', e => onClickAddToWached(resp.data, e));
+  buttonsList.addEventListener('click', e => onClickAddToWatched(resp.data, e));
 };
