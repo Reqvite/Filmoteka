@@ -119,11 +119,11 @@ const onClickBtn = (data,e)=>{
 const onMyLibararyClick = e =>{
 
     if (e.target.name !== 'library') {
-         refs.listEl.classList.remove('is-hidden');
+         refs.pagination.classList.remove('is-hidden');
         return; 
     };
 
-    refs.listEl.classList.add('is-hidden');
+    refs.pagination.classList.add('is-hidden');
     refs.queueBtnInLibrary.setAttribute('disabled', 'disabled');
 
     onAuthStateChanged(auth, (user) => {
