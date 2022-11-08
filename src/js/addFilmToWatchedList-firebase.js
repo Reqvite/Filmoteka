@@ -19,10 +19,6 @@ const onClickAddToWatched = (data, e) => {
   const dbRef = ref(getDatabase());
   let listWatchedArr = [];
 
-  if (e.target.name !== 'watched') {
-    return;
-  }
-
   if (userIsLogin) {
     onAuthStateChanged(getAuth(), user => {
       const uid = user.uid;
@@ -72,6 +68,7 @@ const onClickAddToWatched = (data, e) => {
 // Кнопка Watched
 
 const onWatchedBtnClick = e => {
+  console.log('watched');
   refs.queueBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.watchedBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
@@ -107,5 +104,4 @@ const onWatchedBtnClick = e => {
     return;
   }
 };
-
 refs.watchedBtnInLibrary.addEventListener('click', onWatchedBtnClick);

@@ -109,38 +109,42 @@ const onClickBtn = (data, e) => {
 // ------------------click my library-------------
 
 const onMyLibararyClick = e => {
-    if (e.target.name !== 'library') {
-         refs.pagination.classList.remove('is-hidden');
-        return; 
-    };
+  if (e.target.name !== 'library') {
+    refs.pagination.classList.remove('is-hidden');
+    return;
+  }
+  refs.listEl.classList.add('is-hidden');
 
-    refs.listEl.classList.add('is-hidden');
+  refs.sectionHeader.classList.remove('header__section');
+  refs.form.style.display = 'none';
+  refs.libraryButtons.style.display = 'flex';
+  refs.sectionHeader.classList.add('header__section--mylibrary');
+  refs.toggleTheme.classList.replace('toggle-theme', 'toggle-theme-mylibrary');
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
-    onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      const uid = user.uid;
+      const dbRef = ref(getDatabase());
 
-        if (user) {
-            const uid = user.uid; 
-            const dbRef = ref(getDatabase());
-      
-            get(child(dbRef, `users/${uid}`)).then((snapshot) => {
-      
-                if (snapshot.exists()) {
-                    const queueListData = snapshot.val().queueList
-                    if (queueListData === '') {
-                        clearContainer();
-                        
-                        Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
-                            timeout: 2000,
-                        });
-                    }else{
-                        const queueList = JSON.parse(snapshot.val().queueList)
-                        renderMurkUpLibrary(queueList);
-                    };   
-                } else {
-                console.log("No data available");
+      get(child(dbRef, `users/${uid}`))
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            const queueListData = snapshot.val().queueList;
+            if (queueListData === '') {
+              clearContainer();
+
+              Notiflix.Notify.failure(`Opps🙊 your library is empty!`, {
+                timeout: 2000,
+              });
+            } else {
+              const queueList = JSON.parse(snapshot.val().queueList);
+              renderMurkUpLibrary(queueList);
             }
+          } else {
+            console.log('No data available');
+          }
         })
         .catch(error => {
           console.error(error);
@@ -155,53 +159,50 @@ const onMyLibararyClick = e => {
 
 refs.headerNavList.addEventListener('click', onMyLibararyClick);
 
-const onQueueBtnClickinLibrary = e =>{
-
-refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
+const onQueueBtnClickinLibrary = e => {
+  refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
-    onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      const uid = user.uid;
+      const dbRef = ref(getDatabase());
 
-            if (user) {
-                const uid = user.uid; 
-                const dbRef = ref(getDatabase());
-      
-                get(child(dbRef, `users/${uid}`)).then((snapshot) => {
-      
-                    if (snapshot.exists()) {
-                        const queueListData = snapshot.val().queueList
-                        if (queueListData === '') {
-                            clearContainer();
-                        
-                            Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
-                             timeout: 2000,
-                            });
-                        }else{
-                            const queueList = JSON.parse(snapshot.val().queueList);
-                            console.log(queueList);
-                            renderMurkUpLibrary(queueList);
-                            console.log(queueList);
-                        };
-                    
-                   
-                } else {
-                    console.log("No data available");
+      get(child(dbRef, `users/${uid}`))
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            const queueListData = snapshot.val().queueList;
+            if (queueListData === '') {
+              clearContainer();
+
+              Notiflix.Notify.failure(`Opps🙊 your library is empty!`, {
+                timeout: 2000,
+              });
+            } else {
+              const queueList = JSON.parse(snapshot.val().queueList);
+              console.log(queueList);
+              renderMurkUpLibrary(queueList);
+              console.log(queueList);
             }
-            }).catch((error) => {
-                console.error(error);
-            });
-          // ...
-        } else {
-          // User is signed out
-          // ...
-        }
-    });
-   if (
+          } else {
+            console.log('No data available');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+  if (
     refs.queueBtnInLibrary.classList.contains('header__mylibrary-btn--active')
   ) {
     return;
-  } 
-}
+  }
+};
 
 refs.queueBtnInLibrary.addEventListener('click', onQueueBtnClickinLibrary);
 
