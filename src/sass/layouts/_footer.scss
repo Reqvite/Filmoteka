@@ -162,8 +162,17 @@
   display: flex;
   flex-direction: column;
   background-color: #f7f5f5;
+  max-width: 300px;
+  min-width: 200px;
+  @include tablet {
+    min-width: 250px;
+  }
 }
 
+.team-footer__foto {
+  object-fit: cover;
+  height: 300px;
+}
 .about-footer {
   text-align: center;
   padding: 10px 10px;

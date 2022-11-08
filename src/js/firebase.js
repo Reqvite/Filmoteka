@@ -172,7 +172,6 @@ function logInUser(e) {
 
          update(ref(database, 'users/' + user.uid),{
              last_login: dt,
-             localData: 'data'
          })
       handleLogIn()
          removeEventListeners()
