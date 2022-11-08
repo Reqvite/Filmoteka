@@ -14,6 +14,7 @@ iconSun: document.querySelector('.icon-sun'),
 iconBrightness: document.querySelector('.icon-brightness'),
 headerNavList: document.querySelector('.header__nav-list'),
 queueBtnInLibrary: document.querySelector('.header__mylibrary-btn--que'),
-watchedBtnInLibrary:document.querySelector('.watched-js')
+watchedBtnInLibrary: document.querySelector('.watched-js'),
+collection: document.querySelector(`.container-films`),
    
 }

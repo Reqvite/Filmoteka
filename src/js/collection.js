@@ -7,9 +7,6 @@ import { refs } from './refs/refs';
 export { fetchTrendingFilms };
 
 let page = 1;
-const collection = document.querySelector(`.container-films`);
-// const pagination = document.querySelector(`.pagination`);
-
 let genreCollection = {};
 
 async function fetchTrendingFilms() {
@@ -25,10 +22,7 @@ async function fetchTrendingFilms() {
 function fetchMovies(page) {
   fetchPopularMovies(page).then(response => {
     const render = renderMarkUp(response.data.results, genreCollection);
-
-    // const renderedPagination = renderPagination(Number(response.data.page), Number(response.data.total_pages))
-    collection.innerHTML = render;
-    // pagination.innerHTML = renderedPagination;
+    refs.collection.innerHTML = render;
 
     updateMarkupPagination(
       response.data.total_pages,
@@ -41,12 +35,9 @@ function fetchMovies(page) {
 function fetchMoviesOnPagination(page) {
   document.querySelector('.header').scrollIntoView();
   fetchPopularMovies(page).then(response => {
-    console.log(response);
     const render = renderMarkUp(response.data.results, genreCollection);
-    collection.innerHTML = render;
-
+    refs.collection.innerHTML = render;
   });
 }
 
 fetchTrendingFilms();
-
