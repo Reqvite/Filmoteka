@@ -1,3 +1,5 @@
+import { fetchTrendingFilms } from './collection.js';
+import { clearContainer } from './markups/renderMarkUpLibrary';
 const homeBtn = document.querySelector('.home-js');
 const myLibraryBtn = document.querySelector('.my-library-js');
 const sectionHeader = document.querySelector('.header__section');
@@ -21,6 +23,8 @@ function switchToMylibrary(e) {
 
 function switchToHome(e) {
   e.preventDefault();
+  clearContainer();
+  fetchTrendingFilms();
   sectionHeader.classList.remove('header__section--mylibrary');
   libraryButtons.style.display = 'none';
   sectionHeader.classList.add('header__section');
