@@ -1,4 +1,5 @@
 import { refs } from '../refs/refs';
+import * as image from '../../images/library/empty-library.jpg';
 
 const renderMurkUpLibrary = queueList => {
   const markup = queueList.reduce((acc, obj) => {
@@ -35,8 +36,12 @@ const renderMurkUpLibrary = queueList => {
 
 const clearContainer = () => {
   const title = `
-    <h1>Opps🙊 your library is empty! Choose something!</h1>
-    `;
+  <img
+  src="${image}"
+  alt="foto"
+  width="250px" height="250px"
+/>
+  `;
   refs.gallery.innerHTML = title;
 };
 

@@ -124,19 +124,7 @@ const onMyLibararyClick = e =>{
     };
 
     refs.listEl.classList.add('is-hidden');
-
-
-//    const moviesListLocalStorage= JSON.parse(localStorage.getItem(WATCHED_KYE));
-//    if (moviesListLocalStorage === null) {
-//     Notiflix.Notify.failure(`my library is emty`,{
-//         timeout: 2000,
-//     });
-//     return;
-//    }
-//     // const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
-//     const renderLibrary = renderMarkUp(moviesListLocalStorage, genreCollection);
-//     container.innerHTML = renderLibrary;
-
+    refs.queueBtnInLibrary.setAttribute('disabled', 'disabled');
 
     onAuthStateChanged(auth, (user) => {
 
@@ -178,8 +166,18 @@ const onMyLibararyClick = e =>{
 refs.headerNavList.addEventListener('click',onMyLibararyClick);
 
 
+
+
+
+//-------------------click btn queue in library-----------------//
 const onQueueBtnClickinLibrary = e =>{
-        console.log(5);
+
+    refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active')
+    refs.queueBtnInLibrary.setAttribute('disabled', 'disabled');
+
+    refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
+    refs.watchedBtnInLibrary.removeAttribute('disabled');
+
     onAuthStateChanged(auth, (user) => {
 
             if (user) {
