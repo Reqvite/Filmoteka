@@ -66,17 +66,33 @@ function userIsLogin(){
 
 userIsLogin()
 
-
-// Закрытие модалки
-modalFormBtnClose.addEventListener('click', e => {
-    modal.classList.add('form-hidden');
-    submitSignBtn.style.display = 'none';
+function closeFormModal() {
+  modal.classList.add('form-hidden');
+  formRegistr.removeEventListener('submit', signUpUser);
+  formRegistr.removeEventListener('submit', logInUser);
+  submitSignBtn.style.display = 'none';
   submitLoginBtn.style.display = 'none';
-  refs.body.style.overflow = 'scroll'
+  document.removeEventListener('keydown', escModal);
+  modal.removeEventListener('click', closeModalOutsideWindow);
+    refs.body.style.overflow = 'scroll'
+}
 
-      formRegistr.removeEventListener('submit', signUpUser);
-    formRegistr.removeEventListener('submit', logInUser); 
-})
+modalFormBtnClose.addEventListener('click', closeFormModal);
+
+function escModal(e) {
+  if (e.code === 'Escape') {
+    closeFormModal();
+  }
+}
+
+function closeModalOutsideWindow(e) {
+  if (!e.target.classList.contains('backdrop-form')) {
+    return;
+  }
+  closeFormModal();
+}
+
+
 
 //Открытие модалки(регистрация)
 signinBtn.addEventListener('click', e => {
@@ -85,7 +101,9 @@ signinBtn.addEventListener('click', e => {
     formRegistr.addEventListener('submit', signUpUser) 
   submitSignBtn.style.display = 'block';
   formTitle.textContent = 'SIGN IN TO FILMOTEKA'
-  refs.body.style.overflow ='hidden'
+  refs.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', escModal);
+  modal.addEventListener('click', closeModalOutsideWindow);
 })
 
 //Регистрация пользователя
@@ -134,6 +152,8 @@ loginBtn.addEventListener('click', e => {
     submitSignBtn.style.display = 'none';
   submitLoginBtn.style.display = 'block';
   refs.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', escModal);
+  modal.addEventListener('click', closeModalOutsideWindow);
 
 })
 
