@@ -1,3 +1,4 @@
+import * as image from '../../images/collection/error__poster.jpg';
 export function renderMarkUp(arrMovies, genreCollection) {
 
   return arrMovies
@@ -13,7 +14,7 @@ export function renderMarkUp(arrMovies, genreCollection) {
           : (genreNames = '');
             poster_path
               ? (poster_path = `https://www.themoviedb.org/t/p/original/${poster_path}`)
-              : (poster_path = './images/icons8-cinema-85.png');
+              : (poster_path = image);
             release_date ? release_date = new Date(release_date).getFullYear() : release_date = '';
             vote_average
               ? vote_average = vote_average.toFixed(1)
