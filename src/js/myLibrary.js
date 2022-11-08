@@ -109,16 +109,14 @@ const onClickBtn = (data, e) => {
 // ------------------click my library-------------
 
 const onMyLibararyClick = e => {
-
-  refs.listEl.classList.add('is-hidden');
-
     if (e.target.name !== 'library') {
          refs.pagination.classList.remove('is-hidden');
         return; 
     };
 
-    refs.pagination.classList.add('is-hidden');
-    refs.queueBtnInLibrary.setAttribute('disabled', 'disabled');
+    refs.listEl.classList.add('is-hidden');
+  refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
+  refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
     onAuthStateChanged(auth, (user) => {
 
@@ -139,7 +137,6 @@ const onMyLibararyClick = e => {
                     }else{
                         const queueList = JSON.parse(snapshot.val().queueList)
                         renderMurkUpLibrary(queueList);
-                        console.log(queueList);
                     };   
                 } else {
                 console.log("No data available");
@@ -160,11 +157,8 @@ refs.headerNavList.addEventListener('click', onMyLibararyClick);
 
 const onQueueBtnClickinLibrary = e =>{
 
-    refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active')
-    refs.queueBtnInLibrary.setAttribute('disabled', 'disabled');
-
-    refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
-    refs.watchedBtnInLibrary.removeAttribute('disabled');
+refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
+  refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
     onAuthStateChanged(auth, (user) => {
 

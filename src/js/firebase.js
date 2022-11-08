@@ -120,7 +120,8 @@ function signUpUser(e) {
             const user = userCredential.user;     
             set(ref(database, 'users/' + user.uid), {
                 username: username,
-                queueList:'',
+              queueList: '',
+                watchedList: '',
                 email: email,
                 last_login: dt,
             })
