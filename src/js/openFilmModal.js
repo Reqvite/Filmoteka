@@ -57,7 +57,7 @@ const closeModal = e => {
   const modalContainer = document.querySelector('.film-details-wrapper');
   modal.classList.add('hidden');
   modalClose.removeEventListener('click', closeModal);
-  modal.removeEventListener('keydown', escModal);
+  document.removeEventListener('keydown', escModal);
   modal.removeEventListener('click', closeModalOutsideWindow);
   body.style.overflow = 'scroll';
   modalContainer.remove();
@@ -73,17 +73,12 @@ function ChangeColorText() {
 }
 
 function escModal(e) {
-
-  if (modal.classList.contains('hidden')) {
-    return;
-  }
   if (e.code === 'Escape') {
     closeModal();
   }
 }
 
 function closeModalOutsideWindow(e) {
-
   if (!e.target.classList.contains('backdrop-details')) {
     return;
   }
