@@ -1,4 +1,4 @@
-import * as image from '../../images/collection/error__poster.jpg';
+import * as image from '../../images/collection/csaff-no-poster.jpg';
 export function renderMarkUp(arrMovies, genreCollection) {
 
   return arrMovies
