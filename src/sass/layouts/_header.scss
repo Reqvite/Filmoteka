@@ -1,7 +1,7 @@
 .header__section {
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 92px;
+  padding-bottom: 89px;
   padding-top: 42px;
   opacity: 0.9;
   background-image: url(../images/header-background-img-home/header-bcgrd-mobile1x.jpg);
@@ -12,7 +12,7 @@
   }
   @include tablet {
     padding-top: 40px;
-    padding-bottom: 80px;
+    padding-bottom: 81px;
     background-image: url(../images/header-background-img-home/header-bcgrd-tablet1x.jpg);
     @include retina {
       background-image: url(../images/header-background-img-home/header-bcgrd-tablet2x.jpg);
@@ -30,12 +30,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 30px;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
     text-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
     text-shadow: 0px 3px 3px #ffffff;
     transform: scale(1.1);
+  }
+  @include tablet {
+    height: 35px;
   }
 }
 .header__logo-text {
@@ -53,6 +57,7 @@
 }
 .header__nav-wrap {
   display: flex;
+  // align-items: center;
 }
 
 .header__nav-list {
@@ -60,6 +65,7 @@
   align-items: baseline;
   margin-left: auto;
   margin-top: 10px;
+  height: 20px;
 }
 
 .header__nav-item {
@@ -83,10 +89,13 @@
 }
 
 .header__home-wrap {
-  padding-top: 62px;
+  padding-top: 49px;
   margin-left: auto;
   margin-right: auto;
   position: relative;
+  @include tablet {
+    padding-top: 40px;
+  }
 }
 .toggle-theme {
   position: absolute;
@@ -102,7 +111,6 @@
   background-color: $accentBg-color;
   border: none;
   border-radius: 50%;
-
   cursor: pointer;
   padding: 5px;
   &:hover,
@@ -118,17 +126,18 @@
 }
 .toggle-theme-mylibrary {
   position: absolute;
+  height: 30px;
+  width: 30px;
   right: 0;
-  bottom: 30;
+  bottom: 55;
+  margin-top: 0px;
   color: $mainBg-color;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: $accentBg-color;
   border: none;
-  border-radius: 5px;
-  height: 30px;
-  min-width: 70px;
+  border-radius: 50%;
   cursor: pointer;
   padding: 5px;
   &:hover,
@@ -137,7 +146,9 @@
     box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
   }
   @include tablet {
-    bottom: 0;
+    bottom: 4;
+    height: 40px;
+    width: 40px;
   }
 }
 
@@ -160,7 +171,7 @@
 }
 .header__input {
   width: 100%;
-  height: 20px;
+  height: 19px;
   color: #ffffff;
   border: none;
   background-color: rgba(0, 0, 0, 0);
@@ -183,7 +194,7 @@
 
 //Це тільки частина header(My Library)
 .header__section--mylibrary {
-  padding-bottom: 62px;
+  padding-bottom: 65px;
   padding-top: 42px;
   background-color: rgba(0, 0, 0, 0.56);
   background-image: url(../images/header-background-img-mylibrary/mylibrary-mobile-x1.jpg);
@@ -194,7 +205,7 @@
   }
   @include tablet {
     padding-top: 40px;
-    padding-bottom: 60px;
+    padding-bottom: 57px;
     background-image: url(../images/header-background-img-mylibrary/mylibrary-tablet-x1.jpg);
     @include retina {
       background-image: url(../images/header-background-img-mylibrary/mylibrary-tablet-x2.jpg);
@@ -213,13 +224,10 @@
   align-items: center;
   justify-content: center;
   margin-left: auto;
-  // margin-top: 66px;
-  @include tablet {
-    // margin-top: 40px;
-  }
 }
 .header__mylibrary-btn {
   min-width: 130px;
+  height: 44px;
   color: #ffffff;
   background-color: transparent;
   border: 1px solid #ffffff;
@@ -233,6 +241,11 @@
   @include tablet {
     min-width: 152px;
   }
+}
+
+.header__mylibrary-btn--active {
+  background: #ff6b01;
+  border: none;
 }
 .header__mylibrary .toggle-theme {
   bottom: 65;
