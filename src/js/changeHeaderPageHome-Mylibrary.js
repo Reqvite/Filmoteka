@@ -16,16 +16,14 @@ function switchToMylibrary(e) {
   form.style.display = 'none';
   libraryButtons.style.display = 'flex';
   sectionHeader.classList.add('header__section--mylibrary');
-  toggleTheme.classList.remove('toggle-theme');
-  toggleTheme.classList.add('toggle-theme-mylibrary');
+  toggleTheme.classList.replace('toggle-theme', 'toggle-theme-mylibrary');
 }
 
-function switchToHome(e) {
+ export function switchToHome(e) {
   e.preventDefault();
   sectionHeader.classList.remove('header__section--mylibrary');
   libraryButtons.style.display = 'none';
   sectionHeader.classList.add('header__section');
   form.style.display = 'block';
-  toggleTheme.classList.add('toggle-theme');
-  toggleTheme.classList.remove('toggle-theme-mylibrary');
+  toggleTheme.classList.replace('toggle-theme-mylibrary', 'toggle-theme');
 }
