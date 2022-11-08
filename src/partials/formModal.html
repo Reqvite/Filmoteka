@@ -5,8 +5,15 @@
         <use href="./images/sprite.svg#icon-close_24px"></use>
       </svg>
     </button>
+    <p class="form-title"></p>
     <form class="registr">
-      <input class="name-input input" type="text" id="username" name="username" placeholder="Username" />
+      <input class="name-input input" type="text" id="username" name="username" placeholder="Username" 
+        type="text"
+   name="name"
+    pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+  title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+                   
+      />
       <input class="input" type="text" id="email" name="email" placeholder="E-mail" />
       <input class="input" type="password" id="password" name="password" placeholder="Password" />
 
