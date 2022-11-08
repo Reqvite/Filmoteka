@@ -16,7 +16,7 @@ const renderMurkUpLibrary = queueList => {
                       <img class="card__image" src="https://www.themoviedb.org/t/p/original/${poster_path}" alt="${title}" width="395px" height="574px">
                        </div>
                   <div class="card__wrap">
-                      <h2 class="card__titletitle">${title}</h2>
+                      <h2 class="card__title">${title}</h2>
                       <div class="card__data">
                           <p class="card__genre">${genreNames.join(', ')} |</p>
                           <p class="card__year">${releaseYear[0]}</p>
