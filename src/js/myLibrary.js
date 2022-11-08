@@ -109,49 +109,41 @@ const onClickBtn = (data, e) => {
 // ------------------click my library-------------
 
 const onMyLibararyClick = e => {
-  if (e.target.name !== 'library') {
-    refs.listEl.classList.remove('is-hidden');
-    return;
-  }
+
   refs.listEl.classList.add('is-hidden');
 
-  refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
-  refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
+    if (e.target.name !== 'library') {
+         refs.pagination.classList.remove('is-hidden');
+        return; 
+    };
 
-  //    const moviesListLocalStorage= JSON.parse(localStorage.getItem(WATCHED_KYE));
-  //    if (moviesListLocalStorage === null) {
-  //     Notiflix.Notify.failure(`my library is emty`,{
-  //         timeout: 2000,
-  //     });
-  //     return;
-  //    }
-  //     // const renderLibrary = fotoCardsTpl(moviesListLocalStorage);
-  //     const renderLibrary = renderMarkUp(moviesListLocalStorage, genreCollection);
-  //     container.innerHTML = renderLibrary;
+    refs.pagination.classList.add('is-hidden');
+    refs.queueBtnInLibrary.setAttribute('disabled', 'disabled');
 
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      const uid = user.uid;
-      const dbRef = ref(getDatabase());
+    onAuthStateChanged(auth, (user) => {
 
-      get(child(dbRef, `users/${uid}`))
-        .then(snapshot => {
-          if (snapshot.exists()) {
-            const queueListData = snapshot.val().queueList;
-            if (queueListData === '') {
-              clearContainer();
-
-              Notiflix.Notify.failure(`Opps🙊 your library is empty!`, {
-                timeout: 2000,
-              });
-            } else {
-              const queueList = JSON.parse(snapshot.val().queueList);
-              renderMurkUpLibrary(queueList);
-              console.log(queueList);
+        if (user) {
+            const uid = user.uid; 
+            const dbRef = ref(getDatabase());
+      
+            get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+      
+                if (snapshot.exists()) {
+                    const queueListData = snapshot.val().queueList
+                    if (queueListData === '') {
+                        clearContainer();
+                        
+                        Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
+                            timeout: 2000,
+                        });
+                    }else{
+                        const queueList = JSON.parse(snapshot.val().queueList)
+                        renderMurkUpLibrary(queueList);
+                        console.log(queueList);
+                    };   
+                } else {
+                console.log("No data available");
             }
-          } else {
-            console.log('No data available');
-          }
         })
         .catch(error => {
           console.error(error);
@@ -166,51 +158,56 @@ const onMyLibararyClick = e => {
 
 refs.headerNavList.addEventListener('click', onMyLibararyClick);
 
-const onQueueBtnClickinLibrary = e => {
-  console.log(5);
-  refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
-  refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
+const onQueueBtnClickinLibrary = e =>{
 
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      const uid = user.uid;
-      const dbRef = ref(getDatabase());
+    refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active')
+    refs.queueBtnInLibrary.setAttribute('disabled', 'disabled');
 
-      get(child(dbRef, `users/${uid}`))
-        .then(snapshot => {
-          if (snapshot.exists()) {
-            const queueListData = snapshot.val().queueList;
-            if (queueListData === '') {
-              clearContainer();
+    refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
+    refs.watchedBtnInLibrary.removeAttribute('disabled');
 
-              Notiflix.Notify.failure(`Opps🙊 your library is empty!`, {
-                timeout: 2000,
-              });
-            } else {
-              const queueList = JSON.parse(snapshot.val().queueList);
-              console.log(queueList);
-              renderMurkUpLibrary(queueList);
-              console.log(queueList);
+    onAuthStateChanged(auth, (user) => {
+
+            if (user) {
+                const uid = user.uid; 
+                const dbRef = ref(getDatabase());
+      
+                get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+      
+                    if (snapshot.exists()) {
+                        const queueListData = snapshot.val().queueList
+                        if (queueListData === '') {
+                            clearContainer();
+                        
+                            Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
+                             timeout: 2000,
+                            });
+                        }else{
+                            const queueList = JSON.parse(snapshot.val().queueList);
+                            console.log(queueList);
+                            renderMurkUpLibrary(queueList);
+                            console.log(queueList);
+                        };
+                    
+                   
+                } else {
+                    console.log("No data available");
             }
-          } else {
-            console.log('No data available');
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
-      // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
-  if (
+            }).catch((error) => {
+                console.error(error);
+            });
+          // ...
+        } else {
+          // User is signed out
+          // ...
+        }
+    });
+   if (
     refs.queueBtnInLibrary.classList.contains('header__mylibrary-btn--active')
   ) {
     return;
-  }
-};
+  } 
+}
 
 refs.queueBtnInLibrary.addEventListener('click', onQueueBtnClickinLibrary);
 

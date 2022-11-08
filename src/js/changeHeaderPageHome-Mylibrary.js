@@ -21,7 +21,7 @@ function switchToMylibrary(e) {
   toggleTheme.classList.replace('toggle-theme', 'toggle-theme-mylibrary');
 }
 
-function switchToHome(e) {
+ export function switchToHome(e) {
   e.preventDefault();
   clearContainer();
   fetchTrendingFilms();

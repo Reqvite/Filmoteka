@@ -1,5 +1,6 @@
-import { fetchFilmDetails } from '../service/service';
 
+
+import img from '../../images/collection/csaff-no-poster.jpg'
 import viewTrailer from '../viewTrailer';
 
 import { onClickBtn } from '../myLibrary';
@@ -7,8 +8,9 @@ import { onClickAddToWatched } from '../addFilmToWatchedList-firebase';
 
 const modal = document.querySelector('.film-modal-content');
 
-export const createFilmDetailsMarkup = resp => {
-  const {
+export const createFilmDetailsMarkup = resp =>{
+
+  let {
     poster_path,
     original_title,
     vote_average,
@@ -16,11 +18,19 @@ export const createFilmDetailsMarkup = resp => {
     popularity,
     genres,
     overview,
-    id,
+    id
   } = resp.data;
-
+ 
+            poster_path
+              ? poster_path = `https://www.themoviedb.org/t/p/original/${poster_path}`
+              : poster_path = img
+            vote_average
+              ? vote_average = vote_average.toFixed(1)
+              : (vote_average = '?');
+  
+  
   const markup = `<div class="film-details-wrapper">
-  <div><img class="modal-img" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="" data-id="${id}"/></div>
+  <div><img class="modal-img" src="${poster_path}" alt="${original_title}" data-id="${id}"/></div>
   <div class="film-details">
     <h2 class="film-details__main-title">${original_title}</h2>
     <ul class="details-list list">

@@ -141,3 +141,14 @@
 .submit-login-btn {
   display: none;
 }
+
+.form-title {
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-size: inherit;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
