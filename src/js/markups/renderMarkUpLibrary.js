@@ -1,4 +1,5 @@
 import { refs } from '../refs/refs';
+import * as image from '../../images/library/empty-library.jpg';
 
 const renderMurkUpLibrary = queueList => {
   const markup = queueList.reduce((acc, obj) => {
@@ -9,13 +10,14 @@ const renderMurkUpLibrary = queueList => {
 
     return (
       acc +
-      `
-        <li class="collection__item" data-id=${id}>
+      `<li class="collection__item" data-id=${id}>
         <a href="" class="card-wrap__link link">
               <div class="card">
-                      <img class="card__image" src="https://www.themoviedb.org/t/p/original/${poster_path}" alt="${title}" width="395px" height="574px">
-                  <div class="card-wrap">
-                      <h2 class="card_ _title">${title}</h2>
+              <div class="card__image-wrap">
+                      <img class="card__image" src="https://www.themoviedb.org/t/p/w500/${poster_path}" alt="${title}" width="395px" height="574px">
+                       </div>
+                  <div class="card__wrap">
+                      <h2 class="card__title">${title}</h2>
                       <div class="card__data">
                           <p class="card__genre">${genreNames.join(', ')} |</p>
                           <p class="card__year">${releaseYear[0]}</p>
@@ -34,8 +36,12 @@ const renderMurkUpLibrary = queueList => {
 
 const clearContainer = () => {
   const title = `
-    <h1>Opps🙊 your library is empty! Choose something!</h1>
-    `;
+  <img
+  src="${image}"
+  alt="foto"
+  width="250px" height="250px"
+/>
+  `;
   refs.gallery.innerHTML = title;
 };
 

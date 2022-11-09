@@ -10,8 +10,11 @@
         </a>
         <h1 class="visually-hidden">Filmoteka</h1>
         <ul class="header__nav-list list">
-          <li class="header__nav-item home-js">
-            <button class="header__nav-button header__nav-button--current">
+          <li class="header__nav-item home-js" name="home" data-active="true" )>
+            <button
+              class="header__nav-button header__nav-button--current"
+              name="home"
+            >
               home
             </button>
           </li>
@@ -32,7 +35,11 @@
             </button>
           </li>
           <li class="header__nav-item login-Out">
-            <button type="button" class="header__nav-button login-Out">
+            <button
+              type="button"
+              class="header__nav-button login-Out"
+              name="log-out"
+            >
               Log out
             </button>
           </li>
@@ -52,24 +59,28 @@
             </svg>
           </button>
         </form>
+        <div class="header__mylibrary" style="display: none">
+          <button
+            class="header__mylibrary-btn button watched-js"
+            name="watched-btn"
+          >
+            Watched
+          </button>
+
+          <button
+            class="header__mylibrary-btn header__mylibrary-btn--active button header__mylibrary-btn--que queue-js"
+          >
+            Queue
+          </button>
+        </div>
+
         <button type="button" class="toggle-theme">
           <svg class="icon-sun" width="25" height="25">
             <use href="./images/sprite.svg#icon-sun"></use>
           </svg>
-          <svg class="icon-brightness" width="25" height="25">
+          <svg class="icon-brightness is-hiden" width="25" height="25">
             <use href="./images/sprite.svg#icon-brightness"></use>
           </svg>
-        </button>
-      </div>
-      <div class="header__mylibrary" style="display: none">
-        <button class="header__mylibrary-btn button" name="watched-btn">
-          Watched
-        </button>
-
-        <button
-          class="header__mylibrary-btn header__mylibrary-btn--active button header__mylibrary-btn--que"
-        >
-          Queue
         </button>
       </div>
     </div>

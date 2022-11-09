@@ -10,18 +10,20 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
 
   let itemEl = '';
   let activePages = '';
-  let beforPages = page - 1;
-  let afterPages = page + 1;
+  let beforPages = page - 2;
+  let afterPages = page + 2;
 	
   if (page > 1) {
     itemEl += `<li class="pagination__arrow pagination__arrow-prev"><span>&#129128;</span></li>`;
   }
 
-  if (page > 2) {
-    itemEl += `<li class="pagination__numb-first"><span>1</span></li>`;
+  if (page > 3) {
+    if (totalPages > 5) {
+      itemEl += `<li class="pagination__numb-first"><span>1</span></li>`;
 
-    if (page > 3) {
-      itemEl += `<li class="pagination__dots"><span>&#183;&#183;&#183;</span></li>`;
+      if (page > 4) {
+        itemEl += `<li class="pagination__dots"><span>&#183;&#183;&#183;</span></li>`;
+      }
     }
   }
 
@@ -36,6 +38,7 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
   } else if (page === 2) {
     afterPages = afterPages + 1;
   }
+
   for (let pageLength = beforPages; pageLength <= afterPages; pageLength += 1) {
     if (pageLength > totalPages || pageLength <= 0) {
       continue;
@@ -49,11 +52,13 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
     itemEl += `<li class="pagination__numb ${activePages}"><span>${pageLength}</span></li>`;
   }
 
-  if (page < totalPages - 1) {
-    if (page < totalPages - 2) {
+  if (page < totalPages - 2) {
+    if (totalPages > 5) {
+      if (page < totalPages - 3) {
       itemEl += `<li class="pagination__dots"><span>&#183;&#183;&#183;</span></li>`;
     }
     itemEl += `<li class="pagination__numb-last"><span>${totalPages}</span></li>`;
+    }
   }
 
   if (page < totalPages) {
@@ -113,37 +118,3 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
     index += 1;
   }
 }
-
-async function addFilmsAndUpdateUI() {
-	try {
-    spinner();
-		filmsApiServer.query = localStorage.getItem('query');
-		const results = await filmsApiServer.fetchFilms();
-    spinner();
-		renderGalleryList(results);
-	} catch (err) {
-		onFetchError(err);
-	}
-}
-
-function renderGalleryList(data) {
-	const { results } = data;
-	
-	refs.gallery.innerHTML = filmCardsTpl(results); //filmCardsTpl(data) - функція яка рендерить HTML сторінку(робить хтось інший), results - масив обєктів
-	document.querySelector('.header').scrollIntoView();
-	clearSearchQuery();
-}
-
-function onFetchError(err) {
-  console.log(err);
-  clearGalleryContainer();
-}
-
-function clearGalleryContainer() {
-  refs.gallery.innerHTML = '';
-}
-
-function clearSearchQuery() {
-  refs.form.search.value = '';
-}
-

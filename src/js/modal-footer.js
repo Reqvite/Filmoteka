@@ -12,54 +12,115 @@ import * as image10 from '../images/footer/270.jpg';
 import * as sprite from '../images/sprite.svg';
 
 (() => {
-    const refs = {
-      openModalBtn: document.querySelector("[data-modal-open]"),
-      closeModalBtn: document.querySelector("[data-modal-close]"),
-      backdrop: document.querySelector(".modal-footer"),
-      modal: document.querySelector("[data-modal]"),
-      body: document.querySelector('body')
-    };
+  const refs = {
+    openModalBtn: document.querySelector('[data-modal-open]'),
+    closeModalBtn: document.querySelector('[data-modal-close]'),
+    backdrop: document.querySelector('.modal-footer'),
+    modal: document.querySelector('[data-modal]'),
+    body: document.querySelector('body'),
+  };
 
-    refs.openModalBtn.addEventListener("click", toggleModal);
-    refs.closeModalBtn.addEventListener("click", toggleModal);
-    refs.backdrop.addEventListener(`click`, onBackdropClick);
+  refs.openModalBtn.addEventListener('click', toggleModal);
+  refs.closeModalBtn.addEventListener('click', toggleModal);
+  refs.backdrop.addEventListener(`click`, onBackdropClick);
 
-    function toggleModal(event){
-      event.preventDefault();
-      refs.modal.classList.toggle("is-hidden");
-      refs.body.style.overflow = 'hidden'
-    }
-    function onCloseModal(){
-      refs.modal.classList.add(`is-hidden`);
-    }
+  function toggleModal(event) {
+    event.preventDefault();
+    refs.modal.classList.toggle('is-hidden');
+    refs.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onEscPress);
+  }
+  function onCloseModal() {
+    refs.modal.classList.add(`is-hidden`);
+  }
+  function closeOnEscKey() {
+    refs.modal.classList.add(`is-hidden`);
+    document.removeEventListener('keydown', onEscPress);
+  }
   function onBackdropClick(event) {
-            refs.body.style.overflow = 'scroll'
-      if(event.currentTarget === event.target){
-        onCloseModal();
-       
-      }
+    refs.body.style.overflow = 'scroll';
+    if (event.currentTarget === event.target) {
+      onCloseModal();
     }
-  })();
-  //////// cart////////
+  }
+  function onEscPress(event) {
+    if (event.code === 'Escape') {
+      closeOnEscKey();
+    }
+  }
+})();
+//////// cart////////
 
-  const cart = [
-    {img: `${image}`, h3: `Scrum Master Yurii Perekrestnyi`, a:`https://github.com/Jodlei`, href: `https://www.linkedin.com/in/yurii-perekrestnyi-998396256/`},
-    {img: `${image}`, h3: `Team Lead Vladyslav Yachyn`, a:`https://github.com/Reqvite`, href: `https://uk.linkedin.com/`},
-    {img: `${image3}`, h3: `Alexander Kulyk`, a:`https://github.com/alexander-kulyk`, href: `https://uk.linkedin.com/`},
-    {img: `${image4}`, h3: `Daria Viunyk`, a:`https://github.com/Darya-Viunyk`, href: `https://www.linkedin.com/in/darya-viunyk-50b386181/`},
-    {img: `${image5}`, h3: `Taras Novitskyi`, a:`https://github.com/Taras-Novitskyi`, href: `https://uk.linkedin.com/`},
-    { img: `${image6}`, h3: `Yevhenii Kavetskyi`, a: `https://github.com/eugeniusz57`, href: `https://www.linkedin.com/in/yevhenii-kavetskyi-423a34250/` },
-    { img: `${image7}`, h3: `Sergii Samara`, a: `https://github.com/SerhiiSamara`, href: `https://www.linkedin.com/in/serhii-samara-73a0397a/` },
-    { img: `${image8}`, h3: `Lina Fomenko`, a: `https://github.com/linafv`, href: `https://uk.linkedin.com/` },
-    { img: `${image9}`, h3: `Inna Sikora`, a: `https://github.com/Inna2794`, href: `https://uk.linkedin.com/` },
-    { img: `${image10}`, h3: `Vladyslav Lysenko`, a: `https://github.com/VladyslavLysenko?tab=repositories`, href: `https://uk.linkedin.com/` }, 
-  ];
-  // DFilmoteka\src\images\sprite.svg:\archive\Goit\js\
-  const paletteCarts = document.querySelector(`.js-palette`);
-  const createCarts = createCart(cart);
-  paletteCarts.insertAdjacentHTML(`afterbegin`, createCarts);
-  function createCart(cart){
-    return cart.map(({img, h3, a, href}) =>{
+
+const cart = [
+  {
+    img: `${image}`,
+    h3: `Scrum Master Yurii Perekrestnyi`,
+    a: `https://github.com/Jodlei`,
+    href: `https://uk.linkedin.com/`,
+  },
+  {
+    img: `${image}`,
+    h3: `Team Lead Vladyslav Yachyn`,
+    a: `https://github.com/Reqvite`,
+    href: `https://uk.linkedin.com/`,
+  },
+  {
+    img: `${image3}`,
+    h3: `Alexander Kulyk`,
+    a: `https://github.com/alexander-kulyk`,
+    href: `https://uk.linkedin.com/`,
+  },
+  {
+    img: `${image4}`,
+    h3: `Viunyk Daria`,
+    a: `https://github.com/Darya-Viunyk`,
+    href: `https://www.linkedin.com/in/darya-viunyk-50b386181/`,
+  },
+  {
+    img: `${image5}`,
+    h3: `Taras Novitskyi`,
+    a: `https://github.com/Taras-Novitskyi`,
+    href: `https://uk.linkedin.com/`,
+  },
+  {
+    img: `${image6}`,
+    h3: `Yevhenii Kavetskyi`,
+    a: `https://github.com/eugeniusz57`,
+    href: `https://www.linkedin.com/in/yevhenii-kavetskyi-423a34250/`,
+  },
+  {
+    img: `${image}`,
+    h3: `Sergii Samara`,
+    a: `https://github.com/SerhiiSamara`,
+    href: `https://uk.linkedin.com/`,
+  },
+  {
+    img: `${image8}`,
+    h3: `Lina Fomenko`,
+    a: `https://github.com/linafv`,
+    href: `https://uk.linkedin.com/`,
+  },
+  {
+    img: `${image9}`,
+    h3: `Inna Sikora`,
+    a: `https://github.com/Inna2794`,
+    href: `https://uk.linkedin.com/`,
+  },
+  {
+    img: `${image}`,
+    h3: `Vlad Lysenko`,
+    a: `https://github.com/eugeniusz57`,
+    href: `https://uk.linkedin.com/`,
+  },
+];
+// DFilmoteka\src\images\sprite.svg:\archive\Goit\js\
+const paletteCarts = document.querySelector(`.js-palette`);
+const createCarts = createCart(cart);
+paletteCarts.insertAdjacentHTML(`afterbegin`, createCarts);
+function createCart(cart) {
+  return cart
+    .map(({ img, h3, a, href }) => {
       return `
       <li class="team-footer__card">
       <img
@@ -89,5 +150,5 @@ import * as sprite from '../images/sprite.svg';
       </div>
     </li>`;
     })
-    .join("");
-  }
+    .join('');
+}
