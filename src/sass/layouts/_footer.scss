@@ -66,11 +66,13 @@
 }
 
 .modal-footer__box {
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   transition-property: transform;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  width: 80%;
+  min-width: 300px;
+  max-width: 400px;
   background: #f7f5f5;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
@@ -79,6 +81,18 @@
 
   .modal-footer.is-hidden & {
     transform: translate(-50%, -50%) scale(0.5);
+  }
+  &.dark {
+    background-color: rgb(97, 97, 97);
+  }
+
+  @include tablet {
+    min-width: 500px;
+    max-width: 800px;
+  }
+  @include desktop {
+    min-width: 800px;
+    max-width: 1000px;
   }
 }
 
@@ -89,13 +103,11 @@
   background-color: #fff;
   border: 1px solid #0000001a;
   border-radius: 50%;
-  justify-content: center;
-  align-items: center;
+  display: flex;
+  margin-left: auto;
   padding: 0;
   right: 12%;
   top: 2%;
-  display: flex;
-  position: absolute;
 }
 
 .footer__icon {
@@ -129,7 +141,6 @@
 
   @include tablet {
     grid-template-columns: auto auto;
-    padding: 0 32px;
   }
 
   @include desktop {
@@ -152,15 +163,17 @@
     line-height: 1.8;
   }
 }
+
 .team-footer__list {
   margin-left: auto;
   margin-right: auto;
-  padding: 50px 20px 30px;
+  padding: 50px 40px 30px;
 }
+
 .team-footer__card {
   display: flex;
   flex-direction: column;
-  background-color: #f7f5f5;
+  background-color: #e3dbdbfa;
   max-width: 300px;
   min-width: 200px;
   @include tablet {
@@ -182,7 +195,7 @@
 
 .team-footer__foto {
   width: auto;
-  aspect-ratio: 3/4;
+  aspect-ratio: 2/2;
 }
 // .team-footer__card .team-footer__foto {
 // }

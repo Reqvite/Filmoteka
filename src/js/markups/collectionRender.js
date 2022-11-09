@@ -1,4 +1,4 @@
-import * as image from '../../images/collection/error__poster.jpg';
+import * as image from '../../images/collection/csaff-no-poster.jpg';
 export function renderMarkUp(arrMovies, genreCollection) {
 
   return arrMovies
@@ -13,7 +13,7 @@ export function renderMarkUp(arrMovies, genreCollection) {
           ? (genreNames = `${genreNames.join(', ')} |`)
           : (genreNames = '');
             poster_path
-              ? (poster_path = `https://www.themoviedb.org/t/p/original/${poster_path}`)
+              ? (poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`)
               : (poster_path = image);
             release_date ? release_date = new Date(release_date).getFullYear() : release_date = '';
             vote_average
@@ -25,7 +25,7 @@ export function renderMarkUp(arrMovies, genreCollection) {
   <a href="" class="card-wrap__link link">
         <div class="card">
             <div class="card__image-wrap">
-                <img class="card__image" src=${poster_path} alt="${title}">
+                <img class="card__image" src=${poster_path} alt="${title}" >
             </div>
             <div class="card__wrap">
                 <h2 class="card__title">${title}</h2>

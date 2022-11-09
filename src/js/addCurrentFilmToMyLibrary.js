@@ -4,6 +4,7 @@ import {
   clearContainer,
 } from './markups/renderMarkUpLibrary';
 import { fetchTrendingFilms } from './collection.js';
+import { spinner } from "./spinner";
 
 const libraryButton = document.querySelector('.header__mylibrary');
 const homeButton = document.querySelector('.home-js');
@@ -52,8 +53,10 @@ export function onClickAddToWached(data, evt) {
 // Клік на кнопку вочед і рендер розмітки
 
 function onWatchedClick(e) {
+  spinner();
   const watchedMovieInLS = JSON.parse(localStorage.getItem('watched'));
   if (e.target.name == 'watched-btn') {
+   
     if (watchedMovieInLS === '') {
       Notiflix.Notify.failure(`My library is emty`);
       return;
@@ -67,8 +70,11 @@ function onWatchedClick(e) {
     const markupWatched = renderMurkUpLibrary(watchedMovieInLS);
 
     clearContainer();
+   
     container.innerHTML = markupWatched;
+    
   }
+  spinner();
 }
 
 function onHomeClick() {
