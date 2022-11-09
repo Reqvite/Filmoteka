@@ -18,13 +18,15 @@ export const createFilmDetailsMarkup = resp => {
     id,
   } = resp.data;
 
-  poster_path
-    ? (poster_path = `https://www.themoviedb.org/t/p/original/${poster_path}`)
-    : (poster_path = img);
-  vote_average
-    ? (vote_average = vote_average.toFixed(1))
-    : (vote_average = '?');
-
+ 
+            poster_path
+              ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
+              : poster_path = img
+            vote_average
+              ? vote_average = vote_average.toFixed(1)
+              : (vote_average = '?');
+  
+  
   const markup = `<div class="film-details-wrapper">
 	<div>
 		<div class="thumb">
