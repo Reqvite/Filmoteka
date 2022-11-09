@@ -55,6 +55,7 @@
   bottom: 68%;
   @include tablet {
     bottom: -40px;
+    background: transparent;
   }
   @include desktop {
     left: 75%;

@@ -1,5 +1,6 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import Notiflix from 'notiflix';
 import fetchTrailerVideo from './fetchTrailerVideo';
-import onError from './onError';
 import createTrailerMarkup from './markups/createTrailerMarkup';
 
 export default async function viewTrailer(trailerId) {
@@ -16,7 +17,7 @@ export default async function viewTrailer(trailerId) {
       const { results } = resp.data;
 
       if (results.length === 0) {
-        onError(' no trailer found!');
+        Notiflix.Notify.info('No trailer found!');
         return;
       }
 
@@ -27,7 +28,7 @@ export default async function viewTrailer(trailerId) {
 
       createTrailerMarkup(trailer, keyVideo);
     } catch (error) {
-      onError(error);
+      Notiflix.Notify.info(error);
     }
   }
 
