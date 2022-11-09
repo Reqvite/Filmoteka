@@ -82,7 +82,7 @@ function renderGalleryList(data) {
   spinner();
   const render = renderMarkUp(results, genreCollection);
   refs.gallery.innerHTML = render;
-    spinner();
+  spinner();
 
   updateMarkupPagination(total_pages, page, renderAfterChangingPage);
 

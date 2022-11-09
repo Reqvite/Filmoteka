@@ -18,3 +18,4 @@ queueBtnInLibrary: document.querySelector('.header__mylibrary-btn--que'),
 watchedBtnInLibrary:document.querySelector('.watched-js'),
 modalFooter: document.querySelector('.modal-footer__box'),
 }
+

@@ -65,6 +65,8 @@
 }
 
 .modal-img {
+  object-fit: cover;
+  object-position: cover;
   @include tablet {
     width: 264px;
     height: 357px;
