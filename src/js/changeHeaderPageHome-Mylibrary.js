@@ -5,9 +5,11 @@ const myLibraryBtn = document.querySelector('.my-library-js');
 const sectionHeader = document.querySelector('.header__section');
 const form = document.querySelector('.header__search-form');
 const libraryButtons = document.querySelector('.header__mylibrary');
-const logo = document.querySelector('.header__logo-link');
 const toggleTheme = document.querySelector('.toggle-theme');
 
+
+// myLibraryBtn.addEventListener('click', switchToMylibrary);
+homeBtn.addEventListener('click', switchToHome);
 
 myLibraryBtn.addEventListener('click', switchToMylibrary);
 homeBtn.addEventListener('click', switchToHome);

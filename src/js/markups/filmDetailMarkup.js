@@ -18,6 +18,7 @@ export const createFilmDetailsMarkup = resp => {
     id,
   } = resp.data;
 
+
  
             poster_path
               ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
@@ -25,7 +26,6 @@ export const createFilmDetailsMarkup = resp => {
             vote_average
               ? vote_average = vote_average.toFixed(1)
               : (vote_average = '?');
-  
   
   const markup = `<div class="film-details-wrapper">
 	<div>
@@ -63,7 +63,7 @@ export const createFilmDetailsMarkup = resp => {
 		<p class="film-details__about">${overview}</p>
 		<ul class="buttons-list list">
 			<li class="buttons-list__item">
-				<button class="main-button button" type="button" name="watched">Add to watched</button>
+				<button class="main-button watched-add button" type="button" name="watched">Add to watched</button>
 			</li>
 			<li class="buttons-list__item"><button class="secondary-button button" type="button" name="queue">Add to
 					queue</button></li>
@@ -83,5 +83,9 @@ export const createFilmDetailsMarkup = resp => {
 
   viewTrailer(id);
 
-  buttonsList.addEventListener('click', e => onClickAddToWatched(resp.data, e));
+  const watchedAddBtn = document.querySelector('.watched-add');
+
+  watchedAddBtn.addEventListener('click', e =>
+    onClickAddToWatched(resp.data, e)
+  );
 };
