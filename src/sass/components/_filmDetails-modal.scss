@@ -49,14 +49,9 @@
   }
 }
 
-.modal-contain__thumb {
-  position: relative;
-  margin-bottom: 20px;
-  overflow: hidden;
-}
-
 .film-details-wrapper {
   margin-top: 18px;
+  position: relative;
   @include tablet {
     display: flex;
   }
@@ -74,6 +69,7 @@
 }
 
 .film-details {
+  padding-bottom: 50px;
   @media screen and (max-width: 767.98px) {
     margin-top: 20px;
   }
@@ -156,13 +152,17 @@
 .trailer {
   position: absolute;
   left: 0;
-  top: 0;
+  bottom: 200px;
   width: 100%;
 
   padding-top: 56.25%;
 
-  transform: translateY(120%);
+  transform: scale(0, 0);
   transition: transform 950ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @include tablet {
+    top: 0;
+  }
 
   &__vieo {
     position: absolute;
@@ -176,5 +176,5 @@
 }
 
 .is-view {
-  transform: translateY(0);
+  transform: scale(1, 1);
 }
