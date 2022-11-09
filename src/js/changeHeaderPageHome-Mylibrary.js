@@ -8,8 +8,10 @@ const libraryButtons = document.querySelector('.header__mylibrary');
 const logo = document.querySelector('.header__logo-link');
 const toggleTheme = document.querySelector('.toggle-theme');
 
+
 myLibraryBtn.addEventListener('click', switchToMylibrary);
 homeBtn.addEventListener('click', switchToHome);
+
 
 function switchToMylibrary(e) {
   e.preventDefault();
@@ -24,10 +26,10 @@ function switchToMylibrary(e) {
  export function switchToHome(e) {
   e.preventDefault();
   clearContainer();
-  fetchTrendingFilms();
+   fetchTrendingFilms();
   sectionHeader.classList.remove('header__section--mylibrary');
   libraryButtons.style.display = 'none';
   sectionHeader.classList.add('header__section');
   form.style.display = 'block';
-  toggleTheme.classList.replace('toggle-theme-mylibrary', 'toggle-theme');
+   toggleTheme.classList.replace('toggle-theme-mylibrary', 'toggle-theme');
 }

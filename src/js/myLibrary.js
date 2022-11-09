@@ -107,11 +107,23 @@ const onClickBtn = (data, e) => {
 };
 
 // ------------------click my library-------------
-
+const homeActive = document.querySelector('.home-js')
+      
 const onMyLibararyClick = e => {
 
+ if (e.target.name === 'log-out') {
+       homeActive.setAttribute('data-active', true)
+  };
+  if (e.target.name === 'home') {
+       homeActive.setAttribute('data-active', true)
+  };
+  if (e.target.name === 'library') {
+       homeActive.setAttribute('data-active', false)
+  };
+  
     if (e.target.name !== 'library') {
-         refs.listEl.classList.remove('is-hidden');
+      refs.listEl.classList.remove('is-hidden');
+
         return; 
     };
 
@@ -119,8 +131,11 @@ const onMyLibararyClick = e => {
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
-    onAuthStateChanged(auth, (user) => {
-
+  onAuthStateChanged(auth, (user) => {
+      
+      if (homeActive.dataset.active === 'true') {
+        return;
+      }
         if (user) {
             const uid = user.uid; 
             const dbRef = ref(getDatabase());
