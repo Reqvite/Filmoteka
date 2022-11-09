@@ -18,21 +18,19 @@ export const createFilmDetailsMarkup = resp => {
     id,
   } = resp.data;
 
- 
-            poster_path
-              ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
-              : poster_path = img
-            vote_average
-              ? vote_average = vote_average.toFixed(1)
-              : (vote_average = '?');
-  
-  
+  poster_path
+    ? (poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`)
+    : (poster_path = img);
+  vote_average
+    ? (vote_average = vote_average.toFixed(1))
+    : (vote_average = '?');
+
   const markup = `<div class="film-details-wrapper">
 	<div>
 		<div class="thumb">
 			<img class="modal-img" src="${poster_path}" alt="${original_title}" data-id="${id}" />
 			<button class="trailer-button trailer-button--view button" type="button">
-				<span class="trailer-button__text trailer-button__text--play">View trailer</span>
+				<span class="trailer-button__text trailer-button__text--play"></span>
 			</button>
 		</div>
 	</div>
@@ -70,7 +68,7 @@ export const createFilmDetailsMarkup = resp => {
 		</ul>
 		<div class="trailer"></div>
 		<button class="trailer-button trailer-button--close button is-hidden" type="button">
-				<span class="trailer-button__text trailer-button__text--stop">closed trailer</span>
+				<span class="trailer-button__text trailer-button__text--stop"></span>
 			</button>
 	</div>
 </div>`;

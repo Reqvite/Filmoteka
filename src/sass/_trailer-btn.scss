@@ -3,13 +3,14 @@
   position: absolute;
   left: 50%;
   bottom: 10px;
-  min-width: 200px;
-  padding: 0px 5px 0px 5px;
+  padding: 0;
   color: white;
   font-size: 15px;
   transform: translateX(-50%);
-  background-color: rgba($color: #e60d0d, $alpha: 0.7);
+  background-color: transparent;
   border-color: transparent;
+  border-radius: 50%;
+
   @include tablet {
     bottom: 10px;
   }
@@ -27,6 +28,7 @@
     margin-right: 5px;
     background: url('../images/play-button.svg') no-repeat center;
     background-size: 100%;
+    border-radius: 50%;
   }
 
   &__text--play:hover::before,
@@ -41,7 +43,7 @@
     width: 50px;
     height: 50px;
     margin-right: 5px;
-    background: url('../images/stop-button-white.svg') no-repeat center;
+    background: url('../images/stop-button.svg') no-repeat center;
     background-size: 100%;
   }
 
@@ -57,7 +59,7 @@
   @include tablet {
     bottom: -40px;
     color: white;
-    background-color: rgba($color: #e60d0d, $alpha: 0.7);
+    background-color: transparent;
   }
   @include desktop {
     bottom: -20px;
