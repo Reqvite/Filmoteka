@@ -19,20 +19,27 @@ import {
 
 export { onClickAddToWatched };
 
-const userId = localStorage.getItem('userId');
 let userIsLogin = JSON.parse(localStorage.getItem('userIsLogin'));
 const dbRef = ref(getDatabase());
+let userId;
+const auth = getAuth();
+const user = auth.currentUser;
+
+onAuthStateChanged(auth, user => {
+  userId = user?.uid;
+});
+
 //кнопка add to watched
 
 const onClickAddToWatched = (data, e) => {
   const idMovie = data.id;
   let listWatchedArr = [];
-
   if (userIsLogin) {
     get(child(dbRef, `users/${userId}`))
       .then(snapshot => {
         if (snapshot.exists()) {
           const watchedDataString = snapshot.val().watchedList;
+
           if (watchedDataString === '') {
             listWatchedArr.push(data);
             const watchedToString = JSON.stringify(listWatchedArr);
@@ -72,7 +79,6 @@ const onClickAddToWatched = (data, e) => {
 // Кнопка Watched
 
 const onWatchedBtnClick = e => {
-  console.log('watched');
   refs.queueBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.watchedBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
