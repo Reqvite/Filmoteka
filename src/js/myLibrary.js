@@ -110,19 +110,13 @@ const onClickBtn = (data, e) => {
 const homeActive = document.querySelector('.home-js')
       
 const onMyLibararyClick = e => {
-  console.log(e.target.name)
- if (e.target.name === 'log-out') {
-       homeActive.setAttribute('data-active', true)
-  };
-  if (e.target.name === 'home') {
-       homeActive.setAttribute('data-active', true)
-  };
   if (e.target.name === 'library') {
        homeActive.setAttribute('data-active', false)
   };
   
     if (e.target.name !== 'library') {
       refs.listEl.classList.remove('is-hidden');
+             homeActive.setAttribute('data-active', true)
 
         return; 
     };
