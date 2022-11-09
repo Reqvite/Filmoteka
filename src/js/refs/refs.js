@@ -21,8 +21,3 @@ export const refs = {
   libraryButtons: document.querySelector('.header__mylibrary'),
   toggleTheme: document.querySelector('.toggle-theme'),
 };
-
-const myLibraryBtn = document.querySelector('.my-library-js');
-const sectionHeader = document.querySelector('.header__section');
-
-const toggleTheme = document.querySelector('.toggle-theme');

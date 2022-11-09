@@ -110,10 +110,9 @@ const onClickBtn = (data, e) => {
 
 const onMyLibararyClick = e => {
   if (e.target.name !== 'library') {
-    refs.pagination.classList.remove('is-hidden');
+    refs.listEl.classList.remove('is-hidden');
     return;
   }
-  refs.listEl.classList.add('is-hidden');
 
   refs.sectionHeader.classList.remove('header__section');
   refs.form.style.display = 'none';

@@ -118,37 +118,3 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
     index += 1;
   }
 }
-
-// async function addFilmsAndUpdateUI() {
-// 	try {
-//     spinner();
-// 		filmsApiServer.query = localStorage.getItem('query');
-// 		const results = await filmsApiServer.fetchFilms();
-//     spinner();
-// 		renderGalleryList(results);
-// 	} catch (err) {
-// 		onFetchError(err);
-// 	}
-// }
-
-// function renderGalleryList(data) {
-// 	const { results } = data;
-	
-// 	refs.gallery.innerHTML = filmCardsTpl(results); //filmCardsTpl(data) - функція яка рендерить HTML сторінку(робить хтось інший), results - масив обєктів
-// 	document.querySelector('.header').scrollIntoView();
-// 	clearSearchQuery();
-// }
-
-// function onFetchError(err) {
-//   console.log(err);
-//   clearGalleryContainer();
-// }
-
-// function clearGalleryContainer() {
-//   refs.gallery.innerHTML = '';
-// }
-
-// function clearSearchQuery() {
-//   refs.form.search.value = '';
-// }
-
