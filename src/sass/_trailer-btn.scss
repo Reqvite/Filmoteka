@@ -3,19 +3,16 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 0;
+  bottom: 10px;
   padding: 0;
   color: red;
-  font-size: 16px;
-  background-color: transparent;
+  font-size: 15px;
+  background-color: rgba($color: #545252, $alpha: 0.4);
   border-color: transparent;
-
   @include tablet {
-    bottom: -40px;
+    bottom: 10px;
   }
-  @include desktop {
-    left: 75%;
-  }
+
   &__text {
     display: flex;
     align-items: center;
@@ -51,5 +48,15 @@
   &__text--stop:focus::before {
     width: 55px;
     height: 55px;
+  }
+}
+
+.trailer-button--close {
+  bottom: 68%;
+  @include tablet {
+    bottom: -40px;
+  }
+  @include desktop {
+    left: 75%;
   }
 }
