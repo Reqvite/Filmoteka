@@ -63,6 +63,9 @@
     display: flex;
     padding-bottom: 45px;
   }
+  @include desktop {
+    padding-bottom: 5px;
+  }
 }
 
 .thumb {

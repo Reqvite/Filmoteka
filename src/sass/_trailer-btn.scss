@@ -59,4 +59,7 @@
     color: white;
     background-color: rgba($color: #e60d0d, $alpha: 0.7);
   }
+  @include desktop {
+    bottom: -20px;
+  }
 }
