@@ -164,6 +164,12 @@
   }
 }
 
+.team-footer__list {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 40px 30px;
+}
+
 .team-footer__card {
   display: flex;
   flex-direction: column;
@@ -189,7 +195,7 @@
 
 .team-footer__foto {
   width: auto;
-  aspect-ratio: 3/4;
+  aspect-ratio: 2/2;
 }
 // .team-footer__card .team-footer__foto {
 // }
