@@ -48,18 +48,19 @@ async function addFilmsAndUpdateUI() {
 }
 
 async function renderAfterChangingPage(currentPage) {
-  try {
+  try {   
     filmsApiServer.pagePagination = currentPage;
-
     spinner();
+
     const data = await filmsApiServer.fetchFilms();
     const { results, page, total_pages } = data;
     const render = renderMarkUp(results, genreCollection);
-    refs.gallery.innerHTML = render;
-
+   
+    refs.gallery.innerHTML = render; 
     spinner();
-    document.querySelector('.header').scrollIntoView({ behavior: "smooth" });
-    
+   setTimeout(() => {
+    document.querySelector('.container-films').scrollIntoView({behavior: "smooth"});
+   }, 500);
   } catch (err) {
     onFetchError(err);
   }
