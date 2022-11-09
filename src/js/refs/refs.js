@@ -19,7 +19,9 @@ export const refs = {
   homeBtn: document.querySelector('.home-js'),
   sectionHeader: document.querySelector('.header__section'),
   libraryButtons: document.querySelector('.header__mylibrary'),
-    toggleTheme: document.querySelector('.toggle-theme'),
+  toggleTheme: document.querySelector('.toggle-theme'),
   modalFooter: document.querySelector('.modal-footer__box'),
+  collection: document.querySelector(`.container-films`),
 };
+
 
