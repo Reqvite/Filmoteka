@@ -1,25 +1,15 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { initializeApp } from 'firebase/app';
-import {
-  getDatabase,
-  set,
-  ref,
-  enableLogging,
-  update,
-  child,
-  get,
-} from 'firebase/database';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from 'firebase/auth';
+
+
+import { initializeApp } from "firebase/app";
+import { getDatabase, set, ref, enableLogging, update,child, get, onDisconnect} from "firebase/database";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+
 
 import { switchToHome } from './changeHeaderPageHome-Mylibrary';
 import { fetchTrendingFilms } from './collection';
 import { refs } from './refs/refs';
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAmrcw3LWh5vdrPE40gh2Uggxq3EG96Lys',
@@ -291,3 +281,4 @@ function removeEventListeners() {
   formRegistr.removeEventListener('submit', signUpUser);
   formRegistr.removeEventListener('submit', logInUser);
 }
+

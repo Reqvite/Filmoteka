@@ -107,43 +107,56 @@ const onClickBtn = (data, e) => {
 };
 
 // ------------------click my library-------------
-
+const homeActive = document.querySelector('.home-js')
+      
 const onMyLibararyClick = e => {
-  if (e.target.name !== 'library') {
-    refs.listEl.classList.remove('is-hidden');
-    return;
-  }
+  console.log(e.target.name)
+ if (e.target.name === 'log-out') {
+       homeActive.setAttribute('data-active', true)
+  };
+  if (e.target.name === 'home') {
+       homeActive.setAttribute('data-active', true)
+  };
+  if (e.target.name === 'library') {
+       homeActive.setAttribute('data-active', false)
+  };
+  
+    if (e.target.name !== 'library') {
+      refs.listEl.classList.remove('is-hidden');
 
-  refs.sectionHeader.classList.remove('header__section');
-  refs.form.style.display = 'none';
-  refs.libraryButtons.style.display = 'flex';
-  refs.sectionHeader.classList.add('header__section--mylibrary');
-  refs.toggleTheme.classList.replace('toggle-theme', 'toggle-theme-mylibrary');
+        return; 
+    };
+
+    refs.listEl.classList.add('is-hidden');
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      const uid = user.uid;
-      const dbRef = ref(getDatabase());
-
-      get(child(dbRef, `users/${uid}`))
-        .then(snapshot => {
-          if (snapshot.exists()) {
-            const queueListData = snapshot.val().queueList;
-            if (queueListData === '') {
-              clearContainer();
-
-              Notiflix.Notify.failure(`Opps🙊 your library is empty!`, {
-                timeout: 2000,
-              });
-            } else {
-              const queueList = JSON.parse(snapshot.val().queueList);
-              renderMurkUpLibrary(queueList);
+  onAuthStateChanged(auth, (user) => {
+      
+      if (homeActive.dataset.active === 'true') {
+        return;
+      }
+        if (user) {
+            const uid = user.uid; 
+            const dbRef = ref(getDatabase());
+      
+            get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+      
+                if (snapshot.exists()) {
+                    const queueListData = snapshot.val().queueList
+                    if (queueListData === '') {
+                        clearContainer();
+                        
+                        Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
+                            timeout: 2000,
+                        });
+                    }else{
+                        const queueList = JSON.parse(snapshot.val().queueList)
+                        renderMurkUpLibrary(queueList);
+                    };   
+                } else {
+                console.log("No data available");
             }
-          } else {
-            console.log('No data available');
-          }
         })
         .catch(error => {
           console.error(error);

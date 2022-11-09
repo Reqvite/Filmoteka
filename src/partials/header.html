@@ -10,7 +10,7 @@
         </a>
         <h1 class="visually-hidden">Filmoteka</h1>
         <ul class="header__nav-list list">
-          <li class="header__nav-item home-js">
+          <li class="header__nav-item home-js" name="home" data-active="true" )>
             <button
               class="header__nav-button header__nav-button--current"
               name="home"
@@ -35,7 +35,11 @@
             </button>
           </li>
           <li class="header__nav-item login-Out">
-            <button type="button" class="header__nav-button login-Out">
+            <button
+              type="button"
+              class="header__nav-button login-Out"
+              name="log-out"
+            >
               Log out
             </button>
           </li>
@@ -74,7 +78,7 @@
           <svg class="icon-sun" width="25" height="25">
             <use href="./images/sprite.svg#icon-sun"></use>
           </svg>
-          <svg class="icon-brightness" width="25" height="25">
+          <svg class="icon-brightness is-hiden" width="25" height="25">
             <use href="./images/sprite.svg#icon-brightness"></use>
           </svg>
         </button>

@@ -7,15 +7,31 @@ const form = document.querySelector('.header__search-form');
 const libraryButtons = document.querySelector('.header__mylibrary');
 const toggleTheme = document.querySelector('.toggle-theme');
 
+
 // myLibraryBtn.addEventListener('click', switchToMylibrary);
 homeBtn.addEventListener('click', switchToHome);
 
-export function switchToHome(e) {
+myLibraryBtn.addEventListener('click', switchToMylibrary);
+homeBtn.addEventListener('click', switchToHome);
+
+
+function switchToMylibrary(e) {
+  e.preventDefault();
+
+  sectionHeader.classList.remove('header__section');
+  form.style.display = 'none';
+  libraryButtons.style.display = 'flex';
+  sectionHeader.classList.add('header__section--mylibrary');
+  toggleTheme.classList.replace('toggle-theme', 'toggle-theme-mylibrary');
+}
+
+ export function switchToHome(e) {
+  e.preventDefault();
   clearContainer();
-  fetchTrendingFilms();
+   fetchTrendingFilms();
   sectionHeader.classList.remove('header__section--mylibrary');
   libraryButtons.style.display = 'none';
   sectionHeader.classList.add('header__section');
   form.style.display = 'block';
-  toggleTheme.classList.replace('toggle-theme-mylibrary', 'toggle-theme');
+   toggleTheme.classList.replace('toggle-theme-mylibrary', 'toggle-theme');
 }

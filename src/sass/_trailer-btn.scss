@@ -2,20 +2,18 @@
   display: block;
   position: absolute;
   left: 50%;
+  bottom: 10px;
+  min-width: 200px;
+  padding: 0px 5px 0px 5px;
+  color: white;
+  font-size: 15px;
   transform: translateX(-50%);
-  bottom: 0;
-  padding: 0;
-  color: red;
-  font-size: 16px;
-  background-color: transparent;
+  background-color: rgba($color: #e60d0d, $alpha: 0.7);
   border-color: transparent;
-
   @include tablet {
-    bottom: -40px;
+    bottom: 10px;
   }
-  @include desktop {
-    left: 75%;
-  }
+
   &__text {
     display: flex;
     align-items: center;
@@ -43,7 +41,7 @@
     width: 50px;
     height: 50px;
     margin-right: 5px;
-    background: url('../images/stop-button.svg') no-repeat center;
+    background: url('../images/stop-button-white.svg') no-repeat center;
     background-size: 100%;
   }
 
@@ -51,5 +49,17 @@
   &__text--stop:focus::before {
     width: 55px;
     height: 55px;
+  }
+}
+
+.trailer-button--close {
+  bottom: 68%;
+  @include tablet {
+    bottom: -40px;
+    color: white;
+    background-color: rgba($color: #e60d0d, $alpha: 0.7);
+  }
+  @include desktop {
+    bottom: -20px;
   }
 }

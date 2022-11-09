@@ -13,11 +13,13 @@ export const refs = {
   listEl: document.querySelector('.pagination__list'),
   iconSun: document.querySelector('.icon-sun'),
   iconBrightness: document.querySelector('.icon-brightness'),
-  headerNavList: document.querySelector('.my-library-js'),
+  headerNavList: document.querySelector('.header__nav-list'),
   queueBtnInLibrary: document.querySelector('.header__mylibrary-btn--que'),
   watchedBtnInLibrary: document.querySelector('.watched-js'),
   homeBtn: document.querySelector('.home-js'),
   sectionHeader: document.querySelector('.header__section'),
   libraryButtons: document.querySelector('.header__mylibrary'),
-  toggleTheme: document.querySelector('.toggle-theme'),
+    toggleTheme: document.querySelector('.toggle-theme'),
+  modalFooter: document.querySelector('.modal-footer__box'),
 };
+

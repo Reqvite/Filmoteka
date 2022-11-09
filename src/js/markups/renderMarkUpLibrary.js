@@ -14,7 +14,7 @@ const renderMurkUpLibrary = queueList => {
         <a href="" class="card-wrap__link link">
               <div class="card">
               <div class="card__image-wrap">
-                      <img class="card__image" src="https://www.themoviedb.org/t/p/original/${poster_path}" alt="${title}" width="395px" height="574px">
+                      <img class="card__image" src="https://www.themoviedb.org/t/p/w500/${poster_path}" alt="${title}" width="395px" height="574px">
                        </div>
                   <div class="card__wrap">
                       <h2 class="card__title">${title}</h2>
