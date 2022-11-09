@@ -1,5 +1,7 @@
 export const refs = {
 body: document.querySelector('body'),
+wraper: document.querySelector('.wraper'),
+content: document.querySelector('.content'),
 toggleTheme: document.querySelector('.toggle-theme'),
 footer: document.querySelector(".footer_box"),
 modal_bgr: document.querySelector(".film-modal-content"),

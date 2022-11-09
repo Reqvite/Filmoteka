@@ -1,0 +1,53 @@
+.wraper {
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+
+  &.active {
+    position: relative;
+    perspective: 1px;
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+}
+
+.content.active {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  transform: translateZ(0px);
+}
+
+.parallax-img {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: cover;
+  // overflow: hidden;
+
+  transform: translateZ(-15px) scale(20);
+
+  @include tablet {
+    transform: translateZ(-10px) scale(20);
+  }
+
+  @include desktop {
+    transform: translateZ(-8px) scale(14);
+  }
+
+  img {
+    height: calc(100% + 500px);
+    object-fit: cover;
+    object-position: left;
+
+    @include tablet {
+      object-position: center;
+      height: calc(100% + 280px);
+    }
+  }
+
+  &.is-hidden {
+    display: none;
+  }
+}
