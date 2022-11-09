@@ -80,6 +80,9 @@
   .modal-footer.is-hidden & {
     transform: translate(-50%, -50%) scale(0.5);
   }
+  &.dark {
+    background-color: rgb(97, 97, 97);
+  }
 }
 
 .footer__button {
@@ -160,7 +163,7 @@
 .team-footer__card {
   display: flex;
   flex-direction: column;
-  background-color: #f7f5f5;
+  background-color: #e3dbdbfa;
   max-width: 300px;
   min-width: 200px;
   @include tablet {

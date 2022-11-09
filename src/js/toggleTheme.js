@@ -21,6 +21,7 @@ function DarkOrWhiteTheme() {
         refs.toggleTheme.style.backgroundColor = "#000";
         refs.iconSun.classList.add('is-hiden'); 
         refs.iconBrightness.classList.remove('is-hiden');
+        refs.modalFooter.classList.add('dark');
         return;
     }
         document.body.classList.remove("dark-theme");
@@ -29,6 +30,7 @@ function DarkOrWhiteTheme() {
         refs.toggleTheme.style.backgroundColor = "#fff";
         refs.iconBrightness.classList.add('is-hiden');
         refs.iconSun.classList.remove('is-hiden') ;
+        refs.modalFooter.classList.remove('dark');
 
 }
 
