@@ -2,6 +2,7 @@ import { fetchFilmDetails } from './service/service';
 import { createFilmDetailsMarkup } from './markups/filmDetailMarkup';
 import { refs } from './refs/refs';
 import { remove } from 'firebase/database';
+import { checkDataMovie, renderModal } from "./myLibrary";
 
 const container = document.querySelector('.container-films');
 const modal = document.querySelector('.backdrop-details');
@@ -31,21 +32,24 @@ const openModal = async e => {
     const resp = await fetchFilmDetails(
       e.target.closest('.collection__item').dataset.id
     );
-    createFilmDetailsMarkup(resp);
-    modal.classList.remove('hidden');
-    body.style.overflow = 'hidden';
-    modalClose.addEventListener('click', closeModal);
-    document.addEventListener('keydown', escModal);
-    modal.addEventListener('click', closeModalOutsideWindow);
+    await renderModal(resp);
+    //console.log(isAdded);
+    
+    //createFilmDetailsMarkup(resp, isAdded);
+    // modal.classList.remove('hidden');
+    // body.style.overflow = 'hidden';
+    // modalClose.addEventListener('click', closeModal);
+    // document.addEventListener('keydown', escModal);
+    // modal.addEventListener('click', closeModalOutsideWindow);
 
-    ChangeColorText();
+    // ChangeColorText();
 
-    const modal_text = document.querySelectorAll('.details-list_title');
-    const LS = JSON.parse(localStorage.getItem('theme'));
-    if (LS) {
-      modal_text.forEach(el => (el.style.color = '#ffffff'));
-      return;
-    }
+    // const modal_text = document.querySelectorAll('.details-list_title');
+    // const LS = JSON.parse(localStorage.getItem('theme'));
+    // if (LS) {
+    //   modal_text.forEach(el => (el.style.color = '#ffffff'));
+    //   return;
+    // }
   } else {
     return;
   }
@@ -53,7 +57,7 @@ const openModal = async e => {
 
 container.addEventListener('click', openModal);
 
-const closeModal = e => {
+export const closeModal = e => {
   const modalContainer = document.querySelector('.film-details-wrapper');
   modal.classList.add('hidden');
   modalClose.removeEventListener('click', closeModal);
@@ -63,7 +67,7 @@ const closeModal = e => {
   modalContainer.remove();
 };
 
-function ChangeColorText() {
+export function ChangeColorText() {
   const modal_text = document.querySelectorAll('.details-list_title');
   const LS = JSON.parse(localStorage.getItem('theme'));
   if (LS) {
@@ -72,13 +76,13 @@ function ChangeColorText() {
   }
 }
 
-function escModal(e) {
+export function escModal(e) {
   if (e.code === 'Escape') {
     closeModal();
   }
 }
 
-function closeModalOutsideWindow(e) {
+export function closeModalOutsideWindow(e) {
   if (!e.target.classList.contains('backdrop-details')) {
     return;
   }

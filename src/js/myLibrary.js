@@ -7,7 +7,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { getDatabase, ref, child, push, update, get } from 'firebase/database';
-import { database } from './firebase';
+import { AuthState, database, getAuthState } from './firebase';
 
 import { refs } from './refs/refs';
 import { renderMarkUp } from './markups/collectionRender';
@@ -16,10 +16,13 @@ import {
   renderMurkUpLibrary,
   clearContainer,
 } from './markups/renderMarkUpLibrary';
+import { createFilmDetailsMarkup } from './markups/filmDetailMarkup';
 
 const auth = getAuth();
+export const user = auth.currentUser;
 const USER_LOGIN_KEY = 'userIsLogin';
-
+// const db = getDatabase();
+// const dbRef = ref(getDatabase());
 // let genreCollection = {};
 // fetchGenreId()
 //   .then(genreId => {
@@ -31,12 +34,13 @@ const USER_LOGIN_KEY = 'userIsLogin';
 
 //------------------------add to queue---------------
 
-const onClickBtn = (data, e) => {
+const onClickBtnToQueue = (data, e) => {
+
+  const queueAddBtn = document.querySelector('.queue-add');
+  queueAddBtn.textContent = 'REMOVE FROME QUEUE';
+
   const idMovie = data.id;
 
-  if (e.target.name !== 'queue') {
-    return;
-  }
   /*-------перевіряю чи залогінився юзер ------------*/
   const userIsLogin = JSON.parse(localStorage.getItem(USER_LOGIN_KEY));
 
@@ -165,6 +169,8 @@ const onMyLibararyClick = e => {
 
 refs.headerNavList.addEventListener('click', onMyLibararyClick);
 
+
+
 const onQueueBtnClickinLibrary = e => {
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
@@ -212,4 +218,109 @@ const onQueueBtnClickinLibrary = e => {
 
 refs.queueBtnInLibrary.addEventListener('click', onQueueBtnClickinLibrary);
 
-export { onClickBtn };
+
+
+
+
+
+
+
+// ---------перевтряю --------
+// export async function AuthState(user) {
+//   return await onAuthStateChanged(auth, user => {
+//     if (user) {
+//       return user.uid;
+//       //return sessionStorage.setItem('userId', `${userId}`);
+//     } else {
+//       return;
+//     }
+//   });
+// }
+
+// const getUser = async() => {
+//   await onAuthStateChanged(auth, (user) => {
+//     console.log('onAuthStateChanged');
+ 
+      
+//     // if (homeActive.dataset.active === 'true') {
+//     //   return;
+//     // }
+//       if (user) {
+//           const uid = user.uid; 
+//           const snapshot = await get(child(dbRef, `users/${uid}`))
+//       }
+// }
+
+//  const getQueueList = async (userId) => {
+//   return await get(child(dbRef, 'users/' + userId))
+//     .then(snapshot => {
+//       if (snapshot.exists()) {
+//         return JSON.parse(snapshot.val().queueList);
+//         //return snapshot.val();
+//       } else {
+//         return null;
+//       }
+//     })
+//     .catch(() => renderErrorServer());
+//   // let arr = [];
+//   // for (let key in value) {
+//   //   arr.push(JSON.parse(value[key]).objService);
+//   // }
+//   // return arr;
+// }
+
+const renderModal = async (resp) =>{
+
+  const data = resp.data;
+  const idMovie = data.id;
+
+  // const a = await getAuthState();
+  // console.log(a);
+  //const userId = await authState(user);
+
+  // console.log({user});
+  // console.log({userId});
+
+  //const list = await getQueueList(userId);
+  //console.log({list});
+  await onAuthStateChanged(auth, (user) => {
+    console.log('onAuthStateChanged');
+ 
+    console.log({user});
+      
+    // if (homeActive.dataset.active === 'true') {
+    //   return;
+    // }
+      if (user) {
+          const uid = user.uid; 
+          const dbRef = ref(getDatabase());
+
+        //const snapshot =  get(child(dbRef, `users/${uid}`))
+    
+          get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+    
+              if (snapshot.exists()) {
+                const rawListQueue = snapshot.val().queueList;
+                  const queueList = rawListQueue && JSON.parse(rawListQueue)  || [];
+                  console.log('queueList',queueList);
+                  const isAdded = queueList.some(obj => obj.id === idMovie);
+                  
+                  createFilmDetailsMarkup(resp, isAdded);  
+               } else {
+              console.log("No data available");
+          }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+});
+  
+
+}
+
+export { onClickBtnToQueue, renderModal };

@@ -1,12 +1,15 @@
 import img from '../../images/collection/csaff-no-poster.jpg';
 import viewTrailer from '../viewTrailer';
 
-import { onClickBtn } from '../myLibrary';
+import { onClickBtnToQueue, checkDataMovie } from '../myLibrary';
 import { onClickAddToWatched } from '../addFilmToWatchedList-firebase';
+import { ChangeColorText, closeModal, closeModalOutsideWindow, escModal } from '../openFilmModal';
 
 const modal = document.querySelector('.film-modal-content');
+const containerModal = document.querySelector('.backdrop-details');
+const modalClose = document.querySelector('.modal-icon-cross');
 
-export const createFilmDetailsMarkup = resp => {
+export const createFilmDetailsMarkup = (resp, isAdded) => {
   let {
     poster_path,
     original_title,
@@ -18,8 +21,6 @@ export const createFilmDetailsMarkup = resp => {
     id,
   } = resp.data;
 
-
-
  
             poster_path
               ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
@@ -28,6 +29,7 @@ export const createFilmDetailsMarkup = resp => {
               ? vote_average = vote_average.toFixed(1)
               : (vote_average = '?');
 
+			  const btnText = isAdded ? 'Remove from list' : 'Add to list';
   const markup = `<div class="film-details-wrapper">
 	<div>
 		<div class="thumb">
@@ -66,8 +68,7 @@ export const createFilmDetailsMarkup = resp => {
 			<li class="buttons-list__item">
 				<button class="main-button watched-add button" type="button" name="watched">Add to watched</button>
 			</li>
-			<li class="buttons-list__item"><button class="secondary-button button" type="button" name="queue">Add to
-					queue</button></li>
+			<li class="buttons-list__item"><button class="secondary-button queue-add button" type="button" name="queue">${btnText}</button></li>
 		</ul>
 		<div class="trailer"></div>
 		<button class="trailer-button trailer-button--close button is-hidden" type="button">
@@ -76,11 +77,31 @@ export const createFilmDetailsMarkup = resp => {
 	</div>
 </div>`;
 
-  modal.insertAdjacentHTML('beforeend', markup);
+      const body = document.querySelector('body');
+	  modal.insertAdjacentHTML('beforeend', markup);
+	  containerModal.classList.remove('hidden');
+	  body.style.overflow = 'hidden';
+	  modalClose.addEventListener('click', closeModal);
+	  document.addEventListener('keydown', escModal);
+	  containerModal.addEventListener('click', closeModalOutsideWindow);
+  
+	  ChangeColorText();
+  	
+	  
+  
+	  const modal_text = document.querySelectorAll('.details-list_title');
+	  const LS = JSON.parse(localStorage.getItem('theme'));
+	  if (LS) {
+		modal_text.forEach(el => (el.style.color = '#ffffff'));
+		return;
+	  }
 
-  const buttonsList = document.querySelector('.buttons-list');
+  
 
-  buttonsList.addEventListener('click', e => onClickBtn(resp.data, e));
+  //const buttonsList = document.querySelector('.buttons-list');
+  const queueAddBtn = document.querySelector('.queue-add');
+
+  queueAddBtn.addEventListener('click', e => onClickBtnToQueue(resp.data, e));
 
   viewTrailer(id);
 
