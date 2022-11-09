@@ -13,7 +13,7 @@ export function renderMarkUp(arrMovies, genreCollection) {
           ? (genreNames = `${genreNames.join(', ')} |`)
           : (genreNames = '');
             poster_path
-              ? (poster_path = `https://www.themoviedb.org/t/p/original/${poster_path}`)
+              ? (poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`)
               : (poster_path = image);
             release_date ? release_date = new Date(release_date).getFullYear() : release_date = '';
             vote_average

@@ -107,11 +107,17 @@ const onClickBtn = (data, e) => {
 };
 
 // ------------------click my library-------------
-
+const homeActive = document.querySelector('.home-js')
+      
 const onMyLibararyClick = e => {
-
+  if (e.target.name === 'library') {
+       homeActive.setAttribute('data-active', false)
+  };
+  
     if (e.target.name !== 'library') {
-         refs.listEl.classList.remove('is-hidden');
+      refs.listEl.classList.remove('is-hidden');
+             homeActive.setAttribute('data-active', true)
+
         return; 
     };
 
@@ -119,8 +125,11 @@ const onMyLibararyClick = e => {
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
-    onAuthStateChanged(auth, (user) => {
-
+  onAuthStateChanged(auth, (user) => {
+      
+      if (homeActive.dataset.active === 'true') {
+        return;
+      }
         if (user) {
             const uid = user.uid; 
             const dbRef = ref(getDatabase());
@@ -156,53 +165,50 @@ const onMyLibararyClick = e => {
 
 refs.headerNavList.addEventListener('click', onMyLibararyClick);
 
-const onQueueBtnClickinLibrary = e =>{
-
-refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
+const onQueueBtnClickinLibrary = e => {
+  refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
-    onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      const uid = user.uid;
+      const dbRef = ref(getDatabase());
 
-            if (user) {
-                const uid = user.uid; 
-                const dbRef = ref(getDatabase());
-      
-                get(child(dbRef, `users/${uid}`)).then((snapshot) => {
-      
-                    if (snapshot.exists()) {
-                        const queueListData = snapshot.val().queueList
-                        if (queueListData === '') {
-                            clearContainer();
-                        
-                            Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
-                             timeout: 2000,
-                            });
-                        }else{
-                            const queueList = JSON.parse(snapshot.val().queueList);
-                            console.log(queueList);
-                            renderMurkUpLibrary(queueList);
-                            console.log(queueList);
-                        };
-                    
-                   
-                } else {
-                    console.log("No data available");
+      get(child(dbRef, `users/${uid}`))
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            const queueListData = snapshot.val().queueList;
+            if (queueListData === '') {
+              clearContainer();
+
+              Notiflix.Notify.failure(`Opps🙊 your library is empty!`, {
+                timeout: 2000,
+              });
+            } else {
+              const queueList = JSON.parse(snapshot.val().queueList);
+              console.log(queueList);
+              renderMurkUpLibrary(queueList);
+              console.log(queueList);
             }
-            }).catch((error) => {
-                console.error(error);
-            });
-          // ...
-        } else {
-          // User is signed out
-          // ...
-        }
-    });
-   if (
+          } else {
+            console.log('No data available');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+  if (
     refs.queueBtnInLibrary.classList.contains('header__mylibrary-btn--active')
   ) {
     return;
-  } 
-}
+  }
+};
 
 refs.queueBtnInLibrary.addEventListener('click', onQueueBtnClickinLibrary);
 
