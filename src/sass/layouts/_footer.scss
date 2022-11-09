@@ -71,7 +71,8 @@
   transition-property: transform;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  width: 70%;
+  min-width: 300px;
+  max-width: 400px;
   background: #f7f5f5;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
@@ -83,6 +84,15 @@
   }
   &.dark {
     background-color: rgb(97, 97, 97);
+  }
+
+  @include tablet {
+    min-width: 500px;
+    max-width: 800px;
+  }
+  @include desktop {
+    min-width: 800px;
+    max-width: 1000px;
   }
 }
 
