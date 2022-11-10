@@ -171,6 +171,7 @@
 
 .wrap-input {
   position: relative;
+  margin-bottom: 10px;
 }
 
 .header__input {
@@ -189,17 +190,13 @@
   }
 }
 
-.header__input--film {
-  // width: 280px;
-}
-
 .header__input--year {
   width: 70px;
 }
 
 .header__form-submit-btn {
   position: absolute;
-  right: 1px;
+  right: -30px;
   border: none;
   cursor: pointer;
   outline: none;
