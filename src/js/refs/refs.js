@@ -22,6 +22,7 @@ export const refs = {
   toggleTheme: document.querySelector('.toggle-theme'),
   modalFooter: document.querySelector('.modal-footer__box'),
   collection: document.querySelector(`.container-films`),
+  btnUp: document.querySelector('.btnUp'),
 };
 
 
