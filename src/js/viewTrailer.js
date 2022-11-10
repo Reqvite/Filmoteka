@@ -1,15 +1,16 @@
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Notiflix from 'notiflix';
 import fetchTrailerVideo from './fetchTrailerVideo';
 import createTrailerMarkup from './markups/createTrailerMarkup';
 
 export default async function viewTrailer(trailerId) {
-  const btnViewTrailer = document.querySelector('.trailer-button--view');
-  const btnCloseTrailer = document.querySelector('.trailer-button--close');
-  const trailer = document.querySelector('.trailer');
+  const refs = {
+    btnViewTrailer: document.querySelector('.trailer-button--view'),
+    btnCloseTrailer: document.querySelector('.trailer-button--close'),
+    trailer: document.querySelector('.trailer'),
+  };
 
-  btnViewTrailer.addEventListener('click', onClickTrailerBtnView);
-  btnCloseTrailer.addEventListener('click', onClickTrailerBtnClose);
+  refs.btnViewTrailer.addEventListener('click', onClickTrailerBtnView);
+  refs.btnCloseTrailer.addEventListener('click', onClickTrailerBtnClose);
 
   async function onClickTrailerBtnView() {
     try {
@@ -22,24 +23,24 @@ export default async function viewTrailer(trailerId) {
       }
 
       const keyVideo = results[0].key;
-      trailer.classList.add('is-view');
-      btnCloseTrailer.classList.remove('is-hidden');
-      btnViewTrailer.classList.add('is-hidden');
+      refs.trailer.classList.add('is-view');
+      refs.btnCloseTrailer.classList.remove('is-hidden');
+      refs.btnViewTrailer.classList.add('is-hidden');
 
-      createTrailerMarkup(trailer, keyVideo);
+      createTrailerMarkup(refs.trailer, keyVideo);
     } catch (error) {
-      Notiflix.Notify.info(error);
+      Notiflix.Notify.failure(error.message);
     }
   }
 
   async function onClickTrailerBtnClose() {
     try {
-      trailer.classList.remove('is-view');
-      trailer.innerHTML = '';
-      btnCloseTrailer.classList.add('is-hidden');
-      btnViewTrailer.classList.remove('is-hidden');
+      refs.trailer.classList.remove('is-view');
+      refs.trailer.innerHTML = '';
+      refs.btnCloseTrailer.classList.add('is-hidden');
+      refs.btnViewTrailer.classList.remove('is-hidden');
     } catch (error) {
-      onError(error);
+      Notiflix.Notify.failure(error.message);
     }
   }
 }
