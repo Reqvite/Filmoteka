@@ -16,6 +16,7 @@ import {
   renderMurkUpLibrary,
   clearContainer,
 } from './markups/renderMarkUpLibrary';
+import { spinner } from "./spinner";
 
 const auth = getAuth();
 const USER_LOGIN_KEY = 'userIsLogin';
@@ -111,13 +112,15 @@ const homeActive = document.querySelector('.home-js')
       
 const onMyLibararyClick = e => {
   if (e.target.name === 'library') {
-       homeActive.setAttribute('data-active', false)
+       homeActive.setAttribute('data-active', false);
+       refs.gallery.innerHTML = '';
+       spinner();
   };
   
     if (e.target.name !== 'library') {
       refs.listEl.classList.remove('is-hidden');
              homeActive.setAttribute('data-active', true)
-
+  
         return; 
     };
 
@@ -151,6 +154,7 @@ const onMyLibararyClick = e => {
                 } else {
                 console.log("No data available");
             }
+            spinner();
         })
         .catch(error => {
           console.error(error);
@@ -168,6 +172,8 @@ refs.headerNavList.addEventListener('click', onMyLibararyClick);
 const onQueueBtnClickinLibrary = e => {
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
+  refs.gallery.innerHTML = '';
+  spinner();
 
   onAuthStateChanged(auth, user => {
     if (user) {
@@ -193,6 +199,7 @@ const onQueueBtnClickinLibrary = e => {
           } else {
             console.log('No data available');
           }
+          spinner();
         })
         .catch(error => {
           console.error(error);

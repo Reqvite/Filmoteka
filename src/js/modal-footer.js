@@ -5,8 +5,10 @@ import * as image3 from '../images/footer/Alexander-Kulyk.jpg';
 import * as image4 from '../images/footer/me-foto-1.jpg';
 import * as image5 from '../images/footer/Taras-Novitskyi.jpg';
 import * as image6 from '../images/footer/Yevhenii-Kavetskyi.jpg';
+import * as image7 from '../images/footer/img20.jpg';
 import * as image9 from '../images/footer/Inna-Sikora.jpg';
 import * as image8 from '../images/footer/Lina-Fomenko.jpg';
+import * as image10 from '../images/footer/270.jpg';
 import * as sprite from '../images/sprite.svg';
 
 (() => {
@@ -48,6 +50,7 @@ import * as sprite from '../images/sprite.svg';
   }
 })();
 //////// cart////////
+
 
 const cart = [
   {
