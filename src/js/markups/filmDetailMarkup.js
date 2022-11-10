@@ -93,7 +93,7 @@ const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 
       
 
-	modal.innerHTML = markup;
+	modal.insertAdjacentHTML('beforeend', markup);
 	openModal();
   
   const queueAddBtn = document.querySelector('.queue-add');
@@ -196,7 +196,7 @@ export const createFilmDetailsMarkupNoUser = (resp) => {
   
 		
   
-	modal.innerHTML = markup;
+	modal.insertAdjacentHTML('beforeend', markup);
 	openModal();
 	
 	const queueAddBtn = document.querySelector('.queue-add');
