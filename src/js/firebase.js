@@ -21,6 +21,14 @@ const firebaseConfig = {
   appId: '1:394290136676:web:9848416d6de87eb2614171',
 };
 
+const list = document.querySelector('.container-films') 
+function listAnimation() {
+  setTimeout(() => {
+    list.style.top = '0'
+    list.style.opacity ='1'
+  },150)
+}
+listAnimation()
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
