@@ -28,6 +28,8 @@ let userId;
 const dbRef = ref(getDatabase());
 const USER_LOGIN_KEY = 'userIsLogin';
 
+
+
 onAuthStateChanged(auth, user => {
   userId = user?.uid;
 });
@@ -37,20 +39,19 @@ onAuthStateChanged(auth, user => {
 const onClickBtnToQueue = (data, e) => {
 
   const queueAddBtn = document.querySelector('.queue-add');
-  queueAddBtn.removeEventListener('click', e => onClickBtnToQueue(data, e));
+  // queueAddBtn.removeEventListener('click',function myClick (e){ onClickBtnToQueue(resp.data, e)});
 
   queueAddBtn.textContent = 'REMOVE FROME QUEUE';
   queueAddBtn.classList.add('remove-from-queue');
   queueAddBtn.classList.remove('queue-add');
 
 
-  const removeFromQueueBtn = document.querySelector('.remove-from-queue');
-  removeFromQueueBtn.addEventListener('click',e => onRemoveQueueBtnClick(data, e));
+  // const removeFromQueueBtn = document.querySelector('.remove-from-queue');
+  // removeFromQueueBtn.addEventListener('click', function click( e ){onRemoveQueueBtnClick(resp.data, e)});
 
-  closeModal();
+  //closeModal();
  
   const idMovie = data.id;
-
 
   /*-------перевіряю чи залогінився юзер ------------*/
   const userIsLogin = JSON.parse(localStorage.getItem(USER_LOGIN_KEY));
@@ -124,7 +125,7 @@ const onRemoveQueueBtnClick = (data, e) => {
   removeFromQueueBtn.classList.add('queue-add');
   removeFromQueueBtn.classList.remove('remove-from-queue');
 
- closeModal();
+ //closeModal();
 
 
   get(child(dbRef, `users/${userId}`)).then((snapshot) => {
@@ -140,15 +141,21 @@ const onRemoveQueueBtnClick = (data, e) => {
            return arr.push(obj)
         });
         
-        if (newQueueListArr.length === 0) {
-            // clearContainer();
+        if (newQueueListArr.length === 0 && homeActive.dataset.active !== true) {
+          clearContainer();
+          closeModal();
             update(ref(database, 'users/' + userId),{
                 queueList: ''
             }); 
             return; 
         } 
-
-       // renderMurkUpLibrary(newQueueListArr);
+        
+        if (homeActive.dataset.active !== true) {
+          console.log(homeActive.dataset.active);
+          renderMurkUpLibrary(newQueueListArr);
+          closeModal();
+          
+        };
 
         const newQueueListString = JSON.stringify(newQueueListArr);
         update(ref(database, 'users/' + userId),{
@@ -172,9 +179,9 @@ console.error(error);
 
 
 
-
 // ------------------click my library-------------
-const homeActive = document.querySelector('.home-js')
+const homeActive = document.querySelector('.home-js');
+ 
       
 const onMyLibararyClick = e => {
   if (e.target.name === 'library') {
@@ -189,6 +196,8 @@ const onMyLibararyClick = e => {
   
         return; 
     };
+
+    console.log(homeActive.dataset.active);
 
     refs.listEl.classList.add('is-hidden');
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');

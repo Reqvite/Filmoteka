@@ -44,20 +44,17 @@ const openModal = async e => {
     const resp = await fetchFilmDetails(
       e.target.closest('.collection__item').dataset.id
     );
-    onAuthStateChanged(auth, user => {
+   await onAuthStateChanged(auth, user => {
       userId = user?.uid;
+
+      if (userId === undefined) {
+        createFilmDetailsMarkupNoUser(resp)
+      }else{
+         checkMovieInQueueList(resp);
+      }
       
     }); 
 
-    if (userId === undefined) {
-      createFilmDetailsMarkupNoUser(resp)
-    }else{
-      await checkMovieInQueueList(resp);
-    }
-
-
-
-   
 
     //------createFilmDetailsMarkup переніс в checkMovieInQueueList
 
