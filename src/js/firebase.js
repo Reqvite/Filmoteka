@@ -224,30 +224,30 @@ function handleLogIn() {
 }
 
 //Получение данных если пользоваетль залогинен
-onAuthStateChanged(auth, user => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    const dbRef = ref(getDatabase());
-    localStorage.setItem('userId', uid);
-    get(child(dbRef, `users/${uid}`))
-      .then(snapshot => {
-        if (snapshot.exists()) {
-          console.log(snapshot.val());
-        } else {
-          console.log('No data available');
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
+// onAuthStateChanged(auth, user => {
+//   if (user) {
+//     // User is signed in, see docs for a list of available properties
+//     // https://firebase.google.com/docs/reference/js/firebase.User
+//     const uid = user.uid;
+//     const dbRef = ref(getDatabase());
+//     localStorage.setItem('userId', uid);
+//     get(child(dbRef, `users/${uid}`))
+//       .then(snapshot => {
+//         if (snapshot.exists()) {
+//           console.log(snapshot.val());
+//         } else {
+//           console.log('No data available');
+//         }
+//       })
+//       .catch(error => {
+//         console.error(error);
+//       });
+//     // ...
+//   } else {
+//     // User is signed out
+//     // ...
+//   }
+// });
 
 //Выйти из аккаунта
 logOut.addEventListener('click', e => {
