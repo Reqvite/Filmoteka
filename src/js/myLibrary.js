@@ -7,7 +7,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { getDatabase, ref, child, push, update, get } from 'firebase/database';
-import { database } from './firebase';
+import { AuthState, database, getAuthState } from './firebase';
 
 import { refs } from './refs/refs';
 import { renderMarkUp } from './markups/collectionRender';
@@ -16,89 +16,95 @@ import {
   renderMurkUpLibrary,
   clearContainer,
 } from './markups/renderMarkUpLibrary';
+
+import { createFilmDetailsMarkup } from './markups/filmDetailMarkup';
+import { closeModal } from './openFilmModal';
+
 import { spinner } from "./spinner";
 
+
 const auth = getAuth();
+let userId;
+const dbRef = ref(getDatabase());
 const USER_LOGIN_KEY = 'userIsLogin';
 
-// let genreCollection = {};
-// fetchGenreId()
-//   .then(genreId => {
-//     genreId.data.genres.forEach(function (genre) {
-//       genreCollection[genre.id] = genre.name;
-//     });
-//   })
-//   .catch(error => console.log(error));
+onAuthStateChanged(auth, user => {
+  userId = user?.uid;
+});
 
 //------------------------add to queue---------------
 
-const onClickBtn = (data, e) => {
+const onClickBtnToQueue = (data, e) => {
+
+  const queueAddBtn = document.querySelector('.queue-add');
+  queueAddBtn.removeEventListener('click', e => onClickBtnToQueue(data, e));
+
+  queueAddBtn.textContent = 'REMOVE FROME QUEUE';
+  queueAddBtn.classList.add('remove-from-queue');
+  queueAddBtn.classList.remove('queue-add');
+
+
+  const removeFromQueueBtn = document.querySelector('.remove-from-queue');
+  removeFromQueueBtn.addEventListener('click',e => onRemoveQueueBtnClick(data, e));
+
+  closeModal();
+ 
   const idMovie = data.id;
 
-  if (e.target.name !== 'queue') {
-    return;
-  }
+
   /*-------перевіряю чи залогінився юзер ------------*/
   const userIsLogin = JSON.parse(localStorage.getItem(USER_LOGIN_KEY));
 
   if (userIsLogin) {
-    onAuthStateChanged(auth, user => {
-      console.log(user);
-      const dbRef = ref(getDatabase());
-      const uid = user.uid;
+    get(child(dbRef, `users/${userId}`))
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            const queueDataString = snapshot.val().queueList;
+            if (queueDataString === '') {
+              let listWatchedArr = [];
+              listWatchedArr.push(data);
 
-      if (user) {
-        get(child(dbRef, `users/${uid}`))
-          .then(snapshot => {
-            if (snapshot.exists()) {
-              const queueDataString = snapshot.val().queueList;
-              if (queueDataString === '') {
-                let listWatchedArr = [];
-                listWatchedArr.push(data);
+              const queueListString = JSON.stringify(listWatchedArr);
 
-                const queueListString = JSON.stringify(listWatchedArr);
-                console.log(queueListString);
-                update(ref(database, 'users/' + uid), {
-                  queueList: queueListString,
+              update(ref(database, 'users/' + userId), {
+                queueList: queueListString,
+              });
+            } else {
+              const queueDataArr = JSON.parse(queueDataString);
+
+              /*---- перевіряю  масив на однакові id і добавляю новий об'єкт-------*/
+              const checkArr = queueDataArr.some(obj => obj.id === idMovie);
+              //listWatchedArr.map(obj => obj.id).includes(idMovie) // інший спосіб
+
+              if (checkArr) {
+                Notiflix.Notify.info(`Тhis movie is in the QUEUE`, {
+                  timeout: 2000,
                 });
               } else {
-                const queueDataArr = JSON.parse(queueDataString);
-                console.log(queueDataArr);
+                // ---------добавляю новий об'єк в масив і перезаписую data-------------
+                queueDataArr.push(data);
+                const queueListString = JSON.stringify(queueDataArr);
 
-                /*---- перевіряю  масив на однакові id і добавляю новий об'єкт-------*/
-                const checkArr = queueDataArr.some(obj => obj.id === idMovie);
-                //listWatchedArr.map(obj => obj.id).includes(idMovie) // інший спосіб
+                update(ref(database, 'users/' + userId), {
+                  queueList: queueListString,
+                });
 
-                if (checkArr) {
-                  Notiflix.Notify.info(`Тhis movie is in the QUEUE`, {
-                    timeout: 2000,
-                  });
-                } else {
-                  // ---------добавляю новий об'єк в масив і перезаписую data-------------
-                  queueDataArr.push(data);
-                  const queueListString = JSON.stringify(queueDataArr);
+                Notiflix.Notify.success(`Added movie to QUEUE`, {
+                  timeout: 2000,
+                });
 
-                  update(ref(database, 'users/' + uid), {
-                    queueList: queueListString,
-                  });
-
-                  Notiflix.Notify.success(`Added movie to QUEUE`, {
-                    timeout: 2000,
-                  });
-                }
               }
-            } else {
-              Notiflix.Notify.failure(`No data available`, {
-                timeout: 2000,
-              });
-              console.log('No data available');
             }
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-    });
+          } else {
+            Notiflix.Notify.failure(`No data available`, {
+              timeout: 2000,
+            });
+            console.log('No data available');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
   } else {
     Notiflix.Notify.failure(`please log in`, {
       timeout: 2000,
@@ -106,6 +112,66 @@ const onClickBtn = (data, e) => {
     return;
   }
 };
+
+//----------------click remove from queue btn-------------
+
+const onRemoveQueueBtnClick = (data, e) => {
+
+  const idMovie = data.id;
+  
+  const removeFromQueueBtn = document.querySelector('.remove-from-queue');
+  removeFromQueueBtn.textContent = 'ADD TO QUEUE';
+  removeFromQueueBtn.classList.add('queue-add');
+  removeFromQueueBtn.classList.remove('remove-from-queue');
+
+ closeModal();
+
+
+  get(child(dbRef, `users/${userId}`)).then((snapshot) => {
+
+    if (snapshot.exists()) {
+
+        const queueListArr = JSON.parse(snapshot.val().queueList);
+
+        const newQueueListArr = queueListArr.filter((obj, idx, arr) =>{
+            if (obj.id === idMovie) {
+                return false
+            };
+           return arr.push(obj)
+        });
+        
+        if (newQueueListArr.length === 0) {
+            // clearContainer();
+            update(ref(database, 'users/' + userId),{
+                queueList: ''
+            }); 
+            return; 
+        } 
+
+       // renderMurkUpLibrary(newQueueListArr);
+
+        const newQueueListString = JSON.stringify(newQueueListArr);
+        update(ref(database, 'users/' + userId),{
+            queueList: newQueueListString
+        }); 
+
+        Notiflix.Notify.success(`removed movie from QUEUE`,{
+            timeout: 2000,
+        });
+        
+
+    } else {
+    console.log("No data available");
+}
+}).catch((error) => {
+console.error(error);
+});  
+
+}
+
+
+
+
 
 // ------------------click my library-------------
 const homeActive = document.querySelector('.home-js')
@@ -128,59 +194,46 @@ const onMyLibararyClick = e => {
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 
-  onAuthStateChanged(auth, (user) => {
+  if (homeActive.dataset.active === 'true') {
+    return;
+  }
+
+  get(child(dbRef, `users/${userId}`)).then((snapshot) => {
       
-      if (homeActive.dataset.active === 'true') {
-        return;
-      }
-        if (user) {
-            const uid = user.uid; 
-            const dbRef = ref(getDatabase());
-      
-            get(child(dbRef, `users/${uid}`)).then((snapshot) => {
-      
-                if (snapshot.exists()) {
-                    const queueListData = snapshot.val().queueList
-                    if (queueListData === '') {
-                        clearContainer();
-                        
-                        Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
-                            timeout: 2000,
-                        });
-                    }else{
-                        const queueList = JSON.parse(snapshot.val().queueList)
-                        renderMurkUpLibrary(queueList);
-                    };   
-                } else {
-                console.log("No data available");
-            }
-            spinner();
-        })
-        .catch(error => {
-          console.error(error);
-        });
-      // ...
+    if (snapshot.exists()) {
+        const queueListData = snapshot.val().queueList
+        if (queueListData === '') {
+            clearContainer();
+            
+            Notiflix.Notify.failure(`Opps🙊 your library is empty!`,{
+                timeout: 2000,
+            });
+        }else{
+            const queueList = JSON.parse(snapshot.val().queueList)
+            renderMurkUpLibrary(queueList);
+        };   
     } else {
-      // User is signed out
-      // ...
+    console.log("No data available");
     }
-  });
+      spinner();
+})
+.catch(error => {
+console.error(error);
+});
 };
 
 refs.headerNavList.addEventListener('click', onMyLibararyClick);
 
+
+// -----------click queue btn in library--------
 const onQueueBtnClickinLibrary = e => {
+
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
   refs.gallery.innerHTML = '';
   spinner();
 
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      const uid = user.uid;
-      const dbRef = ref(getDatabase());
-
-      get(child(dbRef, `users/${uid}`))
+  get(child(dbRef, `users/${userId}`))
         .then(snapshot => {
           if (snapshot.exists()) {
             const queueListData = snapshot.val().queueList;
@@ -204,12 +257,7 @@ const onQueueBtnClickinLibrary = e => {
         .catch(error => {
           console.error(error);
         });
-      // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
+
   if (
     refs.queueBtnInLibrary.classList.contains('header__mylibrary-btn--active')
   ) {
@@ -219,4 +267,37 @@ const onQueueBtnClickinLibrary = e => {
 
 refs.queueBtnInLibrary.addEventListener('click', onQueueBtnClickinLibrary);
 
-export { onClickBtn };
+
+
+// ---------перевтряю чи є фільм в масиві для кнопки queue в --------
+
+const checkMovieInQueueList = async (resp) =>{
+
+  const data = resp.data;
+  const idMovie = data.id;
+
+  // if (homeActive.dataset.active === 'true') {
+  //     return;
+  //   };
+
+    get(child(dbRef, `users/${userId}`)).then((snapshot) => {
+    
+      if (snapshot.exists()) {
+        const rawListQueue = snapshot.val().queueList;
+        const queueList = rawListQueue && JSON.parse(rawListQueue)  || [];
+         
+        const isAdded = queueList.some(obj => obj.id === idMovie);
+          
+          createFilmDetailsMarkup(resp, isAdded);  
+       } else {
+      console.log("No data available");
+  }
+})
+.catch(error => {
+console.error(error);
+});
+  
+
+}
+
+export { onClickBtnToQueue, checkMovieInQueueList, onRemoveQueueBtnClick };
