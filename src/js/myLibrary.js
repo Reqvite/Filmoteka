@@ -17,6 +17,7 @@ import {
   clearContainer,
 } from './markups/renderMarkUpLibrary';
 import { createFilmDetailsMarkup } from './markups/filmDetailMarkup';
+import { closeModal } from './openFilmModal';
 
 const auth = getAuth();
 export const user = auth.currentUser;
@@ -39,6 +40,12 @@ const onClickBtnToQueue = (data, e) => {
   const queueAddBtn = document.querySelector('.queue-add');
   queueAddBtn.textContent = 'REMOVE FROME QUEUE';
 
+  queueAddBtn.classList.add('remove-from-queue');
+  queueAddBtn.classList.remove('queue-add');
+
+  closeModal();
+ 
+
   const idMovie = data.id;
 
   /*-------перевіряю чи залогінився юзер ------------*/
@@ -46,7 +53,7 @@ const onClickBtnToQueue = (data, e) => {
 
   if (userIsLogin) {
     onAuthStateChanged(auth, user => {
-      console.log(user);
+      
       const dbRef = ref(getDatabase());
       const uid = user.uid;
 
@@ -60,13 +67,12 @@ const onClickBtnToQueue = (data, e) => {
                 listWatchedArr.push(data);
 
                 const queueListString = JSON.stringify(listWatchedArr);
-                console.log(queueListString);
+
                 update(ref(database, 'users/' + uid), {
                   queueList: queueListString,
                 });
               } else {
                 const queueDataArr = JSON.parse(queueDataString);
-                console.log(queueDataArr);
 
                 /*---- перевіряю  масив на однакові id і добавляю новий об'єкт-------*/
                 const checkArr = queueDataArr.some(obj => obj.id === idMovie);
@@ -88,6 +94,7 @@ const onClickBtnToQueue = (data, e) => {
                   Notiflix.Notify.success(`Added movie to QUEUE`, {
                     timeout: 2000,
                   });
+
                 }
               }
             } else {
@@ -109,6 +116,78 @@ const onClickBtnToQueue = (data, e) => {
     return;
   }
 };
+
+//----------------click remove from queue bbtn-------------
+
+const onRemoveQueueBtnClick = (data, e) => {
+
+  const idMovie = data.id;
+  
+  const removeFromQueueBtn = document.querySelector('.remove-from-queue');
+  removeFromQueueBtn.textContent = 'ADD TO QUEUE';
+  removeFromQueueBtn.classList.add('queue-add');
+  removeFromQueueBtn.classList.remove('remove-from-queue');
+
+  closeModal();
+
+
+  onAuthStateChanged(auth, (user) => {
+
+    if (user) {
+        const uid = user.uid; 
+        const dbRef = ref(getDatabase());
+
+        get(child(dbRef, `users/${uid}`)).then((snapshot) => {
+
+            if (snapshot.exists()) {
+
+                const queueListArr = JSON.parse(snapshot.val().queueList);
+
+                const newQueueListArr = queueListArr.filter((obj, idx, arr) =>{
+                    if (obj.id === idMovie) {
+                        return false
+                    };
+                   return arr.push(obj)
+                });
+                
+                if (newQueueListArr.length === 0) {
+                    // clearContainer();
+                    update(ref(database, 'users/' + uid),{
+                        queueList: ''
+                    }); 
+                    return; 
+                } 
+
+               // renderMurkUpLibrary(newQueueListArr);
+
+                const newQueueListString = JSON.stringify(newQueueListArr);
+                update(ref(database, 'users/' + uid),{
+                    queueList: newQueueListString
+                }); 
+
+                Notiflix.Notify.success(`removed movie from QUEUE`,{
+                    timeout: 2000,
+                });
+                
+
+            } else {
+            console.log("No data available");
+        }
+    }).catch((error) => {
+        console.error(error);
+    });
+  // ...
+} else {
+  // User is signed out
+  // ...
+}
+});   
+
+}
+
+
+
+
 
 // ------------------click my library-------------
 const homeActive = document.querySelector('.home-js')
@@ -284,9 +363,7 @@ const renderModal = async (resp) =>{
   //const list = await getQueueList(userId);
   //console.log({list});
   await onAuthStateChanged(auth, (user) => {
-    console.log('onAuthStateChanged');
- 
-    console.log({user});
+
       
     // if (homeActive.dataset.active === 'true') {
     //   return;
@@ -302,7 +379,7 @@ const renderModal = async (resp) =>{
               if (snapshot.exists()) {
                 const rawListQueue = snapshot.val().queueList;
                   const queueList = rawListQueue && JSON.parse(rawListQueue)  || [];
-                  console.log('queueList',queueList);
+                 
                   const isAdded = queueList.some(obj => obj.id === idMovie);
                   
                   createFilmDetailsMarkup(resp, isAdded);  
@@ -323,4 +400,4 @@ const renderModal = async (resp) =>{
 
 }
 
-export { onClickBtnToQueue, renderModal };
+export { onClickBtnToQueue, renderModal, onRemoveQueueBtnClick };

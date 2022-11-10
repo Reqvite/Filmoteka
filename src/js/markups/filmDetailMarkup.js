@@ -1,7 +1,7 @@
 import img from '../../images/collection/csaff-no-poster.jpg';
 import viewTrailer from '../viewTrailer';
 
-import { onClickBtnToQueue, checkDataMovie } from '../myLibrary';
+import { onClickBtnToQueue, checkDataMovie, onRemoveQueueBtnClick } from '../myLibrary';
 import { onClickAddToWatched } from '../addFilmToWatchedList-firebase';
 import { ChangeColorText, closeModal, closeModalOutsideWindow, escModal } from '../openFilmModal';
 
@@ -29,7 +29,9 @@ export const createFilmDetailsMarkup = (resp, isAdded) => {
               ? vote_average = vote_average.toFixed(1)
               : (vote_average = '?');
 
-			  const btnText = isAdded ? 'Remove from list' : 'Add to list';
+const addToQueueBnt = isAdded ? 'REMOVE FROM QUEUE' : 'ADD TO QUEUE';
+const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
+
   const markup = `<div class="film-details-wrapper">
 	<div>
 		<div class="thumb">
@@ -68,7 +70,7 @@ export const createFilmDetailsMarkup = (resp, isAdded) => {
 			<li class="buttons-list__item">
 				<button class="main-button watched-add button" type="button" name="watched">Add to watched</button>
 			</li>
-			<li class="buttons-list__item"><button class="secondary-button queue-add button" type="button" name="queue">${btnText}</button></li>
+			<li class="buttons-list__item"><button class="secondary-button ${classQueueBtn} button" type="button" name="queue">${addToQueueBnt}</button></li>
 		</ul>
 		<div class="trailer"></div>
 		<button class="trailer-button trailer-button--close button is-hidden" type="button">
@@ -87,8 +89,6 @@ export const createFilmDetailsMarkup = (resp, isAdded) => {
   
 	  ChangeColorText();
   	
-	  
-  
 	  const modal_text = document.querySelectorAll('.details-list_title');
 	  const LS = JSON.parse(localStorage.getItem('theme'));
 	  if (LS) {
@@ -97,11 +97,14 @@ export const createFilmDetailsMarkup = (resp, isAdded) => {
 	  }
 
   
-
-  //const buttonsList = document.querySelector('.buttons-list');
   const queueAddBtn = document.querySelector('.queue-add');
+  const removeFromQueueBtn = document.querySelector('.remove-from-queue');
+  console.log({queueAddBtn});
+  console.log({removeFromQueueBtn});
 
-  queueAddBtn.addEventListener('click', e => onClickBtnToQueue(resp.data, e));
+
+  queueAddBtn?.addEventListener('click', e => onClickBtnToQueue(resp.data, e));
+  removeFromQueueBtn?.addEventListener('click',e => onRemoveQueueBtnClick(resp.data, e));
 
   viewTrailer(id);
 
