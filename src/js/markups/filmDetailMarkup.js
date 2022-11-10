@@ -17,7 +17,7 @@ export const createFilmDetailsMarkup = resp => {
     overview,
     id,
   } = resp.data;
-
+	let rating = null;
 
 
  
@@ -27,6 +27,15 @@ export const createFilmDetailsMarkup = resp => {
             vote_average
               ? vote_average = vote_average.toFixed(1)
               : (vote_average = '?');
+
+	if (vote_average >= 7) {
+		rating = 'masterpiece'
+	}else if (vote_average >= 5 && vote_average <= 7) {
+		rating = 'good'
+	}else if(vote_average <= 5) {
+		rating = 'bad'
+	}
+
 
   const markup = `<div class="film-details-wrapper">
 	<div>
@@ -42,7 +51,7 @@ export const createFilmDetailsMarkup = resp => {
 		<ul class="details-list list">
 			<li class="details-list__item">
 				<p class="details-list_title">Vote / Votes</p>
-				<span class="details-list__information-1">${vote_average}</span>&nbsp/&nbsp<span
+				<span class="details-list__information-1 ${rating}">${vote_average}</span>&nbsp/&nbsp<span
 					class="details-list__information-2">${vote_count}</span>
 			</li>
 			<li class="details-list__item">
