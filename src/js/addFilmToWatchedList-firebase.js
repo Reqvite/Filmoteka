@@ -20,7 +20,7 @@ import { spinner } from './spinner';
 
 export { onClickAddToWatched };
 
-let userIsLogin = JSON.parse(localStorage.getItem('userIsLogin'));
+
 const dbRef = ref(getDatabase());
 let userId;
 const auth = getAuth();
@@ -33,6 +33,7 @@ onAuthStateChanged(auth, user => {
 //кнопка add to watched
 
 const onClickAddToWatched = (data, e) => {
+  let userIsLogin = JSON.parse(localStorage.getItem('userIsLogin'));
   const idMovie = data.id;
   let listWatchedArr = [];
   if (userIsLogin) {
@@ -42,6 +43,7 @@ const onClickAddToWatched = (data, e) => {
           const watchedDataString = snapshot.val().watchedList;
 
           if (watchedDataString === '') {
+            Notiflix.Notify.success(`Added movie to watched list.`);
             listWatchedArr.push(data);
             const watchedToString = JSON.stringify(listWatchedArr);
 
