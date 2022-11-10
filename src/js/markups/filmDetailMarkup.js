@@ -21,7 +21,8 @@ export const createFilmDetailsMarkup = (resp, isAdded) => {
     id,
   } = resp.data;
 
- 
+	let rating = null;
+
             poster_path
               ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
               : poster_path = img
@@ -32,6 +33,15 @@ export const createFilmDetailsMarkup = (resp, isAdded) => {
 			  //-----підставляє техт і клас в кнопку queue-------
 const addToQueueBnt = isAdded ? 'REMOVE FROM QUEUE' : 'ADD TO QUEUE';
 const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
+
+	if (vote_average >= 7) {
+		rating = 'masterpiece'
+	}else if (vote_average >= 5 && vote_average <= 7) {
+		rating = 'good'
+	}else if(vote_average <= 5) {
+		rating = 'bad'
+	}
+
 
   const markup = `<div class="film-details-wrapper">
 	<div>
@@ -47,7 +57,7 @@ const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 		<ul class="details-list list">
 			<li class="details-list__item">
 				<p class="details-list_title">Vote / Votes</p>
-				<span class="details-list__information-1">${vote_average}</span>&nbsp/&nbsp<span
+				<span class="details-list__information-1 ${rating}">${vote_average}</span>&nbsp/&nbsp<span
 					class="details-list__information-2">${vote_count}</span>
 			</li>
 			<li class="details-list__item">

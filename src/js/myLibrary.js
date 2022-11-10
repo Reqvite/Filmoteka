@@ -16,8 +16,12 @@ import {
   renderMurkUpLibrary,
   clearContainer,
 } from './markups/renderMarkUpLibrary';
+
 import { createFilmDetailsMarkup } from './markups/filmDetailMarkup';
 import { closeModal } from './openFilmModal';
+
+import { spinner } from "./spinner";
+
 
 const auth = getAuth();
 let userId;
@@ -170,13 +174,15 @@ const homeActive = document.querySelector('.home-js')
       
 const onMyLibararyClick = e => {
   if (e.target.name === 'library') {
-       homeActive.setAttribute('data-active', false)
+       homeActive.setAttribute('data-active', false);
+       refs.gallery.innerHTML = '';
+       spinner();
   };
   
     if (e.target.name !== 'library') {
       refs.listEl.classList.remove('is-hidden');
              homeActive.setAttribute('data-active', true)
-
+  
         return; 
     };
 
@@ -204,7 +210,8 @@ const onMyLibararyClick = e => {
         };   
     } else {
     console.log("No data available");
-}
+    }
+      spinner();
 })
 .catch(error => {
 console.error(error);
@@ -219,6 +226,8 @@ const onQueueBtnClickinLibrary = e => {
 
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
+  refs.gallery.innerHTML = '';
+  spinner();
 
   get(child(dbRef, `users/${userId}`))
         .then(snapshot => {
@@ -239,6 +248,7 @@ const onQueueBtnClickinLibrary = e => {
           } else {
             console.log('No data available');
           }
+          spinner();
         })
         .catch(error => {
           console.error(error);

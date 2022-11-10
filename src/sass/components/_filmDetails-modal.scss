@@ -141,6 +141,16 @@
   font-size: 12px;
   line-height: 1.16;
   text-transform: uppercase;
+
+  &.masterpiece {
+    background-color: #66cc33;
+  }
+  &.good {
+    background-color: #ffcc33;
+  }
+  &.bad {
+    background-color: #f00000;
+  }
 }
 .details-list__information-2 {
   display: block;

@@ -104,3 +104,35 @@
   &:focus {
   }
 }
+// button Up
+.btnUp{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 5px;
+  bottom: 30%;
+  min-width: 30px;
+  height: 30px;
+  background-color: $secondary-text-color;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  cursor: pointer;
+  color: $header-text-color;
+  border: 1px solid $header-text-color;
+  transition: opacity 0.3s linear;
+  opacity: 1;
+
+  &:hover,
+  &:focus {
+    border: transparent;
+    background-color: rgb(235, 136, 65);
+  }
+
+  &.is-hiden{
+    opacity: 0;
+  }
+}

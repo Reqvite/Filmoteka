@@ -16,6 +16,7 @@ import {
   renderMurkUpLibrary,
   clearContainer,
 } from './markups/renderMarkUpLibrary';
+import { spinner } from './spinner';
 
 export { onClickAddToWatched };
 
@@ -81,6 +82,8 @@ const onClickAddToWatched = (data, e) => {
 const onWatchedBtnClick = e => {
   refs.queueBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.watchedBtnInLibrary.classList.add('header__mylibrary-btn--active');
+  refs.gallery.innerHTML = '';
+  spinner();
 
   get(child(dbRef, `users/${userId}`))
     .then(snapshot => {
@@ -97,6 +100,7 @@ const onWatchedBtnClick = e => {
       } else {
         console.log('No data available');
       }
+      spinner();
     })
     .catch(error => {
       console.error(error);
