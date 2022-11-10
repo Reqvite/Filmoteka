@@ -1,6 +1,5 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-
 import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, enableLogging, update,child, get, onDisconnect} from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
@@ -22,6 +21,16 @@ const firebaseConfig = {
   appId: '1:394290136676:web:9848416d6de87eb2614171',
 };
 
+const sectionMain = document.querySelector('.section-main');
+
+let checkOnline = null
+checkOnline = setInterval(() => {
+
+  if (navigator.onLine) {
+    console.log(navigator.onLine)
+    sectionMain.outerHTML = `<img src="../images/internet-error.gif" alt="error" />`
+  }
+}, 5000)
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
