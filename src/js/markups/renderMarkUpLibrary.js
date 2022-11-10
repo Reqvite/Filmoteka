@@ -1,9 +1,27 @@
 import { refs } from '../refs/refs';
-import * as image from '../../images/library/empty-library.jpg';
+import * as image from '../../images/library/empty-library.png';
+import img from '../../images/collection/csaff-no-poster.jpg';
 
 const renderMurkUpLibrary = queueList => {
+
+  let rating = null;
+
   const markup = queueList.reduce((acc, obj) => {
     const { id, poster_path, title, release_date, vote_average, genres } = obj;
+
+
+    // poster_path
+    //           ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
+    //           : poster_path = img
+           // vote_average ? vote_average = vote_average.toFixed(1) : (vote_average = '?')
+
+              if (vote_average >= 7) {
+                rating = 'masterpiece'
+              }else if (vote_average >= 5 && vote_average <= 7) {
+                rating = 'good'
+              }else if(vote_average <= 5) {
+                rating = 'bad'
+              }
 
     const genreNames = genres.map(gender => gender.name);
     const releaseYear = release_date.split('-');
@@ -39,7 +57,7 @@ const clearContainer = () => {
   <img
   src="${image}"
   alt="foto"
-  width="250px" height="250px"
+  width="300px" height="300px"
 />
   `;
   refs.gallery.innerHTML = title;
