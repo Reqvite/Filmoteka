@@ -1,8 +1,21 @@
 import { fetchFilmDetails } from './service/service';
-import { createFilmDetailsMarkup } from './markups/filmDetailMarkup';
+import { createFilmDetailsMarkup, createFilmDetailsMarkupNoUser } from './markups/filmDetailMarkup';
 import { refs } from './refs/refs';
 import { remove } from 'firebase/database';
 import { checkDataMovie, checkMovieInQueueList, renderModal } from "./myLibrary";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from 'firebase/auth';
+
+const auth = getAuth();
+console.log(auth);
+let userId;
+
+
 
 const container = document.querySelector('.container-films');
 const modal = document.querySelector('.backdrop-details');
@@ -32,6 +45,16 @@ const openModal = async e => {
     const resp = await fetchFilmDetails(
       e.target.closest('.collection__item').dataset.id
     );
+    onAuthStateChanged(auth, user => {
+      userId = user?.uid;
+      
+    }); 
+
+    if (userId === undefined) {
+      createFilmDetailsMarkupNoUser(resp)
+    }
+
+
 
     await checkMovieInQueueList(resp);
 

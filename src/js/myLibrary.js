@@ -37,13 +37,17 @@ onAuthStateChanged(auth, user => {
 const onClickBtnToQueue = (data, e) => {
 
   const queueAddBtn = document.querySelector('.queue-add');
+  queueAddBtn.removeEventListener('click', e => onClickBtnToQueue(data, e));
 
   queueAddBtn.textContent = 'REMOVE FROME QUEUE';
-
   queueAddBtn.classList.add('remove-from-queue');
   queueAddBtn.classList.remove('queue-add');
 
-  closeModal();
+
+  const removeFromQueueBtn = document.querySelector('.remove-from-queue');
+  removeFromQueueBtn.addEventListener('click',e => onRemoveQueueBtnClick(data, e));
+
+  //closeModal();
  
   const idMovie = data.id;
 
@@ -120,7 +124,7 @@ const onRemoveQueueBtnClick = (data, e) => {
   removeFromQueueBtn.classList.add('queue-add');
   removeFromQueueBtn.classList.remove('remove-from-queue');
 
- closeModal();
+ //closeModal();
 
 
   get(child(dbRef, `users/${userId}`)).then((snapshot) => {
