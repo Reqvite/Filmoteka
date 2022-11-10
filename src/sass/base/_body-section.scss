@@ -4,13 +4,14 @@ body {
   color: $main-text-color;
   font-family: $mainFont;
   font-weight: 500;
+  overflow-x: hidden;
 }
 
 .dark-theme {
   background-color: rgb(97, 97, 97);
   color: $header-text-color;
 }
-.wrapper{
+.wrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
