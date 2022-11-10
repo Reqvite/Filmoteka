@@ -1,6 +1,5 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-
 import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, enableLogging, update,child, get, onDisconnect} from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
@@ -21,6 +20,7 @@ const firebaseConfig = {
   messagingSenderId: '394290136676',
   appId: '1:394290136676:web:9848416d6de87eb2614171',
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -282,3 +282,15 @@ function removeEventListeners() {
   formRegistr.removeEventListener('submit', logInUser);
 }
 
+
+const sectionMain = document.querySelector('.section-main');
+const errorImg = document.querySelector('.error-img')
+
+document.addEventListener('click', checkConection)
+
+function checkConection(){
+ if (!navigator.onLine) {
+   sectionMain.outerHTML = '<p class="error-title">Check your connection and please reload the page.<p>';
+   errorImg.style.display = 'block';
+  }
+}
