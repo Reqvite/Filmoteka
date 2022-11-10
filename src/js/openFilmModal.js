@@ -12,7 +12,6 @@ import {
 } from 'firebase/auth';
 
 const auth = getAuth();
-console.log(auth);
 let userId;
 
 
@@ -52,11 +51,13 @@ const openModal = async e => {
 
     if (userId === undefined) {
       createFilmDetailsMarkupNoUser(resp)
+    }else{
+      await checkMovieInQueueList(resp);
     }
 
 
 
-    await checkMovieInQueueList(resp);
+   
 
     //------createFilmDetailsMarkup переніс в checkMovieInQueueList
 
