@@ -29,37 +29,6 @@ const auth = getAuth();
 const user = auth.currentUser;
 const dt = new Date();
 
-// export async function AuthState(user) {
-//   return await onAuthStateChanged(auth, user => {
-//     if (user) {
-//       return user.uid;
-//       //return sessionStorage.setItem('userId', `${userId}`);
-//     } else {
-//       return;
-//     }
-//   });
-// }
-
-// export const getAuthState = async () => await AuthState(user);
-
-// export const getQueueList = async (userId) => {
-//   return await get(child(dbRef, 'users/' + userId))
-//     .then(snapshot => {
-//       if (snapshot.exists()) {
-//         return JSON.parse(snapshot.val().queueList);
-//         //return snapshot.val();
-//       } else {
-//         return null;
-//       }
-//     })
-//     .catch(() => renderErrorServer());
-//   // let arr = [];
-//   // for (let key in value) {
-//   //   arr.push(JSON.parse(value[key]).objService);
-//   // }
-//   // return arr;
-// }
-
 //Modal btns
 const signinBtn = document.querySelector('.signin-Btn');
 const loginBtn = document.querySelector('.login-Btn');

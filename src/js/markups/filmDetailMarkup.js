@@ -29,6 +29,7 @@ export const createFilmDetailsMarkup = (resp, isAdded) => {
               ? vote_average = vote_average.toFixed(1)
               : (vote_average = '?');
 
+			  //-----підставляє техт і клас в кнопку queue-------
 const addToQueueBnt = isAdded ? 'REMOVE FROM QUEUE' : 'ADD TO QUEUE';
 const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 
@@ -79,8 +80,33 @@ const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 	</div>
 </div>`;
 
-      const body = document.querySelector('body');
-	  modal.insertAdjacentHTML('beforeend', markup);
+      
+
+	modal.insertAdjacentHTML('beforeend', markup);
+	openModal();
+  
+  const queueAddBtn = document.querySelector('.queue-add');
+  const removeFromQueueBtn = document.querySelector('.remove-from-queue');
+
+
+  queueAddBtn?.addEventListener('click', e => onClickBtnToQueue(resp.data, e));
+  removeFromQueueBtn?.addEventListener('click',e => onRemoveQueueBtnClick(resp.data, e));
+
+  viewTrailer(id);
+
+  const watchedAddBtn = document.querySelector('.watched-add');
+
+  watchedAddBtn.addEventListener('click', e =>
+    onClickAddToWatched(resp.data, e)
+  );
+};
+
+
+
+
+function openModal() {
+
+	const body = document.querySelector('body');
 	  containerModal.classList.remove('hidden');
 	  body.style.overflow = 'hidden';
 	  modalClose.addEventListener('click', closeModal);
@@ -95,22 +121,5 @@ const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 		modal_text.forEach(el => (el.style.color = '#ffffff'));
 		return;
 	  }
-
-  
-  const queueAddBtn = document.querySelector('.queue-add');
-  const removeFromQueueBtn = document.querySelector('.remove-from-queue');
-  console.log({queueAddBtn});
-  console.log({removeFromQueueBtn});
-
-
-  queueAddBtn?.addEventListener('click', e => onClickBtnToQueue(resp.data, e));
-  removeFromQueueBtn?.addEventListener('click',e => onRemoveQueueBtnClick(resp.data, e));
-
-  viewTrailer(id);
-
-  const watchedAddBtn = document.querySelector('.watched-add');
-
-  watchedAddBtn.addEventListener('click', e =>
-    onClickAddToWatched(resp.data, e)
-  );
+	
 };

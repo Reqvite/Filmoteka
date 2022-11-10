@@ -2,7 +2,7 @@ import { fetchFilmDetails } from './service/service';
 import { createFilmDetailsMarkup } from './markups/filmDetailMarkup';
 import { refs } from './refs/refs';
 import { remove } from 'firebase/database';
-import { checkDataMovie, renderModal } from "./myLibrary";
+import { checkDataMovie, checkMovieInQueueList, renderModal } from "./myLibrary";
 
 const container = document.querySelector('.container-films');
 const modal = document.querySelector('.backdrop-details');
@@ -32,9 +32,12 @@ const openModal = async e => {
     const resp = await fetchFilmDetails(
       e.target.closest('.collection__item').dataset.id
     );
-    await renderModal(resp);
-    //console.log(isAdded);
-    
+
+    await checkMovieInQueueList(resp);
+
+    //------createFilmDetailsMarkup переніс в checkMovieInQueueList
+
+    //-------переніс код в createFilmDetailsMarkup -----
     //createFilmDetailsMarkup(resp, isAdded);
     // modal.classList.remove('hidden');
     // body.style.overflow = 'hidden';
