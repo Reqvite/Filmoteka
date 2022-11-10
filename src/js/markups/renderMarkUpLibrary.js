@@ -7,13 +7,12 @@ const renderMurkUpLibrary = queueList => {
   let rating = null;
 
   const markup = queueList.reduce((acc, obj) => {
-    const { id, poster_path, title, release_date, vote_average, genres } = obj;
+    let { id, poster_path, title, release_date, vote_average, genres } = obj;
 
-
-    // poster_path
-    //           ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
-    //           : poster_path = img
-           // vote_average ? vote_average = vote_average.toFixed(1) : (vote_average = '?')
+    poster_path
+              ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
+              : poster_path = img
+           vote_average ? vote_average = vote_average.toFixed(1) : (vote_average = '?')
 
               if (vote_average >= 7) {
                 rating = 'masterpiece'
@@ -23,7 +22,12 @@ const renderMurkUpLibrary = queueList => {
                 rating = 'bad'
               }
 
-    const genreNames = genres.map(gender => gender.name);
+    let genreNames = genres.map(gender => gender.name);
+
+      if (genreNames.length >=3) {
+        genreNames = [genreNames[0], genreNames[1], 'Other'];  
+      }
+
     const releaseYear = release_date.split('-');
 
     return (
@@ -32,7 +36,7 @@ const renderMurkUpLibrary = queueList => {
         <a href="" class="card-wrap__link link">
               <div class="card">
               <div class="card__image-wrap">
-                      <img class="card__image" src="https://www.themoviedb.org/t/p/w500/${poster_path}" alt="${title}" width="395px" height="574px">
+                      <img class="card__image" src="${poster_path}" alt="${title}" width="395px" height="574px">
                        </div>
                   <div class="card__wrap">
                       <h2 class="card__title">${title}</h2>
