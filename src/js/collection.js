@@ -35,11 +35,12 @@ function fetchMovies(page) {
 }
 
 function fetchMoviesOnPagination(page) {
-  document.querySelector('.header').scrollIntoView();
   fetchPopularMovies(page).then(response => {
     const render = renderMarkUp(response.data.results, genreCollection);
     refs.collection.innerHTML = render;
-
+    setTimeout(() => {
+      document.querySelector('.container-films').scrollIntoView({behavior: "smooth"});
+    }, 500);
   });
 }
 
