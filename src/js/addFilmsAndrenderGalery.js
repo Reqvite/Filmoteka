@@ -29,18 +29,17 @@ function onSubmitForm(e) {
 
   filmsApiServer.query = e.currentTarget.searchFilm.value.trim();
   const userYearString = e.currentTarget.searchYear.value.trim();
+
   if (userYearString) {
     const userYear = Number(userYearString);
-    if (userYear <= 1895 || currYear <= userYear || Number.isNaN(userYear)) {
-      Notiflix.Notify.info('Pleas, enter correct year!');
+    if (userYear < 1895 || currYear <= userYear || Number.isNaN(userYear)) {
+      Notiflix.Notify.info('Please, enter correct year!');
       clearSearchYear();
       return;
     }
   }
 
-  const userYear = Number(userYearString);
-
-  filmsApiServer.primary_release_year = userYear;
+  filmsApiServer.primary_release_year = Number(userYearString);
 
   if (filmsApiServer.query === '') {
     Notiflix.Notify.warning('Please enter your search query');
