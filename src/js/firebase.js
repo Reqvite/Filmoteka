@@ -21,16 +21,7 @@ const firebaseConfig = {
   appId: '1:394290136676:web:9848416d6de87eb2614171',
 };
 
-const sectionMain = document.querySelector('.section-main');
 
-let checkOnline = null
-checkOnline = setInterval(() => {
-
-  if (navigator.onLine) {
-    console.log(navigator.onLine)
-    sectionMain.outerHTML = `<img src="../images/internet-error.gif" alt="error" />`
-  }
-}, 5000)
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
@@ -291,3 +282,15 @@ function removeEventListeners() {
   formRegistr.removeEventListener('submit', logInUser);
 }
 
+
+const sectionMain = document.querySelector('.section-main');
+const errorImg = document.querySelector('.error-img')
+
+document.addEventListener('click', checkConection)
+
+function checkConection(){
+ if (!navigator.onLine) {
+   sectionMain.outerHTML = '<p class="error-title">Check your connection and please reload the page.<p>';
+   errorImg.style.display = 'block';
+  }
+}
