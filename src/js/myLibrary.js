@@ -47,7 +47,7 @@ const onClickBtnToQueue = (data, e) => {
   const removeFromQueueBtn = document.querySelector('.remove-from-queue');
   removeFromQueueBtn.addEventListener('click',e => onRemoveQueueBtnClick(data, e));
 
-  //closeModal();
+  closeModal();
  
   const idMovie = data.id;
 
@@ -124,7 +124,7 @@ const onRemoveQueueBtnClick = (data, e) => {
   removeFromQueueBtn.classList.add('queue-add');
   removeFromQueueBtn.classList.remove('remove-from-queue');
 
- //closeModal();
+ closeModal();
 
 
   get(child(dbRef, `users/${userId}`)).then((snapshot) => {
