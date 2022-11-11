@@ -13,35 +13,49 @@ import * as image10 from '../images/footer/270.jpg';
 import * as sprite from '../images/sprite.svg';
 
 (() => {
-    const refs = {
-      openModalBtn: document.querySelector("[data-modal-open]"),
-      closeModalBtn: document.querySelector("[data-modal-close]"),
-      backdrop: document.querySelector(".modal-footer"),
-      modal: document.querySelector("[data-modal]"),
-      body: document.querySelector('body')
-    };
+  const refs = {
+    openModalBtn: document.querySelector('[data-modal-open]'),
+    closeModalBtn: document.querySelector('[data-modal-close]'),
+    backdrop: document.querySelector('.modal-footer'),
+    modal: document.querySelector('[data-modal]'),
+    body: document.querySelector('body'),
+  };
 
-    refs.openModalBtn.addEventListener("click", toggleModal);
-    refs.closeModalBtn.addEventListener("click", toggleModal);
-    refs.backdrop.addEventListener(`click`, onBackdropClick);
+  refs.openModalBtn.addEventListener('click', toggleModal);
+  refs.closeModalBtn.addEventListener('click', toggleModal);
+  refs.backdrop.addEventListener(`click`, onBackdropClick);
 
-    function toggleModal(event){
-      event.preventDefault();
-      refs.modal.classList.toggle("is-hidden");
-      refs.body.style.overflow = 'hidden'
+  function toggleModal(event) {
+    event.preventDefault();
+    refs.modal.classList.toggle('is-hidden');
+    document.addEventListener('keydown', onEscPress);
+    if (!refs.modal.classList.contains('is-hidden')) {
+          refs.body.style.overflow = 'hidden';
+    } else {
+      refs.body.style.overflow = 'scroll';
     }
-    function onCloseModal(){
-      refs.modal.classList.add(`is-hidden`);
-    }
+  }
+  function onCloseModal() {
+    refs.modal.classList.add(`is-hidden`);
+  }
+  function closeOnEscKey() {
+    refs.modal.classList.add(`is-hidden`);
+    document.removeEventListener('keydown', onEscPress);
+  }
   function onBackdropClick(event) {
-            refs.body.style.overflow = 'scroll'
-      if(event.currentTarget === event.target){
-        onCloseModal();
-       
-      }
+    if (event.currentTarget === event.target) {
+      onCloseModal();
+         refs.body.style.overflow = 'scroll';
     }
-  })();
-  //////// cart////////
+  }
+  function onEscPress(event) {
+    if (event.code === 'Escape') {
+      closeOnEscKey();
+         refs.body.style.overflow = 'scroll';
+    }
+  }
+})();
+//////// cart////////
 
   const cart = [
     {img: `${image1}`, h3: `Scrum Master Yurii Perekrestnyi`, a:`https://github.com/Jodlei`, href: `https://www.linkedin.com/in/yurii-perekrestnyi-998396256/`},
@@ -90,5 +104,5 @@ import * as sprite from '../images/sprite.svg';
       </div>
     </li>`;
     })
-    .join("");
-  }
+    .join('');
+}

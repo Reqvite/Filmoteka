@@ -1,77 +1,75 @@
 <header class="header">
-  <section class="header__section">
-    <div class="container">
-      <div class="header__nav-wrap">
-        <a href="./index.html" class="header__logo-link link">
-          <svg width="24" height="24" class="header__logo">
-            <use href="./images/sprite.svg#icon-logo"></use>
-          </svg>
-          <span class="header__logo-text">Filmoteka</span>
-        </a>
-        <h1 class="visually-hidden">Filmoteka</h1>
-        <ul class="header__nav-list list">
-          <li class="header__nav-item home-js">
-            <button class="header__nav-button header__nav-button--current">
-              home
-            </button>
-          </li>
+	<section class="header__section">
+		<div class="container">
+			<div class="header__nav-wrap">
+				<a href="./index.html" class="header__logo-link link">
+					<svg width="24" height="24" class="header__logo">
+						<use href="./images/sprite.svg#icon-logo"></use>
+					</svg>
+					<span class="header__logo-text">Filmoteka</span>
+				</a>
+				<h1 class="visually-hidden">Filmoteka</h1>
+				<ul class="header__nav-list list">
+					<li class="header__nav-item home-js" name="home" data-active="true" )>
+						<button class="header__nav-button header__nav-button--current" name="home">
+							home
+						</button>
+					</li>
 
-          <li class="header__nav-item">
-            <button class="header__nav-button my-library-js" name="library">
-              my library
-            </button>
-          </li>
-          <li class="header__nav-item">
-            <button type="button" class="header__nav-button login-Btn">
-              Log in
-            </button>
-          </li>
-          <li class="header__nav-item">
-            <button type="button" class="header__nav-button signin-Btn">
-              Sign in
-            </button>
-          </li>
-          <li class="header__nav-item login-Out">
-            <button type="button" class="header__nav-button login-Out">
-              Log out
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div class="header__home-wrap">
-        <form class="header__search-form">
-          <input
-            class="header__input"
-            type="text"
-            name="search"
-            placeholder="Movie search"
-          />
-          <button type="submit" class="header__form-submit-btn">
-            <svg width="12" height="12" class="header__logo">
-              <use href="./images/sprite.svg#icon-search-2"></use>
-            </svg>
-          </button>
-        </form>
-        <button type="button" class="toggle-theme">
-          <svg class="icon-sun" width="25" height="25">
-            <use href="./images/sprite.svg#icon-sun"></use>
-          </svg>
-          <svg class="icon-brightness" width="25" height="25">
-            <use href="./images/sprite.svg#icon-brightness"></use>
-          </svg>
-        </button>
-      </div>
-      <div class="header__mylibrary" style="display: none">
-        <button class="header__mylibrary-btn button" name="watched-btn">
-          Watched
-        </button>
+					<li class="header__nav-item">
+						<button class="header__nav-button my-library-js" name="library">
+							my library
+						</button>
+					</li>
+					<li class="header__nav-item">
+						<button type="button" class="header__nav-button login-Btn">
+							Log in
+						</button>
+					</li>
+					<li class="header__nav-item">
+						<button type="button" class="header__nav-button signin-Btn">
+							Sign in
+						</button>
+					</li>
+					<li class="header__nav-item login-Out">
+						<button type="button" class="header__nav-button login-Out" name="log-out">
+							Log out
+						</button>
+					</li>
+				</ul>
+			</div>
+			<div class="header__home-wrap">
+				<form class="header__search-form">
+					<div class="wrap-input">
+						<input class="header__input" type="text" name="searchFilm" placeholder="Movie search" autofocus />
+						<button type="submit" class="header__form-submit-btn">
+							<svg width="12" height="12" class="header__logo">
+								<use href="./images/sprite.svg#icon-search-2"></use>
+							</svg>
+						</button>
+					</div>
+					<input class="header__input header__input--year" type="text" name="searchYear" placeholder="Enter year" />
+				</form>
+				<div class="header__mylibrary" style="display: none">
+					<button class="header__mylibrary-btn button watched-js" name="watched-btn">
+						Watched
+					</button>
 
-        <button
-          class="header__mylibrary-btn header__mylibrary-btn--active button header__mylibrary-btn--que"
-        >
-          Queue
-        </button>
-      </div>
-    </div>
-  </section>
+					<button
+						class="header__mylibrary-btn header__mylibrary-btn--active button header__mylibrary-btn--que queue-js">
+						Queue
+					</button>
+				</div>
+
+				<button type="button" class="toggle-theme">
+					<svg class="icon-sun" width="25" height="25">
+						<use href="./images/sprite.svg#icon-sun"></use>
+					</svg>
+					<svg class="icon-brightness is-hiden" width="25" height="25">
+						<use href="./images/sprite.svg#icon-brightness"></use>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</section>
 </header>

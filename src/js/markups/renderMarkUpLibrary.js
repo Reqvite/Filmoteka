@@ -1,21 +1,45 @@
 import { refs } from '../refs/refs';
+import * as image from '../../images/library/empty-library.png';
+import img from '../../images/collection/csaff-no-poster.jpg';
 
 const renderMurkUpLibrary = queueList => {
-  const markup = queueList.reduce((acc, obj) => {
-    const { id, poster_path, title, release_date, vote_average, genres } = obj;
 
-    const genreNames = genres.map(gender => gender.name);
+  let rating = null;
+
+  const markup = queueList.reduce((acc, obj) => {
+    let { id, poster_path, title, release_date, vote_average, genres } = obj;
+
+    poster_path
+              ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
+              : poster_path = img
+           vote_average ? vote_average = vote_average.toFixed(1) : (vote_average = '?')
+
+              if (vote_average >= 7) {
+                rating = 'masterpiece'
+              }else if (vote_average >= 5 && vote_average <= 7) {
+                rating = 'good'
+              }else if(vote_average <= 5) {
+                rating = 'bad'
+              }
+
+    let genreNames = genres.map(gender => gender.name);
+
+      if (genreNames.length >=3) {
+        genreNames = [genreNames[0], genreNames[1], 'Other'];  
+      }
+
     const releaseYear = release_date.split('-');
 
     return (
       acc +
-      `
-        <li class="collection__item" data-id=${id}>
+      `<li class="collection__item" data-id=${id}>
         <a href="" class="card-wrap__link link">
               <div class="card">
-                      <img class="card__image" src="https://www.themoviedb.org/t/p/original/${poster_path}" alt="${title}" width="395px" height="574px">
-                  <div class="card-wrap">
-                      <h2 class="card_ _title">${title}</h2>
+              <div class="card__image-wrap">
+                      <img class="card__image" src="${poster_path}" alt="${title}" width="395px" height="574px">
+                       </div>
+                  <div class="card__wrap">
+                      <h2 class="card__title">${title}</h2>
                       <div class="card__data">
                           <p class="card__genre">${genreNames.join(', ')} |</p>
                           <p class="card__year">${releaseYear[0]}</p>
@@ -34,8 +58,12 @@ const renderMurkUpLibrary = queueList => {
 
 const clearContainer = () => {
   const title = `
-    <h1>Opps🙊 your library is empty! Choose something!</h1>
-    `;
+  <img
+  src="${image}"
+  alt="foto"
+  width="300px" height="300px"
+/>
+  `;
   refs.gallery.innerHTML = title;
 };
 

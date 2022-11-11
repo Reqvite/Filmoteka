@@ -1,47 +1,46 @@
+import Notiflix from 'notiflix';
 import fetchTrailerVideo from './fetchTrailerVideo';
-import onError from './onError';
 import createTrailerMarkup from './markups/createTrailerMarkup';
 
 export default async function viewTrailer(trailerId) {
-  const btnViewAndStopTrailer = document.querySelector('.trailer-button');
-  const trailer = document.querySelector('.trailer');
-  const insertBtn = btnViewAndStopTrailer.firstElementChild;
+  const refs = {
+    btnViewTrailer: document.querySelector('.trailer-button--view'),
+    btnCloseTrailer: document.querySelector('.trailer-button--close'),
+    trailer: document.querySelector('.trailer'),
+  };
 
-  btnViewAndStopTrailer.addEventListener('click', onClickTrailerBtn);
+  refs.btnViewTrailer.addEventListener('click', onClickTrailerBtnView);
+  refs.btnCloseTrailer.addEventListener('click', onClickTrailerBtnClose);
 
-  async function onClickTrailerBtn(e) {
+  async function onClickTrailerBtnView() {
     try {
-      let keyVideo;
-      if (e.target.innerText === 'VIEW TRAILER') {
-        const resp = await fetchTrailerVideo(trailerId);
-        const { results } = resp.data;
+      const resp = await fetchTrailerVideo(trailerId);
+      const { results } = resp.data;
 
-        if (results.length === 0) {
-          onError(' no trailer found!');
-          return;
-        }
-
-        keyVideo = results[0].key;
-        trailer.classList.add('is-view');
-
-        createTrailerMarkup(trailer, keyVideo);
-
-        e.target.innerText = 'CLOSE TRAILER';
-        insertBtn.classList.remove('trailer-button__text--play');
-        insertBtn.classList.add('trailer-button__text--stop');
+      if (results.length === 0) {
+        Notiflix.Notify.info('Sorry, no trailer found!');
         return;
       }
 
-      if (e.target.innerText === 'CLOSE TRAILER') {
-        trailer.classList.remove('is-view');
-        e.target.innerText = 'VIEW TRAILER';
-        insertBtn.classList.add('trailer-button__text--play');
-        insertBtn.classList.remove('trailer-button__text--stop');
-        trailer.innerHTML = '';
-        return;
-      }
+      const keyVideo = results[0].key;
+      refs.trailer.classList.add('is-view');
+      refs.btnCloseTrailer.classList.remove('is-hidden');
+      refs.btnViewTrailer.classList.add('is-hidden');
+
+      createTrailerMarkup(refs.trailer, keyVideo);
     } catch (error) {
-      onError(error);
+      Notiflix.Notify.failure(error.message);
+    }
+  }
+
+  async function onClickTrailerBtnClose() {
+    try {
+      refs.trailer.classList.remove('is-view');
+      refs.trailer.innerHTML = '';
+      refs.btnCloseTrailer.classList.add('is-hidden');
+      refs.btnViewTrailer.classList.remove('is-hidden');
+    } catch (error) {
+      Notiflix.Notify.failure(error.message);
     }
   }
 }

@@ -1,15 +1,18 @@
+.main{
+  flex: 1 1 auto;
+}
+
 .collection {
-  padding: 0 20px;
+  padding: 20px 20px 0px ;
   display: grid;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
   grid-template-columns: auto;
   gap: 32px;
 
   @include tablet {
     grid-template-columns: auto auto;
-    padding: 0 32px;
+    padding: 60px 32px 0px;
   }
 
   @include desktop {
@@ -27,9 +30,10 @@
   @include desktop {
     max-width: 395px;
   }
+
   transform: scale(1);
-  transition: box-shadow 1000ms cubic-bezier(0.075, 0.82, 0.165, 1),
-    transform 1000ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  @include transition($one: box-shadow, $two: transform, $time:1000ms, $func:cubic-bezier(0.075, 0.82, 0.165, 1));
+
   &:hover,
   &:focus {
     box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
@@ -67,9 +71,11 @@
 }
 
 .card__wrap {
-  margin-top: 12px;
-  flex-grow: 1;
+  padding-top: 12px;
+  padding-bottom: 5px;
   padding-left: 5px;
+  flex-grow: 1;
+  
 
   @include mobile {
     font-size: 12px;
@@ -85,6 +91,17 @@
   text-transform: uppercase;
   margin-bottom: 5px;
   font-size: inherit;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space:nowrap;
+
+  // .collection__item:hover &,
+  // .collection__item:focus &{
+  //   text-overflow: clip;
+  //   overflow: visible;
+  //   white-space: normal;
+  // }
 }
 .card__data {
   display: flex;
@@ -93,10 +110,8 @@
 }
 .card__genre {
   list-style: none;
-  // margin-top: 10px;
-  // margin-left: 0;
-  // padding-left: 0;
 }
+
 .card__year {
   margin-left: 6px;
 }

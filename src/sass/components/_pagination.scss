@@ -1,40 +1,56 @@
-.pagination{
-	@include flexCenter();
+.pagination {
+  @include flexCenter();
 
-	&__list {
-		display: flex;
-		padding: 8px;
-	}
+  &__list {
+    display: flex;
+    padding: 8px;
+  }
 
-	& li {
-		@include flexCenter();
+  & li {
+    @include flexCenter();
 
-		height: 40px;
-		width: 40px;
-		border-radius: 5px;
+    height: 36px;
+    width: 36px;
+    border-radius: 5px;
 
-		font-weight: 500;
-		font-size: 12px;
-		line-height: 1.33;
-		
-		list-style: none;
-		text-align: center;
-		cursor: pointer;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
 
-		@include transition();
-	}
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+
+    @include transition();
+  }
+
+  &__arrow {
+    background-color: #79767671;
+	margin-left: 5px;
+	margin-right: 5px;
+  }
+
+  li.pagination__dots, li.pagination__numb-first, li.pagination__numb-last {
+	display: none;
 	
-	&__arrow{
-		background-color: #79767671;
-	}
+	 @include tablet {
+      display: flex;
+    }
+  }
 
-	&__numb.active, &__numb:hover, &__numb:focus, &__arrow:hover, &__arrow:focus,&__numb-first:hover, &__numb-first:focus, &__numb-last:hover, &__numb-last:focus {
-		background-color: $accentBg-color;
-	} 
+  &__numb.active,
+  &__numb:hover,
+  &__numb:focus,
+  &__arrow:hover,
+  &__arrow:focus,
+  &__numb-first:hover,
+  &__numb-first:focus,
+  &__numb-last:hover,
+  &__numb-last:focus {
+    background-color: $accentBg-color;
+  }
 
-	&.is-hidden {
-		display: none;
-	}
+  &.is-hidden {
+    display: none;
+  }
 }
-
-

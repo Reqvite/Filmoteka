@@ -1,5 +1,6 @@
 // Усі жанри
 import axios from 'axios';
+import { spinner } from "./spinner";
 
 export function buildUrl(pageNumber = 1) {
     const key = `e145377b3a98d62607e7dc90339d279b`;
@@ -17,6 +18,8 @@ export async function fetchGenreId() {
 }
 
 export async function fetchPopularMovies(page) {
-    const response = await axios.get(buildUrl(page));           
+    spinner();
+    const response = await axios.get(buildUrl(page));  
+    spinner();         
     return response;
 }
