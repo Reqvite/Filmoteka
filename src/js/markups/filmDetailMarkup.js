@@ -32,8 +32,10 @@ export const createFilmDetailsMarkup = (resp, isAdded) => {
               : (vote_average = '?');
 
 			  //-----підставляє техт і клас в кнопку queue-------
-const addToQueueBnt = isAdded ? 'REMOVE FROM QUEUE' : 'ADD TO QUEUE';
-const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
+
+
+// const addToQueueBnt = isAdded ? 'REMOVE FROM QUEUE' : 'ADD TO QUEUE';
+// const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 
 	if (vote_average >= 7) {
 		rating = 'masterpiece'
@@ -82,7 +84,10 @@ const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 			<li class="buttons-list__item">
 				<button class="main-button watched-add button" type="button" name="watched">Add to watched</button>
 			</li>
-			<li class="buttons-list__item"><button class="secondary-button ${classQueueBtn} button" type="button" name="queue">${addToQueueBnt}</button></li>
+			<li class="buttons-list__item"><button class="secondary-button remove-from-queue button"  type="button" name="queue">REMOVE FROM QUEUE</button></li>
+			<li class="buttons-list__item"><button class="secondary-button queue-add button" type="button" name="queue">ADD TO QUEUE</button></li>
+			
+			
 		</ul>
 		<div class="trailer"></div>
 		<button class="trailer-button trailer-button--close button is-hidden" type="button">
@@ -91,14 +96,26 @@ const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 	</div>
 </div>`;
 
-      
 
-	modal.insertAdjacentHTML('beforeend', markup);
-	openModal();
-  
-  const queueAddBtn = document.querySelector('.queue-add');
-  const removeFromQueueBtn = document.querySelector('.remove-from-queue');
+modal.insertAdjacentHTML('beforeend', markup);
 
+		
+openModal();
+const queueAddBtn = document.querySelector('.queue-add');
+const removeFromQueueBtn = document.querySelector('.remove-from-queue');
+	
+	isAdded 
+		? queueAddBtn.classList.add('hidden')  
+		: removeFromQueueBtn.classList.add('hidden');
+	
+	
+	// if (isAdded) {
+	// 	queueAddBtn.classList.add('hidden')
+	// 	removeFromQueueBtn.classList.remove('hidden')
+	// } else {
+	// 	removeFromQueueBtn.classList.add('hidden')
+	// 	queueAddBtn.classList.remove('hidden')
+	// }
 
   queueAddBtn?.addEventListener('click', e => onClickBtnToQueue(resp.data, e));
   removeFromQueueBtn?.addEventListener('click',e => onRemoveQueueBtnClick(resp.data, e));
