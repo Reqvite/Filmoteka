@@ -1,4 +1,5 @@
 import { refs } from "./refs/refs";
+import { addParallax } from './parallax';
 
 const LS_Key = 'theme';
 DarkOrWhiteTheme();
@@ -22,6 +23,8 @@ function DarkOrWhiteTheme() {
         refs.iconSun.classList.add('is-hiden'); 
         refs.iconBrightness.classList.remove('is-hiden');
         refs.modalFooter.classList.add('dark');
+
+        addParallax('dark');
         return;
     }
         document.body.classList.remove("dark-theme");
@@ -30,7 +33,8 @@ function DarkOrWhiteTheme() {
         refs.toggleTheme.style.backgroundColor = "#fff";
         refs.iconBrightness.classList.add('is-hiden');
         refs.iconSun.classList.remove('is-hiden') ;
-        refs.modalFooter.classList.remove('dark');
-
+    refs.modalFooter.classList.remove('dark');
+    
+    addParallax('white');
 }
 

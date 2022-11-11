@@ -5,6 +5,7 @@ import { fetchGenreId } from './collectionFetch';
 import { renderMarkUp } from './markups/collectionRender'; 
 import { refs } from "./refs/refs";
 import { spinner } from "./spinner";
+import { setHeight } from "./parallax";
 
 const filmsApiServer = new FilmsApiServer();
 
@@ -85,7 +86,7 @@ function renderGalleryList(data) {
   spinner();
 
   updateMarkupPagination(total_pages, page, renderAfterChangingPage);
-
+  setHeight();
 }
 
 function clearSearchQuery() {

@@ -3,6 +3,7 @@ import { fetchPopularMovies } from './collectionFetch';
 import { renderMarkUp } from './markups/collectionRender';
 import updateMarkupPagination from './pagination';
 import { refs } from './refs/refs';
+import { setHeight } from './parallax';
 
 export { fetchTrendingFilms };
 
@@ -39,8 +40,10 @@ function fetchMoviesOnPagination(page) {
     const render = renderMarkUp(response.data.results, genreCollection);
     refs.collection.innerHTML = render;
     setTimeout(() => {
-      document.querySelector('.container-films').scrollIntoView({behavior: "smooth"});
-    }, 500);
+      document
+        .querySelector('.container-films')
+        .scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   });
 }
 

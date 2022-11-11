@@ -28,3 +28,5 @@ import './js/changeHeaderPageHome-Mylibrary';
 import './js/addFilmToWatchedList-firebase';
 
 import "./js/btnUp";
+
+import './js/parallax';
