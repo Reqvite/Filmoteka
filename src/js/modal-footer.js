@@ -1,6 +1,7 @@
 // import image from '../images/footer';
 
 import * as image from '../images/footer/no-foto.jpg';
+import * as image1 from '../images/footer/Yurii-Perekrestnyi.jpg';
 import * as image3 from '../images/footer/Alexander-Kulyk.jpg';
 import * as image4 from '../images/footer/me-foto-1.jpg';
 import * as image5 from '../images/footer/Taras-Novitskyi.jpg';
@@ -43,7 +44,7 @@ import * as sprite from '../images/sprite.svg';
   //////// cart////////
 
   const cart = [
-    {img: `${image}`, h3: `Scrum Master Yurii Perekrestnyi`, a:`https://github.com/Jodlei`, href: `https://www.linkedin.com/in/yurii-perekrestnyi-998396256/`},
+    {img: `${image1}`, h3: `Scrum Master Yurii Perekrestnyi`, a:`https://github.com/Jodlei`, href: `https://www.linkedin.com/in/yurii-perekrestnyi-998396256/`},
     {img: `${image}`, h3: `Team Lead Vladyslav Yachyn`, a:`https://github.com/Reqvite`, href: `https://uk.linkedin.com/`},
     {img: `${image3}`, h3: `Alexander Kulyk`, a:`https://github.com/alexander-kulyk`, href: `https://uk.linkedin.com/`},
     {img: `${image4}`, h3: `Daria Viunyk`, a:`https://github.com/Darya-Viunyk`, href: `https://www.linkedin.com/in/darya-viunyk-50b386181/`},
