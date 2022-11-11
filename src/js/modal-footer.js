@@ -38,14 +38,15 @@ import * as sprite from '../images/sprite.svg';
     document.removeEventListener('keydown', onEscPress);
   }
   function onBackdropClick(event) {
-    refs.body.style.overflow = 'scroll';
     if (event.currentTarget === event.target) {
       onCloseModal();
+         refs.body.style.overflow = 'scroll';
     }
   }
   function onEscPress(event) {
     if (event.code === 'Escape') {
       closeOnEscKey();
+         refs.body.style.overflow = 'scroll';
     }
   }
 })();
@@ -90,7 +91,7 @@ const cart = [
     href: `https://www.linkedin.com/in/yevhenii-kavetskyi-423a34250/`,
   },
   {
-    img: `${image}`,
+    img: `${image7}`,
     h3: `Sergii Samara`,
     a: `https://github.com/SerhiiSamara`,
     href: `https://uk.linkedin.com/`,
@@ -108,7 +109,7 @@ const cart = [
     href: `https://uk.linkedin.com/`,
   },
   {
-    img: `${image}`,
+    img: `${image10}`,
     h3: `Vlad Lysenko`,
     a: `https://github.com/eugeniusz57`,
     href: `https://uk.linkedin.com/`,
