@@ -102,7 +102,7 @@
   height: 30px;
   width: 30px;
   right: 0;
-  bottom: 30px;
+  bottom: 59px;
   margin-top: 0px;
   color: $mainBg-color;
   display: flex;
@@ -170,11 +170,11 @@
 }
 
 .wrap-input {
-  position: relative;
   margin-bottom: 10px;
 }
 
 .header__input {
+  position: relative;
   width: 100%;
   height: 19px;
   color: #ffffff;
@@ -196,7 +196,7 @@
 
 .header__form-submit-btn {
   position: absolute;
-  right: -30px;
+  right: 0;
   border: none;
   cursor: pointer;
   outline: none;
