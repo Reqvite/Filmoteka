@@ -35,6 +35,7 @@ import * as sprite from '../images/sprite.svg';
       refs.body.style.overflow = 'scroll';
     }
   }
+  
   function onCloseModal() {
     refs.modal.classList.add(`is-hidden`);
   }
