@@ -40,12 +40,13 @@ import * as sprite from '../images/sprite.svg';
   function onBackdropClick(event) {
     if (event.currentTarget === event.target) {
       onCloseModal();
-          refs.body.style.overflow = 'scroll';
+         refs.body.style.overflow = 'scroll';
     }
   }
   function onEscPress(event) {
     if (event.code === 'Escape') {
       closeOnEscKey();
+         refs.body.style.overflow = 'scroll';
     }
   }
 })();
