@@ -62,6 +62,9 @@ const onClickBtnToQueue = (data, e) => {
           if (snapshot.exists()) {
             const queueDataString = snapshot.val().queueList;
             if (queueDataString === '') {
+               Notiflix.Notify.success(`Added movie to QUEUE`, {
+                  timeout: 2000,
+                });
               let listWatchedArr = [];
               listWatchedArr.push(data);
 
@@ -107,7 +110,7 @@ const onClickBtnToQueue = (data, e) => {
           console.error(error);
         });
   } else {
-    Notiflix.Notify.failure(`please log in`, {
+    Notiflix.Notify.failure(`Please log in`, {
       timeout: 2000,
     });
     return;
@@ -141,7 +144,7 @@ const onRemoveQueueBtnClick = (data, e) => {
            return arr.push(obj)
         });
         
-        if (newQueueListArr.length === 0 && homeActive.dataset.active !== true) {
+        if (newQueueListArr.length === 0 && homeActive.dataset.active !== 'true') {
           clearContainer();
           closeModal();
             update(ref(database, 'users/' + userId),{
@@ -150,11 +153,9 @@ const onRemoveQueueBtnClick = (data, e) => {
             return; 
         } 
         
-        if (homeActive.dataset.active !== true) {
-          console.log(homeActive.dataset.active);
+        if (homeActive.dataset.active !== 'true') {
           renderMurkUpLibrary(newQueueListArr);
-          closeModal();
-          
+          closeModal();        
         };
 
         const newQueueListString = JSON.stringify(newQueueListArr);
