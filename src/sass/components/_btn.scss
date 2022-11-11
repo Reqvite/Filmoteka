@@ -62,20 +62,8 @@
 }
 
 .main-button {
-  border-color: transparent;
-  color: white;
   background-color: $accentBg-color;
-
-  transition: box-shadow 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
-  &:hover,
-  &:focus {
-    box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
-  }
-}
-
-.secondary-button {
-  background-color: transparent;
-
+  border-color: transparent;
   transition: color 500ms cubic-bezier(0.075, 0.82, 0.165, 1),
     background-color 500ms cubic-bezier(0.075, 0.82, 0.165, 1),
     border-color 500ms cubic-bezier(0.075, 0.82, 0.165, 1),
@@ -83,13 +71,24 @@
   &:hover,
   &:focus {
     color: white;
-    background-color: $accentBg-color;
     border-color: transparent;
     box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
   }
 }
 
-
+.secondary-button {
+  background-color: $accentBg-color;
+  border-color: transparent;
+  transition: color 500ms cubic-bezier(0.075, 0.82, 0.165, 1),
+    border-color 500ms cubic-bezier(0.075, 0.82, 0.165, 1),
+    box-shadow 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:hover,
+  &:focus {
+    color: white;
+    border-color: transparent;
+    box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
+  }
+}
 
 .modal-icon-cross {
   display: block;
@@ -97,42 +96,94 @@
   margin-left: auto;
   border-color: transparent;
   background-color: transparent;
-
+  transition: all 0.3s linear;
   cursor: pointer;
 
   &:hover,
   &:focus {
+    transform: scale(1.2) rotate(90deg);
   }
 }
 // button Up
-.btnUp{
+.btnUp {
+  padding: 2rem 1rem;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   position: fixed;
-  right: 5px;
-  bottom: 30%;
-  min-width: 30px;
-  height: 30px;
+  right: 2%;
+  bottom: 5%;
   background-color: $secondary-text-color;
-  border-radius: 5px;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
+  border-radius: 3rem;
+  transform: rotate(90deg);
+  transition: all 0.3s linear;
   cursor: pointer;
-  color: $header-text-color;
-  border: 1px solid $header-text-color;
-  transition: opacity 0.3s linear;
   opacity: 1;
+  z-index: 5;
+
+  &__arrow {
+    position: relative;
+    background-color: white;
+    width: 50px;
+    height: 3px;
+    border-radius: 1rem;
+    transform-origin: right center;
+    transition: all 0.3s linear;
+
+    &::before {
+      transform: rotate(-35deg);
+    }
+    &::after {
+      transform: rotate(35deg);
+    }
+
+    &::before,
+    &::after {
+      display: block;
+      content: '';
+      position: absolute;
+      left: 0;
+      background: white;
+      width: 2rem;
+      height: 3px;
+      transform-origin: left;
+      transition: all 0.3s linear;
+      border-radius: 1rem;
+    }
+  }
 
   &:hover,
   &:focus {
-    border: transparent;
     background-color: rgb(235, 136, 65);
+    transform: scale(1.2) rotate(90deg);
+
+    .arrow {
+      &:before {
+        transform: rotate(35deg);
+      }
+      &:after {
+        transform: rotate(-35deg);
+      }
+    }
   }
 
-  &.is-hiden{
+  &.is-hiden {
     opacity: 0;
   }
 }
+
+
+.remove-from-queue.hidden{
+  display: none;
+  margin: 0;
+  opacity: 0;
+}
+
+.queue-add.hidden{
+  display: none;
+  margin: 0;
+  opacity: 0;
+}
+

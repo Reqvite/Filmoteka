@@ -1,6 +1,5 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-
 import { initializeApp } from "firebase/app";
 import { getDatabase, set, ref, enableLogging, update,child, get, onDisconnect} from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
@@ -21,6 +20,15 @@ const firebaseConfig = {
   messagingSenderId: '394290136676',
   appId: '1:394290136676:web:9848416d6de87eb2614171',
 };
+
+const list = document.querySelector('.container-films') 
+function listAnimation() {
+  setTimeout(() => {
+    list.style.top = '0'
+    list.style.opacity ='1'
+  },150)
+}
+listAnimation()
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -224,30 +232,30 @@ function handleLogIn() {
 }
 
 //Получение данных если пользоваетль залогинен
-onAuthStateChanged(auth, user => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    const dbRef = ref(getDatabase());
-    localStorage.setItem('userId', uid);
-    get(child(dbRef, `users/${uid}`))
-      .then(snapshot => {
-        if (snapshot.exists()) {
-          console.log(snapshot.val());
-        } else {
-          console.log('No data available');
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
+// onAuthStateChanged(auth, user => {
+//   if (user) {
+//     // User is signed in, see docs for a list of available properties
+//     // https://firebase.google.com/docs/reference/js/firebase.User
+//     const uid = user.uid;
+//     const dbRef = ref(getDatabase());
+//     localStorage.setItem('userId', uid);
+//     get(child(dbRef, `users/${uid}`))
+//       .then(snapshot => {
+//         if (snapshot.exists()) {
+//           console.log(snapshot.val());
+//         } else {
+//           console.log('No data available');
+//         }
+//       })
+//       .catch(error => {
+//         console.error(error);
+//       });
+//     // ...
+//   } else {
+//     // User is signed out
+//     // ...
+//   }
+// });
 
 //Выйти из аккаунта
 logOut.addEventListener('click', e => {
@@ -282,3 +290,15 @@ function removeEventListeners() {
   formRegistr.removeEventListener('submit', logInUser);
 }
 
+
+const sectionMain = document.querySelector('.section-main');
+const errorImg = document.querySelector('.error-img')
+
+document.addEventListener('click', checkConection)
+
+function checkConection(){
+ if (!navigator.onLine) {
+   sectionMain.outerHTML = '<p class="error-title">Check your connection and please reload the page.<p>';
+   errorImg.style.display = 'block';
+  }
+}
