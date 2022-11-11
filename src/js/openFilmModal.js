@@ -12,7 +12,6 @@ import {
 } from 'firebase/auth';
 
 const auth = getAuth();
-console.log(auth);
 let userId;
 
 
@@ -39,24 +38,25 @@ container.addEventListener('click', e => {
   }
 });
 
+onAuthStateChanged(auth, user => {
+  userId = user?.uid;
+});
+
 const openModal = async e => {
   e.preventDefault();
   if (e.target.closest('.collection__item')?.dataset.id) {
     const resp = await fetchFilmDetails(
       e.target.closest('.collection__item').dataset.id
     );
-    onAuthStateChanged(auth, user => {
-      userId = user?.uid;
+
+      if (userId === undefined) {
+        createFilmDetailsMarkupNoUser(resp)
+      }else{
+         checkMovieInQueueList(resp);
+      }
       
-    }); 
-
-    if (userId === undefined) {
-      createFilmDetailsMarkupNoUser(resp)
-    }
 
 
-
-    await checkMovieInQueueList(resp);
 
     //------createFilmDetailsMarkup переніс в checkMovieInQueueList
 
@@ -90,7 +90,6 @@ export const closeModal = e => {
   document.removeEventListener('keydown', escModal);
   modal.removeEventListener('click', closeModalOutsideWindow);
   body.style.overflow = 'scroll';
-  modalContainer.remove();
 };
 
 export function ChangeColorText() {

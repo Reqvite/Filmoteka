@@ -93,7 +93,7 @@ const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 
       
 
-	modal.innerHTML = markup;
+	modal.insertAdjacentHTML('beforeend', markup);
 	openModal();
   
   const queueAddBtn = document.querySelector('.queue-add');
@@ -196,7 +196,7 @@ export const createFilmDetailsMarkupNoUser = (resp) => {
   
 		
   
-	modal.innerHTML = markup;
+	modal.insertAdjacentHTML('beforeend', markup);
 	openModal();
 	
 	const queueAddBtn = document.querySelector('.queue-add');
@@ -218,6 +218,12 @@ export const createFilmDetailsMarkupNoUser = (resp) => {
 
 //----------------------------------
 function openModal() {
+ 
+	const checkModalContentAll = document.querySelectorAll('.film-details-wrapper')
+	const checkModalContent = document.querySelector('.film-details-wrapper')
+	if (checkModalContentAll?.length >= 2) {
+		checkModalContent?.remove()
+	}
 
 	const body = document.querySelector('body');
 	  containerModal.classList.remove('hidden');
