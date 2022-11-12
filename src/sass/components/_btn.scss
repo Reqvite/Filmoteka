@@ -112,7 +112,7 @@
   bottom: 4%;
   background-color: $secondary-text-color;
   border-radius: 3rem;
-  transform: rotate(90deg);
+  transform: rotate(90deg) scale(1);
   transition: all 0.3s linear;
   cursor: pointer;
   opacity: 1;
@@ -149,17 +149,35 @@
     }
   }
 
-  &:hover,
-  &:focus {
-    background-color: rgb(235, 136, 65);
-    transform: scale(1.2) rotate(90deg);
+  @media (hover: none) {
+    &:active {
+      background-color: rgb(235, 136, 65);
+      transform: scale(1.1) rotate(90deg);
 
-    .arrow {
-      &:before {
-        transform: rotate(35deg);
+      .arrow {
+        &:before {
+          transform: rotate(35deg);
+        }
+        &:after {
+          transform: rotate(-35deg);
+        }
       }
-      &:after {
-        transform: rotate(-35deg);
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover,
+    &:focus {
+      background-color: rgb(235, 136, 65);
+      transform: scale(1.1) rotate(90deg);
+
+      .arrow {
+        &:before {
+          transform: rotate(35deg);
+        }
+        &:after {
+          transform: rotate(-35deg);
+        }
       }
     }
   }

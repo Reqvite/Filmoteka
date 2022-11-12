@@ -7,7 +7,7 @@ window.addEventListener('scroll', () => {
   let windowWidth = window.innerWidth;
   let scrollPoint = 0;
 
-  scrollPoint = windowWidth <= 768 ? 4000 : 2000;
+  scrollPoint = windowWidth <= 768 ? 3500 : 2000;
   scrollY > scrollPoint
     ? refs.btnUp.classList.remove('is-hiden')
     : refs.btnUp.classList.add('is-hiden');
