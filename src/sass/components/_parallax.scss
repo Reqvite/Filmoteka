@@ -23,20 +23,20 @@
   inset: 0;
   min-height: 100%;
 
-  transform: translateZ(-5px) scale(6);
+  transform: translateZ(-8px) scale(9);
 
   object-fit: cover;
   object-position: center;
-  // overflow: hidden;
 
   img {
+    // display: none; // можна відключити паралакс фон на мобілці
     height: 100%;
     min-width: 100%;
-    // max-width: none;
     object-fit: cover;
     object-position: left;
 
     @include tablet {
+      // display: block;// 
       object-position: center;
     }
 

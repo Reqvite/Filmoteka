@@ -32,6 +32,7 @@ export function addParallax(theme) {
 
 export function setHeight() {
   const timerId = setInterval(() => {
+    const wraper = document.querySelector('.wraper');
     const header = document.querySelector('header');
     const main = document.querySelector('main');
     const footer = document.querySelector('footer');
@@ -39,7 +40,7 @@ export function setHeight() {
     
     let wightContent = main.clientWidth;
     let heightContent = header.clientHeight + main.clientHeight + footer.clientHeight;
-    heightContent = heightContent - 300 / wightContent * heightContent;
+    heightContent = heightContent / (1.5 + (heightContent - 2000) / 6000);
     
     if (imgContainer) { 
       imgContainer.style.height = `${heightContent}px`;

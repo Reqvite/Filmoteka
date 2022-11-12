@@ -59,7 +59,7 @@ const closeModal = e => {
   modalClose.removeEventListener('click', closeModal);
   document.removeEventListener('keydown', escModal);
   modal.removeEventListener('click', closeModalOutsideWindow);
-  body.style.overflow = 'scroll';
+  body.style.overflow = 'auto';
   modalContainer.remove();
 };
 
