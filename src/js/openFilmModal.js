@@ -90,6 +90,8 @@ export const closeModal = e => {
   document.removeEventListener('keydown', escModal);
   modal.removeEventListener('click', closeModalOutsideWindow);
   body.style.overflow = 'scroll';
+   body.style.overflowX = 'hidden';
+
 };
 
 export function ChangeColorText() {
