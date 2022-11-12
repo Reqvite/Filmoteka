@@ -25,7 +25,10 @@ export const refs = {
   modalFooter: document.querySelector('.modal-footer__box'),
   collection: document.querySelector(`.container-films`),
   btnUp: document.querySelector('.btnUp'),
+
   parallaxImg: document.querySelector('.parallax-img'),
+
+  homeButton: document.querySelector('.home-js--button'),
+  myLibraryButton: document.querySelector('.my-library-js--button'),
+
 };
-
-
