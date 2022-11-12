@@ -143,7 +143,6 @@ const onRemoveQueueBtnClick = (data, e) => {
             'header__mylibrary-btn--active'
           )
         ) {
-          console.log(1);
         } else {
           if (
             newQueueListArr.length === 0 &&
