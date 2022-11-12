@@ -1,8 +1,15 @@
 import { fetchFilmDetails } from './service/service';
-import { createFilmDetailsMarkup, createFilmDetailsMarkupNoUser } from './markups/filmDetailMarkup';
+import {
+  createFilmDetailsMarkup,
+  createFilmDetailsMarkupNoUser,
+} from './markups/filmDetailMarkup';
 import { refs } from './refs/refs';
 import { remove } from 'firebase/database';
-import { checkDataMovie, checkMovieInQueueList, renderModal } from "./myLibrary";
+import {
+  checkDataMovie,
+  checkMovieInQueueList,
+  renderModal,
+} from './myLibrary';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -10,18 +17,15 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
+import { checkFilmInWatchedList } from './addFilmToWatchedList-firebase';
 
 const auth = getAuth();
 let userId;
 
-
-
 const container = document.querySelector('.container-films');
 const modal = document.querySelector('.backdrop-details');
-
 const modalClose = document.querySelector('.modal-icon-cross');
 const body = document.querySelector('body');
-
 const btnViewAndStopTrailer = document.querySelector('.trailer-button');
 const trailer = document.querySelector('.trailer');
 // console.log(modal);
@@ -49,14 +53,11 @@ const openModal = async e => {
       e.target.closest('.collection__item').dataset.id
     );
 
-      if (userId === undefined) {
-        createFilmDetailsMarkupNoUser(resp)
-      }else{
-         checkMovieInQueueList(resp);
-      }
-      
-
-
+    if (userId === undefined) {
+      createFilmDetailsMarkupNoUser(resp);
+    } else {
+      checkMovieInQueueList(resp);
+    }
 
     //------createFilmDetailsMarkup переніс в checkMovieInQueueList
 

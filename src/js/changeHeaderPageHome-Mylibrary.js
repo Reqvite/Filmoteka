@@ -9,9 +9,6 @@ const form = document.querySelector('.header__search-form');
 const libraryButtons = document.querySelector('.header__mylibrary');
 const toggleTheme = document.querySelector('.toggle-theme');
 
-// myLibraryBtn.addEventListener('click', switchToMylibrary);
-homeBtn.addEventListener('click', switchToHome);
-
 myLibraryBtn.addEventListener('click', switchToMylibrary);
 homeBtn.addEventListener('click', switchToHome);
 

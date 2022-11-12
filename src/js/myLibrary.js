@@ -281,10 +281,17 @@ const checkMovieInQueueList = async resp => {
       if (snapshot.exists()) {
         const rawListQueue = snapshot.val().queueList;
         const queueList = (rawListQueue && JSON.parse(rawListQueue)) || [];
-
         const isAdded = queueList.some(obj => obj.id === idMovie);
+        // ----------watched
+        const watchedDataString = snapshot.val().watchedList;
+        const watchedList =
+          (watchedDataString && JSON.parse(watchedDataString)) || [];
 
-        createFilmDetailsMarkup(resp, isAdded);
+        const isAddedToWatched = watchedList.some(obj => obj.id === idMovie);
+
+        console.log(isAddedToWatched, 1);
+
+        createFilmDetailsMarkup(resp, isAdded, isAddedToWatched);
       } else {
         console.log('No data available');
       }
