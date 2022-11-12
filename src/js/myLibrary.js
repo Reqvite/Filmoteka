@@ -222,7 +222,7 @@ const onMyLibararyClick = e => {
     if (snapshot.exists()) {
         const queueListData = snapshot.val().queueList
 
-        if (queueListData === '') {
+        if (queueListData === '' || queueListData === '[]') {
             clearContainer();
             
           }else{

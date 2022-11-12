@@ -10,6 +10,12 @@ const modal = document.querySelector('.film-modal-content');
 const containerModal = document.querySelector('.backdrop-details');
 const modalClose = document.querySelector('.modal-icon-cross');
 
+const classHiddenForQueueBtn = (isAddedToQueueList, queueAddBtn, removeFromQueueBtn) =>{
+	isAddedToQueueList 
+		? queueAddBtn.classList.add('hidden')  
+		: removeFromQueueBtn.classList.add('hidden');
+}
+
 export const createFilmDetailsMarkup = (resp, isAddedToQueueList) => {
   let {
     poster_path,
@@ -99,9 +105,7 @@ const queueAddBtn = document.querySelector('.queue-add');
 const removeFromQueueBtn = document.querySelector('.remove-from-queue');
 
 	//-----підставляє  клас hidden в кнопку queue / remove-------
-	isAddedToQueueList 
-		? queueAddBtn.classList.add('hidden')  
-		: removeFromQueueBtn.classList.add('hidden');
+	classHiddenForQueueBtn(isAddedToQueueList, queueAddBtn, removeFromQueueBtn ) 
 	
 	
 
