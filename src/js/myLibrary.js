@@ -115,18 +115,19 @@ const onMyLibararyClick = e => {
     homeActive.setAttribute('data-active', false);
     refs.gallery.innerHTML = '';
     document.querySelector('.parallax-img').classList.add('is-hidden'); // remove parallax on liberary
+    refs.pagination.classList.add('is-hidden')
     spinner();
   };
   
     if (e.target.name !== 'library') {
-      refs.listEl.classList.remove('is-hidden');
+      // refs.listEl.classList.remove('is-hidden');
       homeActive.setAttribute('data-active', true);
       document.querySelector('.parallax-img').classList.remove('is-hidden'); // add parallax 
-
+      refs.pagination.classList.remove('is-hidden');
       return;
     };
 
-    refs.listEl.classList.add('is-hidden');
+    // refs.listEl.classList.add('is-hidden');
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 

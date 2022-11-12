@@ -26,14 +26,25 @@
 
   &__arrow {
     background-color: #79767671;
-	margin-left: 5px;
-	margin-right: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    &--prev::after {
+      content: '\1F868';
+      @include flexCenter();
+    }
+    &--next::after {
+      content: '\1F86A';
+      @include flexCenter();
+    }
   }
 
-  li.pagination__dots, li.pagination__numb-first, li.pagination__numb-last {
-	display: none;
-	
-	 @include tablet {
+  li.pagination__dots,
+  li.pagination__numb-first,
+  li.pagination__numb-last {
+    display: none;
+
+    @include tablet {
       display: flex;
     }
   }
