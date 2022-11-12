@@ -185,6 +185,9 @@ console.error(error);
 const homeActive = document.querySelector('.home-js');
 
 const onMyLibararyClick = e => {
+   if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
+    return
+  }
   if (e.target.name === 'library') {
     homeActive.setAttribute('data-active', false);
     refs.gallery.innerHTML = '';
