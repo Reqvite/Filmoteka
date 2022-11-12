@@ -2,21 +2,24 @@ import img from '../../images/collection/csaff-no-poster.jpg';
 import viewTrailer from '../viewTrailer';
 import Notiflix from 'notiflix';
 
-import { onClickBtnToQueue, checkDataMovie, onRemoveQueueBtnClick } from '../myLibrary';
+import {
+  onClickBtnToQueue,
+  checkDataMovie,
+  onRemoveQueueBtnClick,
+} from '../myLibrary';
 import { onClickAddToWatched } from '../addFilmToWatchedList-firebase';
-import { ChangeColorText, closeModal, closeModalOutsideWindow, escModal } from '../openFilmModal';
+import {
+  ChangeColorText,
+  closeModal,
+  closeModalOutsideWindow,
+  escModal,
+} from '../openFilmModal';
 
 const modal = document.querySelector('.film-modal-content');
 const containerModal = document.querySelector('.backdrop-details');
 const modalClose = document.querySelector('.modal-icon-cross');
 
-const classHiddenForQueueBtn = (isAddedToQueueList, queueAddBtn, removeFromQueueBtn) =>{
-	isAddedToQueueList 
-		? queueAddBtn.classList.add('hidden')  
-		: removeFromQueueBtn.classList.add('hidden');
-}
-
-export const createFilmDetailsMarkup = (resp, isAddedToQueueList) => {
+export const createFilmDetailsMarkup = (resp, isAdded, isAddedToWatched) => {
   let {
     poster_path,
     original_title,
@@ -28,24 +31,27 @@ export const createFilmDetailsMarkup = (resp, isAddedToQueueList) => {
     id,
   } = resp.data;
 
-	let rating = null;
+  let rating = null;
 
-            poster_path
-              ? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
-              : poster_path = img
-            vote_average
-              ? vote_average = vote_average.toFixed(1)
-              : (vote_average = '?');
+  poster_path
+    ? (poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`)
+    : (poster_path = img);
+  vote_average
+    ? (vote_average = vote_average.toFixed(1))
+    : (vote_average = '?');
 
+  //-----підставляє техт і клас в кнопку queue-------
 
-	if (vote_average >= 7) {
-		rating = 'masterpiece'
-	}else if (vote_average >= 5 && vote_average <= 7) {
-		rating = 'good'
-	}else if(vote_average <= 5) {
-		rating = 'bad'
-	}
+  // const addToQueueBnt = isAdded ? 'REMOVE FROM QUEUE' : 'ADD TO QUEUE';
+  // const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 
+  if (vote_average >= 7) {
+    rating = 'masterpiece';
+  } else if (vote_average >= 5 && vote_average <= 7) {
+    rating = 'good';
+  } else if (vote_average <= 5) {
+    rating = 'bad';
+  }
 
   const markup = `<div class="film-details-wrapper">
 	<div>
@@ -97,66 +103,74 @@ export const createFilmDetailsMarkup = (resp, isAddedToQueueList) => {
 	</div>
 </div>`;
 
+  modal.insertAdjacentHTML('beforeend', markup);
 
-modal.insertAdjacentHTML('beforeend', markup);		
-openModal();
-
-const queueAddBtn = document.querySelector('.queue-add');
-const removeFromQueueBtn = document.querySelector('.remove-from-queue');
-
-	//-----підставляє  клас hidden в кнопку queue / remove-------
-	classHiddenForQueueBtn(isAddedToQueueList, queueAddBtn, removeFromQueueBtn ) 
-	
-	
-
-  queueAddBtn?.addEventListener('click', e => onClickBtnToQueue(resp.data, e));
-  removeFromQueueBtn?.addEventListener('click',e => onRemoveQueueBtnClick(resp.data, e));
-
-  viewTrailer(id);
+  openModal();
+  const queueAddBtn = document.querySelector('.queue-add');
+  const removeFromQueueBtn = document.querySelector('.remove-from-queue');
 
   const watchedAddBtn = document.querySelector('.watched-add');
 
+  isAdded
+    ? queueAddBtn.classList.add('hidden')
+    : removeFromQueueBtn.classList.add('hidden');
+
+  isAddedToWatched
+    ? (watchedAddBtn.textContent = 'remove from watched')
+    : (watchedAddBtn.textContent = 'add to watched');
+
+  // if (isAdded) {
+  // 	queueAddBtn.classList.add('hidden')
+  // 	removeFromQueueBtn.classList.remove('hidden')
+  // } else {
+  // 	removeFromQueueBtn.classList.add('hidden')
+  // 	queueAddBtn.classList.remove('hidden')
+  // }
+
+  queueAddBtn?.addEventListener('click', e => onClickBtnToQueue(resp.data, e));
+  removeFromQueueBtn?.addEventListener('click', e =>
+    onRemoveQueueBtnClick(resp.data, e)
+  );
+
+  viewTrailer(id);
+
   watchedAddBtn.addEventListener('click', e =>
-    onClickAddToWatched(resp.data, e)
+    onClickAddToWatched(resp.data, isAddedToWatched)
   );
 };
 
-
-
 //--------------------render if no user--------------
 
-export const createFilmDetailsMarkupNoUser = (resp) => {
-	let {
-	  poster_path,
-	  original_title,
-	  vote_average,
-	  vote_count,
-	  popularity,
-	  genres,
-	  overview,
-	  id,
-	} = resp.data;
-  
-	  let rating = null;
-  
-			  poster_path
-				? poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`
-				: poster_path = img
-			  vote_average
-				? vote_average = vote_average.toFixed(1)
-				: (vote_average = '?');
-  
-  
-	  if (vote_average >= 7) {
-		  rating = 'masterpiece'
-	  }else if (vote_average >= 5 && vote_average <= 7) {
-		  rating = 'good'
-	  }else if(vote_average <= 5) {
-		  rating = 'bad'
-	  }
-  
-  
-	const markup = `<div class="film-details-wrapper">
+export const createFilmDetailsMarkupNoUser = resp => {
+  let {
+    poster_path,
+    original_title,
+    vote_average,
+    vote_count,
+    popularity,
+    genres,
+    overview,
+    id,
+  } = resp.data;
+
+  let rating = null;
+
+  poster_path
+    ? (poster_path = `https://www.themoviedb.org/t/p/w500/${poster_path}`)
+    : (poster_path = img);
+  vote_average
+    ? (vote_average = vote_average.toFixed(1))
+    : (vote_average = '?');
+
+  if (vote_average >= 7) {
+    rating = 'masterpiece';
+  } else if (vote_average >= 5 && vote_average <= 7) {
+    rating = 'good';
+  } else if (vote_average <= 5) {
+    rating = 'bad';
+  }
+
+  const markup = `<div class="film-details-wrapper">
 	  <div>
 		  <div class="thumb">
 			  <img class="modal-img" src="${poster_path}" alt="${original_title}" data-id="${id}" />
@@ -184,8 +198,8 @@ export const createFilmDetailsMarkupNoUser = (resp) => {
 			  <li class="details-list__item">
 				  <p class="details-list_title">Genre</p>
 				  <span class="details-list__information-2">${genres.map(el => {
-			return el.name;
-		  })}</span>
+            return el.name;
+          })}</span>
 			  </li>
 		  </ul>
 		  <h3 class="film-details__secondary-title">About</h3>
@@ -202,47 +216,48 @@ export const createFilmDetailsMarkupNoUser = (resp) => {
 			  </button>
 	  </div>
   </div>`;
-  
-		
-  
-	modal.insertAdjacentHTML('beforeend', markup);
-	openModal();
 
-	const watchedAddBtn = document.querySelector('.watched-add');
-	const queueAddBtn = document.querySelector('.queue-add');
+  modal.insertAdjacentHTML('beforeend', markup);
+  openModal();
 
-	queueAddBtn?.addEventListener('click', e => Notiflix.Notify.failure(`Please, log in!`));
-	watchedAddBtn.addEventListener('click', e => Notiflix.Notify.failure(`Please, log in!`));
-  
-	viewTrailer(id);
-	
+  const queueAddBtn = document.querySelector('.queue-add');
+
+  queueAddBtn?.addEventListener('click', e =>
+    Notiflix.Notify.failure(`please log in`)
+  );
+
+  viewTrailer(id);
+
+  const watchedAddBtn = document.querySelector('.watched-add');
+
+  watchedAddBtn.addEventListener('click', e =>
+    Notiflix.Notify.failure(`please log in`)
+  );
 };
-
-
 
 //----------------------------------
 function openModal() {
- 
-	const checkModalContentAll = document.querySelectorAll('.film-details-wrapper')
-	const checkModalContent = document.querySelector('.film-details-wrapper')
-	if (checkModalContentAll?.length >= 2) {
-		checkModalContent?.remove()
-	}
+  const checkModalContentAll = document.querySelectorAll(
+    '.film-details-wrapper'
+  );
+  const checkModalContent = document.querySelector('.film-details-wrapper');
+  if (checkModalContentAll?.length >= 2) {
+    checkModalContent?.remove();
+  }
 
-	const body = document.querySelector('body');
-	  containerModal.classList.remove('hidden');
-	  body.style.overflow = 'hidden';
-	  modalClose.addEventListener('click', closeModal);
-	  document.addEventListener('keydown', escModal);
-	  containerModal.addEventListener('click', closeModalOutsideWindow);
-  
-	  ChangeColorText();
-  	
-	  const modal_text = document.querySelectorAll('.details-list_title');
-	  const LS = JSON.parse(localStorage.getItem('theme'));
-	  if (LS) {
-		modal_text.forEach(el => (el.style.color = '#ffffff'));
-		return;
-	  }
-	
-};
+  const body = document.querySelector('body');
+  containerModal.classList.remove('hidden');
+  body.style.overflow = 'hidden';
+  modalClose.addEventListener('click', closeModal);
+  document.addEventListener('keydown', escModal);
+  containerModal.addEventListener('click', closeModalOutsideWindow);
+
+  ChangeColorText();
+
+  const modal_text = document.querySelectorAll('.details-list_title');
+  const LS = JSON.parse(localStorage.getItem('theme'));
+  if (LS) {
+    modal_text.forEach(el => (el.style.color = '#ffffff'));
+    return;
+  }
+}

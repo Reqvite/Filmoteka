@@ -15,15 +15,14 @@ import {
 import { createFilmDetailsMarkup } from './markups/filmDetailMarkup';
 import { closeModal } from './openFilmModal';
 
-import { spinner } from "./spinner";
-
+import { spinner } from './spinner';
 
 const auth = getAuth();
 let userId;
 const dbRef = ref(getDatabase());
 
-const USER_LOGIN_KEY = 'userIsLogin';
 
+const USER_LOGIN_KEY = 'userIsLogin';
 
 onAuthStateChanged(auth, user => {
   userId = user?.uid;
@@ -182,22 +181,21 @@ console.error(error);
 
 }
 
-
-
-
 // ------------------click my library-------------
 const homeActive = document.querySelector('.home-js');
- 
-      
+
 const onMyLibararyClick = e => {
-  if (e.target.name === 'library') {
-    homeActive.setAttribute('data-active', false);
-    refs.gallery.innerHTML = '';
-    document.querySelector('.parallax-img').classList.add('is-hidden'); // remove parallax on liberary
-    spinner();
+  if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
+    return
+  }
+  if (e.target.name === 'library' ) {
+       homeActive.setAttribute('data-active', false);
+       refs.gallery.innerHTML = '';
+       document.querySelector('.parallax-img').classList.add('is-hidden'); // remove parallax on liberary
+       spinner();
   };
   
-    if (e.target.name !== 'library') {
+    if (e.target.name !== 'library' ) {
       refs.listEl.classList.remove('is-hidden');
       homeActive.setAttribute('data-active', true);
       document.querySelector('.parallax-img').classList.remove('is-hidden'); // add parallax 
@@ -237,7 +235,6 @@ console.error(error);
 
 refs.headerNavList.addEventListener('click', onMyLibararyClick);
 
-
 // -----------click queue btn in library--------
 const onQueueBtnClickinLibrary = e => {
 
@@ -276,34 +273,37 @@ const onQueueBtnClickinLibrary = e => {
 
 refs.queueBtnInLibrary.addEventListener('click', onQueueBtnClickinLibrary);
 
-
-
 // ---------перевтряю чи є фільм в масиві для кнопки queue в --------
 
-const checkMovieInQueueList = async (resp) =>{
-
+const checkMovieInQueueList = async resp => {
   const data = resp.data;
   const idMovie = data.id;
 
-    get(child(dbRef, `users/${userId}`)).then((snapshot) => {
-    
+  // if (homeActive.dataset.active === 'true') {
+  //     return;
+  //   };
+
+  get(child(dbRef, `users/${userId}`))
+    .then(snapshot => {
       if (snapshot.exists()) {
         const rawListQueue = snapshot.val().queueList;
-        const queueList = rawListQueue && JSON.parse(rawListQueue)  || [];
-         
-        const isAddedToQueueList = queueList.some(obj => obj.id === idMovie);
-          
-          createFilmDetailsMarkup(resp, isAddedToQueueList); 
+        const queueList = (rawListQueue && JSON.parse(rawListQueue)) || [];
+        const isAdded = queueList.some(obj => obj.id === idMovie);
+        // ----------watched
+        const watchedDataString = snapshot.val().watchedList;
+        const watchedList =
+          (watchedDataString && JSON.parse(watchedDataString)) || [];
 
-       } else {
-      console.log("No data available");
-  }
-})
-.catch(error => {
-console.error(error);
-});
-  
+        const isAddedToWatched = watchedList.some(obj => obj.id === idMovie);
 
-}
+        createFilmDetailsMarkup(resp, isAdded, isAddedToWatched);
+      } else {
+        console.log('No data available');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};
 
 export { onClickBtnToQueue, checkMovieInQueueList, onRemoveQueueBtnClick };
