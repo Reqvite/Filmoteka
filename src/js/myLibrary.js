@@ -41,15 +41,20 @@ const onClickBtnToQueue = (data, e) => {
   const queueAddBtn = document.querySelector('.queue-add');
   // queueAddBtn.removeEventListener('click',function myClick (e){ onClickBtnToQueue(resp.data, e)});
 
-  queueAddBtn.textContent = 'REMOVE FROME QUEUE';
-  queueAddBtn.classList.add('remove-from-queue');
-  queueAddBtn.classList.remove('queue-add');
+  const removeBtn = document.querySelector('.remove-from-queue');
+  removeBtn.classList.remove('hidden')
+
+  queueAddBtn.classList.add('hidden')
+
+  // queueAddBtn.textContent = 'REMOVE FROME QUEUE';
+  // queueAddBtn.classList.add('remove-from-queue');
+  // queueAddBtn.classList.remove('queue-add');
 
 
   // const removeFromQueueBtn = document.querySelector('.remove-from-queue');
   // removeFromQueueBtn.addEventListener('click', function click( e ){onRemoveQueueBtnClick(resp.data, e)});
 
-  closeModal();
+  // closeModal();
  
   const idMovie = data.id;
 
@@ -124,11 +129,16 @@ const onRemoveQueueBtnClick = (data, e) => {
   const idMovie = data.id;
   
   const removeFromQueueBtn = document.querySelector('.remove-from-queue');
-  removeFromQueueBtn.textContent = 'ADD TO QUEUE';
-  removeFromQueueBtn.classList.add('queue-add');
-  removeFromQueueBtn.classList.remove('remove-from-queue');
+  removeFromQueueBtn.classList.add('hidden');
 
- closeModal();
+  const queueAddBtn = document.querySelector('.queue-add');
+  queueAddBtn.classList.remove('hidden');
+
+  // removeFromQueueBtn.textContent = 'ADD TO QUEUE';
+  // removeFromQueueBtn.classList.add('queue-add');
+  // removeFromQueueBtn.classList.remove('remove-from-queue');
+
+ //closeModal();
 
 
   get(child(dbRef, `users/${userId}`)).then((snapshot) => {
