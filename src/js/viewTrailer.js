@@ -18,7 +18,7 @@ export default async function viewTrailer(trailerId) {
       const { results } = resp.data;
 
       if (results.length === 0) {
-        Notiflix.Notify.info('No trailer found!');
+        Notiflix.Notify.info('Sorry, no trailer found!');
         return;
       }
 

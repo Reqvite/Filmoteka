@@ -1,19 +1,22 @@
 .loader {
-    margin-left: auto;
-    margin-right: auto;
-    border: 4px solid #ec9393b4; /* Light grey */
-    border-top: 4px solid $secondary-text-color; /* Blue */
-    border-radius: 50%;
-    width:80px;
-    height:80px;
-    animation: spin 1s linear infinite;
-    &.is-hiden{
-        display: none;
-      }
+  margin-left: auto;
+  margin-right: auto;
+  border: 4px solid #ec9393b4; /* Light grey */
+  border-top: 4px solid $secondary-text-color; /* Blue */
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+  &.is-hiden {
+    display: none;
   }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -102,7 +102,7 @@
   height: 30px;
   width: 30px;
   right: 0;
-  bottom: 30px;
+  bottom: 59px;
   margin-top: 0px;
   color: $mainBg-color;
   display: flex;
@@ -153,6 +153,7 @@
 
 .header__search-form {
   position: relative;
+  // display: flex;
   width: 280px;
   margin-left: auto;
   margin-right: auto;
@@ -160,7 +161,6 @@
   font-size: 14px;
   line-height: 1.14;
   color: #ffffff;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 1);
   @include tablet {
     width: 336px;
   }
@@ -168,12 +168,19 @@
     width: 394px;
   }
 }
+
+.wrap-input {
+  margin-bottom: 10px;
+}
+
 .header__input {
+  position: relative;
   width: 100%;
   height: 19px;
   color: #ffffff;
   border: none;
   background-color: rgba(0, 0, 0, 0);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 1);
 
   &::placeholder {
     color: #ffffff;
@@ -182,9 +189,14 @@
     line-height: 1.14px;
   }
 }
+
+.header__input--year {
+  width: 70px;
+}
+
 .header__form-submit-btn {
   position: absolute;
-  right: 1px;
+  right: 0;
   border: none;
   cursor: pointer;
   outline: none;
