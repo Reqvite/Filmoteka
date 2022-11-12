@@ -35,7 +35,7 @@
     text-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   &:hover,
   &:focus {
-    text-shadow: 0px 3px 3px #ffffff;
+    text-shadow: 0px 1px 2px #ffffff;
     transform: scale(1.1);
   }
   @include tablet {
@@ -57,27 +57,34 @@
 }
 .header__nav-wrap {
   display: flex;
-  // align-items: center;
+  align-items: center;
 }
 
 .header__nav-list {
   display: flex;
   align-items: baseline;
   margin-left: auto;
-  margin-top: 10px;
+  height: 100%;
+  // margin-top: 10px;
   height: 20px;
 }
 
 .header__nav-item {
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
     text-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  &:not(:first-child) {
+    margin-left: 40px;
+  }
   &:hover,
   &:focus {
-    text-shadow: 0px 3px 3px #ffffff;
-    transform: scale(1.1);
+    text-shadow: 0px 2px 2px #ffffff;
+    transform: scale(1.15);
   }
 }
 .header__nav-button {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
   background-color: transparent;
   border: none;
   font-style: normal;
@@ -86,6 +93,33 @@
   line-height: 14px;
   text-transform: uppercase;
   color: #ffffff;
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    display: block;
+    background-color: #ff001b;
+    left: 0;
+    bottom: 0;
+    transform: scaleX(0);
+    transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  &:hover::after,
+  &:focus::after {
+    transform: scaleX(1);
+  }
+}
+
+.header__nav-button--current::after {
+  content: '';
+  width: 100%;
+  height: 3px;
+  display: block;
+  background-color: #ff001b;
+  left: 0;
+  bottom: 0;
+  transform: scaleX(1);
 }
 
 .header__home-wrap {
@@ -102,7 +136,7 @@
   height: 30px;
   width: 30px;
   right: 0;
-  bottom: 30px;
+  bottom: 29px;
   margin-top: 0px;
   color: $mainBg-color;
   display: flex;
@@ -153,6 +187,7 @@
 
 .header__search-form {
   position: relative;
+  // display: flex;
   width: 280px;
   margin-left: auto;
   margin-right: auto;
@@ -160,7 +195,6 @@
   font-size: 14px;
   line-height: 1.14;
   color: #ffffff;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 1);
   @include tablet {
     width: 336px;
   }
@@ -168,12 +202,19 @@
     width: 394px;
   }
 }
+
+.wrap-input {
+  margin-bottom: 10px;
+}
+
 .header__input {
+  position: relative;
   width: 100%;
   height: 19px;
   color: #ffffff;
   border: none;
   background-color: rgba(0, 0, 0, 0);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 1);
 
   &::placeholder {
     color: #ffffff;
@@ -182,9 +223,14 @@
     line-height: 1.14px;
   }
 }
+
+.header__input--year {
+  width: 70px;
+}
+
 .header__form-submit-btn {
   position: absolute;
-  right: 1px;
+  right: 0;
   border: none;
   cursor: pointer;
   outline: none;
@@ -260,5 +306,5 @@
   }
 }
 
-.form-title {
-}
+// .form-title {
+// }

@@ -1,4 +1,4 @@
-import { refs } from "./refs/refs";
+import { refs } from './refs/refs';
 
 window.addEventListener('scroll', () => {
     // определяем величину прокрутки
@@ -6,7 +6,16 @@ window.addEventListener('scroll', () => {
     window.scrollY ||
     document.documentElement.scrollTop;
     // если страница прокручена больше чем на 400px, то делаем кнопку видимой, иначе скрываем
-    scrollY > 400 ? refs.btnUp.classList.remove('is-hiden') : refs.btnUp.classList.add('is-hiden');
+    //scrollY > 400 ? refs.btnUp.classList.remove('is-hiden') : refs.btnUp.classList.add('is-hiden');
+    
+    let windowWidth = window.innerWidth;
+  let scrollPoint = 0;
+
+  scrollPoint = windowWidth <= 768 ? 3000 : 2000;
+
+  scrollY > scrollPoint
+    ? refs.btnUp.classList.remove('is-hiden')
+    : refs.btnUp.classList.add('is-hiden');
   });
 
   refs.wraper.addEventListener('scroll', () => {
@@ -14,9 +23,16 @@ window.addEventListener('scroll', () => {
     const scrollY =
     refs.wraper.scrollTop || document.documentElement.scrollTop;
     // если страница прокручена больше чем на 400px, то делаем кнопку видимой, иначе скрываем
-    scrollY > 400
-      ? refs.btnUp.classList.remove('is-hiden')
-      : refs.btnUp.classList.add('is-hiden');
+    //scrollY > 400 ? refs.btnUp.classList.remove('is-hiden'): refs.btnUp.classList.add('is-hiden');
+    
+    let windowWidth = window.innerWidth;
+  let scrollPoint = 0;
+
+  scrollPoint = windowWidth <= 768 ? 3000 : 2000;
+
+  scrollY > scrollPoint
+    ? refs.btnUp.classList.remove('is-hiden')
+    : refs.btnUp.classList.add('is-hiden');
   });
 
   refs.btnUp.addEventListener('click', onScrollUp);

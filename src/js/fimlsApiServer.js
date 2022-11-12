@@ -5,8 +5,9 @@ const API_KEY = 'e145377b3a98d62607e7dc90339d279b';
 
 export default class FilmsApiServer {
   constructor() {
-    this.searchQuery = '',
+    this.searchQuery = '';
     this.page = 1;
+    this.primary_release_year = '';
   }
 
   async fetchFilms() {
@@ -15,6 +16,20 @@ export default class FilmsApiServer {
         api_key: API_KEY,
         query: `${this.searchQuery}`,
         page: `${this.page}`,
+        language: 'en-US',
+      },
+    };
+    const { data } = await axios.get(`${BASE_URL}`, options);
+    return data;
+  }
+
+  async fetchFilmsYear() {
+    const options = {
+      params: {
+        api_key: API_KEY,
+        query: `${this.searchQuery}`,
+        page: `${this.page}`,
+        primary_release_year: `${this.primary_release_year}`,
         language: 'en-US',
       },
     };
