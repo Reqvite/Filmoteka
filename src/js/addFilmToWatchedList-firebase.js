@@ -166,7 +166,7 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
         console.error(error);
       });
   } else {
-    Notiflix.Notify.failure(`Please log in`);
+    Notiflix.Notify.failure(`Please, log in!`);
     return;
   }
 };
