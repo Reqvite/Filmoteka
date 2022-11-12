@@ -10,7 +10,7 @@ const modal = document.querySelector('.film-modal-content');
 const containerModal = document.querySelector('.backdrop-details');
 const modalClose = document.querySelector('.modal-icon-cross');
 
-export const createFilmDetailsMarkup = (resp, isAdded) => {
+export const createFilmDetailsMarkup = (resp, isAddedToQueueList) => {
   let {
     poster_path,
     original_title,
@@ -31,11 +31,6 @@ export const createFilmDetailsMarkup = (resp, isAdded) => {
               ? vote_average = vote_average.toFixed(1)
               : (vote_average = '?');
 
-			  //-----підставляє техт і клас в кнопку queue-------
-
-
-// const addToQueueBnt = isAdded ? 'REMOVE FROM QUEUE' : 'ADD TO QUEUE';
-// const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 
 	if (vote_average >= 7) {
 		rating = 'masterpiece'
@@ -97,25 +92,18 @@ export const createFilmDetailsMarkup = (resp, isAdded) => {
 </div>`;
 
 
-modal.insertAdjacentHTML('beforeend', markup);
-
-		
+modal.insertAdjacentHTML('beforeend', markup);		
 openModal();
+
 const queueAddBtn = document.querySelector('.queue-add');
 const removeFromQueueBtn = document.querySelector('.remove-from-queue');
-	
-	isAdded 
+
+	//-----підставляє  клас hidden в кнопку queue / remove-------
+	isAddedToQueueList 
 		? queueAddBtn.classList.add('hidden')  
 		: removeFromQueueBtn.classList.add('hidden');
 	
 	
-	// if (isAdded) {
-	// 	queueAddBtn.classList.add('hidden')
-	// 	removeFromQueueBtn.classList.remove('hidden')
-	// } else {
-	// 	removeFromQueueBtn.classList.add('hidden')
-	// 	queueAddBtn.classList.remove('hidden')
-	// }
 
   queueAddBtn?.addEventListener('click', e => onClickBtnToQueue(resp.data, e));
   removeFromQueueBtn?.addEventListener('click',e => onRemoveQueueBtnClick(resp.data, e));
@@ -215,21 +203,16 @@ export const createFilmDetailsMarkupNoUser = (resp) => {
   
 	modal.insertAdjacentHTML('beforeend', markup);
 	openModal();
-	
+
+	const watchedAddBtn = document.querySelector('.watched-add');
 	const queueAddBtn = document.querySelector('.queue-add');
 
-	queueAddBtn?.addEventListener('click', e => Notiflix.Notify.failure(`please log in`));
-	
+	queueAddBtn?.addEventListener('click', e => Notiflix.Notify.failure(`Please, log in!`));
+	watchedAddBtn.addEventListener('click', e => Notiflix.Notify.failure(`Please, log in!`));
   
 	viewTrailer(id);
-  
-	const watchedAddBtn = document.querySelector('.watched-add');
-  
-	watchedAddBtn.addEventListener('click', e => Notiflix.Notify.failure(`please log in`)
-	);
+	
 };
-
-
 
 
 
