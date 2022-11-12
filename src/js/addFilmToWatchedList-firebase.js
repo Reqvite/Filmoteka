@@ -20,7 +20,6 @@ import { spinner } from './spinner';
 
 export { onClickAddToWatched };
 
-
 const dbRef = ref(getDatabase());
 let userId;
 const auth = getAuth();
