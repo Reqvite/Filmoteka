@@ -1,17 +1,12 @@
 import Notiflix from 'notiflix';
 import {
   getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut,
 } from 'firebase/auth';
-import { getDatabase, ref, child, push, update, get } from 'firebase/database';
-import { AuthState, database, getAuthState } from './firebase';
+import { getDatabase, ref, child, update, get } from 'firebase/database';
+import {database } from './firebase';
 
 import { refs } from './refs/refs';
-import { renderMarkUp } from './markups/collectionRender';
-import { fetchGenreId } from './collectionFetch';
 import {
   renderMurkUpLibrary,
   clearContainer,
@@ -28,7 +23,6 @@ let userId;
 const dbRef = ref(getDatabase());
 
 const USER_LOGIN_KEY = 'userIsLogin';
-
 
 
 onAuthStateChanged(auth, user => {
@@ -66,7 +60,7 @@ const onClickBtnToQueue = (data, e) => {
             if (queueDataString === '') {
 
               Notiflix.Notify.success(`Added movie to QUEUE`, {
-                  timeout: 2000,
+                  timeout: 1000,
               });
 
               let listWatchedArr = [];
@@ -86,7 +80,7 @@ const onClickBtnToQueue = (data, e) => {
               updateUser(database, userId, queueListString);
 
               Notiflix.Notify.success(`Added movie to QUEUE`, {
-                timeout: 2000,
+                timeout: 1000,
               });
 
               /*---- перевіряю  масив на однакові id і добавляю новий об'єкт-------*/
@@ -95,7 +89,7 @@ const onClickBtnToQueue = (data, e) => {
 
               // if (checkArr) {
               //   Notiflix.Notify.info(`Тhis movie is in the QUEUE`, {
-              //     timeout: 2000,
+              //     timeout: 1000,
               //   });
               // } else {
               //   // ---------добавляю новий об'єк в масив і перезаписую data-------------
@@ -107,14 +101,14 @@ const onClickBtnToQueue = (data, e) => {
               //   });
 
               //   Notiflix.Notify.success(`Added movie to QUEUE`, {
-              //     timeout: 2000,
+              //     timeout: 1000,
               //   });
 
               // }
             }
           } else {
             Notiflix.Notify.failure(`No data available`, {
-              timeout: 2000,
+              timeout: 1000,
             });
             console.log('No data available');
           }
@@ -123,8 +117,8 @@ const onClickBtnToQueue = (data, e) => {
           console.error(error);
         });
   } else {
-    Notiflix.Notify.failure(`Please! log in!`, {
-      timeout: 2000,
+    Notiflix.Notify.failure(`Please, log in!`, {
+      timeout: 1000,
     });
     return;
   }
@@ -174,8 +168,8 @@ const onRemoveQueueBtnClick = (data, e) => {
 
         updateUser(database, userId, newQueueListString); 
 
-        Notiflix.Notify.success(`removed movie from QUEUE`,{
-            timeout: 2000,
+        Notiflix.Notify.success(`Removed movie from QUEUE`,{
+            timeout: 1000,
         });
         
 
