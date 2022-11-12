@@ -191,21 +191,19 @@ const onMyLibararyClick = e => {
   if (e.target.name === 'library') {
     homeActive.setAttribute('data-active', false);
     refs.gallery.innerHTML = '';
-    document.querySelector('.parallax-img').classList.add('is-hidden'); // remove parallax on liberary
+    document.querySelector('.parallax-img-container').classList.add('disable'); // remove parallax on liberary
     refs.pagination.classList.add('is-hidden')
     spinner();
   };
   
     if (e.target.name !== 'library') {
-      // refs.listEl.classList.remove('is-hidden');
       homeActive.setAttribute('data-active', true);
-      document.querySelector('.parallax-img').classList.remove('is-hidden'); // add parallax 
+      document
+        .querySelector('.parallax-img-container').classList.remove('disable'); // add parallax 
       refs.pagination.classList.remove('is-hidden');
       return;
     };
 
-
-    // refs.listEl.classList.add('is-hidden');
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 

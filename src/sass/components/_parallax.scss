@@ -31,6 +31,9 @@
   &.is-hidden {
     display: none;
   }
+  &.disable{
+    display: none;
+  }
 }
 
 .parallax-img {
