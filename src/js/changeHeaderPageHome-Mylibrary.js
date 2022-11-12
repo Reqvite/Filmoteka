@@ -13,6 +13,9 @@ myLibraryBtn.addEventListener('click', switchToMylibrary);
 homeBtn.addEventListener('click', switchToHome);
 
 function switchToMylibrary(e) {
+   if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
+    return
+  }
   sectionHeader.classList.remove('header__section');
   form.style.display = 'none';
   libraryButtons.style.display = 'flex';
@@ -23,6 +26,9 @@ function switchToMylibrary(e) {
 }
 
 export function switchToHome(e) {
+   if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
+    return
+  }
   clearContainer();
   fetchTrendingFilms();
   sectionHeader.classList.remove('header__section--mylibrary');

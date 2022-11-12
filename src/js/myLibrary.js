@@ -185,13 +185,17 @@ console.error(error);
 const homeActive = document.querySelector('.home-js');
 
 const onMyLibararyClick = e => {
-  if (e.target.name === 'library') {
+  console.log(e.target.nodeName)
+  if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
+    return
+  }
+  if (e.target.name === 'library' ) {
        homeActive.setAttribute('data-active', false);
        refs.gallery.innerHTML = '';
        spinner();
   };
   
-    if (e.target.name !== 'library') {
+    if (e.target.name !== 'library' ) {
       refs.listEl.classList.remove('is-hidden');
              homeActive.setAttribute('data-active', true)
   
