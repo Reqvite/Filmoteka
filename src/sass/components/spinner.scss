@@ -7,7 +7,7 @@
   width: 60px;
   height: 60px;
   -webkit-animation: spin 2s linear infinite;
-          animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
 }
 .loader.is-hiden {
   display: none;
@@ -29,4 +29,4 @@
   100% {
     transform: rotate(360deg);
   }
-}/*# sourceMappingURL=spinner.css.map */
+}
