@@ -28,82 +28,90 @@ let userId;
 onAuthStateChanged(auth, user => {
   userId = user?.uid;
 });
+// let isAddedToWatchedf = null;
+// get(child(dbRef, `users/${userId}`))
+//   .then(snapshot => {
+//     if (snapshot.exists()) {
+//       const watchedDataString = snapshot.val().watchedList;
+//       const watchedList =
+//         (watchedDataString && JSON.parse(watchedDataString)) || [];
 
-//Кнопка add to watched
+//       isAddedToWatchedf = watchedList.some(obj => obj.id === idMovie);
+//     } else {
+//       console.log('No data available');
+//     }
+//   })
+//   .catch(error => {
+//     console.error(error);
+//   });
+
+//Кнопка add-remove  watched
 const onClickAddToWatched = (data, isAddedToWatched) => {
   let userIsLogin = JSON.parse(localStorage.getItem('userIsLogin'));
   let listWatchedArr = [];
-
   const idMovie = data.id;
   const watchedAddBtn = document.querySelector('.watched-add');
   const homeActive = document.querySelector('.home-js');
 
-  console.log(isAddedToWatched);
-
-  // видалення зі списку watched
-  if (isAddedToWatched) {
-    const removeFromQueueBtn = document.querySelector('.remove-from-queue');
-    removeFromQueueBtn.classList.add('hidden');
-
-    const queueAddBtn = document.querySelector('.queue-add');
-    queueAddBtn.classList.remove('hidden');
-
-    console.log(isAddedToWatched, ' функція видаляе');
-
-    get(child(dbRef, `users/${userId}`))
-      .then(snapshot => {
-        if (snapshot.exists()) {
-          const watchedDataString = JSON.parse(snapshot.val().watchedList);
-          const afterRemovalWatchedData = watchedDataString.filter(
-            (obj, idx, arr) => {
-              if (obj.id === idMovie) {
-                return false;
-              }
-              return arr.push(obj);
-            }
-          );
-
-          if (
-            afterRemovalWatchedData.length === 0 &&
-            homeActive.dataset.active !== 'true'
-          ) {
-            clearContainer();
-            closeModal();
-            update(ref(database, 'users/' + userId), {
-              watchedList: '',
-            });
-            return;
-          }
-
-          if (homeActive.dataset.active !== 'true') {
-            renderMurkUpLibrary(afterRemovalWatchedData);
-            closeModal();
-          }
-
-          const newWatchedListString = JSON.stringify(afterRemovalWatchedData);
-          update(ref(database, 'users/' + userId), {
-            watchedList: newWatchedListString,
-          });
-
-          Notiflix.Notify.success(`removed movie from Watched`);
-        } else {
-          console.log('No data available');
-        }
-      })
-
-      .catch(error => {
-        console.error(error);
-      });
-    watchedAddBtn.textContent = 'add to wached';
-  }
-
-  // додавання у список watched
   if (userIsLogin) {
-    const watchedAddBtn = document.querySelector('.watched-add');
+    // --------------видалення зі списку watched--------------
+    if (isAddedToWatched) {
+      console.log(isAddedToWatched, ' функція видаляє');
+      closeModal();
+      watchedAddBtn.textContent = 'add to wached';
 
+      get(child(dbRef, `users/${userId}`))
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            const watchedDataString = JSON.parse(snapshot.val().watchedList);
+            const afterRemovalWatchedData = watchedDataString.filter(
+              (obj, idx, arr) => {
+                if (obj.id === idMovie) {
+                  return false;
+                }
+                return arr.push(obj);
+              }
+            );
+
+            if (
+              afterRemovalWatchedData.length === 0
+              // &&
+              // homeActive.dataset.active !== 'true'
+            ) {
+              clearContainer();
+              closeModal();
+              update(ref(database, 'users/' + userId), {
+                watchedList: '',
+              });
+              return;
+            }
+
+            if (homeActive.dataset.active !== 'true') {
+              renderMurkUpLibrary(afterRemovalWatchedData);
+              closeModal();
+            }
+            const newWatchedListString = JSON.stringify(
+              afterRemovalWatchedData
+            );
+            update(ref(database, 'users/' + userId), {
+              watchedList: newWatchedListString,
+            });
+
+            Notiflix.Notify.success(`removed movie from Watched`);
+          } else {
+            console.log('No data available');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+
+    // додавання у список watched
     if (!isAddedToWatched) {
       console.log(isAddedToWatched, ' функція додає');
-
+      closeModal();
+      watchedAddBtn.textContent = 'remove from watched';
       get(child(dbRef, `users/${userId}`))
         .then(snapshot => {
           if (snapshot.exists()) {
@@ -131,7 +139,6 @@ const onClickAddToWatched = (data, isAddedToWatched) => {
                   watchedList: watchedListString,
                 });
 
-                watchedAddBtn.textContent = 'remove from watched';
                 Notiflix.Notify.success(`Added movie to watched list.`);
               }
             }

@@ -289,8 +289,6 @@ const checkMovieInQueueList = async resp => {
 
         const isAddedToWatched = watchedList.some(obj => obj.id === idMovie);
 
-        console.log(isAddedToWatched, 1);
-
         createFilmDetailsMarkup(resp, isAdded, isAddedToWatched);
       } else {
         console.log('No data available');
