@@ -106,18 +106,13 @@
 }
 // button Up
 .btnUp {
-  padding: 2rem 1rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+  padding: 2rem 0.75rem;
   position: fixed;
   right: 2%;
-  bottom: 5%;
+  bottom: 4%;
   background-color: $secondary-text-color;
   border-radius: 3rem;
-  transform: rotate(90deg);
+  transform: rotate(90deg) scale(1);
   transition: all 0.3s linear;
   cursor: pointer;
   opacity: 1;
@@ -126,7 +121,7 @@
   &__arrow {
     position: relative;
     background-color: white;
-    width: 50px;
+    width: 40px;
     height: 3px;
     border-radius: 1rem;
     transform-origin: right center;
@@ -146,7 +141,7 @@
       position: absolute;
       left: 0;
       background: white;
-      width: 2rem;
+      width: 1.5rem;
       height: 3px;
       transform-origin: left;
       transition: all 0.3s linear;
@@ -154,17 +149,35 @@
     }
   }
 
-  &:hover,
-  &:focus {
-    background-color: rgb(235, 136, 65);
-    transform: scale(1.2) rotate(90deg);
+  @media (hover: none) {
+    &:active {
+      background-color: rgb(235, 136, 65);
+      transform: scale(1.1) rotate(90deg);
 
-    .arrow {
-      &:before {
-        transform: rotate(35deg);
+      .arrow {
+        &:before {
+          transform: rotate(35deg);
+        }
+        &:after {
+          transform: rotate(-35deg);
+        }
       }
-      &:after {
-        transform: rotate(-35deg);
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover,
+    &:focus {
+      background-color: rgb(235, 136, 65);
+      transform: scale(1.1) rotate(90deg);
+
+      .arrow {
+        &:before {
+          transform: rotate(35deg);
+        }
+        &:after {
+          transform: rotate(-35deg);
+        }
       }
     }
   }
@@ -174,16 +187,14 @@
   }
 }
 
-
-.remove-from-queue.hidden{
+.remove-from-queue.hidden {
   display: none;
   margin: 0;
   opacity: 0;
 }
 
-.queue-add.hidden{
+.queue-add.hidden {
   display: none;
   margin: 0;
   opacity: 0;
 }
-

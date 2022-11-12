@@ -1,17 +1,12 @@
 import Notiflix from 'notiflix';
 import {
   getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut,
 } from 'firebase/auth';
-import { getDatabase, ref, child, push, update, get } from 'firebase/database';
-import { AuthState, database, getAuthState } from './firebase';
+import { getDatabase, ref, child, update, get } from 'firebase/database';
+import {database } from './firebase';
 
 import { refs } from './refs/refs';
-import { renderMarkUp } from './markups/collectionRender';
-import { fetchGenreId } from './collectionFetch';
 import {
   renderMurkUpLibrary,
   clearContainer,
@@ -25,31 +20,30 @@ import { spinner } from './spinner';
 const auth = getAuth();
 let userId;
 const dbRef = ref(getDatabase());
+
+
 const USER_LOGIN_KEY = 'userIsLogin';
 
 onAuthStateChanged(auth, user => {
   userId = user?.uid;
 });
 
-//------------------------add to queue---------------
+const updateUser = (database, userId, queueListString) =>{
+  update(ref(database, 'users/' + userId), {
+    queueList: queueListString,
+  });
+}
+
+//----------------------- click add to queue---------------
 
 const onClickBtnToQueue = (data, e) => {
+
   const queueAddBtn = document.querySelector('.queue-add');
-  // queueAddBtn.removeEventListener('click',function myClick (e){ onClickBtnToQueue(resp.data, e)});
-
   const removeBtn = document.querySelector('.remove-from-queue');
-  removeBtn.classList.remove('hidden');
 
+  removeBtn.classList.remove('hidden')
   queueAddBtn.classList.add('hidden');
-
-  // queueAddBtn.textContent = 'REMOVE FROME QUEUE';
-  // queueAddBtn.classList.add('remove-from-queue');
-  // queueAddBtn.classList.remove('queue-add');
-
-  // const removeFromQueueBtn = document.querySelector('.remove-from-queue');
-  // removeFromQueueBtn.addEventListener('click', function click( e ){onRemoveQueueBtnClick(resp.data, e)});
-
-  // closeModal();
+ 
 
   const idMovie = data.id;
 
@@ -58,59 +52,72 @@ const onClickBtnToQueue = (data, e) => {
 
   if (userIsLogin) {
     get(child(dbRef, `users/${userId}`))
-      .then(snapshot => {
-        if (snapshot.exists()) {
-          const queueDataString = snapshot.val().queueList;
-          if (queueDataString === '') {
-            Notiflix.Notify.success(`Added movie to QUEUE`, {
-              timeout: 2000,
-            });
-            let listWatchedArr = [];
-            listWatchedArr.push(data);
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            const queueDataString = snapshot.val().queueList;
 
-            const queueListString = JSON.stringify(listWatchedArr);
+            if (queueDataString === '') {
 
-            update(ref(database, 'users/' + userId), {
-              queueList: queueListString,
-            });
-          } else {
-            const queueDataArr = JSON.parse(queueDataString);
-
-            /*---- перевіряю  масив на однакові id і добавляю новий об'єкт-------*/
-            const checkArr = queueDataArr.some(obj => obj.id === idMovie);
-            //listWatchedArr.map(obj => obj.id).includes(idMovie) // інший спосіб
-
-            if (checkArr) {
-              Notiflix.Notify.info(`Тhis movie is in the QUEUE`, {
-                timeout: 2000,
+              Notiflix.Notify.success(`Added movie to QUEUE`, {
+                  timeout: 1000,
               });
+
+              let listWatchedArr = [];
+              listWatchedArr.push(data);
+
+              const queueListString = JSON.stringify(listWatchedArr);
+
+              updateUser(database, userId, queueListString);
+
             } else {
+              const queueDataArr = JSON.parse(queueDataString);
+
               // ---------добавляю новий об'єк в масив і перезаписую data-------------
               queueDataArr.push(data);
               const queueListString = JSON.stringify(queueDataArr);
 
-              update(ref(database, 'users/' + userId), {
-                queueList: queueListString,
-              });
+              updateUser(database, userId, queueListString);
 
               Notiflix.Notify.success(`Added movie to QUEUE`, {
-                timeout: 2000,
+                timeout: 1000,
               });
+
+              /*---- перевіряю  масив на однакові id і добавляю новий об'єкт-------*/
+              //const checkArr = queueDataArr.some(obj => obj.id === idMovie);
+              //listWatchedArr.map(obj => obj.id).includes(idMovie) // інший спосіб
+
+              // if (checkArr) {
+              //   Notiflix.Notify.info(`Тhis movie is in the QUEUE`, {
+              //     timeout: 1000,
+              //   });
+              // } else {
+              //   // ---------добавляю новий об'єк в масив і перезаписую data-------------
+              //   queueDataArr.push(data);
+              //   const queueListString = JSON.stringify(queueDataArr);
+
+              //   update(ref(database, 'users/' + userId), {
+              //     queueList: queueListString,
+              //   });
+
+              //   Notiflix.Notify.success(`Added movie to QUEUE`, {
+              //     timeout: 1000,
+              //   });
+
+              // }
             }
+          } else {
+            Notiflix.Notify.failure(`No data available`, {
+              timeout: 1000,
+            });
+            console.log('No data available');
           }
-        } else {
-          Notiflix.Notify.failure(`No data available`, {
-            timeout: 2000,
-          });
-          console.log('No data available');
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
+        })
+        .catch(error => {
+          console.error(error);
+        });
   } else {
-    Notiflix.Notify.failure(`Please log in`, {
-      timeout: 2000,
+    Notiflix.Notify.failure(`Please, log in!`, {
+      timeout: 1000,
     });
     return;
   }
@@ -119,77 +126,77 @@ const onClickBtnToQueue = (data, e) => {
 //----------------click remove from queue btn-------------
 
 const onRemoveQueueBtnClick = (data, e) => {
+
   const idMovie = data.id;
 
   const removeFromQueueBtn = document.querySelector('.remove-from-queue');
-  removeFromQueueBtn.classList.add('hidden');
-
   const queueAddBtn = document.querySelector('.queue-add');
+  
+  removeFromQueueBtn.classList.add('hidden');
   queueAddBtn.classList.remove('hidden');
 
-  // removeFromQueueBtn.textContent = 'ADD TO QUEUE';
-  // removeFromQueueBtn.classList.add('queue-add');
-  // removeFromQueueBtn.classList.remove('remove-from-queue');
+  get(child(dbRef, `users/${userId}`)).then((snapshot) => {
 
-  //closeModal();
+    if (snapshot.exists()) {
 
-  get(child(dbRef, `users/${userId}`))
-    .then(snapshot => {
-      if (snapshot.exists()) {
         const queueListArr = JSON.parse(snapshot.val().queueList);
 
-        const newQueueListArr = queueListArr.filter((obj, idx, arr) => {
-          if (obj.id === idMovie) {
-            return false;
-          }
-          return arr.push(obj);
+          // -----------видаляю фільм із списку ------------//
+        const newQueueListArr = queueListArr.filter((obj, idx, arr) =>{
+            if (obj.id === idMovie) {
+                return false
+            };
+           return arr.push(obj)
         });
-
-        if (
-          newQueueListArr.length === 0 &&
-          homeActive.dataset.active !== 'true'
-        ) {
+        
+        if (newQueueListArr.length === 0 && homeActive.dataset.active !== 'true') {
           clearContainer();
           closeModal();
-          update(ref(database, 'users/' + userId), {
-            queueList: '',
-          });
-          return;
-        }
 
+          const string = ''
+            updateUser(database, userId, string);
+            return; 
+        } 
+        
         if (homeActive.dataset.active !== 'true') {
           renderMurkUpLibrary(newQueueListArr);
-          closeModal();
-        }
+          closeModal();        
+        };
 
         const newQueueListString = JSON.stringify(newQueueListArr);
-        update(ref(database, 'users/' + userId), {
-          queueList: newQueueListString,
-        });
 
-        Notiflix.Notify.success(`removed movie from QUEUE`, {
-          timeout: 2000,
+        updateUser(database, userId, newQueueListString); 
+
+        Notiflix.Notify.success(`Removed movie from QUEUE`,{
+            timeout: 1000,
         });
-      } else {
-        console.log('No data available');
-      }
-    })
-    .catch(error => {
-      console.error(error);
-    });
-};
+        
+
+    } else {
+    console.log("No data available");
+}
+}).catch((error) => {
+console.error(error);
+});  
+
+}
 
 // ------------------click my library-------------
 const homeActive = document.querySelector('.home-js');
 
 const onMyLibararyClick = e => {
   if (e.target.name === 'library') {
-    homeActive.setAttribute('data-active', false);
-    refs.gallery.innerHTML = '';
-    spinner();
-  }
-
-  console.log(homeActive.dataset.active);
+       homeActive.setAttribute('data-active', false);
+       refs.gallery.innerHTML = '';
+       spinner();
+  };
+  
+    if (e.target.name !== 'library') {
+      refs.listEl.classList.remove('is-hidden');
+             homeActive.setAttribute('data-active', true)
+  
+        return; 
+    };
 
   refs.listEl.classList.add('is-hidden');
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
@@ -199,63 +206,58 @@ const onMyLibararyClick = e => {
     return;
   }
 
-  get(child(dbRef, `users/${userId}`))
-    .then(snapshot => {
-      if (snapshot.exists()) {
-        const queueListData = snapshot.val().queueList;
-        if (queueListData === '') {
-          clearContainer();
+  get(child(dbRef, `users/${userId}`)).then((snapshot) => {
+      
+    if (snapshot.exists()) {
+        const queueListData = snapshot.val().queueList
 
-          Notiflix.Notify.failure(`Opps🙊 your library is empty!`, {
-            timeout: 2000,
-          });
-        } else {
-          const queueList = JSON.parse(snapshot.val().queueList);
-          renderMurkUpLibrary(queueList);
-        }
-      } else {
-        console.log('No data available');
-      }
+        if (queueListData === '' || queueListData === '[]') {
+            clearContainer();
+            
+          }else{
+            const queueList = JSON.parse(snapshot.val().queueList)
+            renderMurkUpLibrary(queueList);
+        };   
+    } else {
+    console.log("No data available");
+    }
       spinner();
-    })
-    .catch(error => {
-      console.error(error);
-    });
+})
+.catch(error => {
+console.error(error);
+});
 };
 
 refs.headerNavList.addEventListener('click', onMyLibararyClick);
 
 // -----------click queue btn in library--------
 const onQueueBtnClickinLibrary = e => {
+
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
   refs.gallery.innerHTML = '';
   spinner();
 
   get(child(dbRef, `users/${userId}`))
-    .then(snapshot => {
-      if (snapshot.exists()) {
-        const queueListData = snapshot.val().queueList;
-        if (queueListData === '') {
-          clearContainer();
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            const queueListData = snapshot.val().queueList;
+            if (queueListData === '') {
+              clearContainer();
 
-          Notiflix.Notify.failure(`Opps🙊 your library is empty!`, {
-            timeout: 2000,
-          });
-        } else {
-          const queueList = JSON.parse(snapshot.val().queueList);
-          console.log(queueList);
-          renderMurkUpLibrary(queueList);
-          console.log(queueList);
-        }
-      } else {
-        console.log('No data available');
-      }
-      spinner();
-    })
-    .catch(error => {
-      console.error(error);
-    });
+            } else {
+              const queueList = JSON.parse(snapshot.val().queueList);
+              
+              renderMurkUpLibrary(queueList);
+            }
+          } else {
+            console.log('No data available');
+          }
+          spinner();
+        })
+        .catch(error => {
+          console.error(error);
+        });
 
   if (
     refs.queueBtnInLibrary.classList.contains('header__mylibrary-btn--active')
