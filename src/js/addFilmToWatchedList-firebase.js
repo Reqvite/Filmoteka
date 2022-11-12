@@ -44,7 +44,7 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
   const homeActive = document.querySelector('.home-js');
 
   if (userIsLogin) {
-    // ---------Перевірка-----------------
+    // ---------Перевірка чи є фільм у списку-----------------
     get(child(dbRef, `users/${userId}`))
       .then(snapshot => {
         if (snapshot.exists()) {
@@ -61,9 +61,6 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
           }
           // --------------видалення зі списку watched--------------
           if (result) {
-            // console.log(isAddedToWatched, ' функція видаляє');
-            // closeModal();
-
             watchedAddBtn.textContent = 'add to watched';
             get(child(dbRef, `users/${userId}`))
               .then(snapshot => {
@@ -84,22 +81,36 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
                         return arr.push(obj);
                       }
                     );
-
                     if (
-                      afterRemovalWatchedData.length === 0 &&
-                      homeActive.dataset.active !== 'true'
+                      refs.queueBtnInLibrary.classList.contains(
+                        'header__mylibrary-btn--active'
+                      )
                     ) {
-                      clearContainer();
-                      closeModal();
-                      update(ref(database, 'users/' + userId), {
-                        watchedList: '',
-                      });
-                      return;
+                      console.log(
+                        refs.queueBtnInLibrary.classList.contains(
+                          'header__mylibrary-btn--active'
+                        )
+                      );
+                    } else {
+                      if (
+                        afterRemovalWatchedData.length === 0 &&
+                        homeActive.dataset.active !== 'true'
+                      ) {
+                        clearContainer();
+                        closeModal();
+                        update(ref(database, 'users/' + userId), {
+                          watchedList: '',
+                        });
+                        return;
+                      }
+                      if (homeActive.dataset.active !== 'true') {
+                        renderMurkUpLibrary(afterRemovalWatchedData);
+                        closeModal();
+                      }
                     }
-                    if (homeActive.dataset.active !== 'true') {
-                      renderMurkUpLibrary(afterRemovalWatchedData);
-                      closeModal();
-                    }
+                    update(ref(database, 'users/' + userId), {
+                      watchedList: '',
+                    });
                     const newWatchedListString = JSON.stringify(
                       afterRemovalWatchedData
                     );
@@ -120,38 +131,26 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
 
           // ---------------додавання у список watched--------
           if (!result) {
-            // console.log(isAddedToWatched, ' функція додає');
-            // closeModal();
             watchedAddBtn.textContent = 'remove from watched';
             get(child(dbRef, `users/${userId}`))
               .then(snapshot => {
                 if (snapshot.exists()) {
                   const watchedDataString = snapshot.val().watchedList;
-
                   if (watchedDataString === '') {
                     Notiflix.Notify.success(`Added movie to watched list.`);
                     listWatchedArr.push(data);
                     const watchedToString = JSON.stringify(listWatchedArr);
-
                     update(ref(database, 'users/' + userId), {
                       watchedList: watchedToString,
                     });
                   } else {
                     const watchedArr = JSON.parse(watchedDataString);
-                    const checkArr = watchedArr.some(obj => obj.id === idMovie);
-
-                    if (checkArr) {
-                      // Notiflix.Notify.info(`This movie is in the watched list.`);
-                    } else {
-                      watchedArr.push(data);
-                      const watchedListString = JSON.stringify(watchedArr);
-
-                      update(ref(database, 'users/' + userId), {
-                        watchedList: watchedListString,
-                      });
-
-                      Notiflix.Notify.success(`Added movie to watched list.`);
-                    }
+                    watchedArr.push(data);
+                    const watchedListString = JSON.stringify(watchedArr);
+                    update(ref(database, 'users/' + userId), {
+                      watchedList: watchedListString,
+                    });
+                    Notiflix.Notify.success(`Added movie to watched list.`);
                   }
                 } else {
                   console.log('No data available');
@@ -205,5 +204,4 @@ const onWatchedBtnClick = e => {
     return;
   }
 };
-
 refs.watchedBtnInLibrary.addEventListener('click', onWatchedBtnClick);
