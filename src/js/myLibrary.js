@@ -112,16 +112,18 @@ const homeActive = document.querySelector('.home-js')
       
 const onMyLibararyClick = e => {
   if (e.target.name === 'library') {
-       homeActive.setAttribute('data-active', false);
-       refs.gallery.innerHTML = '';
-       spinner();
+    homeActive.setAttribute('data-active', false);
+    refs.gallery.innerHTML = '';
+    document.querySelector('.parallax-img').classList.add('is-hidden'); // remove parallax on liberary
+    spinner();
   };
   
     if (e.target.name !== 'library') {
       refs.listEl.classList.remove('is-hidden');
-             homeActive.setAttribute('data-active', true)
-  
-        return; 
+      homeActive.setAttribute('data-active', true);
+      document.querySelector('.parallax-img').classList.remove('is-hidden'); // add parallax 
+
+      return;
     };
 
     refs.listEl.classList.add('is-hidden');
