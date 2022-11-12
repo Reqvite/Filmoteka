@@ -70,6 +70,7 @@
 }
 
 .header__nav-item {
+  cursor: pointer;
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
     text-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   &:not(:first-child) {
@@ -82,6 +83,7 @@
   }
 }
 .header__nav-button {
+  cursor: pointer;
   width: 100%;
   height: 100%;
   padding: 0px;
