@@ -59,8 +59,6 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
               (watchedDataString && JSON.parse(watchedDataString)) || [];
             result = watchedList.some(obj => obj.id === idMovie);
           }
-          console.log(result);
-
           // --------------видалення зі списку watched--------------
           if (result) {
             // console.log(isAddedToWatched, ' функція видаляє');

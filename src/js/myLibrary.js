@@ -185,7 +185,6 @@ console.error(error);
 const homeActive = document.querySelector('.home-js');
 
 const onMyLibararyClick = e => {
-  console.log(e.target.nodeName)
   if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
     return
   }
