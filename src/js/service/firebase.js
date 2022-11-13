@@ -140,7 +140,7 @@ function signUpUser(e) {
       removeEventListeners();
 
       Notify.failure(errorMessage, {
-        timeout: 1000,
+        timeout: 2000,
       });
     });
   e.target.reset();
@@ -209,7 +209,7 @@ function logInUser(e) {
       const errorMessage = error.message;
       formRegistr.removeEventListener('submit', signUpUser);
       Notify.failure(errorMessage, {
-        timeout: 1000,
+        timeout: 2000,
       });
     });
 }
@@ -274,7 +274,7 @@ refs.logOut.addEventListener('click', e => {
       const errorCode = error.code;
       const errorMessage = error.message;
       Notify.failure(errorMessage, {
-        timeout: 1000,
+        timeout: 2000,
       });
     });
 });
