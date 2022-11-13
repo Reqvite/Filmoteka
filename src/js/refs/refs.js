@@ -1,6 +1,8 @@
 export const refs = {
   body: document.querySelector('body'),
   toggleTheme: document.querySelector('.toggle-theme'),
+  wraper: document.querySelector('.wraper'),
+  content: document.querySelector('.content'),
   footer: document.querySelector('.footer_box'),
   modal_bgr: document.querySelector('.film-modal-content'),
   form: document.querySelector('.header__search-form'),
@@ -23,6 +25,8 @@ export const refs = {
   modalFooter: document.querySelector('.modal-footer__box'),
   collection: document.querySelector(`.container-films`),
   btnUp: document.querySelector('.btnUp'),
+  parallaxImg: document.querySelector('.parallax-img'),
   homeButton: document.querySelector('.home-js--button'),
   myLibraryButton: document.querySelector('.my-library-js--button'),
+
 };

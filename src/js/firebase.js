@@ -272,6 +272,7 @@ logOut.addEventListener('click', e => {
       localStorage.setItem('userIsLogin', 'false');
       switchToHome(e);
       fetchTrendingFilms();
+      
       Notify.success('Successful logged out.', {
         timeout: 1000,
       });

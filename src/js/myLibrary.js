@@ -182,23 +182,25 @@ const onRemoveQueueBtnClick = (data, e) => {
 const homeActive = document.querySelector('.home-js');
 
 const onMyLibararyClick = e => {
-  if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
+   if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
     return
   }
-  if (e.target.name === 'library' ) {
-       homeActive.setAttribute('data-active', false);
-       refs.gallery.innerHTML = '';
-       spinner();
+  if (e.target.name === 'library') {
+    homeActive.setAttribute('data-active', false);
+    refs.gallery.innerHTML = '';
+    document.querySelector('.parallax-img-container').classList.add('disable'); // remove parallax on liberary
+    refs.pagination.classList.add('is-hidden')
+    spinner();
   };
   
-    if (e.target.name !== 'library' ) {
-      refs.listEl.classList.remove('is-hidden');
-             homeActive.setAttribute('data-active', true)
-  
-        return; 
+    if (e.target.name !== 'library') {
+      homeActive.setAttribute('data-active', true);
+      document
+        .querySelector('.parallax-img-container').classList.remove('disable'); // add parallax 
+      refs.pagination.classList.remove('is-hidden');
+      return;
     };
 
-  refs.listEl.classList.add('is-hidden');
   refs.watchedBtnInLibrary.classList.remove('header__mylibrary-btn--active');
   refs.queueBtnInLibrary.classList.add('header__mylibrary-btn--active');
 

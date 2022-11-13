@@ -1,0 +1,61 @@
+.wraper {
+  margin: 0 auto;
+  width: 100%;
+
+  &.active {
+    position: relative;
+    perspective: 1px;
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+}
+
+.content.active {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  transform: translateZ(0px);
+}
+
+.parallax-img-container {
+  position: absolute;
+  inset: 0;
+  min-height: 100%;
+  width: calc(100% + 20px);
+
+  transform: translateZ(-8px) scale(9);
+
+  object-fit: cover;
+  object-position: center;
+
+  &.is-hidden {
+    display: none;
+  }
+  &.disable{
+    display: none;
+  }
+}
+
+.parallax-img {
+    // display: none; // можна відключити паралакс фон на мобілці
+    height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    object-position: left;
+
+    @include tablet {
+      // display: block;// 
+      object-position: center;
+    }
+
+    @include desktop {
+      object-position: center;
+    }
+    
+//     &.is-hidden {
+//   display: none;
+// }
+  }
+
+

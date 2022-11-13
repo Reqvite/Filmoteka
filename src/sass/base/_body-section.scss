@@ -8,10 +8,17 @@ body {
 }
 
 .dark-theme {
-  background-color: rgb(97, 97, 97);
+  background-color: rgb(31, 1, 1);
   color: $header-text-color;
 }
-.wrapper {
+
+// .wrapper{
+//   min-height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+// }
+
+.content {
   min-height: 100vh;
   display: flex;
   flex-direction: column;

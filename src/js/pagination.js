@@ -14,7 +14,7 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
   let afterPages = page + 2;
 	
   if (page > 1) {
-    itemEl += `<li class="pagination__arrow pagination__arrow-prev"><span>&#129128;</span></li>`;
+    itemEl += `<li class="pagination__arrow pagination__arrow--prev"><span></span></li>`;
   }
 
   if (page > 3) {
@@ -22,7 +22,7 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
       itemEl += `<li class="pagination__numb-first"><span>1</span></li>`;
 
       if (page > 4) {
-        itemEl += `<li class="pagination__dots"><span>&#183;&#183;&#183;</span></li>`;
+        itemEl += `<li class="pagination__dots pagination__dots--prev"><span>&#183;&#183;&#183;</span></li>`;
       }
     }
   }
@@ -55,24 +55,26 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
   if (page < totalPages - 2) {
     if (totalPages > 5) {
       if (page < totalPages - 3) {
-      itemEl += `<li class="pagination__dots"><span>&#183;&#183;&#183;</span></li>`;
+      itemEl += `<li class="pagination__dots pagination__dots--next"><span>&#183;&#183;&#183;</span></li>`;
     }
     itemEl += `<li class="pagination__numb-last"><span>${totalPages}</span></li>`;
     }
   }
 
   if (page < totalPages) {
-    itemEl += `<li class="pagination__arrow pagination__arrow-next"><span>&#129130;</span></li>`;
+    itemEl += `<li class="pagination__arrow pagination__arrow--next"><span></span></li>`;
   }
 
   refs.listEl.innerHTML = itemEl;
 
   const refsPagin = {
-    prevEl: document.querySelector('.pagination__arrow-prev'),
-    nextEl: document.querySelector('.pagination__arrow-next'),
+    prevEl: document.querySelector('.pagination__arrow--prev'),
+    nextEl: document.querySelector('.pagination__arrow--next'),
     numbFirstEl: document.querySelector('.pagination__numb-first'),
     numbLastEl: document.querySelector('.pagination__numb-last'),
     numbEl: document.querySelectorAll('.pagination__numb'),
+    dotsPrev: document.querySelector('.pagination__dots--prev'),
+    dotsNext: document.querySelector('.pagination__dots--next'),
   };
 
   if (refsPagin.prevEl) {
@@ -116,5 +118,29 @@ export default function updateMarkupPagination(totalPages, page, addFilmsAndUpda
       updateMarkupPagination(totalPages, pageLength, addFilmsAndUpdateUI);
     });
     index += 1;
+  }
+
+  if (refsPagin.dotsPrev) {
+    refsPagin.dotsPrev.addEventListener('click', async () => {
+      if (page > 5) {
+        await addFilmsAndUpdateUI(page - 5);
+      updateMarkupPagination(totalPages, page - 5, addFilmsAndUpdateUI);
+      } else {
+        await addFilmsAndUpdateUI(1);
+        updateMarkupPagination(totalPages, 1, addFilmsAndUpdateUI);
+      }
+    });
+  }
+
+  if (refsPagin.dotsNext) {
+    refsPagin.dotsNext.addEventListener('click', async () => {
+      if (page < totalPages - 5) {
+        await addFilmsAndUpdateUI(page + 5);
+        updateMarkupPagination(totalPages, page + 5, addFilmsAndUpdateUI);
+      } else {
+        await addFilmsAndUpdateUI(totalPages);
+        updateMarkupPagination(totalPages, totalPages, addFilmsAndUpdateUI);
+      }
+    });
   }
 }

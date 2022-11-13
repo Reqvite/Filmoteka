@@ -108,8 +108,16 @@
 .btnUp {
   padding: 2rem 0.75rem;
   position: fixed;
+  
+  z-index: 99;
+  //right: 5px;
+  //bottom: 30%;
+  //min-width: 30px;
+  //height: 30px;
+
   right: 2%;
   bottom: 4%;
+
   background-color: $secondary-text-color;
   border-radius: 3rem;
   transform: rotate(90deg) scale(1);
