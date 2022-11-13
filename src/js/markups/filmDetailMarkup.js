@@ -210,7 +210,7 @@ export const createFilmDetailsMarkupNoUser = resp => {
   const queueAddBtn = document.querySelector('.queue-add');
 
   queueAddBtn?.addEventListener('click', e =>
-    Notiflix.Notify.failure(`please log in`)
+    Notiflix.Notify.failure(`Please, log in!`)
   );
 
   viewTrailer(id);
@@ -218,7 +218,7 @@ export const createFilmDetailsMarkupNoUser = resp => {
   const watchedAddBtn = document.querySelector('.watched-add');
 
   watchedAddBtn.addEventListener('click', e =>
-    Notiflix.Notify.failure(`please log in`)
+    Notiflix.Notify.failure(`[Please, log in!`)
   );
 };
 
