@@ -138,22 +138,28 @@ const onRemoveQueueBtnClick = (data, e) => {
           }
           return arr.push(obj);
         });
-
         if (
-          newQueueListArr.length === 0 &&
-          homeActive.dataset.active !== 'true'
+          refs.watchedBtnInLibrary.classList.contains(
+            'header__mylibrary-btn--active'
+          )
         ) {
-          clearContainer();
-          closeModal();
+        } else {
+          if (
+            newQueueListArr.length === 0 &&
+            homeActive.dataset.active !== 'true'
+          ) {
+            clearContainer();
+            closeModal();
 
-          const string = '';
-          updateUser(database, userId, string);
-          return;
-        }
+            const string = '';
+            updateUser(database, userId, string);
+            return;
+          }
 
-        if (homeActive.dataset.active !== 'true') {
-          renderMurkUpLibrary(newQueueListArr);
-          closeModal();
+          if (homeActive.dataset.active !== 'true') {
+            renderMurkUpLibrary(newQueueListArr);
+            closeModal();
+          }
         }
 
         const newQueueListString = JSON.stringify(newQueueListArr);
@@ -234,7 +240,9 @@ const onQueueBtnClickinLibrary = e => {
     .then(snapshot => {
       if (snapshot.exists()) {
         const queueListData = snapshot.val().queueList;
-        if (queueListData === '') {
+
+
+        if (queueListData === '' || queueListData === '[]') {
           clearContainer();
         } else {
           const queueList = JSON.parse(snapshot.val().queueList);
