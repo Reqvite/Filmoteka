@@ -23,6 +23,7 @@ export function switchToHome(e) {
     return
   }
   clearContainer();
+  localStorage.setItem('currentPage', 1); // relaod trending start page from 1 page
   fetchTrendingFilms();
   refs.sectionHeader.classList.remove('header__section--mylibrary');
   refs.libraryButtons.style.display = 'none';
