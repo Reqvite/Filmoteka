@@ -1,6 +1,6 @@
 // Усі жанри
 import axios from 'axios';
-import { spinner } from "./spinner";
+import { spinner } from "../componets/spinner";
 
 export function buildUrl(pageNumber = 1) {
     const key = `e145377b3a98d62607e7dc90339d279b`;

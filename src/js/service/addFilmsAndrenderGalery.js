@@ -1,10 +1,10 @@
 import FilmsApiServer from './fimlsApiServer';
 import Notiflix from 'notiflix';
-import updateMarkupPagination from './pagination'
+import updateMarkupPagination from '../componets/pagination';
 import { fetchGenreId } from './collectionFetch'; 
-import { renderMarkUp } from './markups/collectionRender'; 
-import { refs } from "./refs/refs";
-import { spinner } from "./spinner";
+import { renderMarkUp } from '../markups/collectionRender'; 
+import { refs } from "../refs/refs";
+import { spinner } from "../componets/spinner";
 
 const filmsApiServer = new FilmsApiServer();
 

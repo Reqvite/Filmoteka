@@ -1,6 +1,6 @@
 import Notiflix from 'notiflix';
 import fetchTrailerVideo from './fetchTrailerVideo';
-import createTrailerMarkup from './markups/createTrailerMarkup';
+import createTrailerMarkup from '../markups/createTrailerMarkup';
 
 export default async function viewTrailer(trailerId) {
   const refs = {

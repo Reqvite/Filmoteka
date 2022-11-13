@@ -1,8 +1,8 @@
 import { fetchGenreId } from './collectionFetch';
 import { fetchPopularMovies } from './collectionFetch';
-import { renderMarkUp } from './markups/collectionRender';
-import updateMarkupPagination from './pagination';
-import { refs } from './refs/refs';
+import { renderMarkUp } from '../markups/collectionRender';
+import updateMarkupPagination from '../componets/pagination';
+import { refs } from '../refs/refs'; 
 
 export { fetchTrendingFilms };
 

@@ -2,29 +2,28 @@ import './sass/index.scss';
 
 //markups
 
-import './js/collection';
-import './js/modal-footer';
 
-import './js/addFilmsAndrenderGalery';
 
-import './js/service/service';
+import './js/modals/modal-footer';
+
+import './js/service/addFilmsAndrenderGalery';
+
+
 
 import './js/markups/filmDetailMarkup';
 
-import './js/openFilmModal';
+import './js/modals/openFilmModal';
 
-import './js/viewTrailer';
+import './js/service/viewTrailer';
 
-import './js/pagination';
+import './js/componets/pagination';
 
-import './js/myLibrary';
+import './js/library/myLibrary';
 
-import './js/toggleTheme';
+import './js/componets/toggleTheme';
 
-import './js/firebase';
+import './js/service/changeHeaderPageHome-Mylibrary';
 
-import './js/changeHeaderPageHome-Mylibrary';
+import './js/library/addFilmToWatchedList-firebase';
 
-import './js/addFilmToWatchedList-firebase';
-
-import "./js/btnUp";
+import "./js/componets/btnUp";

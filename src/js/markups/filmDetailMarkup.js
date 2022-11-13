@@ -1,23 +1,19 @@
 import img from '../../images/collection/csaff-no-poster.jpg';
-import viewTrailer from '../viewTrailer';
+import viewTrailer from '../service/viewTrailer';
 import Notiflix from 'notiflix';
 
+import { refs } from '../refs/refs';
 import {
   onClickBtnToQueue,
-  checkDataMovie,
   onRemoveQueueBtnClick,
-} from '../myLibrary';
-import { onClickAddToWatched } from '../addFilmToWatchedList-firebase';
+} from '../library/myLibrary';
+import { onClickAddToWatched } from '../library/addFilmToWatchedList-firebase';
 import {
   ChangeColorText,
   closeModal,
   closeModalOutsideWindow,
   escModal,
-} from '../openFilmModal';
-
-const modal = document.querySelector('.film-modal-content');
-const containerModal = document.querySelector('.backdrop-details');
-const modalClose = document.querySelector('.modal-icon-cross');
+} from '../modals/openFilmModal';
 
 export const createFilmDetailsMarkup = (resp, isAdded, isAddedToWatched) => {
   let {
@@ -42,8 +38,6 @@ export const createFilmDetailsMarkup = (resp, isAdded, isAddedToWatched) => {
 
   //-----підставляє техт і клас в кнопку queue-------
 
-  // const addToQueueBnt = isAdded ? 'REMOVE FROM QUEUE' : 'ADD TO QUEUE';
-  // const classQueueBtn = isAdded ? 'remove-from-queue' : 'queue-add';
 
   if (vote_average >= 7) {
     rating = 'masterpiece';
@@ -103,7 +97,7 @@ export const createFilmDetailsMarkup = (resp, isAdded, isAddedToWatched) => {
 	</div>
 </div>`;
 
-  modal.insertAdjacentHTML('beforeend', markup);
+  refs.modal.insertAdjacentHTML('beforeend', markup);
 
   openModal();
   const queueAddBtn = document.querySelector('.queue-add');
@@ -119,13 +113,6 @@ export const createFilmDetailsMarkup = (resp, isAdded, isAddedToWatched) => {
     ? (watchedAddBtn.textContent = 'remove from watched')
     : (watchedAddBtn.textContent = 'add to watched');
 
-  // if (isAdded) {
-  // 	queueAddBtn.classList.add('hidden')
-  // 	removeFromQueueBtn.classList.remove('hidden')
-  // } else {
-  // 	removeFromQueueBtn.classList.add('hidden')
-  // 	queueAddBtn.classList.remove('hidden')
-  // }
 
   queueAddBtn?.addEventListener('click', e => onClickBtnToQueue(resp.data, e));
   removeFromQueueBtn?.addEventListener('click', e =>
@@ -217,7 +204,7 @@ export const createFilmDetailsMarkupNoUser = resp => {
 	  </div>
   </div>`;
 
-  modal.insertAdjacentHTML('beforeend', markup);
+  refs.modal.insertAdjacentHTML('beforeend', markup);
   openModal();
 
   const queueAddBtn = document.querySelector('.queue-add');
@@ -245,12 +232,11 @@ function openModal() {
     checkModalContent?.remove();
   }
 
-  const body = document.querySelector('body');
-  containerModal.classList.remove('hidden');
-  body.style.overflow = 'hidden';
-  modalClose.addEventListener('click', closeModal);
+  refs.containerModal.classList.remove('hidden');
+  refs.body.style.overflow = 'hidden';
+  refs.modalClose.addEventListener('click', closeModal);
   document.addEventListener('keydown', escModal);
-  containerModal.addEventListener('click', closeModalOutsideWindow);
+  refs.containerModal.addEventListener('click', closeModalOutsideWindow);
 
   ChangeColorText();
 

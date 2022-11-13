@@ -6,18 +6,15 @@ import {
   child,
   update,
   get,
-  onValue,
-  set,
-  push,
 } from 'firebase/database';
-import { database } from './firebase';
-import { refs } from './refs/refs';
+import { database } from '../service/firebase'; 
+import { refs } from '../refs/refs';
 import {
   renderMurkUpLibrary,
   clearContainer,
-} from './markups/renderMarkUpLibrary';
-import { spinner } from './spinner';
-import { closeModal } from './openFilmModal';
+} from '../markups/renderMarkUpLibrary';
+import { spinner } from '../componets/spinner';
+import { closeModal } from '../modals/openFilmModal';
 export { onClickAddToWatched };
 
 const dbRef = ref(getDatabase());

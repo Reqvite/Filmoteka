@@ -5,9 +5,9 @@ import { getDatabase, set, ref, enableLogging, update,child, get, onDisconnect} 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
 
-import { switchToHome } from './changeHeaderPageHome-Mylibrary';
+import { switchToHome } from './changeHeaderPageHome-Mylibrary'; 
 import { fetchTrendingFilms } from './collection';
-import { refs } from './refs/refs';
+import { refs } from '../refs/refs';
 
 
 const firebaseConfig = {
@@ -37,14 +37,6 @@ const auth = getAuth();
 const user = auth.currentUser;
 const dt = new Date();
 
-//Modal btns
-const signinBtn = document.querySelector('.signin-Btn');
-const loginBtn = document.querySelector('.login-Btn');
-
-//submit btns
-const logOut = document.querySelector('.login-Out');
-const submitSignBtn = document.querySelector('.submit-signUp-btn');
-const submitLoginBtn = document.querySelector('.submit-login-btn');
 
 //modal open-close
 const modal = document.querySelector('.backdrop-form');
@@ -56,8 +48,7 @@ const formRegistr = document.querySelector('.registr');
 const formTitle = document.querySelector('.form-title');
 
 const myLibraryJs = document.querySelector('.my-library-js');
-myLibraryJs.style.display = 'none';
-logOut.style.display = 'none';
+
 
 //Проверка залогинен пользователь или нет
 function userIsLogin() {
@@ -65,10 +56,13 @@ function userIsLogin() {
   const userIsLoginParse = JSON.parse(userIsLogin);
 
   if (userIsLoginParse) {
-    signinBtn.style.display = 'none';
-    loginBtn.style.display = 'none';
+    refs.signinBtn.style.display = 'none';
+    refs.loginBtn.style.display = 'none';
     myLibraryJs.style.display = 'block';
-    logOut.style.display = 'block';
+    refs.logOut.style.display = 'block';
+  } else {
+    myLibraryJs.style.display = 'none';
+    refs.logOut.style.display = 'none';
   }
 }
 
@@ -78,8 +72,8 @@ function closeFormModal() {
   modal.classList.add('form-hidden');
   formRegistr.removeEventListener('submit', signUpUser);
   formRegistr.removeEventListener('submit', logInUser);
-  submitSignBtn.style.display = 'none';
-  submitLoginBtn.style.display = 'none';
+  refs.submitSignBtn.style.display = 'none';
+  refs.submitLoginBtn.style.display = 'none';
   document.removeEventListener('keydown', escModal);
   modal.removeEventListener('click', closeModalOutsideWindow);
   refs.body.style.overflow = 'scroll';
@@ -101,11 +95,11 @@ function closeModalOutsideWindow(e) {
 }
 
 //Открытие модалки(регистрация)
-signinBtn.addEventListener('click', e => {
+refs.signinBtn.addEventListener('click', e => {
   modal.classList.remove('form-hidden');
   nameInput.style.display = 'block';
   formRegistr.addEventListener('submit', signUpUser);
-  submitSignBtn.style.display = 'block';
+  refs.submitSignBtn.style.display = 'block';
   formTitle.textContent = 'SIGN IN TO FILMOTEKA';
   refs.body.style.overflow = 'hidden';
   document.addEventListener('keydown', escModal);
@@ -154,13 +148,13 @@ function signUpUser(e) {
 
 //Открытие модалки(логин)
 
-loginBtn.addEventListener('click', e => {
+refs.loginBtn.addEventListener('click', e => {
   formRegistr.addEventListener('submit', logInUser);
   formTitle.textContent = 'LOG IN TO FILMOTEKA';
   modal.classList.remove('form-hidden');
   nameInput.style.display = 'none';
-  submitSignBtn.style.display = 'none';
-  submitLoginBtn.style.display = 'block';
+  refs.submitSignBtn.style.display = 'none';
+  refs.submitLoginBtn.style.display = 'block';
   refs.body.style.overflow = 'hidden';
   document.addEventListener('keydown', escModal);
   modal.addEventListener('click', closeModalOutsideWindow);
@@ -222,11 +216,11 @@ function logInUser(e) {
 
 function handleLogIn() {
   modal.classList.add('form-hidden');
-  signinBtn.style.display = 'none';
-  loginBtn.style.display = 'none';
-  logOut.style.display = 'block';
+  refs.signinBtn.style.display = 'none';
+  refs.loginBtn.style.display = 'none';
+  refs.logOut.style.display = 'block';
   myLibraryJs.style.display = 'block';
-  submitLoginBtn.style.display = 'none';
+  refs.submitLoginBtn.style.display = 'none';
   localStorage.setItem('userIsLogin', 'true');
   refs.body.style.overflow = 'scroll';
 }
@@ -258,13 +252,13 @@ function handleLogIn() {
 // });
 
 //Выйти из аккаунта
-logOut.addEventListener('click', e => {
+refs.logOut.addEventListener('click', e => {
   signOut(auth)
     .then(() => {
       // Sign-out successful.
-      signinBtn.style.display = 'block';
-      loginBtn.style.display = 'block';
-      logOut.style.display = 'none';
+      refs.signinBtn.style.display = 'block';
+      refs.loginBtn.style.display = 'block';
+      refs.logOut.style.display = 'none';
       myLibraryJs.style.display = 'none';
 
       localStorage.setItem('userId', '');
@@ -291,14 +285,11 @@ function removeEventListeners() {
 }
 
 
-const sectionMain = document.querySelector('.section-main');
-const errorImg = document.querySelector('.error-img')
-
 document.addEventListener('click', checkConection)
 
 function checkConection(){
  if (!navigator.onLine) {
-   sectionMain.outerHTML = '<p class="error-title">Check your connection and please reload the page.<p>';
-   errorImg.style.display = 'block';
+   refs.sectionMain.outerHTML = '<p class="error-title">Check your connection and please reload the page.<p>';
+   refs.errorImg.style.display = 'block';
   }
 }
