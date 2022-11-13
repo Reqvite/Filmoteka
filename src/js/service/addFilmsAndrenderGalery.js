@@ -91,7 +91,6 @@ function renderGalleryList(data) {
     return;
   }
 
-  
   spinner();
   const render = renderMarkUp(results, genreCollection);
   refs.gallery.innerHTML = render;
