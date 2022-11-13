@@ -78,7 +78,7 @@ function renderGalleryList(data) {
     clearContainer(refs.listEl);
     Notiflix.Notify.failure(
       'Search result not successful. Enter the correct movie name and try again', {
-      timeout: 1000,
+      timeout: 2000,
     });
      const title = `
   <img
