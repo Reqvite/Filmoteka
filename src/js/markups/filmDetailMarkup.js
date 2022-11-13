@@ -218,7 +218,7 @@ export const createFilmDetailsMarkupNoUser = resp => {
   const watchedAddBtn = document.querySelector('.watched-add');
 
   watchedAddBtn.addEventListener('click', e =>
-    Notiflix.Notify.failure(`[Please, log in!`)
+    Notiflix.Notify.failure(`Please, log in!`)
   );
 };
 

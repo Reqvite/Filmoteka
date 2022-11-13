@@ -28,7 +28,9 @@ function onSubmitForm(e) {
   filmsApiServer.query = e.currentTarget.search.value.trim();
 
   if (filmsApiServer.query === '') {
-    Notiflix.Notify.warning('Please enter your search query');
+    Notiflix.Notify.warning('Please enter your search query', {
+      timeout: 1000,
+    });
     return;
   }
 
@@ -73,8 +75,9 @@ function renderGalleryList(data) {
   if (results.length === 0) {
     clearContainer(refs.listEl);
     Notiflix.Notify.failure(
-      'Search result not successful. Enter the correct movie name and try again'
-    );
+      'Search result not successful. Enter the correct movie name and try again', {
+      timeout: 1000,
+    });
     return;
   }
 
