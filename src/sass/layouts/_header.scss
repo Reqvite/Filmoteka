@@ -189,7 +189,8 @@
 .header__search-form {
   position: relative;
   // display: flex;
-  width: 280px;
+  min-width: 200px;
+
   margin-left: auto;
   margin-right: auto;
   font-weight: 400;
