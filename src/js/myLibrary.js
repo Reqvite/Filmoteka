@@ -240,7 +240,9 @@ const onQueueBtnClickinLibrary = e => {
     .then(snapshot => {
       if (snapshot.exists()) {
         const queueListData = snapshot.val().queueList;
-        if (queueListData === '') {
+
+
+        if (queueListData === '' || queueListData === '[]') {
           clearContainer();
         } else {
           const queueList = JSON.parse(snapshot.val().queueList);
