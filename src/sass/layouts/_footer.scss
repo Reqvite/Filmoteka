@@ -46,6 +46,7 @@
 }
 .modal-footer {
   position: fixed;
+  z-index: 900;
   top: 0;
   left: 0;
   width: 100%;
@@ -77,7 +78,7 @@
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
-  padding: 40px;
+  padding: 20px;
 
   .modal-footer.is-hidden & {
     transform: translate(-50%, -50%) scale(0.5);
@@ -92,7 +93,7 @@
   }
   @include desktop {
     min-width: 800px;
-    max-width: 1000px;
+    max-width: 1200px;
   }
 }
 
@@ -108,6 +109,12 @@
   padding: 0;
   right: 12%;
   top: 2%;
+
+  transition: background-color 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  &:hover,
+  &:focus {
+    background-color: $accentBg-color;
+  }
 }
 
 .footer__icon {
@@ -137,37 +144,37 @@
   justify-content: center;
   align-items: center;
   grid-template-columns: auto;
-  gap: 32px;
+  gap: 20px;
 
   @include tablet {
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
   }
 
   @include desktop {
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto auto;
   }
 }
 .team-footer__title {
   color: $secondary-text-color;
-  font-size: 36px;
-  line-height: 1.15;
+  font-size: 20px;
+  line-height: 1.2;
   text-align: center;
 
   @include tablet {
-    font-size: 58px;
-    line-height: 1.5;
+    font-size: 25px;
+    line-height: 1.2;
   }
 
   @include desktop {
-    font-size: 70px;
-    line-height: 1.8;
+    font-size: 40px;
+    line-height: 1.2;
   }
 }
 
 .team-footer__list {
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
-  padding: 50px 40px 30px;
 }
 
 .team-footer__card {
@@ -199,8 +206,7 @@
   width: auto;
   aspect-ratio: 2/2;
 }
-// .team-footer__card .team-footer__foto {
-// }
+
 .networks-footer {
   display: flex;
   justify-content: center;
@@ -234,7 +240,6 @@
   &:hover,
   &:focus {
     background-color: #ff6b01;
-    // color: #ff6b01;
   }
 }
 

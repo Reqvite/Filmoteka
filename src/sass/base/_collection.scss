@@ -1,9 +1,9 @@
-.main{
+.main {
   flex: 1 1 auto;
 }
 
 .collection {
-  padding: 20px 20px 0px ;
+  padding: 20px 20px 0px;
   display: grid;
   justify-content: center;
   align-items: center;
@@ -21,6 +21,7 @@
 }
 .collection__item {
   cursor: pointer;
+  min-width: 200px;
   max-width: 280px;
 
   @include tablet {
@@ -32,7 +33,12 @@
   }
 
   transform: scale(1);
-  @include transition($one: box-shadow, $two: transform, $time:1000ms, $func:cubic-bezier(0.075, 0.82, 0.165, 1));
+  @include transition(
+    $one: box-shadow,
+    $two: transform,
+    $time: 1000ms,
+    $func: cubic-bezier(0.075, 0.82, 0.165, 1)
+  );
 
   &:hover,
   &:focus {
@@ -48,7 +54,7 @@
 }
 
 .card__image-wrap {
-  width: 280px;
+  min-width: 200px;
   height: 402px;
 
   @include tablet {
@@ -75,7 +81,6 @@
   padding-bottom: 5px;
   padding-left: 5px;
   flex-grow: 1;
-  
 
   @include mobile {
     font-size: 12px;
@@ -94,7 +99,7 @@
 
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space:nowrap;
+  white-space: nowrap;
 
   // .collection__item:hover &,
   // .collection__item:focus &{

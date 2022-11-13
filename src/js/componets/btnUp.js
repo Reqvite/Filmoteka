@@ -1,4 +1,4 @@
-import { refs } from './refs/refs';
+import { refs } from '../refs/refs';
 
 window.addEventListener('scroll', () => {
   // определяем величину прокрутки

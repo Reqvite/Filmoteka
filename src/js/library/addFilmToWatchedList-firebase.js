@@ -6,18 +6,15 @@ import {
   child,
   update,
   get,
-  onValue,
-  set,
-  push,
 } from 'firebase/database';
-import { database } from './firebase';
-import { refs } from './refs/refs';
+import { database } from '../service/firebase'; 
+import { refs } from '../refs/refs';
 import {
   renderMurkUpLibrary,
   clearContainer,
-} from './markups/renderMarkUpLibrary';
-import { spinner } from './spinner';
-import { closeModal } from './openFilmModal';
+} from '../markups/renderMarkUpLibrary';
+import { spinner } from '../componets/spinner';
+import { closeModal } from '../modals/openFilmModal';
 export { onClickAddToWatched };
 
 const dbRef = ref(getDatabase());
@@ -119,7 +116,9 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
                     });
                   }
 
-                  Notiflix.Notify.success(`Removed movie from Watched`);
+                  Notiflix.Notify.success(`Removed movie from Watched`, {
+      timeout: 1000,
+    });
                 } else {
                   console.log('No data available');
                 }
@@ -137,7 +136,9 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
                 if (snapshot.exists()) {
                   const watchedDataString = snapshot.val().watchedList;
                   if (watchedDataString === '') {
-                    Notiflix.Notify.success(`Added movie to watched list.`);
+                    Notiflix.Notify.success(`Added movie to watched list.`, {
+      timeout: 1000,
+    });
                     listWatchedArr.push(data);
                     const watchedToString = JSON.stringify(listWatchedArr);
                     update(ref(database, 'users/' + userId), {
@@ -150,7 +151,9 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
                     update(ref(database, 'users/' + userId), {
                       watchedList: watchedListString,
                     });
-                    Notiflix.Notify.success(`Added movie to watched list.`);
+                    Notiflix.Notify.success(`Added movie to watched list.`, {
+      timeout: 1000,
+    });
                   }
                 } else {
                   console.log('No data available');
@@ -166,7 +169,9 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
         console.error(error);
       });
   } else {
-    Notiflix.Notify.failure(`Please, log in!`);
+    Notiflix.Notify.failure(`Please, log in!`, {
+      timeout: 1000,
+    });
     return;
   }
 };

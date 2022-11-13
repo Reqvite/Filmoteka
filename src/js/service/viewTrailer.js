@@ -1,6 +1,6 @@
 import Notiflix from 'notiflix';
 import fetchTrailerVideo from './fetchTrailerVideo';
-import createTrailerMarkup from './markups/createTrailerMarkup';
+import createTrailerMarkup from '../markups/createTrailerMarkup';
 
 export default async function viewTrailer(trailerId) {
   const refs = {
@@ -18,7 +18,9 @@ export default async function viewTrailer(trailerId) {
       const { results } = resp.data;
 
       if (results.length === 0) {
-        Notiflix.Notify.info('Sorry, no trailer found!');
+        Notiflix.Notify.info('Sorry, no trailer found!', {
+      timeout: 1000,
+    });
         return;
       }
 

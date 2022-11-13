@@ -1,18 +1,18 @@
 import Notiflix from 'notiflix';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getDatabase, ref, child, update, get } from 'firebase/database';
-import { database } from './firebase';
+import { getDatabase, ref, child, update, get } from 'firebase/database'; 
+import { database } from '../service/firebase'; 
 
-import { refs } from './refs/refs';
+import { refs } from '../refs/refs';
 import {
   renderMurkUpLibrary,
   clearContainer,
-} from './markups/renderMarkUpLibrary';
+} from '../markups/renderMarkUpLibrary';
 
-import { createFilmDetailsMarkup } from './markups/filmDetailMarkup';
-import { closeModal } from './openFilmModal';
+import { createFilmDetailsMarkup } from '../markups/filmDetailMarkup';
+import { closeModal } from '../modals/openFilmModal';
 
-import { spinner } from './spinner';
+import { spinner } from '../componets/spinner';
 
 const auth = getAuth();
 let userId;

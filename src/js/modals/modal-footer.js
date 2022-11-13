@@ -1,16 +1,16 @@
 // import image from '../images/footer';
 
-import * as image from '../images/footer/no-foto.jpg';
-import * as image1 from '../images/footer/Yurii-Perekrestnyi.jpg';
-import * as image3 from '../images/footer/Alexander-Kulyk.jpg';
-import * as image4 from '../images/footer/me-foto-1.jpg';
-import * as image5 from '../images/footer/Taras-Novitskyi.jpg';
-import * as image6 from '../images/footer/Yevhenii-Kavetskyi.jpg';
-import * as image7 from '../images/footer/img20.jpg';
-import * as image9 from '../images/footer/Inna-Sikora.jpg';
-import * as image8 from '../images/footer/Lina-Fomenko.jpg';
-import * as image10 from '../images/footer/270.jpg';
-import * as sprite from '../images/sprite.svg';
+import * as image from '../../images/footer/no-foto.jpg';
+import * as image1 from '../../images/footer/Yurii-Perekrestnyi.jpg';
+import * as image3 from '../../images/footer/Alexander-Kulyk.jpg';
+import * as image4 from '../../images/footer/me-foto-1.jpg';
+import * as image5 from '../../images/footer/Taras-Novitskyi.jpg';
+import * as image6 from '../../images/footer/Yevhenii-Kavetskyi.jpg';
+import * as image7 from '../../images/footer/img20.jpg';
+import * as image9 from '../../images/footer/Inna-Sikora.jpg';
+import * as image8 from '../../images/footer/Lina-Fomenko.jpg';
+import * as image10 from '../../images/footer/270.jpg';
+import * as sprite from '../../images/sprite.svg';
 
 (() => {
   const refs = {
@@ -56,7 +56,6 @@ import * as sprite from '../images/sprite.svg';
     }
   }
 })();
-//////// cart////////
 
   const cart = [
     {img: `${image1}`, h3: `Scrum Master Yurii Perekrestnyi`, a:`https://github.com/Jodlei`, href: `https://www.linkedin.com/in/yurii-perekrestnyi-998396256/`},

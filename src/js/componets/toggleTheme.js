@@ -1,4 +1,4 @@
-import { refs } from "./refs/refs";
+import { refs } from "../refs/refs";
 
 const LS_Key = 'theme';
 DarkOrWhiteTheme();

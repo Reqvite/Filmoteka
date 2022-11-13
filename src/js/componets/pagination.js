@@ -1,5 +1,5 @@
-import FilmsApiServer from './fimlsApiServer';
-import { refs } from "./refs/refs";
+import FilmsApiServer from '../service/fimlsApiServer';
+import { refs } from '../refs/refs';
 import { spinner } from "./spinner";
 
 
