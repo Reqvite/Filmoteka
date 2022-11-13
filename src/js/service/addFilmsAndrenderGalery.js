@@ -6,6 +6,8 @@ import { renderMarkUp } from '../markups/collectionRender';
 import { refs } from "../refs/refs";
 import { spinner } from "../componets/spinner";
 
+import * as image from '../../images/searchError.jpg';
+
 const filmsApiServer = new FilmsApiServer();
 
  let genreCollection = {};
@@ -78,6 +80,14 @@ function renderGalleryList(data) {
       'Search result not successful. Enter the correct movie name and try again', {
       timeout: 1000,
     });
+     const title = `
+  <img
+  src="${image}"
+  alt="foto"
+  width="1000px" height="1000px"
+/>
+  `;
+  refs.gallery.innerHTML = title;
     return;
   }
 
