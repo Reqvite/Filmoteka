@@ -86,11 +86,11 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
                         'header__mylibrary-btn--active'
                       )
                     ) {
-                      console.log(
-                        refs.queueBtnInLibrary.classList.contains(
-                          'header__mylibrary-btn--active'
-                        )
-                      );
+                      // console.log(
+                      //   refs.queueBtnInLibrary.classList.contains(
+                      //     'header__mylibrary-btn--active'
+                      //   )
+                      // );
                     } else {
                       if (
                         afterRemovalWatchedData.length === 0 &&
@@ -166,7 +166,7 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
         console.error(error);
       });
   } else {
-    Notiflix.Notify.failure(`Please log in`);
+    Notiflix.Notify.failure(`Please, log in!`);
     return;
   }
 };
@@ -183,7 +183,7 @@ const onWatchedBtnClick = e => {
       if (snapshot.exists()) {
         const watchedList = snapshot.val().watchedList;
 
-        if (watchedList === '') {
+        if (watchedList === '' || watchedList === '[]') {
           clearContainer();
         } else {
           const watchedListArr = JSON.parse(snapshot.val().watchedList);
