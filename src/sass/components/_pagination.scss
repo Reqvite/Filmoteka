@@ -26,14 +26,30 @@
 
   &__arrow {
     background-color: #79767671;
-	margin-left: 5px;
-	margin-right: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    &--prev {
+      @include flexCenter;
+      background-image: url('../images/arrow-left.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &--next {
+      @include flexCenter;
+      background-image: url('../images/arrow-right.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+    }
   }
 
-  li.pagination__dots, li.pagination__numb-first, li.pagination__numb-last {
-	display: none;
-	
-	 @include tablet {
+  li.pagination__dots,
+  li.pagination__numb-first,
+  li.pagination__numb-last {
+    display: none;
+
+    @include tablet {
       display: flex;
     }
   }
