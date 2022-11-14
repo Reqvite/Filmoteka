@@ -22,7 +22,7 @@ export function switchToHome(e) {
    if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
     return
   }
-  clearContainer();
+    clearContainer();
   localStorage.setItem('currentPage', 1); // relaod trending start page from 1 page
   fetchTrendingFilms();
   refs.sectionHeader.classList.remove('header__section--mylibrary');
@@ -31,5 +31,5 @@ export function switchToHome(e) {
   refs.form.style.display = 'block';
   refs.homeButton.classList.add('header__nav-button--current');
   refs.myLibraryButton.classList.remove('header__nav-button--current');
-  refs.toggleTheme.classList.replace('toggle-theme-mylibrary', 'toggle-theme');
+  refs.toggleTheme.classList.replace('toggle-theme-mylibrary', 'toggle-theme');   
 }

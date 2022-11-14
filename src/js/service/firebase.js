@@ -253,6 +253,9 @@ function handleLogIn() {
 
 //Выйти из аккаунта
 refs.logOut.addEventListener('click', e => {
+     if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
+    return
+  }
   signOut(auth)
     .then(() => {
       // Sign-out successful.
