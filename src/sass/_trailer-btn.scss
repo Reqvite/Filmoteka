@@ -19,16 +19,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
   }
   &__text--play::before {
     content: '';
     display: inline-block;
     width: 50px;
     height: 50px;
-    margin-right: 5px;
     background: url('../images/play-button.svg') no-repeat center;
     background-size: 100%;
     border-radius: 50%;
+    background-color: rgba(81, 79, 79, 0.5);
   }
 
   &__text--play:hover::before,

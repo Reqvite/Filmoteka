@@ -93,6 +93,9 @@ const onClickAddToWatched = (data, isAddedToWatchedf) => {
                         afterRemovalWatchedData.length === 0 &&
                         homeActive.dataset.active !== 'true'
                       ) {
+                                 Notiflix.Notify.success(`Removed movie from QUEUE`, {
+          timeout: 1000,
+        });
                         clearContainer();
                         closeModal();
                         update(ref(database, 'users/' + userId), {

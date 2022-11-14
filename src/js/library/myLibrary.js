@@ -73,29 +73,6 @@ const onClickBtnToQueue = (data, e) => {
             Notiflix.Notify.success(`Added movie to QUEUE`, {
               timeout: 1000,
             });
-
-            /*---- перевіряю  масив на однакові id і добавляю новий об'єкт-------*/
-            //const checkArr = queueDataArr.some(obj => obj.id === idMovie);
-            //listWatchedArr.map(obj => obj.id).includes(idMovie) // інший спосіб
-
-            // if (checkArr) {
-            //   Notiflix.Notify.info(`Тhis movie is in the QUEUE`, {
-            //     timeout: 1000,
-            //   });
-            // } else {
-            //   // ---------добавляю новий об'єк в масив і перезаписую data-------------
-            //   queueDataArr.push(data);
-            //   const queueListString = JSON.stringify(queueDataArr);
-
-            //   update(ref(database, 'users/' + userId), {
-            //     queueList: queueListString,
-            //   });
-
-            //   Notiflix.Notify.success(`Added movie to QUEUE`, {
-            //     timeout: 1000,
-            //   });
-
-            // }
           }
         } else {
           Notiflix.Notify.failure(`No data available`, {
@@ -148,6 +125,9 @@ const onRemoveQueueBtnClick = (data, e) => {
             newQueueListArr.length === 0 &&
             homeActive.dataset.active !== 'true'
           ) {
+                     Notiflix.Notify.success(`Removed movie from QUEUE`, {
+          timeout: 1000,
+        });
             clearContainer();
             closeModal();
 
