@@ -20,7 +20,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: rgba(81, 79, 79, 0.5);
   }
   &__text--play::before {
     content: '';
@@ -30,6 +29,7 @@
     background: url('../images/play-button.svg') no-repeat center;
     background-size: 100%;
     border-radius: 50%;
+    background-color: rgba(81, 79, 79, 0.5);
   }
 
   &__text--play:hover::before,
