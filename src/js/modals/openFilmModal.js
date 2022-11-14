@@ -1,16 +1,9 @@
 import { fetchFilmDetails } from '../service/fetchFilmDetails';
-import {
-  createFilmDetailsMarkupNoUser,
-} from '../markups/filmDetailMarkup';
+import { createFilmDetailsMarkupNoUser } from '../markups/filmDetailMarkup';
 import { refs } from '../refs/refs';
 
-import {
-  checkMovieInQueueList,
-} from '../library/myLibrary';
-import {
-  getAuth,
-  onAuthStateChanged,
-} from 'firebase/auth';
+import { checkMovieInQueueList } from '../library/myLibrary';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const auth = getAuth();
 let userId;
@@ -43,13 +36,14 @@ const openModal = async e => {
 container.addEventListener('click', openModal);
 
 export const closeModal = e => {
+  const modalContainContainer = document.querySelector('.film-details-wrapper');
   modal.classList.add('hidden');
   modalClose.removeEventListener('click', closeModal);
   document.removeEventListener('keydown', escModal);
   modal.removeEventListener('click', closeModalOutsideWindow);
   refs.body.style.overflow = 'scroll';
-   refs.body.style.overflowX = 'hidden';
-
+  refs.body.style.overflowX = 'hidden';
+  modalContainContainer.innerHTML = '';
 };
 
 export function ChangeColorText() {
