@@ -1,7 +1,7 @@
 .header__section {
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 89px;
+  padding-bottom: 42px;
   padding-top: 42px;
   opacity: 0.9;
   background-image: url(../images/header-background-img-home/header-bcgrd-mobile1x.jpg);
@@ -137,7 +137,7 @@
   height: 30px;
   width: 30px;
   right: 0;
-  bottom: 29px;
+  bottom: 180px;
   margin-top: 0px;
   color: $mainBg-color;
   display: flex;
@@ -153,7 +153,7 @@
     box-shadow: 0px 8px 22px rgba(255, 107, 1, 0.6);
   }
   @include tablet {
-    bottom: 0;
+    bottom: 105px;
     height: 40px;
     width: 40px;
   }
@@ -193,6 +193,7 @@
 
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 30px;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.14;
@@ -305,5 +306,32 @@
 .icon-brightness {
   &.is-hiden {
     display: none;
+  }
+}
+
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  @include tablet {
+    justify-content: center;
+    gap: 20px;
+  }
+  @include desktop {
+    gap: 40px;
+  }
+  &__button {
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-color: $header-text-color;
+    background-color: $header-text-color;
+    border-radius: 7px;
+    width: 100%;
+    @include tablet {
+      justify-content: center;
+      gap: 20px;
+      max-width: 210px;
+    }
   }
 }
