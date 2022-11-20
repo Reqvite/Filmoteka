@@ -86,4 +86,8 @@ export default class FilmsApiServer {
   resetPage() {
     this.page = 1;
   }
+
+  resetGenreId() {
+    this.genreId = '';
+  }
 }

@@ -28,6 +28,7 @@ function onSubmitForm(e) {
   clearContainer(refs.gallery);
   clearContainer(refs.listEl);
   filmsApiServer.resetPage();
+  filmsApiServer.resetGenreId();
 
   filmsApiServer.query = e.currentTarget.search.value.trim();
 
@@ -41,10 +42,59 @@ function onSubmitForm(e) {
   addFilmsAndUpdateUI();
 }
 
+function onClickFilterButtons(e) {
+  if (e.target.name === 'genre') {
+    if (!document.querySelector('.sub-filter__item')) {
+      const markup = renderSubFilterMarkup(Object.values(genreCollection));
+      refs.genreButton.nextElementSibling.insertAdjacentHTML(
+        'beforeend',
+        markup
+      );
+      refs.genreButton.style.color = '#ff6b08';
+      const subFilterButtons = document.querySelector('.sub-filter--genre');
+      subFilterButtons.addEventListener('click', onClickSubFilterButton);
+      async function onClickSubFilterButton(e) {
+        // if (event.target.nodeName !== 'BUTTON') {
+        //   refs.genreButton.style.color = '#000000';
+        //   clearContainer(refs.genreButton.nextElementSibling);
+        //   return;
+        // }
+        const userGenre = e.target.innerText;
+        const numberGenre = Object.values(genreCollection).indexOf(userGenre);
+        const userGenreId = Object.keys(genreCollection)[numberGenre];
+        refs.genreButton.style.color = '#000000';
+        clearContainer(refs.genreButton.nextElementSibling);
+        filmsApiServer.genreId = userGenreId;
+        filmsApiServer.resetPage();
+        clearContainer(refs.gallery);
+        clearContainer(refs.listEl);
+        addFilmsAndUpdateUI();
+      }
+      return;
+    } else {
+      refs.genreButton.style.color = '#000000';
+      clearContainer(refs.genreButton.nextElementSibling);
+      return;
+    }
+  }
+
+  if (e.target.name === 'sort') {
+  }
+
+  if (e.target.name === 'year') {
+    console.log(e.target.name);
+  }
+}
+
 async function addFilmsAndUpdateUI() {
   try {
+    let results;
     spinner();
-    const results = await filmsApiServer.fetchFilms();
+    if (filmsApiServer.genreId) {
+      results = await filmsApiServer.fetchFimsId();
+    } else {
+      results = await filmsApiServer.fetchFilms();
+    }
     spinner();
     renderGalleryList(results);
   } catch (err) {
@@ -55,9 +105,13 @@ async function addFilmsAndUpdateUI() {
 async function renderAfterChangingPage(currentPage) {
   try {
     filmsApiServer.pagePagination = currentPage;
+    let data;
     spinner();
-
-    const data = await filmsApiServer.fetchFilms();
+    if (filmsApiServer.genreId) {
+      data = await filmsApiServer.fetchFimsId();
+    } else {
+      data = await filmsApiServer.fetchFilms();
+    }
     const { results, page, total_pages } = data;
     const render = renderMarkUp(results, genreCollection);
 
@@ -115,44 +169,4 @@ function clearContainer(element) {
 function onFetchError(err) {
   console.log(err);
   clearContainer(refs.gallery);
-}
-
-function onClickFilterButtons(e) {
-  if (e.target.name === 'genre') {
-    if (!document.querySelector('.sub-filter__item')) {
-      const markup = renderSubFilterMarkup(Object.values(genreCollection));
-      refs.genreButton.nextElementSibling.insertAdjacentHTML(
-        'beforeend',
-        markup
-      );
-      refs.genreButton.style.color = '#ff6b08';
-      const subFilterButtons = document.querySelector('.sub-filter--genre');
-      subFilterButtons.addEventListener('click', onClickSubFilterButton);
-      async function onClickSubFilterButton(e) {
-        const userGenre = e.target.innerText;
-        const numberGenre = Object.values(genreCollection).indexOf(userGenre);
-        const userGenreId = Object.keys(genreCollection)[numberGenre];
-        filmsApiServer.genreId = userGenreId;
-        console.log(filmsApiServer.genreId);
-        const respons = await filmsApiServer.fetchFimsId();
-        console.log(respons);
-        clearContainer(subFilterButtons);
-        clearContainer(refs.gallery);
-        clearContainer(refs.listEl);
-        filmsApiServer.resetPage();
-      }
-      return;
-    } else {
-      refs.genreButton.style.color = '#000000';
-      clearContainer(refs.genreButton.nextElementSibling);
-      return;
-    }
-  }
-
-  if (e.target.name === 'sort') {
-  }
-
-  if (e.target.name === 'year') {
-    console.log(e.target.name);
-  }
 }
