@@ -29,6 +29,10 @@ function onSubmitForm(e) {
   clearContainer(refs.listEl);
   filmsApiServer.resetPage();
   filmsApiServer.resetGenreId();
+  filmsApiServer.activeSearch = '';
+  filmsApiServer.genreId = '';
+  filmsApiServer.sortVariety = '';
+  localStorage.setItem('currentPage', '1');
 
   filmsApiServer.query = e.currentTarget.search.value.trim();
 
@@ -43,46 +47,65 @@ function onSubmitForm(e) {
 }
 
 function onClickFilterButtons(e) {
-  if (e.target.name === 'genre') {
-    if (!document.querySelector('.sub-filter__item')) {
-      const markup = renderSubFilterMarkup(Object.values(genreCollection));
-      refs.genreButton.nextElementSibling.insertAdjacentHTML(
-        'beforeend',
-        markup
-      );
-      refs.genreButton.style.color = '#ff6b08';
-      const subFilterButtons = document.querySelector('.sub-filter--genre');
-      subFilterButtons.addEventListener('click', onClickSubFilterButton);
-      async function onClickSubFilterButton(e) {
-        // if (event.target.nodeName !== 'BUTTON') {
-        //   refs.genreButton.style.color = '#000000';
-        //   clearContainer(refs.genreButton.nextElementSibling);
-        //   return;
-        // }
-        const userGenre = e.target.innerText;
-        const numberGenre = Object.values(genreCollection).indexOf(userGenre);
-        const userGenreId = Object.keys(genreCollection)[numberGenre];
-        refs.genreButton.style.color = '#000000';
-        clearContainer(refs.genreButton.nextElementSibling);
-        filmsApiServer.genreId = userGenreId;
-        filmsApiServer.resetPage();
-        clearContainer(refs.gallery);
-        clearContainer(refs.listEl);
-        addFilmsAndUpdateUI();
-      }
-      return;
-    } else {
-      refs.genreButton.style.color = '#000000';
-      clearContainer(refs.genreButton.nextElementSibling);
-      return;
+  filmsApiServer.activeSearch = e.target.name;
+  if (filmsApiServer.activeSearch === 'genre') {
+    filmsApiServer.sortVariety = '';
+    filmsApiServer.primary_release_year = '';
+    const currentFilterButton = refs.genreButton;
+    const objSubFilterDataKeys = Object.keys(genreCollection);
+    const objSubFilterDataValues = Object.values(genreCollection);
+    createSubFilterMarkup(
+      currentFilterButton,
+      objSubFilterDataKeys,
+      objSubFilterDataValues
+    );
+  }
+
+  if (filmsApiServer.activeSearch === 'sort') {
+    filmsApiServer.genreId = '';
+    filmsApiServer.primary_release_year = '';
+    const currentFilterButton = refs.sortButton;
+    const objSubFilterDataKeys = [
+      'popularity.desc',
+      'popularity.asc',
+      'release_date.desc',
+      'release_date.desc',
+      'original_tile.desc',
+      'original_tile.asc',
+    ];
+    const objSubFilterDataValues = [
+      'Popularity (decreasing)',
+      'Popularity (increasing)',
+      'Release date (decreasing)',
+      'Release date (increasing)',
+      'A-Z',
+      'Z-A',
+    ];
+
+    createSubFilterMarkup(
+      currentFilterButton,
+      objSubFilterDataKeys,
+      objSubFilterDataValues
+    );
+  }
+
+  if (filmsApiServer.activeSearch === 'year') {
+    filmsApiServer.genreId = '';
+    filmsApiServer.sortVariety = '';
+    const currentFilterButton = refs.yearButton;
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const objSubFilterDataValues = [];
+    const objSubFilterDataKeys = [];
+    for (let i = 1874; i <= currentYear; i += 1) {
+      objSubFilterDataKeys.push(i);
+      objSubFilterDataValues.push('' + i);
     }
-  }
-
-  if (e.target.name === 'sort') {
-  }
-
-  if (e.target.name === 'year') {
-    console.log(e.target.name);
+    createSubFilterMarkup(
+      currentFilterButton,
+      objSubFilterDataKeys,
+      objSubFilterDataValues
+    );
   }
 }
 
@@ -90,10 +113,19 @@ async function addFilmsAndUpdateUI() {
   try {
     let results;
     spinner();
-    if (filmsApiServer.genreId) {
-      results = await filmsApiServer.fetchFimsId();
-    } else {
-      results = await filmsApiServer.fetchFilms();
+    switch (filmsApiServer.activeSearch) {
+      case 'genre':
+        results = await filmsApiServer.fetchFimsId();
+        break;
+      case 'sort':
+        results = await filmsApiServer.fetchFimsSorting();
+        break;
+      case 'year':
+        results = await filmsApiServer.fetchFilmsYear();
+        break;
+      default:
+        results = await filmsApiServer.fetchFilms();
+        break;
     }
     spinner();
     renderGalleryList(results);
@@ -109,7 +141,12 @@ async function renderAfterChangingPage(currentPage) {
     spinner();
     if (filmsApiServer.genreId) {
       data = await filmsApiServer.fetchFimsId();
-    } else {
+    } else if (filmsApiServer.sortVariety) {
+      data = await filmsApiServer.fetchFimsSorting();
+    } else if (filmsApiServer.primary_release_year) {
+      data = await filmsApiServer.fetchFilmsYear();
+    }
+    {
       data = await filmsApiServer.fetchFilms();
     }
     const { results, page, total_pages } = data;
@@ -169,4 +206,48 @@ function clearContainer(element) {
 function onFetchError(err) {
   console.log(err);
   clearContainer(refs.gallery);
+  return;
+}
+
+function createSubFilterMarkup(filterButton, dataKeys, dataValues) {
+  if (!document.querySelector('.sub-filter__item')) {
+    const subFilterContainer = filterButton.nextElementSibling;
+    const markup = renderSubFilterMarkup(dataValues);
+    subFilterContainer.insertAdjacentHTML('beforeend', markup);
+    filterButton.style.color = '#ff6b08';
+    subFilterContainer.addEventListener('click', onClickSubFilterButton);
+    async function onClickSubFilterButton(e) {
+      if (e.target.nodeName !== 'BUTTON') {
+        filterButton.style.color = '#000000';
+        clearContainer(filterButton.nextElementSibling);
+        return;
+      }
+      localStorage.setItem('currentPage', '1');
+      const userSelectedItem = e.target.innerText;
+      const numberItem = dataValues.indexOf(userSelectedItem);
+      const dataSearch = dataKeys[numberItem];
+      filterButton.style.color = '#000000';
+      clearContainer(filterButton.nextElementSibling);
+      switch (filmsApiServer.activeSearch) {
+        case 'genre':
+          filmsApiServer.genreId = dataSearch;
+          break;
+        case 'sort':
+          filmsApiServer.sortVariety = dataSearch;
+          break;
+        case 'year':
+          filmsApiServer.primary_release_year = dataSearch;
+          break;
+      }
+      filmsApiServer.resetPage();
+      clearContainer(refs.gallery);
+      clearContainer(refs.listEl);
+      addFilmsAndUpdateUI();
+    }
+    return;
+  } else {
+    filterButton.style.color = '#000000';
+    clearContainer(filterButton.nextElementSibling);
+    return;
+  }
 }

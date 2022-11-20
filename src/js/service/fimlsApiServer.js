@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const searchFilms = 'search';
-const searchFilmsById = 'discover';
+const searchFilmsByIdOrSort = 'discover';
 const BASE_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = 'e145377b3a98d62607e7dc90339d279b';
 
@@ -11,7 +11,8 @@ export default class FilmsApiServer {
     this.page = 1;
     this.primary_release_year = '';
     this.genreId = '';
-    this.sort = '';
+    this.sortVariety = '';
+    this.activeSearch = '';
   }
 
   async fetchFilms() {
@@ -39,7 +40,10 @@ export default class FilmsApiServer {
         language: 'en-US',
       },
     };
-    const { data } = await axios.get(`${BASE_URL}`, options);
+    const { data } = await axios.get(
+      `${BASE_URL}${searchFilmsByIdOrSort}/movie`,
+      options
+    );
     return data;
   }
 
@@ -53,10 +57,31 @@ export default class FilmsApiServer {
       },
     };
     const { data } = await axios.get(
-      `${BASE_URL}${searchFilmsById}/movie`,
+      `${BASE_URL}${searchFilmsByIdOrSort}/movie`,
       options
     );
     return data;
+  }
+
+  async fetchFimsSorting() {
+    try {
+      const options = {
+        params: {
+          api_key: API_KEY,
+          page: `${this.page}`,
+          sort_by: `${this.sortVariety}`,
+          language: 'en-US',
+        },
+      };
+      const { data } = await axios.get(
+        `${BASE_URL}${searchFilmsByIdOrSort}/movie`,
+        options
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   }
 
   get query() {
