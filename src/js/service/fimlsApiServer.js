@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
+const searchFilms = 'search';
+const searchFilmsByIdOrSort = 'discover';
+const BASE_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = 'e145377b3a98d62607e7dc90339d279b';
 
 export default class FilmsApiServer {
@@ -8,6 +10,9 @@ export default class FilmsApiServer {
     this.searchQuery = '';
     this.page = 1;
     this.primary_release_year = '';
+    this.genreId = '';
+    this.sortVariety = '';
+    this.activeSearch = '';
   }
 
   async fetchFilms() {
@@ -19,7 +24,10 @@ export default class FilmsApiServer {
         language: 'en-US',
       },
     };
-    const { data } = await axios.get(`${BASE_URL}`, options);
+    const { data } = await axios.get(
+      `${BASE_URL}${searchFilms}/movie`,
+      options
+    );
     return data;
   }
 
@@ -27,14 +35,53 @@ export default class FilmsApiServer {
     const options = {
       params: {
         api_key: API_KEY,
-        query: `${this.searchQuery}`,
         page: `${this.page}`,
         primary_release_year: `${this.primary_release_year}`,
         language: 'en-US',
       },
     };
-    const { data } = await axios.get(`${BASE_URL}`, options);
+    const { data } = await axios.get(
+      `${BASE_URL}${searchFilmsByIdOrSort}/movie`,
+      options
+    );
     return data;
+  }
+
+  async fetchFimsId() {
+    const options = {
+      params: {
+        api_key: API_KEY,
+        page: `${this.page}`,
+        with_genres: `${this.genreId}`,
+        language: 'en-US',
+      },
+    };
+    const { data } = await axios.get(
+      `${BASE_URL}${searchFilmsByIdOrSort}/movie`,
+      options
+    );
+    return data;
+  }
+
+  async fetchFimsSorting() {
+    try {
+      const options = {
+        params: {
+          api_key: API_KEY,
+          page: `${this.page}`,
+          sort_by: `${this.sortVariety}`,
+          language: 'en-US',
+        },
+      };
+      const { data } = await axios.get(
+        `${BASE_URL}${searchFilmsByIdOrSort}/movie`,
+        options
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+      return;
+    }
   }
 
   get query() {
@@ -63,5 +110,9 @@ export default class FilmsApiServer {
 
   resetPage() {
     this.page = 1;
+  }
+
+  resetGenreId() {
+    this.genreId = '';
   }
 }

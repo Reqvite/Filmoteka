@@ -2,7 +2,7 @@ import FilmsApiServer from '../service/fimlsApiServer';
 import { refs } from '../refs/refs';
 import { spinner } from './spinner';
 
-const filmsApiServer = new FilmsApiServer();
+// const filmsApiServer = new FilmsApiServer();
 
 export default function updateMarkupPagination(
   totalPages,
@@ -154,4 +154,3 @@ export default function updateMarkupPagination(
     });
   }
 }
-

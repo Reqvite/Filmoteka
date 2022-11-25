@@ -2,13 +2,14 @@ import { fetchGenreId } from './collectionFetch';
 import { fetchPopularMovies } from './collectionFetch';
 import { renderMarkUp } from '../markups/collectionRender';
 import updateMarkupPagination from '../componets/pagination';
-import { refs } from '../refs/refs'; 
+import { refs } from '../refs/refs';
 
 export { fetchTrendingFilms };
 
 // let page = 1;
 let genreCollection = {};
- 
+localStorage.setItem('currentPage', '1');
+
 async function fetchTrendingFilms() {
   let currentPage = Number(localStorage.getItem('currentPage')) || 1;
   const resp = await fetchGenreId();
@@ -38,7 +39,9 @@ function fetchMoviesOnPagination(page) {
     const render = renderMarkUp(response.data.results, genreCollection);
     refs.collection.innerHTML = render;
     setTimeout(() => {
-      document.querySelector('.container-films').scrollIntoView({behavior: "smooth"});
+      document
+        .querySelector('.container-films')
+        .scrollIntoView({ behavior: 'smooth' });
     }, 100);
   });
 }

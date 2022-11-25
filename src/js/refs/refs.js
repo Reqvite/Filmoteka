@@ -26,7 +26,7 @@ export const refs = {
   btnUp: document.querySelector('.btnUp'),
   homeButton: document.querySelector('.home-js--button'),
   myLibraryButton: document.querySelector('.my-library-js--button'),
-  myLibraryBtn:document.querySelector('.my-library-js'),
+  myLibraryBtn: document.querySelector('.my-library-js'),
   watchedAddBtn: document.querySelector('.watched-add'),
   homeActive: document.querySelector('.home-js'),
   queueAddBtn: document.querySelector('.queue-add'),
@@ -36,8 +36,12 @@ export const refs = {
   containerModal: document.querySelector('.backdrop-details'),
   modalClose: document.querySelector('.modal-icon-cross'),
   libraryButtons: document.querySelector('.header__mylibrary'),
+  filterButtons: document.querySelector('.filter'),
+  sortButton: document.querySelector('button[name=sort]'),
+  genreButton: document.querySelector('button[name=genre]'),
+  yearButton: document.querySelector('button[name=year]'),
 
-                         //FIREBASE//
+  //FIREBASE//
   //header auth btns
   signinBtn: document.querySelector('.signin-Btn'),
   loginBtn: document.querySelector('.login-Btn'),
@@ -45,9 +49,8 @@ export const refs = {
   logOut: document.querySelector('.login-Out'),
   submitSignBtn: document.querySelector('.submit-signUp-btn'),
   submitLoginBtn: document.querySelector('.submit-login-btn'),
-  
+
   //checkConnection
   sectionMain: document.querySelector('.section-main'),
-  errorImg: document.querySelector('.error-img')
-
+  errorImg: document.querySelector('.error-img'),
 };
