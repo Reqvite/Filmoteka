@@ -16,6 +16,7 @@ function switchToMylibrary(e) {
   refs.homeButton.classList.remove('header__nav-button--current');
   refs.myLibraryButton.classList.add('header__nav-button--current');
   refs.toggleTheme.classList.replace('toggle-theme', 'toggle-theme-mylibrary');
+    refs.filterButtons.style.display = 'none'
 }
 
 export function switchToHome(e) {
@@ -32,4 +33,5 @@ export function switchToHome(e) {
   refs.homeButton.classList.add('header__nav-button--current');
   refs.myLibraryButton.classList.remove('header__nav-button--current');
   refs.toggleTheme.classList.replace('toggle-theme-mylibrary', 'toggle-theme');   
+  refs.filterButtons.style.display = 'flex'
 }
