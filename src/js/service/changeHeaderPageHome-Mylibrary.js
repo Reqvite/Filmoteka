@@ -5,6 +5,7 @@ import { refs } from '../refs/refs';
 refs.myLibraryBtn.addEventListener('click', switchToMylibrary);
 refs.homeBtn.addEventListener('click', switchToHome);
 
+
 function switchToMylibrary(e) {
    if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
     return
