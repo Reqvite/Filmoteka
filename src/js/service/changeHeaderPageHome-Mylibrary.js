@@ -20,6 +20,7 @@ function switchToMylibrary(e) {
     refs.filterButtons.style.display = 'none'
 }
 
+
 export function switchToHome(e) {
    if (e.target.nodeName === 'LI' || e.target.nodeName === 'UL') {
     return
